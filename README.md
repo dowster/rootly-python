@@ -15,7 +15,7 @@ If the endpoints you're going to hit require authentication, use `AuthenticatedC
 ```python
 from rootly_api_v_1_client import AuthenticatedClient
 
-client = AuthenticatedClient(base_url="https://api.rootly.com", token="SuperSecretToken")
+client = AuthenticatedClient(base_url="https://api.rootly.com", token="ROOTLY_API_KEY")
 ```
 
 Now call your endpoint and use your models:
@@ -48,7 +48,7 @@ By default, when you're calling an HTTPS API it will attempt to verify that SSL 
 ```python
 client = AuthenticatedClient(
     base_url="https://internal_api.rootly.com", 
-    token="SuperSecretToken",
+    token="ROOTLY_API_KEY",
     verify_ssl="/path/to/certificate_bundle.pem",
 )
 ```
@@ -58,7 +58,7 @@ You can also disable certificate validation altogether, but beware that **this i
 ```python
 client = AuthenticatedClient(
     base_url="https://internal_api.rootly.com", 
-    token="SuperSecretToken", 
+    token="ROOTLY_API_KEY", 
     verify_ssl=False
 )
 ```
