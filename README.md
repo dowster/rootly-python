@@ -1,4 +1,4 @@
-# rootly-api-v-1-client
+# rootly-python
 A client library for accessing Rootly API v1
 
 ## Usage
