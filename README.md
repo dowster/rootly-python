@@ -1,29 +1,29 @@
-# rootly-python
+# rootly
 A client library for accessing Rootly API v1
 
 ## Usage
 First, create a client:
 
 ```python
-from rootly_api_v_1_client import Client
+from rootly_sdk import Client
 
-client = Client(base_url="https://api.rootly.com")
+client = Client(base_url="https://api.example.com")
 ```
 
 If the endpoints you're going to hit require authentication, use `AuthenticatedClient` instead:
 
 ```python
-from rootly_api_v_1_client import AuthenticatedClient
+from rootly_sdk import AuthenticatedClient
 
-client = AuthenticatedClient(base_url="https://api.rootly.com", token="ROOTLY_API_KEY")
+client = AuthenticatedClient(base_url="https://api.example.com", token="SuperSecretToken")
 ```
 
 Now call your endpoint and use your models:
 
 ```python
-from rootly_api_v_1_client.models import MyDataModel
-from rootly_api_v_1_client.api.my_tag import get_my_data_model
-from rootly_api_v_1_client.types import Response
+from rootly_sdk.models import MyDataModel
+from rootly_sdk.api.my_tag import get_my_data_model
+from rootly_sdk.types import Response
 
 with client as client:
     my_data: MyDataModel = get_my_data_model.sync(client=client)
@@ -34,9 +34,9 @@ with client as client:
 Or do the same thing with an async version:
 
 ```python
-from rootly_api_v_1_client.models import MyDataModel
-from rootly_api_v_1_client.api.my_tag import get_my_data_model
-from rootly_api_v_1_client.types import Response
+from rootly_sdk.models import MyDataModel
+from rootly_sdk.api.my_tag import get_my_data_model
+from rootly_sdk.types import Response
 
 async with client as client:
     my_data: MyDataModel = await get_my_data_model.asyncio(client=client)
@@ -47,8 +47,8 @@ By default, when you're calling an HTTPS API it will attempt to verify that SSL 
 
 ```python
 client = AuthenticatedClient(
-    base_url="https://internal_api.rootly.com", 
-    token="ROOTLY_API_KEY",
+    base_url="https://internal_api.example.com", 
+    token="SuperSecretToken",
     verify_ssl="/path/to/certificate_bundle.pem",
 )
 ```
@@ -57,8 +57,8 @@ You can also disable certificate validation altogether, but beware that **this i
 
 ```python
 client = AuthenticatedClient(
-    base_url="https://internal_api.rootly.com", 
-    token="ROOTLY_API_KEY", 
+    base_url="https://internal_api.example.com", 
+    token="SuperSecretToken", 
     verify_ssl=False
 )
 ```
@@ -72,14 +72,14 @@ Things to know:
 
 1. All path/query params, and bodies become method arguments.
 1. If your endpoint had any tags on it, the first tag will be used as a module name for the function (my_tag above)
-1. Any endpoint which did not have a tag will be in `rootly_api_v_1_client.api.default`
+1. Any endpoint which did not have a tag will be in `rootly_sdk.api.default`
 
 ## Advanced customizations
 
 There are more settings on the generated `Client` class which let you control more runtime behavior, check out the docstring on that class for more info. You can also customize the underlying `httpx.Client` or `httpx.AsyncClient` (depending on your use-case):
 
 ```python
-from rootly_api_v_1_client import Client
+from rootly_sdk import Client
 
 def log_request(request):
     print(f"Request event hook: {request.method} {request.url} - Waiting for response")
@@ -89,7 +89,7 @@ def log_response(response):
     print(f"Response event hook: {request.method} {request.url} - Status {response.status_code}")
 
 client = Client(
-    base_url="https://api.rootly.com",
+    base_url="https://api.example.com",
     httpx_args={"event_hooks": {"request": [log_request], "response": [log_response]}},
 )
 
@@ -100,13 +100,13 @@ You can even set the httpx client directly, but beware that this will override a
 
 ```python
 import httpx
-from rootly_api_v_1_client import Client
+from rootly_sdk import Client
 
 client = Client(
-    base_url="https://api.rootly.com",
+    base_url="https://api.example.com",
 )
 # Note that base_url needs to be re-set, as would any shared cookies, headers, etc.
-client.set_httpx_client(httpx.Client(base_url="https://api.rootly.com", proxies="http://localhost:8030"))
+client.set_httpx_client(httpx.Client(base_url="https://api.example.com", proxies="http://localhost:8030"))
 ```
 
 ## Building / publishing this package
