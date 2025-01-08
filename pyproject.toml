@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "rootly-api-v-1-client"
+name = "rootly"
 version = "v1"
 description = "A client library for accessing Rootly API v1"
 authors = []
 readme = "README.md"
 packages = [
-    {include = "rootly_api_v_1_client"},
+    {include = "rootly_sdk"},
 ]
-include = ["CHANGELOG.md", "rootly_api_v_1_client/py.typed"]
+include = ["CHANGELOG.md", "rootly_sdk/py.typed"]
 
 
 [tool.poetry.dependencies]
