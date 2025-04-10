@@ -54,7 +54,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentRetrospectiveStepResponse]]:
-    """Retrieves a incident retrospective step
+    """Retrieves an incident retrospective step
 
      Retrieves a specific incident retrospective step by id
 
@@ -85,7 +85,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentRetrospectiveStepResponse]]:
-    """Retrieves a incident retrospective step
+    """Retrieves an incident retrospective step
 
      Retrieves a specific incident retrospective step by id
 
@@ -111,7 +111,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentRetrospectiveStepResponse]]:
-    """Retrieves a incident retrospective step
+    """Retrieves an incident retrospective step
 
      Retrieves a specific incident retrospective step by id
 
@@ -140,7 +140,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentRetrospectiveStepResponse]]:
-    """Retrieves a incident retrospective step
+    """Retrieves an incident retrospective step
 
      Retrieves a specific incident retrospective step by id
 

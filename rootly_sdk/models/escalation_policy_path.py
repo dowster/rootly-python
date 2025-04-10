@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.escalation_policy_path_match_mode import EscalationPolicyPathMatchMode
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -31,6 +32,8 @@ class EscalationPolicyPath:
         repeat (Union[None, bool]): Whether this path should be repeated until someone acknowledges the alert
         repeat_count (Union[None, int]): The number of times this path will be executed until someone acknowledges the
             alert
+        match_mode (Union[Unset, EscalationPolicyPathMatchMode]): How path rules are matched.
+        position (Union[Unset, int]): The position of this path in the paths for this EP.
         created_at (Union[Unset, str]): Date of creation
         updated_at (Union[Unset, str]): Date of last update
         rules (Union[Unset, list[Union['EscalationPolicyPathRulesItemType0', 'EscalationPolicyPathRulesItemType1',
@@ -46,6 +49,8 @@ class EscalationPolicyPath:
     escalation_policy_id: str
     repeat: Union[None, bool]
     repeat_count: Union[None, int]
+    match_mode: Union[Unset, EscalationPolicyPathMatchMode] = UNSET
+    position: Union[Unset, int] = UNSET
     created_at: Union[Unset, str] = UNSET
     updated_at: Union[Unset, str] = UNSET
     rules: Union[
@@ -90,6 +95,12 @@ class EscalationPolicyPath:
         repeat_count: Union[None, int]
         repeat_count = self.repeat_count
 
+        match_mode: Union[Unset, str] = UNSET
+        if not isinstance(self.match_mode, Unset):
+            match_mode = self.match_mode.value
+
+        position = self.position
+
         created_at = self.created_at
 
         updated_at = self.updated_at
@@ -132,6 +143,10 @@ class EscalationPolicyPath:
                 "repeat_count": repeat_count,
             }
         )
+        if match_mode is not UNSET:
+            field_dict["match_mode"] = match_mode
+        if position is not UNSET:
+            field_dict["position"] = position
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if updated_at is not UNSET:
@@ -175,6 +190,15 @@ class EscalationPolicyPath:
             return cast(Union[None, int], data)
 
         repeat_count = _parse_repeat_count(d.pop("repeat_count"))
+
+        _match_mode = d.pop("match_mode", UNSET)
+        match_mode: Union[Unset, EscalationPolicyPathMatchMode]
+        if isinstance(_match_mode, Unset):
+            match_mode = UNSET
+        else:
+            match_mode = EscalationPolicyPathMatchMode(_match_mode)
+
+        position = d.pop("position", UNSET)
 
         created_at = d.pop("created_at", UNSET)
 
@@ -278,6 +302,8 @@ class EscalationPolicyPath:
             escalation_policy_id=escalation_policy_id,
             repeat=repeat,
             repeat_count=repeat_count,
+            match_mode=match_mode,
+            position=position,
             created_at=created_at,
             updated_at=updated_at,
             rules=rules,

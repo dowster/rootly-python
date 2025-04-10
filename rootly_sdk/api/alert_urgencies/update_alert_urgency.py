@@ -66,7 +66,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateAlertUrgency,
 ) -> Response[Union[AlertUrgencyResponse, ErrorsList]]:
-    """Update a alert urgency
+    """Update an alert urgency
 
      Update a specific alert urgency by id
 
@@ -100,7 +100,7 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateAlertUrgency,
 ) -> Optional[Union[AlertUrgencyResponse, ErrorsList]]:
-    """Update a alert urgency
+    """Update an alert urgency
 
      Update a specific alert urgency by id
 
@@ -129,7 +129,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateAlertUrgency,
 ) -> Response[Union[AlertUrgencyResponse, ErrorsList]]:
-    """Update a alert urgency
+    """Update an alert urgency
 
      Update a specific alert urgency by id
 
@@ -161,7 +161,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateAlertUrgency,
 ) -> Optional[Union[AlertUrgencyResponse, ErrorsList]]:
-    """Update a alert urgency
+    """Update an alert urgency
 
      Update a specific alert urgency by id
 

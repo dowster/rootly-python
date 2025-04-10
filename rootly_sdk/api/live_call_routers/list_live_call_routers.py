@@ -97,9 +97,9 @@ def sync_detailed(
     filtercreated_atlte: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
 ) -> Response[LiveCallRouterList]:
-    """List live_call_routers
+    """List Live Call Routers
 
-     List live_call_routers
+     List Live Call Routers
 
     Args:
         include (Union[Unset, str]):
@@ -158,9 +158,9 @@ def sync(
     filtercreated_atlte: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
 ) -> Optional[LiveCallRouterList]:
-    """List live_call_routers
+    """List Live Call Routers
 
-     List live_call_routers
+     List Live Call Routers
 
     Args:
         include (Union[Unset, str]):
@@ -214,9 +214,9 @@ async def asyncio_detailed(
     filtercreated_atlte: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
 ) -> Response[LiveCallRouterList]:
-    """List live_call_routers
+    """List Live Call Routers
 
-     List live_call_routers
+     List Live Call Routers
 
     Args:
         include (Union[Unset, str]):
@@ -273,9 +273,9 @@ async def asyncio(
     filtercreated_atlte: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
 ) -> Optional[LiveCallRouterList]:
-    """List live_call_routers
+    """List Live Call Routers
 
-     List live_call_routers
+     List Live Call Routers
 
     Args:
         include (Union[Unset, str]):

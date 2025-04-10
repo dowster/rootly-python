@@ -12,9 +12,8 @@ from ..models.update_alert_group_data_attributes_group_by_alert_urgency import (
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.update_alert_group_data_attributes_alert_group_targets_attributes import (
-        UpdateAlertGroupDataAttributesAlertGroupTargetsAttributes,
-    )
+    from ..models.update_alert_group_data_attributes_attributes_item import UpdateAlertGroupDataAttributesAttributesItem
+    from ..models.update_alert_group_data_attributes_targets_item import UpdateAlertGroupDataAttributesTargetsItem
 
 
 T = TypeVar("T", bound="UpdateAlertGroupDataAttributes")
@@ -27,8 +26,8 @@ class UpdateAlertGroupDataAttributes:
         name (Union[Unset, str]): The name of the alert group
         description (Union[None, Unset, str]): The description of the alert group
         time_window (Union[Unset, int]): The length of time an Alert Group should stay open and accept new alerts
-        alert_group_targets_attributes (Union[Unset, UpdateAlertGroupDataAttributesAlertGroupTargetsAttributes]):
-            Attributes for alert group targets
+        targets (Union[Unset, list['UpdateAlertGroupDataAttributesTargetsItem']]):
+        attributes (Union[Unset, list['UpdateAlertGroupDataAttributesAttributesItem']]):
         group_by_alert_title (Union[Unset, UpdateAlertGroupDataAttributesGroupByAlertTitle]): Whether the alerts should
             be grouped by titles.
         group_by_alert_urgency (Union[Unset, UpdateAlertGroupDataAttributesGroupByAlertUrgency]): Whether the alerts
@@ -40,7 +39,8 @@ class UpdateAlertGroupDataAttributes:
     name: Union[Unset, str] = UNSET
     description: Union[None, Unset, str] = UNSET
     time_window: Union[Unset, int] = UNSET
-    alert_group_targets_attributes: Union[Unset, "UpdateAlertGroupDataAttributesAlertGroupTargetsAttributes"] = UNSET
+    targets: Union[Unset, list["UpdateAlertGroupDataAttributesTargetsItem"]] = UNSET
+    attributes: Union[Unset, list["UpdateAlertGroupDataAttributesAttributesItem"]] = UNSET
     group_by_alert_title: Union[Unset, UpdateAlertGroupDataAttributesGroupByAlertTitle] = UNSET
     group_by_alert_urgency: Union[Unset, UpdateAlertGroupDataAttributesGroupByAlertUrgency] = UNSET
     condition_type: Union[Unset, UpdateAlertGroupDataAttributesConditionType] = UNSET
@@ -56,9 +56,19 @@ class UpdateAlertGroupDataAttributes:
 
         time_window = self.time_window
 
-        alert_group_targets_attributes: Union[Unset, dict[str, Any]] = UNSET
-        if not isinstance(self.alert_group_targets_attributes, Unset):
-            alert_group_targets_attributes = self.alert_group_targets_attributes.to_dict()
+        targets: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.targets, Unset):
+            targets = []
+            for targets_item_data in self.targets:
+                targets_item = targets_item_data.to_dict()
+                targets.append(targets_item)
+
+        attributes: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.attributes, Unset):
+            attributes = []
+            for attributes_item_data in self.attributes:
+                attributes_item = attributes_item_data.to_dict()
+                attributes.append(attributes_item)
 
         group_by_alert_title: Union[Unset, int] = UNSET
         if not isinstance(self.group_by_alert_title, Unset):
@@ -80,8 +90,10 @@ class UpdateAlertGroupDataAttributes:
             field_dict["description"] = description
         if time_window is not UNSET:
             field_dict["time_window"] = time_window
-        if alert_group_targets_attributes is not UNSET:
-            field_dict["alert_group_targets_attributes"] = alert_group_targets_attributes
+        if targets is not UNSET:
+            field_dict["targets"] = targets
+        if attributes is not UNSET:
+            field_dict["attributes"] = attributes
         if group_by_alert_title is not UNSET:
             field_dict["group_by_alert_title"] = group_by_alert_title
         if group_by_alert_urgency is not UNSET:
@@ -93,9 +105,10 @@ class UpdateAlertGroupDataAttributes:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        from ..models.update_alert_group_data_attributes_alert_group_targets_attributes import (
-            UpdateAlertGroupDataAttributesAlertGroupTargetsAttributes,
+        from ..models.update_alert_group_data_attributes_attributes_item import (
+            UpdateAlertGroupDataAttributesAttributesItem,
         )
+        from ..models.update_alert_group_data_attributes_targets_item import UpdateAlertGroupDataAttributesTargetsItem
 
         d = src_dict.copy()
         name = d.pop("name", UNSET)
@@ -111,14 +124,19 @@ class UpdateAlertGroupDataAttributes:
 
         time_window = d.pop("time_window", UNSET)
 
-        _alert_group_targets_attributes = d.pop("alert_group_targets_attributes", UNSET)
-        alert_group_targets_attributes: Union[Unset, UpdateAlertGroupDataAttributesAlertGroupTargetsAttributes]
-        if isinstance(_alert_group_targets_attributes, Unset):
-            alert_group_targets_attributes = UNSET
-        else:
-            alert_group_targets_attributes = UpdateAlertGroupDataAttributesAlertGroupTargetsAttributes.from_dict(
-                _alert_group_targets_attributes
-            )
+        targets = []
+        _targets = d.pop("targets", UNSET)
+        for targets_item_data in _targets or []:
+            targets_item = UpdateAlertGroupDataAttributesTargetsItem.from_dict(targets_item_data)
+
+            targets.append(targets_item)
+
+        attributes = []
+        _attributes = d.pop("attributes", UNSET)
+        for attributes_item_data in _attributes or []:
+            attributes_item = UpdateAlertGroupDataAttributesAttributesItem.from_dict(attributes_item_data)
+
+            attributes.append(attributes_item)
 
         _group_by_alert_title = d.pop("group_by_alert_title", UNSET)
         group_by_alert_title: Union[Unset, UpdateAlertGroupDataAttributesGroupByAlertTitle]
@@ -145,7 +163,8 @@ class UpdateAlertGroupDataAttributes:
             name=name,
             description=description,
             time_window=time_window,
-            alert_group_targets_attributes=alert_group_targets_attributes,
+            targets=targets,
+            attributes=attributes,
             group_by_alert_title=group_by_alert_title,
             group_by_alert_urgency=group_by_alert_urgency,
             condition_type=condition_type,

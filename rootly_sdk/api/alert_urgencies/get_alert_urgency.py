@@ -54,7 +54,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[AlertUrgencyResponse, ErrorsList]]:
-    """Retrieves a alert urgency
+    """Retrieves an alert urgency
 
      Retrieves a specific alert urgency by id
 
@@ -85,7 +85,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[AlertUrgencyResponse, ErrorsList]]:
-    """Retrieves a alert urgency
+    """Retrieves an alert urgency
 
      Retrieves a specific alert urgency by id
 
@@ -111,7 +111,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[AlertUrgencyResponse, ErrorsList]]:
-    """Retrieves a alert urgency
+    """Retrieves an alert urgency
 
      Retrieves a specific alert urgency by id
 
@@ -140,7 +140,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[AlertUrgencyResponse, ErrorsList]]:
-    """Retrieves a alert urgency
+    """Retrieves an alert urgency
 
      Retrieves a specific alert urgency by id
 

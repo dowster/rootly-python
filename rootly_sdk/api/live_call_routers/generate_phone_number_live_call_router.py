@@ -68,9 +68,9 @@ def sync_detailed(
     country_code: GeneratePhoneNumberLiveCallRouterCountryCode,
     phone_type: GeneratePhoneNumberLiveCallRouterPhoneType,
 ) -> Response[Union[Any, ErrorsList]]:
-    """Generates a phone number for live_call_router
+    """Generates a phone number for Live Call Router
 
-     Generates a phone number for live_call_router
+     Generates a phone number for Live Call Router
 
     Args:
         country_code (GeneratePhoneNumberLiveCallRouterCountryCode):
@@ -102,9 +102,9 @@ def sync(
     country_code: GeneratePhoneNumberLiveCallRouterCountryCode,
     phone_type: GeneratePhoneNumberLiveCallRouterPhoneType,
 ) -> Optional[Union[Any, ErrorsList]]:
-    """Generates a phone number for live_call_router
+    """Generates a phone number for Live Call Router
 
-     Generates a phone number for live_call_router
+     Generates a phone number for Live Call Router
 
     Args:
         country_code (GeneratePhoneNumberLiveCallRouterCountryCode):
@@ -131,9 +131,9 @@ async def asyncio_detailed(
     country_code: GeneratePhoneNumberLiveCallRouterCountryCode,
     phone_type: GeneratePhoneNumberLiveCallRouterPhoneType,
 ) -> Response[Union[Any, ErrorsList]]:
-    """Generates a phone number for live_call_router
+    """Generates a phone number for Live Call Router
 
-     Generates a phone number for live_call_router
+     Generates a phone number for Live Call Router
 
     Args:
         country_code (GeneratePhoneNumberLiveCallRouterCountryCode):
@@ -163,9 +163,9 @@ async def asyncio(
     country_code: GeneratePhoneNumberLiveCallRouterCountryCode,
     phone_type: GeneratePhoneNumberLiveCallRouterPhoneType,
 ) -> Optional[Union[Any, ErrorsList]]:
-    """Generates a phone number for live_call_router
+    """Generates a phone number for Live Call Router
 
-     Generates a phone number for live_call_router
+     Generates a phone number for Live Call Router
 
     Args:
         country_code (GeneratePhoneNumberLiveCallRouterCountryCode):

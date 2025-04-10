@@ -109,9 +109,9 @@ def sync_detailed(
     filtercreated_atlt: Union[Unset, str] = UNSET,
     filtercreated_atlte: Union[Unset, str] = UNSET,
 ) -> Response[CatalogFieldList]:
-    """List catalog_fields
+    """List Catalog Fields
 
-     List catalog_fields
+     List Catalog Fields
 
     Args:
         catalog_id (str):
@@ -173,9 +173,9 @@ def sync(
     filtercreated_atlt: Union[Unset, str] = UNSET,
     filtercreated_atlte: Union[Unset, str] = UNSET,
 ) -> Optional[CatalogFieldList]:
-    """List catalog_fields
+    """List Catalog Fields
 
-     List catalog_fields
+     List Catalog Fields
 
     Args:
         catalog_id (str):
@@ -232,9 +232,9 @@ async def asyncio_detailed(
     filtercreated_atlt: Union[Unset, str] = UNSET,
     filtercreated_atlte: Union[Unset, str] = UNSET,
 ) -> Response[CatalogFieldList]:
-    """List catalog_fields
+    """List Catalog Fields
 
-     List catalog_fields
+     List Catalog Fields
 
     Args:
         catalog_id (str):
@@ -294,9 +294,9 @@ async def asyncio(
     filtercreated_atlt: Union[Unset, str] = UNSET,
     filtercreated_atlte: Union[Unset, str] = UNSET,
 ) -> Optional[CatalogFieldList]:
-    """List catalog_fields
+    """List Catalog Fields
 
-     List catalog_fields
+     List Catalog Fields
 
     Args:
         catalog_id (str):

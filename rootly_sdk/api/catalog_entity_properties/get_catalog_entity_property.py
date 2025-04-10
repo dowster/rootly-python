@@ -69,9 +69,9 @@ def sync_detailed(
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogEntityPropertyInclude] = UNSET,
 ) -> Response[Union[CatalogEntityPropertyResponse, ErrorsList]]:
-    """Retrieves a catalog_entity_property
+    """Retrieves a Catalog Entity Property
 
-     Retrieves a specific catalog_entity_property by id
+     Retrieves a specific Catalog Entity Property by id
 
     Args:
         id (str):
@@ -103,9 +103,9 @@ def sync(
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogEntityPropertyInclude] = UNSET,
 ) -> Optional[Union[CatalogEntityPropertyResponse, ErrorsList]]:
-    """Retrieves a catalog_entity_property
+    """Retrieves a Catalog Entity Property
 
-     Retrieves a specific catalog_entity_property by id
+     Retrieves a specific Catalog Entity Property by id
 
     Args:
         id (str):
@@ -132,9 +132,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogEntityPropertyInclude] = UNSET,
 ) -> Response[Union[CatalogEntityPropertyResponse, ErrorsList]]:
-    """Retrieves a catalog_entity_property
+    """Retrieves a Catalog Entity Property
 
-     Retrieves a specific catalog_entity_property by id
+     Retrieves a specific Catalog Entity Property by id
 
     Args:
         id (str):
@@ -164,9 +164,9 @@ async def asyncio(
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogEntityPropertyInclude] = UNSET,
 ) -> Optional[Union[CatalogEntityPropertyResponse, ErrorsList]]:
-    """Retrieves a catalog_entity_property
+    """Retrieves a Catalog Entity Property
 
-     Retrieves a specific catalog_entity_property by id
+     Retrieves a specific Catalog Entity Property by id
 
     Args:
         id (str):

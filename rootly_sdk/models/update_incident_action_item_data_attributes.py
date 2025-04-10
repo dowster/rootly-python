@@ -22,6 +22,8 @@ class UpdateIncidentActionItemDataAttributes:
         priority (Union[Unset, UpdateIncidentActionItemDataAttributesPriority]): The priority of the action item
         status (Union[Unset, UpdateIncidentActionItemDataAttributesStatus]): The status of the action item
         due_date (Union[None, Unset, str]): The due date of the action item
+        jira_issue_id (Union[None, Unset, str]): The Jira issue ID.
+        jira_issue_url (Union[None, Unset, str]): The Jira issue URL.
     """
 
     summary: Union[Unset, str] = UNSET
@@ -32,6 +34,8 @@ class UpdateIncidentActionItemDataAttributes:
     priority: Union[Unset, UpdateIncidentActionItemDataAttributesPriority] = UNSET
     status: Union[Unset, UpdateIncidentActionItemDataAttributesStatus] = UNSET
     due_date: Union[None, Unset, str] = UNSET
+    jira_issue_id: Union[None, Unset, str] = UNSET
+    jira_issue_url: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
         summary = self.summary
@@ -75,6 +79,18 @@ class UpdateIncidentActionItemDataAttributes:
         else:
             due_date = self.due_date
 
+        jira_issue_id: Union[None, Unset, str]
+        if isinstance(self.jira_issue_id, Unset):
+            jira_issue_id = UNSET
+        else:
+            jira_issue_id = self.jira_issue_id
+
+        jira_issue_url: Union[None, Unset, str]
+        if isinstance(self.jira_issue_url, Unset):
+            jira_issue_url = UNSET
+        else:
+            jira_issue_url = self.jira_issue_url
+
         field_dict: dict[str, Any] = {}
         field_dict.update({})
         if summary is not UNSET:
@@ -93,6 +109,10 @@ class UpdateIncidentActionItemDataAttributes:
             field_dict["status"] = status
         if due_date is not UNSET:
             field_dict["due_date"] = due_date
+        if jira_issue_id is not UNSET:
+            field_dict["jira_issue_id"] = jira_issue_id
+        if jira_issue_url is not UNSET:
+            field_dict["jira_issue_url"] = jira_issue_url
 
         return field_dict
 
@@ -166,6 +186,24 @@ class UpdateIncidentActionItemDataAttributes:
 
         due_date = _parse_due_date(d.pop("due_date", UNSET))
 
+        def _parse_jira_issue_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        jira_issue_id = _parse_jira_issue_id(d.pop("jira_issue_id", UNSET))
+
+        def _parse_jira_issue_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        jira_issue_url = _parse_jira_issue_url(d.pop("jira_issue_url", UNSET))
+
         update_incident_action_item_data_attributes = cls(
             summary=summary,
             description=description,
@@ -175,6 +213,8 @@ class UpdateIncidentActionItemDataAttributes:
             priority=priority,
             status=status,
             due_date=due_date,
+            jira_issue_id=jira_issue_id,
+            jira_issue_url=jira_issue_url,
         )
 
         return update_incident_action_item_data_attributes

@@ -54,7 +54,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentSubStatusResponse]]:
-    """Delete a incident_sub_status
+    """Delete an incident_sub_status
 
      Delete a specific incident_sub_status by id
 
@@ -85,7 +85,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentSubStatusResponse]]:
-    """Delete a incident_sub_status
+    """Delete an incident_sub_status
 
      Delete a specific incident_sub_status by id
 
@@ -111,7 +111,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentSubStatusResponse]]:
-    """Delete a incident_sub_status
+    """Delete an incident_sub_status
 
      Delete a specific incident_sub_status by id
 
@@ -140,7 +140,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentSubStatusResponse]]:
-    """Delete a incident_sub_status
+    """Delete an incident_sub_status
 
      Delete a specific incident_sub_status by id
 

@@ -54,7 +54,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentFeedbackResponse]]:
-    """Retrieves a incident feedback
+    """Retrieves an incident feedback
 
      Retrieves a specific incident_feedback by id
 
@@ -85,7 +85,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentFeedbackResponse]]:
-    """Retrieves a incident feedback
+    """Retrieves an incident feedback
 
      Retrieves a specific incident_feedback by id
 
@@ -111,7 +111,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentFeedbackResponse]]:
-    """Retrieves a incident feedback
+    """Retrieves an incident feedback
 
      Retrieves a specific incident_feedback by id
 
@@ -140,7 +140,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentFeedbackResponse]]:
-    """Retrieves a incident feedback
+    """Retrieves an incident feedback
 
      Retrieves a specific incident_feedback by id
 

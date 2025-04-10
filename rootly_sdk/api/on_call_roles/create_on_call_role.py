@@ -38,14 +38,14 @@ def _parse_response(
         response_201 = OnCallRoleResponse.from_dict(response.json())
 
         return response_201
-    if response.status_code == 401:
-        response_401 = ErrorsList.from_dict(response.json())
-
-        return response_401
     if response.status_code == 422:
         response_422 = ErrorsList.from_dict(response.json())
 
         return response_422
+    if response.status_code == 401:
+        response_401 = ErrorsList.from_dict(response.json())
+
+        return response_401
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -68,9 +68,9 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: NewOnCallRole,
 ) -> Response[Union[ErrorsList, OnCallRoleResponse]]:
-    """Creates a on_call_role
+    """Creates an On-Call Role
 
-     Creates a new on_call_role from provided data
+     Creates a new On-Call Role from provided data
 
     Args:
         body (NewOnCallRole):
@@ -99,9 +99,9 @@ def sync(
     client: AuthenticatedClient,
     body: NewOnCallRole,
 ) -> Optional[Union[ErrorsList, OnCallRoleResponse]]:
-    """Creates a on_call_role
+    """Creates an On-Call Role
 
-     Creates a new on_call_role from provided data
+     Creates a new On-Call Role from provided data
 
     Args:
         body (NewOnCallRole):
@@ -125,9 +125,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: NewOnCallRole,
 ) -> Response[Union[ErrorsList, OnCallRoleResponse]]:
-    """Creates a on_call_role
+    """Creates an On-Call Role
 
-     Creates a new on_call_role from provided data
+     Creates a new On-Call Role from provided data
 
     Args:
         body (NewOnCallRole):
@@ -154,9 +154,9 @@ async def asyncio(
     client: AuthenticatedClient,
     body: NewOnCallRole,
 ) -> Optional[Union[ErrorsList, OnCallRoleResponse]]:
-    """Creates a on_call_role
+    """Creates an On-Call Role
 
-     Creates a new on_call_role from provided data
+     Creates a new On-Call Role from provided data
 
     Args:
         body (NewOnCallRole):

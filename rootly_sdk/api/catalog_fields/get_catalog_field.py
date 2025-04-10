@@ -69,9 +69,9 @@ def sync_detailed(
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogFieldInclude] = UNSET,
 ) -> Response[Union[CatalogFieldResponse, ErrorsList]]:
-    """Retrieves a catalog_field
+    """Retrieves a Catalog Field
 
-     Retrieves a specific catalog_field by id
+     Retrieves a specific Catalog Field by id
 
     Args:
         id (str):
@@ -103,9 +103,9 @@ def sync(
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogFieldInclude] = UNSET,
 ) -> Optional[Union[CatalogFieldResponse, ErrorsList]]:
-    """Retrieves a catalog_field
+    """Retrieves a Catalog Field
 
-     Retrieves a specific catalog_field by id
+     Retrieves a specific Catalog Field by id
 
     Args:
         id (str):
@@ -132,9 +132,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogFieldInclude] = UNSET,
 ) -> Response[Union[CatalogFieldResponse, ErrorsList]]:
-    """Retrieves a catalog_field
+    """Retrieves a Catalog Field
 
-     Retrieves a specific catalog_field by id
+     Retrieves a specific Catalog Field by id
 
     Args:
         id (str):
@@ -164,9 +164,9 @@ async def asyncio(
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogFieldInclude] = UNSET,
 ) -> Optional[Union[CatalogFieldResponse, ErrorsList]]:
-    """Retrieves a catalog_field
+    """Retrieves a Catalog Field
 
-     Retrieves a specific catalog_field by id
+     Retrieves a specific Catalog Field by id
 
     Args:
         id (str):

@@ -7,6 +7,9 @@ from ..models.create_linear_subtask_issue_task_params_task_type import CreateLin
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.create_linear_subtask_issue_task_params_labels_item import (
+        CreateLinearSubtaskIssueTaskParamsLabelsItem,
+    )
     from ..models.create_linear_subtask_issue_task_params_priority import CreateLinearSubtaskIssueTaskParamsPriority
     from ..models.create_linear_subtask_issue_task_params_state import CreateLinearSubtaskIssueTaskParamsState
 
@@ -24,6 +27,7 @@ class CreateLinearSubtaskIssueTaskParams:
         task_type (Union[Unset, CreateLinearSubtaskIssueTaskParamsTaskType]):
         description (Union[Unset, str]): The issue description
         priority (Union[Unset, CreateLinearSubtaskIssueTaskParamsPriority]): The priority id and display name
+        labels (Union[Unset, list['CreateLinearSubtaskIssueTaskParamsLabelsItem']]):
         assign_user_email (Union[Unset, str]): The assigned user's email
     """
 
@@ -33,6 +37,7 @@ class CreateLinearSubtaskIssueTaskParams:
     task_type: Union[Unset, CreateLinearSubtaskIssueTaskParamsTaskType] = UNSET
     description: Union[Unset, str] = UNSET
     priority: Union[Unset, "CreateLinearSubtaskIssueTaskParamsPriority"] = UNSET
+    labels: Union[Unset, list["CreateLinearSubtaskIssueTaskParamsLabelsItem"]] = UNSET
     assign_user_email: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -53,6 +58,13 @@ class CreateLinearSubtaskIssueTaskParams:
         if not isinstance(self.priority, Unset):
             priority = self.priority.to_dict()
 
+        labels: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.labels, Unset):
+            labels = []
+            for labels_item_data in self.labels:
+                labels_item = labels_item_data.to_dict()
+                labels.append(labels_item)
+
         assign_user_email = self.assign_user_email
 
         field_dict: dict[str, Any] = {}
@@ -70,6 +82,8 @@ class CreateLinearSubtaskIssueTaskParams:
             field_dict["description"] = description
         if priority is not UNSET:
             field_dict["priority"] = priority
+        if labels is not UNSET:
+            field_dict["labels"] = labels
         if assign_user_email is not UNSET:
             field_dict["assign_user_email"] = assign_user_email
 
@@ -77,6 +91,9 @@ class CreateLinearSubtaskIssueTaskParams:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+        from ..models.create_linear_subtask_issue_task_params_labels_item import (
+            CreateLinearSubtaskIssueTaskParamsLabelsItem,
+        )
         from ..models.create_linear_subtask_issue_task_params_priority import CreateLinearSubtaskIssueTaskParamsPriority
         from ..models.create_linear_subtask_issue_task_params_state import CreateLinearSubtaskIssueTaskParamsState
 
@@ -103,6 +120,13 @@ class CreateLinearSubtaskIssueTaskParams:
         else:
             priority = CreateLinearSubtaskIssueTaskParamsPriority.from_dict(_priority)
 
+        labels = []
+        _labels = d.pop("labels", UNSET)
+        for labels_item_data in _labels or []:
+            labels_item = CreateLinearSubtaskIssueTaskParamsLabelsItem.from_dict(labels_item_data)
+
+            labels.append(labels_item)
+
         assign_user_email = d.pop("assign_user_email", UNSET)
 
         create_linear_subtask_issue_task_params = cls(
@@ -112,6 +136,7 @@ class CreateLinearSubtaskIssueTaskParams:
             task_type=task_type,
             description=description,
             priority=priority,
+            labels=labels,
             assign_user_email=assign_user_email,
         )
 

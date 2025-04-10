@@ -2,6 +2,12 @@ from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
+from ..models.update_escalation_policy_level_data_attributes_paging_strategy_configuration_schedule_strategy import (
+    UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy,
+)
+from ..models.update_escalation_policy_level_data_attributes_paging_strategy_configuration_strategy import (
+    UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -21,6 +27,10 @@ class UpdateEscalationPolicyLevelDataAttributes:
         position (Union[Unset, int]): Position of the escalation policy level
         escalation_policy_path_id (Union[None, Unset, str]): The ID of the dynamic escalation policy path the level will
             belong to. If nothing is specified it will add the level to your default path.
+        paging_strategy_configuration_strategy (Union[Unset,
+            UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy]):
+        paging_strategy_configuration_schedule_strategy (Union[Unset,
+            UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy]):
         notification_target_params (Union[Unset,
             list[Union['UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0', None]]]): Escalation
             level's notification targets
@@ -29,6 +39,12 @@ class UpdateEscalationPolicyLevelDataAttributes:
     delay: Union[Unset, int] = UNSET
     position: Union[Unset, int] = UNSET
     escalation_policy_path_id: Union[None, Unset, str] = UNSET
+    paging_strategy_configuration_strategy: Union[
+        Unset, UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy
+    ] = UNSET
+    paging_strategy_configuration_schedule_strategy: Union[
+        Unset, UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy
+    ] = UNSET
     notification_target_params: Union[
         Unset, list[Union["UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0", None]]
     ] = UNSET
@@ -47,6 +63,14 @@ class UpdateEscalationPolicyLevelDataAttributes:
             escalation_policy_path_id = UNSET
         else:
             escalation_policy_path_id = self.escalation_policy_path_id
+
+        paging_strategy_configuration_strategy: Union[Unset, str] = UNSET
+        if not isinstance(self.paging_strategy_configuration_strategy, Unset):
+            paging_strategy_configuration_strategy = self.paging_strategy_configuration_strategy.value
+
+        paging_strategy_configuration_schedule_strategy: Union[Unset, str] = UNSET
+        if not isinstance(self.paging_strategy_configuration_schedule_strategy, Unset):
+            paging_strategy_configuration_schedule_strategy = self.paging_strategy_configuration_schedule_strategy.value
 
         notification_target_params: Union[Unset, list[Union[None, dict[str, Any]]]] = UNSET
         if not isinstance(self.notification_target_params, Unset):
@@ -70,6 +94,12 @@ class UpdateEscalationPolicyLevelDataAttributes:
             field_dict["position"] = position
         if escalation_policy_path_id is not UNSET:
             field_dict["escalation_policy_path_id"] = escalation_policy_path_id
+        if paging_strategy_configuration_strategy is not UNSET:
+            field_dict["paging_strategy_configuration_strategy"] = paging_strategy_configuration_strategy
+        if paging_strategy_configuration_schedule_strategy is not UNSET:
+            field_dict["paging_strategy_configuration_schedule_strategy"] = (
+                paging_strategy_configuration_schedule_strategy
+            )
         if notification_target_params is not UNSET:
             field_dict["notification_target_params"] = notification_target_params
 
@@ -94,6 +124,34 @@ class UpdateEscalationPolicyLevelDataAttributes:
             return cast(Union[None, Unset, str], data)
 
         escalation_policy_path_id = _parse_escalation_policy_path_id(d.pop("escalation_policy_path_id", UNSET))
+
+        _paging_strategy_configuration_strategy = d.pop("paging_strategy_configuration_strategy", UNSET)
+        paging_strategy_configuration_strategy: Union[
+            Unset, UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy
+        ]
+        if isinstance(_paging_strategy_configuration_strategy, Unset):
+            paging_strategy_configuration_strategy = UNSET
+        else:
+            paging_strategy_configuration_strategy = (
+                UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy(
+                    _paging_strategy_configuration_strategy
+                )
+            )
+
+        _paging_strategy_configuration_schedule_strategy = d.pop(
+            "paging_strategy_configuration_schedule_strategy", UNSET
+        )
+        paging_strategy_configuration_schedule_strategy: Union[
+            Unset, UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy
+        ]
+        if isinstance(_paging_strategy_configuration_schedule_strategy, Unset):
+            paging_strategy_configuration_schedule_strategy = UNSET
+        else:
+            paging_strategy_configuration_schedule_strategy = (
+                UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy(
+                    _paging_strategy_configuration_schedule_strategy
+                )
+            )
 
         notification_target_params = []
         _notification_target_params = d.pop("notification_target_params", UNSET)
@@ -128,6 +186,8 @@ class UpdateEscalationPolicyLevelDataAttributes:
             delay=delay,
             position=position,
             escalation_policy_path_id=escalation_policy_path_id,
+            paging_strategy_configuration_strategy=paging_strategy_configuration_strategy,
+            paging_strategy_configuration_schedule_strategy=paging_strategy_configuration_schedule_strategy,
             notification_target_params=notification_target_params,
         )
 

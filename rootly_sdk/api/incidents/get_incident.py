@@ -69,7 +69,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     include: Union[Unset, GetIncidentInclude] = UNSET,
 ) -> Response[Union[ErrorsList, IncidentResponse]]:
-    """Retrieves a incident
+    """Retrieves an incident
 
      Retrieves a specific incident by id
 
@@ -103,7 +103,7 @@ def sync(
     client: AuthenticatedClient,
     include: Union[Unset, GetIncidentInclude] = UNSET,
 ) -> Optional[Union[ErrorsList, IncidentResponse]]:
-    """Retrieves a incident
+    """Retrieves an incident
 
      Retrieves a specific incident by id
 
@@ -132,7 +132,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     include: Union[Unset, GetIncidentInclude] = UNSET,
 ) -> Response[Union[ErrorsList, IncidentResponse]]:
-    """Retrieves a incident
+    """Retrieves an incident
 
      Retrieves a specific incident by id
 
@@ -164,7 +164,7 @@ async def asyncio(
     client: AuthenticatedClient,
     include: Union[Unset, GetIncidentInclude] = UNSET,
 ) -> Optional[Union[ErrorsList, IncidentResponse]]:
-    """Retrieves a incident
+    """Retrieves an incident
 
      Retrieves a specific incident by id
 

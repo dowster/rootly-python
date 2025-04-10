@@ -3,6 +3,12 @@ from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.escalation_policy_level_paging_strategy_configuration_schedule_strategy import (
+    EscalationPolicyLevelPagingStrategyConfigurationScheduleStrategy,
+)
+from ..models.escalation_policy_level_paging_strategy_configuration_strategy import (
+    EscalationPolicyLevelPagingStrategyConfigurationStrategy,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -25,6 +31,9 @@ class EscalationPolicyLevel:
             Escalation level's notification targets
         escalation_policy_path_id (Union[None, Unset, str]): The ID of the dynamic escalation policy path the level will
             belong to. If nothing is specified it will add the level to your default path.
+        paging_strategy_configuration_strategy (Union[Unset, EscalationPolicyLevelPagingStrategyConfigurationStrategy]):
+        paging_strategy_configuration_schedule_strategy (Union[Unset,
+            EscalationPolicyLevelPagingStrategyConfigurationScheduleStrategy]):
         created_at (Union[Unset, str]): Date of creation
         updated_at (Union[Unset, str]): Date of last update
     """
@@ -34,6 +43,12 @@ class EscalationPolicyLevel:
     position: int
     notification_target_params: list[Union["EscalationPolicyLevelNotificationTargetParamsItemType0", None]]
     escalation_policy_path_id: Union[None, Unset, str] = UNSET
+    paging_strategy_configuration_strategy: Union[Unset, EscalationPolicyLevelPagingStrategyConfigurationStrategy] = (
+        UNSET
+    )
+    paging_strategy_configuration_schedule_strategy: Union[
+        Unset, EscalationPolicyLevelPagingStrategyConfigurationScheduleStrategy
+    ] = UNSET
     created_at: Union[Unset, str] = UNSET
     updated_at: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -64,6 +79,14 @@ class EscalationPolicyLevel:
         else:
             escalation_policy_path_id = self.escalation_policy_path_id
 
+        paging_strategy_configuration_strategy: Union[Unset, str] = UNSET
+        if not isinstance(self.paging_strategy_configuration_strategy, Unset):
+            paging_strategy_configuration_strategy = self.paging_strategy_configuration_strategy.value
+
+        paging_strategy_configuration_schedule_strategy: Union[Unset, str] = UNSET
+        if not isinstance(self.paging_strategy_configuration_schedule_strategy, Unset):
+            paging_strategy_configuration_schedule_strategy = self.paging_strategy_configuration_schedule_strategy.value
+
         created_at = self.created_at
 
         updated_at = self.updated_at
@@ -80,6 +103,12 @@ class EscalationPolicyLevel:
         )
         if escalation_policy_path_id is not UNSET:
             field_dict["escalation_policy_path_id"] = escalation_policy_path_id
+        if paging_strategy_configuration_strategy is not UNSET:
+            field_dict["paging_strategy_configuration_strategy"] = paging_strategy_configuration_strategy
+        if paging_strategy_configuration_schedule_strategy is not UNSET:
+            field_dict["paging_strategy_configuration_schedule_strategy"] = (
+                paging_strategy_configuration_schedule_strategy
+            )
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if updated_at is not UNSET:
@@ -136,6 +165,30 @@ class EscalationPolicyLevel:
 
         escalation_policy_path_id = _parse_escalation_policy_path_id(d.pop("escalation_policy_path_id", UNSET))
 
+        _paging_strategy_configuration_strategy = d.pop("paging_strategy_configuration_strategy", UNSET)
+        paging_strategy_configuration_strategy: Union[Unset, EscalationPolicyLevelPagingStrategyConfigurationStrategy]
+        if isinstance(_paging_strategy_configuration_strategy, Unset):
+            paging_strategy_configuration_strategy = UNSET
+        else:
+            paging_strategy_configuration_strategy = EscalationPolicyLevelPagingStrategyConfigurationStrategy(
+                _paging_strategy_configuration_strategy
+            )
+
+        _paging_strategy_configuration_schedule_strategy = d.pop(
+            "paging_strategy_configuration_schedule_strategy", UNSET
+        )
+        paging_strategy_configuration_schedule_strategy: Union[
+            Unset, EscalationPolicyLevelPagingStrategyConfigurationScheduleStrategy
+        ]
+        if isinstance(_paging_strategy_configuration_schedule_strategy, Unset):
+            paging_strategy_configuration_schedule_strategy = UNSET
+        else:
+            paging_strategy_configuration_schedule_strategy = (
+                EscalationPolicyLevelPagingStrategyConfigurationScheduleStrategy(
+                    _paging_strategy_configuration_schedule_strategy
+                )
+            )
+
         created_at = d.pop("created_at", UNSET)
 
         updated_at = d.pop("updated_at", UNSET)
@@ -146,6 +199,8 @@ class EscalationPolicyLevel:
             position=position,
             notification_target_params=notification_target_params,
             escalation_policy_path_id=escalation_policy_path_id,
+            paging_strategy_configuration_strategy=paging_strategy_configuration_strategy,
+            paging_strategy_configuration_schedule_strategy=paging_strategy_configuration_schedule_strategy,
             created_at=created_at,
             updated_at=updated_at,
         )

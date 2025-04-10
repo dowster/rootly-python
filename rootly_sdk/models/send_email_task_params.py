@@ -18,7 +18,7 @@ class SendEmailTaskParams:
         body (Union[None, str]): The email body
         task_type (Union[Unset, SendEmailTaskParamsTaskType]):
         from_ (Union[Unset, str]): The from email address. Need to use SMTP integration if different than rootly.com
-            Default: 'Rootly <no-reply@rootly.com>'.
+            Default: 'Rootly <workflows@rootly.com>'.
         cc (Union[Unset, list[str]]):
         bcc (Union[Unset, list[str]]):
         preheader (Union[None, Unset, str]): The preheader
@@ -31,7 +31,7 @@ class SendEmailTaskParams:
     subject: str
     body: Union[None, str]
     task_type: Union[Unset, SendEmailTaskParamsTaskType] = UNSET
-    from_: Union[Unset, str] = "Rootly <no-reply@rootly.com>"
+    from_: Union[Unset, str] = "Rootly <workflows@rootly.com>"
     cc: Union[Unset, list[str]] = UNSET
     bcc: Union[Unset, list[str]] = UNSET
     preheader: Union[None, Unset, str] = UNSET

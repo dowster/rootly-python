@@ -64,6 +64,9 @@ from ..models.action_item_trigger_params_incident_condition_started_at_type_1 im
     ActionItemTriggerParamsIncidentConditionStartedAtType1,
 )
 from ..models.action_item_trigger_params_incident_condition_status import ActionItemTriggerParamsIncidentConditionStatus
+from ..models.action_item_trigger_params_incident_condition_sub_status import (
+    ActionItemTriggerParamsIncidentConditionSubStatus,
+)
 from ..models.action_item_trigger_params_incident_condition_summary_type_1 import (
     ActionItemTriggerParamsIncidentConditionSummaryType1,
 )
@@ -99,6 +102,8 @@ class ActionItemTriggerParams:
             ActionItemTriggerParamsIncidentConditionKind.IS.
         incident_condition_status (Union[Unset, ActionItemTriggerParamsIncidentConditionStatus]):  Default:
             ActionItemTriggerParamsIncidentConditionStatus.ANY.
+        incident_condition_sub_status (Union[Unset, ActionItemTriggerParamsIncidentConditionSubStatus]):  Default:
+            ActionItemTriggerParamsIncidentConditionSubStatus.ANY.
         incident_condition_environment (Union[Unset, ActionItemTriggerParamsIncidentConditionEnvironment]):  Default:
             ActionItemTriggerParamsIncidentConditionEnvironment.ANY.
         incident_condition_severity (Union[Unset, ActionItemTriggerParamsIncidentConditionSeverity]):  Default:
@@ -154,6 +159,9 @@ class ActionItemTriggerParams:
     )
     incident_condition_status: Union[Unset, ActionItemTriggerParamsIncidentConditionStatus] = (
         ActionItemTriggerParamsIncidentConditionStatus.ANY
+    )
+    incident_condition_sub_status: Union[Unset, ActionItemTriggerParamsIncidentConditionSubStatus] = (
+        ActionItemTriggerParamsIncidentConditionSubStatus.ANY
     )
     incident_condition_environment: Union[Unset, ActionItemTriggerParamsIncidentConditionEnvironment] = (
         ActionItemTriggerParamsIncidentConditionEnvironment.ANY
@@ -254,6 +262,10 @@ class ActionItemTriggerParams:
         incident_condition_status: Union[Unset, str] = UNSET
         if not isinstance(self.incident_condition_status, Unset):
             incident_condition_status = self.incident_condition_status.value
+
+        incident_condition_sub_status: Union[Unset, str] = UNSET
+        if not isinstance(self.incident_condition_sub_status, Unset):
+            incident_condition_sub_status = self.incident_condition_sub_status.value
 
         incident_condition_environment: Union[Unset, str] = UNSET
         if not isinstance(self.incident_condition_environment, Unset):
@@ -413,6 +425,8 @@ class ActionItemTriggerParams:
             field_dict["incident_condition_kind"] = incident_condition_kind
         if incident_condition_status is not UNSET:
             field_dict["incident_condition_status"] = incident_condition_status
+        if incident_condition_sub_status is not UNSET:
+            field_dict["incident_condition_sub_status"] = incident_condition_sub_status
         if incident_condition_environment is not UNSET:
             field_dict["incident_condition_environment"] = incident_condition_environment
         if incident_condition_severity is not UNSET:
@@ -523,6 +537,15 @@ class ActionItemTriggerParams:
             incident_condition_status = UNSET
         else:
             incident_condition_status = ActionItemTriggerParamsIncidentConditionStatus(_incident_condition_status)
+
+        _incident_condition_sub_status = d.pop("incident_condition_sub_status", UNSET)
+        incident_condition_sub_status: Union[Unset, ActionItemTriggerParamsIncidentConditionSubStatus]
+        if isinstance(_incident_condition_sub_status, Unset):
+            incident_condition_sub_status = UNSET
+        else:
+            incident_condition_sub_status = ActionItemTriggerParamsIncidentConditionSubStatus(
+                _incident_condition_sub_status
+            )
 
         _incident_condition_environment = d.pop("incident_condition_environment", UNSET)
         incident_condition_environment: Union[Unset, ActionItemTriggerParamsIncidentConditionEnvironment]
@@ -815,6 +838,7 @@ class ActionItemTriggerParams:
             incident_condition_visibility=incident_condition_visibility,
             incident_condition_kind=incident_condition_kind,
             incident_condition_status=incident_condition_status,
+            incident_condition_sub_status=incident_condition_sub_status,
             incident_condition_environment=incident_condition_environment,
             incident_condition_severity=incident_condition_severity,
             incident_condition_incident_type=incident_condition_incident_type,

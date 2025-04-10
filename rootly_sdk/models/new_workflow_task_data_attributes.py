@@ -49,7 +49,6 @@ if TYPE_CHECKING:
     from ..models.create_quip_page_task_params import CreateQuipPageTaskParams
     from ..models.create_service_now_incident_task_params import CreateServiceNowIncidentTaskParams
     from ..models.create_sharepoint_page_task_params import CreateSharepointPageTaskParams
-    from ..models.create_shortcut_story_task_params import CreateShortcutStoryTaskParams
     from ..models.create_shortcut_task_task_params import CreateShortcutTaskTaskParams
     from ..models.create_slack_channel_task_params import CreateSlackChannelTaskParams
     from ..models.create_trello_card_task_params import CreateTrelloCardTaskParams
@@ -57,6 +56,8 @@ if TYPE_CHECKING:
     from ..models.create_zendesk_jira_link_task_params import CreateZendeskJiraLinkTaskParams
     from ..models.create_zendesk_ticket_task_params import CreateZendeskTicketTaskParams
     from ..models.create_zoom_meeting_task_params import CreateZoomMeetingTaskParams
+    from ..models.genius_create_openai_chat_completion_task_params import GeniusCreateOpenaiChatCompletionTaskParams
+    from ..models.genius_create_watsonx_chat_completion_task_params import GeniusCreateWatsonxChatCompletionTaskParams
     from ..models.get_alerts_task_params import GetAlertsTaskParams
     from ..models.get_pulses_task_params import GetPulsesTaskParams
     from ..models.http_client_task_params import HttpClientTaskParams
@@ -135,28 +136,29 @@ class NewWorkflowTaskDataAttributes:
             'CreateMicrosoftTeamsChannelTaskParams', 'CreateMicrosoftTeamsMeetingTaskParams', 'CreateMotionTaskTaskParams',
             'CreateNotionPageTaskParams', 'CreateOpsgenieAlertTaskParams', 'CreateOutlookEventTaskParams',
             'CreatePagerdutyStatusUpdateTaskParams', 'CreatePagertreeAlertTaskParams', 'CreateQuipPageTaskParams',
-            'CreateServiceNowIncidentTaskParams', 'CreateSharepointPageTaskParams', 'CreateShortcutStoryTaskParams',
-            'CreateShortcutTaskTaskParams', 'CreateSlackChannelTaskParams', 'CreateTrelloCardTaskParams',
-            'CreateWebexMeetingTaskParams', 'CreateZendeskJiraLinkTaskParams', 'CreateZendeskTicketTaskParams',
-            'CreateZoomMeetingTaskParams', 'GetAlertsTaskParams', 'GetPulsesTaskParams', 'HttpClientTaskParams',
-            'InviteToMicrosoftTeamsChannelTaskParams', 'InviteToSlackChannelOpsgenieTaskParams',
-            'InviteToSlackChannelRootlyTaskParams', 'InviteToSlackChannelVictorOpsTaskParams',
-            'PageOpsgenieOnCallRespondersTaskParams', 'PagePagerdutyOnCallRespondersTaskParams',
-            'PageRootlyOnCallRespondersTaskParams', 'PrintTaskParams', 'PublishIncidentTaskParams', 'RedisClientTaskParams',
-            'RemoveGoogleDocsPermissionsTaskParams', 'RenameMicrosoftTeamsChannelTaskParams',
-            'RenameSlackChannelTaskParams', 'RunCommandHerokuTaskParams', 'SendDashboardReportTaskParams',
-            'SendEmailTaskParams', 'SendSmsTaskParams', 'SendWhatsappMessageTaskParams', 'SnapshotDatadogGraphTaskParams',
-            'SnapshotGrafanaDashboardTaskParams', 'SnapshotLookerLookTaskParams', 'SnapshotNewRelicGraphTaskParams',
-            'TriggerWorkflowTaskParams', 'TweetTwitterMessageTaskParams', 'UpdateActionItemTaskParams',
-            'UpdateAirtableTableRecordTaskParams', 'UpdateAsanaTaskTaskParams', 'UpdateAttachedAlertsTaskParams',
-            'UpdateClickupTaskTaskParams', 'UpdateGithubIssueTaskParams', 'UpdateGitlabIssueTaskParams',
-            'UpdateGoogleCalendarEventTaskParams', 'UpdateGoogleDocsPageTaskParams', 'UpdateIncidentPostmortemTaskParams',
-            'UpdateIncidentStatusTimestampTaskParams', 'UpdateIncidentTaskParams', 'UpdateJiraIssueTaskParams',
-            'UpdateLinearIssueTaskParams', 'UpdateMotionTaskTaskParams', 'UpdateNotionPageTaskParams',
-            'UpdateOpsgenieAlertTaskParams', 'UpdateOpsgenieIncidentTaskParams', 'UpdatePagerdutyIncidentTaskParams',
-            'UpdatePagertreeAlertTaskParams', 'UpdateServiceNowIncidentTaskParams', 'UpdateShortcutStoryTaskParams',
-            'UpdateShortcutTaskTaskParams', 'UpdateSlackChannelTopicTaskParams', 'UpdateStatusTaskParams',
-            'UpdateTrelloCardTaskParams', 'UpdateVictorOpsIncidentTaskParams', 'UpdateZendeskTicketTaskParams', Any]):
+            'CreateServiceNowIncidentTaskParams', 'CreateSharepointPageTaskParams', 'CreateShortcutTaskTaskParams',
+            'CreateSlackChannelTaskParams', 'CreateTrelloCardTaskParams', 'CreateWebexMeetingTaskParams',
+            'CreateZendeskJiraLinkTaskParams', 'CreateZendeskTicketTaskParams', 'CreateZoomMeetingTaskParams',
+            'GeniusCreateOpenaiChatCompletionTaskParams', 'GeniusCreateWatsonxChatCompletionTaskParams',
+            'GetAlertsTaskParams', 'GetPulsesTaskParams', 'HttpClientTaskParams', 'InviteToMicrosoftTeamsChannelTaskParams',
+            'InviteToSlackChannelOpsgenieTaskParams', 'InviteToSlackChannelRootlyTaskParams',
+            'InviteToSlackChannelVictorOpsTaskParams', 'PageOpsgenieOnCallRespondersTaskParams',
+            'PagePagerdutyOnCallRespondersTaskParams', 'PageRootlyOnCallRespondersTaskParams', 'PrintTaskParams',
+            'PublishIncidentTaskParams', 'RedisClientTaskParams', 'RemoveGoogleDocsPermissionsTaskParams',
+            'RenameMicrosoftTeamsChannelTaskParams', 'RenameSlackChannelTaskParams', 'RunCommandHerokuTaskParams',
+            'SendDashboardReportTaskParams', 'SendEmailTaskParams', 'SendSmsTaskParams', 'SendWhatsappMessageTaskParams',
+            'SnapshotDatadogGraphTaskParams', 'SnapshotGrafanaDashboardTaskParams', 'SnapshotLookerLookTaskParams',
+            'SnapshotNewRelicGraphTaskParams', 'TriggerWorkflowTaskParams', 'TweetTwitterMessageTaskParams',
+            'UpdateActionItemTaskParams', 'UpdateAirtableTableRecordTaskParams', 'UpdateAsanaTaskTaskParams',
+            'UpdateAttachedAlertsTaskParams', 'UpdateClickupTaskTaskParams', 'UpdateGithubIssueTaskParams',
+            'UpdateGitlabIssueTaskParams', 'UpdateGoogleCalendarEventTaskParams', 'UpdateGoogleDocsPageTaskParams',
+            'UpdateIncidentPostmortemTaskParams', 'UpdateIncidentStatusTimestampTaskParams', 'UpdateIncidentTaskParams',
+            'UpdateJiraIssueTaskParams', 'UpdateLinearIssueTaskParams', 'UpdateMotionTaskTaskParams',
+            'UpdateNotionPageTaskParams', 'UpdateOpsgenieAlertTaskParams', 'UpdateOpsgenieIncidentTaskParams',
+            'UpdatePagerdutyIncidentTaskParams', 'UpdatePagertreeAlertTaskParams', 'UpdateServiceNowIncidentTaskParams',
+            'UpdateShortcutStoryTaskParams', 'UpdateShortcutTaskTaskParams', 'UpdateSlackChannelTopicTaskParams',
+            'UpdateStatusTaskParams', 'UpdateTrelloCardTaskParams', 'UpdateVictorOpsIncidentTaskParams',
+            'UpdateZendeskTicketTaskParams', Any]):
         name (Union[Unset, str]): Name of the workflow task
         position (Union[Unset, int]): The position of the workflow task
         skip_on_failure (Union[Unset, bool]): Skip workflow task if any failures
@@ -208,7 +210,6 @@ class NewWorkflowTaskDataAttributes:
         "CreateQuipPageTaskParams",
         "CreateServiceNowIncidentTaskParams",
         "CreateSharepointPageTaskParams",
-        "CreateShortcutStoryTaskParams",
         "CreateShortcutTaskTaskParams",
         "CreateSlackChannelTaskParams",
         "CreateTrelloCardTaskParams",
@@ -216,6 +217,8 @@ class NewWorkflowTaskDataAttributes:
         "CreateZendeskJiraLinkTaskParams",
         "CreateZendeskTicketTaskParams",
         "CreateZoomMeetingTaskParams",
+        "GeniusCreateOpenaiChatCompletionTaskParams",
+        "GeniusCreateWatsonxChatCompletionTaskParams",
         "GetAlertsTaskParams",
         "GetPulsesTaskParams",
         "HttpClientTaskParams",
@@ -323,7 +326,6 @@ class NewWorkflowTaskDataAttributes:
         from ..models.create_quip_page_task_params import CreateQuipPageTaskParams
         from ..models.create_service_now_incident_task_params import CreateServiceNowIncidentTaskParams
         from ..models.create_sharepoint_page_task_params import CreateSharepointPageTaskParams
-        from ..models.create_shortcut_story_task_params import CreateShortcutStoryTaskParams
         from ..models.create_shortcut_task_task_params import CreateShortcutTaskTaskParams
         from ..models.create_slack_channel_task_params import CreateSlackChannelTaskParams
         from ..models.create_trello_card_task_params import CreateTrelloCardTaskParams
@@ -331,6 +333,10 @@ class NewWorkflowTaskDataAttributes:
         from ..models.create_zendesk_jira_link_task_params import CreateZendeskJiraLinkTaskParams
         from ..models.create_zendesk_ticket_task_params import CreateZendeskTicketTaskParams
         from ..models.create_zoom_meeting_task_params import CreateZoomMeetingTaskParams
+        from ..models.genius_create_openai_chat_completion_task_params import GeniusCreateOpenaiChatCompletionTaskParams
+        from ..models.genius_create_watsonx_chat_completion_task_params import (
+            GeniusCreateWatsonxChatCompletionTaskParams,
+        )
         from ..models.get_alerts_task_params import GetAlertsTaskParams
         from ..models.get_pulses_task_params import GetPulsesTaskParams
         from ..models.http_client_task_params import HttpClientTaskParams
@@ -486,8 +492,6 @@ class NewWorkflowTaskDataAttributes:
             task_params = self.task_params.to_dict()
         elif isinstance(self.task_params, CreateServiceNowIncidentTaskParams):
             task_params = self.task_params.to_dict()
-        elif isinstance(self.task_params, CreateShortcutStoryTaskParams):
-            task_params = self.task_params.to_dict()
         elif isinstance(self.task_params, CreateShortcutTaskTaskParams):
             task_params = self.task_params.to_dict()
         elif isinstance(self.task_params, CreateTrelloCardTaskParams):
@@ -602,6 +606,10 @@ class NewWorkflowTaskDataAttributes:
             task_params = self.task_params.to_dict()
         elif isinstance(self.task_params, TriggerWorkflowTaskParams):
             task_params = self.task_params.to_dict()
+        elif isinstance(self.task_params, GeniusCreateOpenaiChatCompletionTaskParams):
+            task_params = self.task_params.to_dict()
+        elif isinstance(self.task_params, GeniusCreateWatsonxChatCompletionTaskParams):
+            task_params = self.task_params.to_dict()
         else:
             task_params = self.task_params
 
@@ -676,7 +684,6 @@ class NewWorkflowTaskDataAttributes:
         from ..models.create_quip_page_task_params import CreateQuipPageTaskParams
         from ..models.create_service_now_incident_task_params import CreateServiceNowIncidentTaskParams
         from ..models.create_sharepoint_page_task_params import CreateSharepointPageTaskParams
-        from ..models.create_shortcut_story_task_params import CreateShortcutStoryTaskParams
         from ..models.create_shortcut_task_task_params import CreateShortcutTaskTaskParams
         from ..models.create_slack_channel_task_params import CreateSlackChannelTaskParams
         from ..models.create_trello_card_task_params import CreateTrelloCardTaskParams
@@ -684,6 +691,10 @@ class NewWorkflowTaskDataAttributes:
         from ..models.create_zendesk_jira_link_task_params import CreateZendeskJiraLinkTaskParams
         from ..models.create_zendesk_ticket_task_params import CreateZendeskTicketTaskParams
         from ..models.create_zoom_meeting_task_params import CreateZoomMeetingTaskParams
+        from ..models.genius_create_openai_chat_completion_task_params import GeniusCreateOpenaiChatCompletionTaskParams
+        from ..models.genius_create_watsonx_chat_completion_task_params import (
+            GeniusCreateWatsonxChatCompletionTaskParams,
+        )
         from ..models.get_alerts_task_params import GetAlertsTaskParams
         from ..models.get_pulses_task_params import GetPulsesTaskParams
         from ..models.http_client_task_params import HttpClientTaskParams
@@ -789,7 +800,6 @@ class NewWorkflowTaskDataAttributes:
             "CreateQuipPageTaskParams",
             "CreateServiceNowIncidentTaskParams",
             "CreateSharepointPageTaskParams",
-            "CreateShortcutStoryTaskParams",
             "CreateShortcutTaskTaskParams",
             "CreateSlackChannelTaskParams",
             "CreateTrelloCardTaskParams",
@@ -797,6 +807,8 @@ class NewWorkflowTaskDataAttributes:
             "CreateZendeskJiraLinkTaskParams",
             "CreateZendeskTicketTaskParams",
             "CreateZoomMeetingTaskParams",
+            "GeniusCreateOpenaiChatCompletionTaskParams",
+            "GeniusCreateWatsonxChatCompletionTaskParams",
             "GetAlertsTaskParams",
             "GetPulsesTaskParams",
             "HttpClientTaskParams",
@@ -1244,14 +1256,6 @@ class NewWorkflowTaskDataAttributes:
                 task_params_type_53 = CreateServiceNowIncidentTaskParams.from_dict(data)
 
                 return task_params_type_53
-            except:  # noqa: E722
-                pass
-            try:
-                if not isinstance(data, dict):
-                    raise TypeError()
-                task_params_type_54 = CreateShortcutStoryTaskParams.from_dict(data)
-
-                return task_params_type_54
             except:  # noqa: E722
                 pass
             try:
@@ -1710,6 +1714,22 @@ class NewWorkflowTaskDataAttributes:
                 return task_params_type_117
             except:  # noqa: E722
                 pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                task_params_type_119 = GeniusCreateOpenaiChatCompletionTaskParams.from_dict(data)
+
+                return task_params_type_119
+            except:  # noqa: E722
+                pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                task_params_type_120 = GeniusCreateWatsonxChatCompletionTaskParams.from_dict(data)
+
+                return task_params_type_120
+            except:  # noqa: E722
+                pass
             return cast(
                 Union[
                     "AddActionItemTaskParams",
@@ -1756,7 +1776,6 @@ class NewWorkflowTaskDataAttributes:
                     "CreateQuipPageTaskParams",
                     "CreateServiceNowIncidentTaskParams",
                     "CreateSharepointPageTaskParams",
-                    "CreateShortcutStoryTaskParams",
                     "CreateShortcutTaskTaskParams",
                     "CreateSlackChannelTaskParams",
                     "CreateTrelloCardTaskParams",
@@ -1764,6 +1783,8 @@ class NewWorkflowTaskDataAttributes:
                     "CreateZendeskJiraLinkTaskParams",
                     "CreateZendeskTicketTaskParams",
                     "CreateZoomMeetingTaskParams",
+                    "GeniusCreateOpenaiChatCompletionTaskParams",
+                    "GeniusCreateWatsonxChatCompletionTaskParams",
                     "GetAlertsTaskParams",
                     "GetPulsesTaskParams",
                     "HttpClientTaskParams",

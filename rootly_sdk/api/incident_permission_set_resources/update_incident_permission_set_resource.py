@@ -66,7 +66,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateIncidentPermissionSetResource,
 ) -> Response[Union[ErrorsList, IncidentPermissionSetResourceResponse]]:
-    """Update a incident_permission_set_resource
+    """Update an incident_permission_set_resource
 
      Update a specific incident_permission_set_resource by id
 
@@ -100,7 +100,7 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateIncidentPermissionSetResource,
 ) -> Optional[Union[ErrorsList, IncidentPermissionSetResourceResponse]]:
-    """Update a incident_permission_set_resource
+    """Update an incident_permission_set_resource
 
      Update a specific incident_permission_set_resource by id
 
@@ -129,7 +129,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateIncidentPermissionSetResource,
 ) -> Response[Union[ErrorsList, IncidentPermissionSetResourceResponse]]:
-    """Update a incident_permission_set_resource
+    """Update an incident_permission_set_resource
 
      Update a specific incident_permission_set_resource by id
 
@@ -161,7 +161,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateIncidentPermissionSetResource,
 ) -> Optional[Union[ErrorsList, IncidentPermissionSetResourceResponse]]:
-    """Update a incident_permission_set_resource
+    """Update an incident_permission_set_resource
 
      Update a specific incident_permission_set_resource by id
 

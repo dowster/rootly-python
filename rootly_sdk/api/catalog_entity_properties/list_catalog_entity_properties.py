@@ -107,7 +107,7 @@ def sync_detailed(
 ) -> Response[CatalogEntityPropertyList]:
     """List catalog properties
 
-     List catalog_entity_properties
+     List Catalog Entity Properties
 
     Args:
         catalog_entity_id (str):
@@ -168,7 +168,7 @@ def sync(
 ) -> Optional[CatalogEntityPropertyList]:
     """List catalog properties
 
-     List catalog_entity_properties
+     List Catalog Entity Properties
 
     Args:
         catalog_entity_id (str):
@@ -224,7 +224,7 @@ async def asyncio_detailed(
 ) -> Response[CatalogEntityPropertyList]:
     """List catalog properties
 
-     List catalog_entity_properties
+     List Catalog Entity Properties
 
     Args:
         catalog_entity_id (str):
@@ -283,7 +283,7 @@ async def asyncio(
 ) -> Optional[CatalogEntityPropertyList]:
     """List catalog properties
 
-     List catalog_entity_properties
+     List Catalog Entity Properties
 
     Args:
         catalog_entity_id (str):

@@ -54,9 +54,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, RetrospectiveProcessGroupResponse]]:
-    """Delete a retrospective_process_group
+    """Delete a Retrospective Process Group
 
-     Delete a specific retrospective_process_group by id
+     Delete a specific Retrospective Process Group by id
 
     Args:
         id (str):
@@ -85,9 +85,9 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, RetrospectiveProcessGroupResponse]]:
-    """Delete a retrospective_process_group
+    """Delete a Retrospective Process Group
 
-     Delete a specific retrospective_process_group by id
+     Delete a specific Retrospective Process Group by id
 
     Args:
         id (str):
@@ -111,9 +111,9 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, RetrospectiveProcessGroupResponse]]:
-    """Delete a retrospective_process_group
+    """Delete a Retrospective Process Group
 
-     Delete a specific retrospective_process_group by id
+     Delete a specific Retrospective Process Group by id
 
     Args:
         id (str):
@@ -140,9 +140,9 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, RetrospectiveProcessGroupResponse]]:
-    """Delete a retrospective_process_group
+    """Delete a Retrospective Process Group
 
-     Delete a specific retrospective_process_group by id
+     Delete a specific Retrospective Process Group by id
 
     Args:
         id (str):

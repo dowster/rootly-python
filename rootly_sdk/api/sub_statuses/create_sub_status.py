@@ -38,14 +38,14 @@ def _parse_response(
         response_201 = SubStatusResponse.from_dict(response.json())
 
         return response_201
-    if response.status_code == 401:
-        response_401 = ErrorsList.from_dict(response.json())
-
-        return response_401
     if response.status_code == 422:
         response_422 = ErrorsList.from_dict(response.json())
 
         return response_422
+    if response.status_code == 401:
+        response_401 = ErrorsList.from_dict(response.json())
+
+        return response_401
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -68,9 +68,9 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: NewSubStatus,
 ) -> Response[Union[ErrorsList, SubStatusResponse]]:
-    """Creates a sub_status
+    """Creates a Sub-Status
 
-     Creates a new sub_status from provided data
+     Creates a new Sub-Status from provided data
 
     Args:
         body (NewSubStatus):
@@ -99,9 +99,9 @@ def sync(
     client: AuthenticatedClient,
     body: NewSubStatus,
 ) -> Optional[Union[ErrorsList, SubStatusResponse]]:
-    """Creates a sub_status
+    """Creates a Sub-Status
 
-     Creates a new sub_status from provided data
+     Creates a new Sub-Status from provided data
 
     Args:
         body (NewSubStatus):
@@ -125,9 +125,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: NewSubStatus,
 ) -> Response[Union[ErrorsList, SubStatusResponse]]:
-    """Creates a sub_status
+    """Creates a Sub-Status
 
-     Creates a new sub_status from provided data
+     Creates a new Sub-Status from provided data
 
     Args:
         body (NewSubStatus):
@@ -154,9 +154,9 @@ async def asyncio(
     client: AuthenticatedClient,
     body: NewSubStatus,
 ) -> Optional[Union[ErrorsList, SubStatusResponse]]:
-    """Creates a sub_status
+    """Creates a Sub-Status
 
-     Creates a new sub_status from provided data
+     Creates a new Sub-Status from provided data
 
     Args:
         body (NewSubStatus):

@@ -64,7 +64,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: NewAuthorization,
 ) -> Response[Union[AuthorizationResponse, ErrorsList]]:
-    """Creates a authorization
+    """Creates an authorization
 
      Creates a new authorization from provided data
 
@@ -95,7 +95,7 @@ def sync(
     client: AuthenticatedClient,
     body: NewAuthorization,
 ) -> Optional[Union[AuthorizationResponse, ErrorsList]]:
-    """Creates a authorization
+    """Creates an authorization
 
      Creates a new authorization from provided data
 
@@ -121,7 +121,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: NewAuthorization,
 ) -> Response[Union[AuthorizationResponse, ErrorsList]]:
-    """Creates a authorization
+    """Creates an authorization
 
      Creates a new authorization from provided data
 
@@ -150,7 +150,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: NewAuthorization,
 ) -> Optional[Union[AuthorizationResponse, ErrorsList]]:
-    """Creates a authorization
+    """Creates an authorization
 
      Creates a new authorization from provided data
 

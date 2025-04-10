@@ -29,6 +29,7 @@ class Incident:
         updated_at (str): Date of last update
         kind (Union[Unset, str]): The kind of the incident
         parent_incident_id (Union[None, Unset, str]): ID of parent incident
+        duplicate_incident_id (Union[None, Unset, str]): ID of duplicated incident
         summary (Union[None, Unset, str]): The summary of the incident
         private (Union[None, Unset, bool]): Create an incident as private Default: False.
         severity (Union[Unset, SeverityResponse]):
@@ -64,6 +65,7 @@ class Incident:
     updated_at: str
     kind: Union[Unset, str] = UNSET
     parent_incident_id: Union[None, Unset, str] = UNSET
+    duplicate_incident_id: Union[None, Unset, str] = UNSET
     summary: Union[None, Unset, str] = UNSET
     private: Union[None, Unset, bool] = False
     severity: Union[Unset, "SeverityResponse"] = UNSET
@@ -109,6 +111,12 @@ class Incident:
             parent_incident_id = UNSET
         else:
             parent_incident_id = self.parent_incident_id
+
+        duplicate_incident_id: Union[None, Unset, str]
+        if isinstance(self.duplicate_incident_id, Unset):
+            duplicate_incident_id = UNSET
+        else:
+            duplicate_incident_id = self.duplicate_incident_id
 
         summary: Union[None, Unset, str]
         if isinstance(self.summary, Unset):
@@ -302,6 +310,8 @@ class Incident:
             field_dict["kind"] = kind
         if parent_incident_id is not UNSET:
             field_dict["parent_incident_id"] = parent_incident_id
+        if duplicate_incident_id is not UNSET:
+            field_dict["duplicate_incident_id"] = duplicate_incident_id
         if summary is not UNSET:
             field_dict["summary"] = summary
         if private is not UNSET:
@@ -384,6 +394,15 @@ class Incident:
             return cast(Union[None, Unset, str], data)
 
         parent_incident_id = _parse_parent_incident_id(d.pop("parent_incident_id", UNSET))
+
+        def _parse_duplicate_incident_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        duplicate_incident_id = _parse_duplicate_incident_id(d.pop("duplicate_incident_id", UNSET))
 
         def _parse_summary(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -686,6 +705,7 @@ class Incident:
             updated_at=updated_at,
             kind=kind,
             parent_incident_id=parent_incident_id,
+            duplicate_incident_id=duplicate_incident_id,
             summary=summary,
             private=private,
             severity=severity,

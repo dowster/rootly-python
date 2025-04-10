@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 from attrs import define as _attrs_define
 from dateutil.parser import isoparse
 
+from ..models.update_alert_data_attributes_noise import UpdateAlertDataAttributesNoise
 from ..models.update_alert_data_attributes_source import UpdateAlertDataAttributesSource
 from ..types import UNSET, Unset
 
@@ -19,6 +20,7 @@ T = TypeVar("T", bound="UpdateAlertDataAttributes")
 class UpdateAlertDataAttributes:
     """
     Attributes:
+        noise (Union[Unset, UpdateAlertDataAttributesNoise]): Whether the alert is marked as noise
         source (Union[Unset, UpdateAlertDataAttributesSource]): The source of the alert
         summary (Union[Unset, str]): The summary of the alert
         description (Union[None, Unset, str]): The description of the alert
@@ -34,6 +36,7 @@ class UpdateAlertDataAttributes:
         data (Union['UpdateAlertDataAttributesDataType0', None, Unset]): Additional data
     """
 
+    noise: Union[Unset, UpdateAlertDataAttributesNoise] = UNSET
     source: Union[Unset, UpdateAlertDataAttributesSource] = UNSET
     summary: Union[Unset, str] = UNSET
     description: Union[None, Unset, str] = UNSET
@@ -51,6 +54,10 @@ class UpdateAlertDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         from ..models.update_alert_data_attributes_data_type_0 import UpdateAlertDataAttributesDataType0
         from ..models.update_alert_data_attributes_labels_item_type_0 import UpdateAlertDataAttributesLabelsItemType0
+
+        noise: Union[Unset, str] = UNSET
+        if not isinstance(self.noise, Unset):
+            noise = self.noise.value
 
         source: Union[Unset, str] = UNSET
         if not isinstance(self.source, Unset):
@@ -146,6 +153,8 @@ class UpdateAlertDataAttributes:
 
         field_dict: dict[str, Any] = {}
         field_dict.update({})
+        if noise is not UNSET:
+            field_dict["noise"] = noise
         if source is not UNSET:
             field_dict["source"] = source
         if summary is not UNSET:
@@ -181,6 +190,13 @@ class UpdateAlertDataAttributes:
         from ..models.update_alert_data_attributes_labels_item_type_0 import UpdateAlertDataAttributesLabelsItemType0
 
         d = src_dict.copy()
+        _noise = d.pop("noise", UNSET)
+        noise: Union[Unset, UpdateAlertDataAttributesNoise]
+        if isinstance(_noise, Unset):
+            noise = UNSET
+        else:
+            noise = UpdateAlertDataAttributesNoise(_noise)
+
         _source = d.pop("source", UNSET)
         source: Union[Unset, UpdateAlertDataAttributesSource]
         if isinstance(_source, Unset):
@@ -350,6 +366,7 @@ class UpdateAlertDataAttributes:
         data = _parse_data(d.pop("data", UNSET))
 
         update_alert_data_attributes = cls(
+            noise=noise,
             source=source,
             summary=summary,
             description=description,

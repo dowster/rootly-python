@@ -66,7 +66,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateIncident,
 ) -> Response[Union[ErrorsList, IncidentResponse]]:
-    """Update a incident
+    """Update an incident
 
      Update a specific incident by id
 
@@ -100,7 +100,7 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateIncident,
 ) -> Optional[Union[ErrorsList, IncidentResponse]]:
-    """Update a incident
+    """Update an incident
 
      Update a specific incident by id
 
@@ -129,7 +129,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateIncident,
 ) -> Response[Union[ErrorsList, IncidentResponse]]:
-    """Update a incident
+    """Update an incident
 
      Update a specific incident by id
 
@@ -161,7 +161,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateIncident,
 ) -> Optional[Union[ErrorsList, IncidentResponse]]:
-    """Update a incident
+    """Update an incident
 
      Update a specific incident by id
 

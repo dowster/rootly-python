@@ -21,6 +21,7 @@ class UpdateIncidentDataAttributes:
         kind (Union[Unset, UpdateIncidentDataAttributesKind]): The kind of the incident Default:
             UpdateIncidentDataAttributesKind.NORMAL.
         parent_incident_id (Union[None, Unset, str]): ID of parent incident
+        duplicate_incident_id (Union[None, Unset, str]): ID of duplicated incident
         summary (Union[None, Unset, str]): The summary of the incident
         status (Union[Unset, UpdateIncidentDataAttributesStatus]): The status of the incident
         private (Union[None, Unset, bool]): Convert the incident as private. Once an incident is updated as private it
@@ -51,6 +52,7 @@ class UpdateIncidentDataAttributes:
     title: Union[None, Unset, str] = UNSET
     kind: Union[Unset, UpdateIncidentDataAttributesKind] = UpdateIncidentDataAttributesKind.NORMAL
     parent_incident_id: Union[None, Unset, str] = UNSET
+    duplicate_incident_id: Union[None, Unset, str] = UNSET
     summary: Union[None, Unset, str] = UNSET
     status: Union[Unset, UpdateIncidentDataAttributesStatus] = UNSET
     private: Union[None, Unset, bool] = False
@@ -93,6 +95,12 @@ class UpdateIncidentDataAttributes:
             parent_incident_id = UNSET
         else:
             parent_incident_id = self.parent_incident_id
+
+        duplicate_incident_id: Union[None, Unset, str]
+        if isinstance(self.duplicate_incident_id, Unset):
+            duplicate_incident_id = UNSET
+        else:
+            duplicate_incident_id = self.duplicate_incident_id
 
         summary: Union[None, Unset, str]
         if isinstance(self.summary, Unset):
@@ -258,6 +266,8 @@ class UpdateIncidentDataAttributes:
             field_dict["kind"] = kind
         if parent_incident_id is not UNSET:
             field_dict["parent_incident_id"] = parent_incident_id
+        if duplicate_incident_id is not UNSET:
+            field_dict["duplicate_incident_id"] = duplicate_incident_id
         if summary is not UNSET:
             field_dict["summary"] = summary
         if status is not UNSET:
@@ -337,6 +347,15 @@ class UpdateIncidentDataAttributes:
             return cast(Union[None, Unset, str], data)
 
         parent_incident_id = _parse_parent_incident_id(d.pop("parent_incident_id", UNSET))
+
+        def _parse_duplicate_incident_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        duplicate_incident_id = _parse_duplicate_incident_id(d.pop("duplicate_incident_id", UNSET))
 
         def _parse_summary(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -603,6 +622,7 @@ class UpdateIncidentDataAttributes:
             title=title,
             kind=kind,
             parent_incident_id=parent_incident_id,
+            duplicate_incident_id=duplicate_incident_id,
             summary=summary,
             status=status,
             private=private,

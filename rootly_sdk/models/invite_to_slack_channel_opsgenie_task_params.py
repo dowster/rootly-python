@@ -24,41 +24,38 @@ T = TypeVar("T", bound="InviteToSlackChannelOpsgenieTaskParams")
 class InviteToSlackChannelOpsgenieTaskParams:
     """
     Attributes:
+        channels (list['InviteToSlackChannelOpsgenieTaskParamsChannelsItem']):
         schedule (InviteToSlackChannelOpsgenieTaskParamsSchedule):
         task_type (Union[Unset, InviteToSlackChannelOpsgenieTaskParamsTaskType]):
-        channels (Union[Unset, list['InviteToSlackChannelOpsgenieTaskParamsChannelsItem']]):
     """
 
+    channels: list["InviteToSlackChannelOpsgenieTaskParamsChannelsItem"]
     schedule: "InviteToSlackChannelOpsgenieTaskParamsSchedule"
     task_type: Union[Unset, InviteToSlackChannelOpsgenieTaskParamsTaskType] = UNSET
-    channels: Union[Unset, list["InviteToSlackChannelOpsgenieTaskParamsChannelsItem"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        channels = []
+        for channels_item_data in self.channels:
+            channels_item = channels_item_data.to_dict()
+            channels.append(channels_item)
+
         schedule = self.schedule.to_dict()
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
             task_type = self.task_type.value
 
-        channels: Union[Unset, list[dict[str, Any]]] = UNSET
-        if not isinstance(self.channels, Unset):
-            channels = []
-            for channels_item_data in self.channels:
-                channels_item = channels_item_data.to_dict()
-                channels.append(channels_item)
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
+                "channels": channels,
                 "schedule": schedule,
             }
         )
         if task_type is not UNSET:
             field_dict["task_type"] = task_type
-        if channels is not UNSET:
-            field_dict["channels"] = channels
 
         return field_dict
 
@@ -72,6 +69,13 @@ class InviteToSlackChannelOpsgenieTaskParams:
         )
 
         d = src_dict.copy()
+        channels = []
+        _channels = d.pop("channels")
+        for channels_item_data in _channels:
+            channels_item = InviteToSlackChannelOpsgenieTaskParamsChannelsItem.from_dict(channels_item_data)
+
+            channels.append(channels_item)
+
         schedule = InviteToSlackChannelOpsgenieTaskParamsSchedule.from_dict(d.pop("schedule"))
 
         _task_type = d.pop("task_type", UNSET)
@@ -81,17 +85,10 @@ class InviteToSlackChannelOpsgenieTaskParams:
         else:
             task_type = InviteToSlackChannelOpsgenieTaskParamsTaskType(_task_type)
 
-        channels = []
-        _channels = d.pop("channels", UNSET)
-        for channels_item_data in _channels or []:
-            channels_item = InviteToSlackChannelOpsgenieTaskParamsChannelsItem.from_dict(channels_item_data)
-
-            channels.append(channels_item)
-
         invite_to_slack_channel_opsgenie_task_params = cls(
+            channels=channels,
             schedule=schedule,
             task_type=task_type,
-            channels=channels,
         )
 
         invite_to_slack_channel_opsgenie_task_params.additional_properties = d

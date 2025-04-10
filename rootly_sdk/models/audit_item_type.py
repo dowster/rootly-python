@@ -2,6 +2,7 @@ from enum import Enum
 
 
 class AuditItemType(str, Enum):
+    APIKEY = "ApiKey"
     CAUSE = "Cause"
     CUSTOMFIELD = "CustomField"
     CUSTOMFIELDOPTION = "CustomFieldOption"

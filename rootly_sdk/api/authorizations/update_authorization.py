@@ -66,7 +66,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateAuthorization,
 ) -> Response[Union[AuthorizationResponse, ErrorsList]]:
-    """Update a authorization
+    """Update an authorization
 
      Update a specific authorization by id
 
@@ -100,7 +100,7 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateAuthorization,
 ) -> Optional[Union[AuthorizationResponse, ErrorsList]]:
-    """Update a authorization
+    """Update an authorization
 
      Update a specific authorization by id
 
@@ -129,7 +129,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateAuthorization,
 ) -> Response[Union[AuthorizationResponse, ErrorsList]]:
-    """Update a authorization
+    """Update an authorization
 
      Update a specific authorization by id
 
@@ -161,7 +161,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateAuthorization,
 ) -> Optional[Union[AuthorizationResponse, ErrorsList]]:
-    """Update a authorization
+    """Update an authorization
 
      Update a specific authorization by id
 

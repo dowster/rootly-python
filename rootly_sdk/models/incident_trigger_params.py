@@ -37,6 +37,9 @@ from ..models.incident_trigger_params_incident_condition_started_at_type_1 impor
     IncidentTriggerParamsIncidentConditionStartedAtType1,
 )
 from ..models.incident_trigger_params_incident_condition_status import IncidentTriggerParamsIncidentConditionStatus
+from ..models.incident_trigger_params_incident_condition_sub_status import (
+    IncidentTriggerParamsIncidentConditionSubStatus,
+)
 from ..models.incident_trigger_params_incident_condition_summary_type_1 import (
     IncidentTriggerParamsIncidentConditionSummaryType1,
 )
@@ -75,6 +78,8 @@ class IncidentTriggerParams:
             IncidentTriggerParamsIncidentConditionKind.IS.
         incident_condition_status (Union[Unset, IncidentTriggerParamsIncidentConditionStatus]):  Default:
             IncidentTriggerParamsIncidentConditionStatus.ANY.
+        incident_condition_sub_status (Union[Unset, IncidentTriggerParamsIncidentConditionSubStatus]):  Default:
+            IncidentTriggerParamsIncidentConditionSubStatus.ANY.
         incident_condition_environment (Union[Unset, IncidentTriggerParamsIncidentConditionEnvironment]):  Default:
             IncidentTriggerParamsIncidentConditionEnvironment.ANY.
         incident_condition_severity (Union[Unset, IncidentTriggerParamsIncidentConditionSeverity]):  Default:
@@ -121,6 +126,9 @@ class IncidentTriggerParams:
     )
     incident_condition_status: Union[Unset, IncidentTriggerParamsIncidentConditionStatus] = (
         IncidentTriggerParamsIncidentConditionStatus.ANY
+    )
+    incident_condition_sub_status: Union[Unset, IncidentTriggerParamsIncidentConditionSubStatus] = (
+        IncidentTriggerParamsIncidentConditionSubStatus.ANY
     )
     incident_condition_environment: Union[Unset, IncidentTriggerParamsIncidentConditionEnvironment] = (
         IncidentTriggerParamsIncidentConditionEnvironment.ANY
@@ -206,6 +214,10 @@ class IncidentTriggerParams:
         incident_condition_status: Union[Unset, str] = UNSET
         if not isinstance(self.incident_condition_status, Unset):
             incident_condition_status = self.incident_condition_status.value
+
+        incident_condition_sub_status: Union[Unset, str] = UNSET
+        if not isinstance(self.incident_condition_sub_status, Unset):
+            incident_condition_sub_status = self.incident_condition_sub_status.value
 
         incident_condition_environment: Union[Unset, str] = UNSET
         if not isinstance(self.incident_condition_environment, Unset):
@@ -326,6 +338,8 @@ class IncidentTriggerParams:
             field_dict["incident_condition_kind"] = incident_condition_kind
         if incident_condition_status is not UNSET:
             field_dict["incident_condition_status"] = incident_condition_status
+        if incident_condition_sub_status is not UNSET:
+            field_dict["incident_condition_sub_status"] = incident_condition_sub_status
         if incident_condition_environment is not UNSET:
             field_dict["incident_condition_environment"] = incident_condition_environment
         if incident_condition_severity is not UNSET:
@@ -422,6 +436,15 @@ class IncidentTriggerParams:
             incident_condition_status = UNSET
         else:
             incident_condition_status = IncidentTriggerParamsIncidentConditionStatus(_incident_condition_status)
+
+        _incident_condition_sub_status = d.pop("incident_condition_sub_status", UNSET)
+        incident_condition_sub_status: Union[Unset, IncidentTriggerParamsIncidentConditionSubStatus]
+        if isinstance(_incident_condition_sub_status, Unset):
+            incident_condition_sub_status = UNSET
+        else:
+            incident_condition_sub_status = IncidentTriggerParamsIncidentConditionSubStatus(
+                _incident_condition_sub_status
+            )
 
         _incident_condition_environment = d.pop("incident_condition_environment", UNSET)
         incident_condition_environment: Union[Unset, IncidentTriggerParamsIncidentConditionEnvironment]
@@ -654,6 +677,7 @@ class IncidentTriggerParams:
             incident_condition_visibility=incident_condition_visibility,
             incident_condition_kind=incident_condition_kind,
             incident_condition_status=incident_condition_status,
+            incident_condition_sub_status=incident_condition_sub_status,
             incident_condition_environment=incident_condition_environment,
             incident_condition_severity=incident_condition_severity,
             incident_condition_incident_type=incident_condition_incident_type,

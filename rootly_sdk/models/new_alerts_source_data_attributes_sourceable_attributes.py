@@ -23,6 +23,7 @@ class NewAlertsSourceDataAttributesSourceableAttributes:
             conditions
         resolve_state (Union[Unset, str]): This value is matched with the value extracted from alerts payload using JSON
             path in field_mappings_attributes
+        accept_threaded_emails (Union[Unset, bool]): Set this to false to reject threaded emails
         field_mappings_attributes (Union[Unset,
             list['NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesItem']]): Specify rules to auto
             resolve alerts
@@ -30,6 +31,7 @@ class NewAlertsSourceDataAttributesSourceableAttributes:
 
     auto_resolve: Union[Unset, bool] = UNSET
     resolve_state: Union[Unset, str] = UNSET
+    accept_threaded_emails: Union[Unset, bool] = UNSET
     field_mappings_attributes: Union[
         Unset, list["NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesItem"]
     ] = UNSET
@@ -39,6 +41,8 @@ class NewAlertsSourceDataAttributesSourceableAttributes:
         auto_resolve = self.auto_resolve
 
         resolve_state = self.resolve_state
+
+        accept_threaded_emails = self.accept_threaded_emails
 
         field_mappings_attributes: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.field_mappings_attributes, Unset):
@@ -54,6 +58,8 @@ class NewAlertsSourceDataAttributesSourceableAttributes:
             field_dict["auto_resolve"] = auto_resolve
         if resolve_state is not UNSET:
             field_dict["resolve_state"] = resolve_state
+        if accept_threaded_emails is not UNSET:
+            field_dict["accept_threaded_emails"] = accept_threaded_emails
         if field_mappings_attributes is not UNSET:
             field_dict["field_mappings_attributes"] = field_mappings_attributes
 
@@ -70,6 +76,8 @@ class NewAlertsSourceDataAttributesSourceableAttributes:
 
         resolve_state = d.pop("resolve_state", UNSET)
 
+        accept_threaded_emails = d.pop("accept_threaded_emails", UNSET)
+
         field_mappings_attributes = []
         _field_mappings_attributes = d.pop("field_mappings_attributes", UNSET)
         for field_mappings_attributes_item_data in _field_mappings_attributes or []:
@@ -84,6 +92,7 @@ class NewAlertsSourceDataAttributesSourceableAttributes:
         new_alerts_source_data_attributes_sourceable_attributes = cls(
             auto_resolve=auto_resolve,
             resolve_state=resolve_state,
+            accept_threaded_emails=accept_threaded_emails,
             field_mappings_attributes=field_mappings_attributes,
         )
 

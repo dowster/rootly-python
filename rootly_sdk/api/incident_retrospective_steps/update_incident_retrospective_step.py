@@ -66,7 +66,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateIncidentRetrospectiveStep,
 ) -> Response[Union[ErrorsList, IncidentRetrospectiveStepResponse]]:
-    """Update a incident retrospective step
+    """Update an incident retrospective step
 
      Update a specific incident retrospective step by id
 
@@ -100,7 +100,7 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateIncidentRetrospectiveStep,
 ) -> Optional[Union[ErrorsList, IncidentRetrospectiveStepResponse]]:
-    """Update a incident retrospective step
+    """Update an incident retrospective step
 
      Update a specific incident retrospective step by id
 
@@ -129,7 +129,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateIncidentRetrospectiveStep,
 ) -> Response[Union[ErrorsList, IncidentRetrospectiveStepResponse]]:
-    """Update a incident retrospective step
+    """Update an incident retrospective step
 
      Update a specific incident retrospective step by id
 
@@ -161,7 +161,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateIncidentRetrospectiveStep,
 ) -> Optional[Union[ErrorsList, IncidentRetrospectiveStepResponse]]:
-    """Update a incident retrospective step
+    """Update an incident retrospective step
 
      Update a specific incident retrospective step by id
 

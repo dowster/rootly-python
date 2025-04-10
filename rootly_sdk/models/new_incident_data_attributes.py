@@ -21,6 +21,7 @@ class NewIncidentDataAttributes:
         kind (Union[Unset, NewIncidentDataAttributesKind]): The kind of the incident Default:
             NewIncidentDataAttributesKind.NORMAL.
         parent_incident_id (Union[None, Unset, str]): ID of parent incident
+        duplicate_incident_id (Union[None, Unset, str]): ID of duplicated incident
         private (Union[None, Unset, bool]): Create an incident as private. Once an incident is made as private it cannot
             be undone Default: False.
         summary (Union[None, Unset, str]): The summary of the incident
@@ -53,6 +54,7 @@ class NewIncidentDataAttributes:
     title: Union[None, Unset, str] = UNSET
     kind: Union[Unset, NewIncidentDataAttributesKind] = NewIncidentDataAttributesKind.NORMAL
     parent_incident_id: Union[None, Unset, str] = UNSET
+    duplicate_incident_id: Union[None, Unset, str] = UNSET
     private: Union[None, Unset, bool] = False
     summary: Union[None, Unset, str] = UNSET
     user_id: Union[None, Unset, str] = UNSET
@@ -96,6 +98,12 @@ class NewIncidentDataAttributes:
             parent_incident_id = UNSET
         else:
             parent_incident_id = self.parent_incident_id
+
+        duplicate_incident_id: Union[None, Unset, str]
+        if isinstance(self.duplicate_incident_id, Unset):
+            duplicate_incident_id = UNSET
+        else:
+            duplicate_incident_id = self.duplicate_incident_id
 
         private: Union[None, Unset, bool]
         if isinstance(self.private, Unset):
@@ -266,6 +274,8 @@ class NewIncidentDataAttributes:
             field_dict["kind"] = kind
         if parent_incident_id is not UNSET:
             field_dict["parent_incident_id"] = parent_incident_id
+        if duplicate_incident_id is not UNSET:
+            field_dict["duplicate_incident_id"] = duplicate_incident_id
         if private is not UNSET:
             field_dict["private"] = private
         if summary is not UNSET:
@@ -347,6 +357,15 @@ class NewIncidentDataAttributes:
             return cast(Union[None, Unset, str], data)
 
         parent_incident_id = _parse_parent_incident_id(d.pop("parent_incident_id", UNSET))
+
+        def _parse_duplicate_incident_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        duplicate_incident_id = _parse_duplicate_incident_id(d.pop("duplicate_incident_id", UNSET))
 
         def _parse_private(data: object) -> Union[None, Unset, bool]:
             if data is None:
@@ -623,6 +642,7 @@ class NewIncidentDataAttributes:
             title=title,
             kind=kind,
             parent_incident_id=parent_incident_id,
+            duplicate_incident_id=duplicate_incident_id,
             private=private,
             summary=summary,
             user_id=user_id,

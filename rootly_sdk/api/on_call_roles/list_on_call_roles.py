@@ -97,9 +97,9 @@ def sync_detailed(
     filtercreated_atlte: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
 ) -> Response[OnCallRoleList]:
-    """List on_call_roles
+    """List On-Call Roles
 
-     List on_call_roles
+     List On-Call Roles
 
     Args:
         include (Union[Unset, str]):
@@ -158,9 +158,9 @@ def sync(
     filtercreated_atlte: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
 ) -> Optional[OnCallRoleList]:
-    """List on_call_roles
+    """List On-Call Roles
 
-     List on_call_roles
+     List On-Call Roles
 
     Args:
         include (Union[Unset, str]):
@@ -214,9 +214,9 @@ async def asyncio_detailed(
     filtercreated_atlte: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
 ) -> Response[OnCallRoleList]:
-    """List on_call_roles
+    """List On-Call Roles
 
-     List on_call_roles
+     List On-Call Roles
 
     Args:
         include (Union[Unset, str]):
@@ -273,9 +273,9 @@ async def asyncio(
     filtercreated_atlte: Union[Unset, str] = UNSET,
     sort: Union[Unset, str] = UNSET,
 ) -> Optional[OnCallRoleList]:
-    """List on_call_roles
+    """List On-Call Roles
 
-     List on_call_roles
+     List On-Call Roles
 
     Args:
         include (Union[Unset, str]):

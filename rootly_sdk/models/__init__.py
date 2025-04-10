@@ -58,6 +58,7 @@ from .action_item_trigger_params_incident_condition_started_at_type_1 import (
     ActionItemTriggerParamsIncidentConditionStartedAtType1,
 )
 from .action_item_trigger_params_incident_condition_status import ActionItemTriggerParamsIncidentConditionStatus
+from .action_item_trigger_params_incident_condition_sub_status import ActionItemTriggerParamsIncidentConditionSubStatus
 from .action_item_trigger_params_incident_condition_summary_type_1 import (
     ActionItemTriggerParamsIncidentConditionSummaryType1,
 )
@@ -89,28 +90,58 @@ from .add_to_timeline_task_params_post_to_slack_channels_item import AddToTimeli
 from .add_to_timeline_task_params_task_type import AddToTimelineTaskParamsTaskType
 from .alert import Alert
 from .alert_data_type_0 import AlertDataType0
+from .alert_event import AlertEvent
+from .alert_event_action import AlertEventAction
+from .alert_event_kind import AlertEventKind
+from .alert_event_list import AlertEventList
+from .alert_event_list_data_item import AlertEventListDataItem
+from .alert_event_list_data_item_type import AlertEventListDataItemType
+from .alert_event_response import AlertEventResponse
+from .alert_event_response_data import AlertEventResponseData
+from .alert_event_response_data_type import AlertEventResponseDataType
 from .alert_group import AlertGroup
+from .alert_group_attributes_item import AlertGroupAttributesItem
 from .alert_group_list import AlertGroupList
 from .alert_group_list_data_item import AlertGroupListDataItem
 from .alert_group_list_data_item_type import AlertGroupListDataItemType
 from .alert_group_response import AlertGroupResponse
 from .alert_group_response_data import AlertGroupResponseData
 from .alert_group_response_data_type import AlertGroupResponseDataType
+from .alert_group_targets_item import AlertGroupTargetsItem
+from .alert_group_targets_item_target_type import AlertGroupTargetsItemTargetType
 from .alert_labels_item_type_0 import AlertLabelsItemType0
 from .alert_list import AlertList
 from .alert_list_data_item import AlertListDataItem
 from .alert_list_data_item_source import AlertListDataItemSource
 from .alert_list_data_item_type import AlertListDataItemType
+from .alert_noise import AlertNoise
 from .alert_response import AlertResponse
 from .alert_response_data import AlertResponseData
 from .alert_response_data_source import AlertResponseDataSource
 from .alert_response_data_type import AlertResponseDataType
+from .alert_routing_rule import AlertRoutingRule
+from .alert_routing_rule_condition_type import AlertRoutingRuleConditionType
+from .alert_routing_rule_conditions_item import AlertRoutingRuleConditionsItem
+from .alert_routing_rule_conditions_item_property_field_condition_type import (
+    AlertRoutingRuleConditionsItemPropertyFieldConditionType,
+)
+from .alert_routing_rule_conditions_item_property_field_type import AlertRoutingRuleConditionsItemPropertyFieldType
+from .alert_routing_rule_destination import AlertRoutingRuleDestination
+from .alert_routing_rule_destination_target_type import AlertRoutingRuleDestinationTargetType
+from .alert_routing_rule_list import AlertRoutingRuleList
+from .alert_routing_rule_list_data_item import AlertRoutingRuleListDataItem
+from .alert_routing_rule_list_data_item_type import AlertRoutingRuleListDataItemType
+from .alert_routing_rule_response import AlertRoutingRuleResponse
+from .alert_routing_rule_response_data import AlertRoutingRuleResponseData
+from .alert_routing_rule_response_data_type import AlertRoutingRuleResponseDataType
 from .alert_source import AlertSource
+from .alert_status import AlertStatus
 from .alert_trigger_params import AlertTriggerParams
 from .alert_trigger_params_alert_condition import AlertTriggerParamsAlertCondition
 from .alert_trigger_params_alert_condition_label import AlertTriggerParamsAlertConditionLabel
 from .alert_trigger_params_alert_condition_payload import AlertTriggerParamsAlertConditionPayload
 from .alert_trigger_params_alert_condition_source import AlertTriggerParamsAlertConditionSource
+from .alert_trigger_params_alert_condition_status import AlertTriggerParamsAlertConditionStatus
 from .alert_trigger_params_trigger_type import AlertTriggerParamsTriggerType
 from .alert_trigger_params_triggers_item import AlertTriggerParamsTriggersItem
 from .alert_urgency import AlertUrgency
@@ -124,10 +155,11 @@ from .alerts_source import AlertsSource
 from .alerts_source_list import AlertsSourceList
 from .alerts_source_list_data_item import AlertsSourceListDataItem
 from .alerts_source_list_data_item_type import AlertsSourceListDataItemType
+from .alerts_source_resolution_rule_attributes_type_0 import AlertsSourceResolutionRuleAttributesType0
 from .alerts_source_response import AlertsSourceResponse
 from .alerts_source_response_data import AlertsSourceResponseData
 from .alerts_source_response_data_type import AlertsSourceResponseDataType
-from .alerts_source_sourceable_attributes import AlertsSourceSourceableAttributes
+from .alerts_source_sourceable_attributes_type_0 import AlertsSourceSourceableAttributesType0
 from .archive_microsoft_teams_channels_task_params import ArchiveMicrosoftTeamsChannelsTaskParams
 from .archive_microsoft_teams_channels_task_params_channels_item import (
     ArchiveMicrosoftTeamsChannelsTaskParamsChannelsItem,
@@ -324,6 +356,7 @@ from .create_linear_issue_task_params_state import CreateLinearIssueTaskParamsSt
 from .create_linear_issue_task_params_task_type import CreateLinearIssueTaskParamsTaskType
 from .create_linear_issue_task_params_team import CreateLinearIssueTaskParamsTeam
 from .create_linear_subtask_issue_task_params import CreateLinearSubtaskIssueTaskParams
+from .create_linear_subtask_issue_task_params_labels_item import CreateLinearSubtaskIssueTaskParamsLabelsItem
 from .create_linear_subtask_issue_task_params_priority import CreateLinearSubtaskIssueTaskParamsPriority
 from .create_linear_subtask_issue_task_params_state import CreateLinearSubtaskIssueTaskParamsState
 from .create_linear_subtask_issue_task_params_task_type import CreateLinearSubtaskIssueTaskParamsTaskType
@@ -377,11 +410,6 @@ from .create_sharepoint_page_task_params_drive import CreateSharepointPageTaskPa
 from .create_sharepoint_page_task_params_parent_folder import CreateSharepointPageTaskParamsParentFolder
 from .create_sharepoint_page_task_params_site import CreateSharepointPageTaskParamsSite
 from .create_sharepoint_page_task_params_task_type import CreateSharepointPageTaskParamsTaskType
-from .create_shortcut_story_task_params import CreateShortcutStoryTaskParams
-from .create_shortcut_story_task_params_archivation import CreateShortcutStoryTaskParamsArchivation
-from .create_shortcut_story_task_params_kind import CreateShortcutStoryTaskParamsKind
-from .create_shortcut_story_task_params_project import CreateShortcutStoryTaskParamsProject
-from .create_shortcut_story_task_params_task_type import CreateShortcutStoryTaskParamsTaskType
 from .create_shortcut_task_task_params import CreateShortcutTaskTaskParams
 from .create_shortcut_task_task_params_completion import CreateShortcutTaskTaskParamsCompletion
 from .create_shortcut_task_task_params_task_type import CreateShortcutTaskTaskParamsTaskType
@@ -494,14 +522,25 @@ from .environment_slack_channels_type_0_item import EnvironmentSlackChannelsType
 from .errors_list import ErrorsList
 from .errors_list_errors_item import ErrorsListErrorsItem
 from .escalation_policy import EscalationPolicy
+from .escalation_policy_business_hours_type_0 import EscalationPolicyBusinessHoursType0
+from .escalation_policy_business_hours_type_0_days_type_0_item import EscalationPolicyBusinessHoursType0DaysType0Item
 from .escalation_policy_level import EscalationPolicyLevel
 from .escalation_policy_level_list import EscalationPolicyLevelList
 from .escalation_policy_level_list_data_item import EscalationPolicyLevelListDataItem
 from .escalation_policy_level_notification_target_params_item_type_0 import (
     EscalationPolicyLevelNotificationTargetParamsItemType0,
 )
+from .escalation_policy_level_notification_target_params_item_type_0_team_members import (
+    EscalationPolicyLevelNotificationTargetParamsItemType0TeamMembers,
+)
 from .escalation_policy_level_notification_target_params_item_type_0_type import (
     EscalationPolicyLevelNotificationTargetParamsItemType0Type,
+)
+from .escalation_policy_level_paging_strategy_configuration_schedule_strategy import (
+    EscalationPolicyLevelPagingStrategyConfigurationScheduleStrategy,
+)
+from .escalation_policy_level_paging_strategy_configuration_strategy import (
+    EscalationPolicyLevelPagingStrategyConfigurationStrategy,
 )
 from .escalation_policy_level_response import EscalationPolicyLevelResponse
 from .escalation_policy_level_response_data import EscalationPolicyLevelResponseData
@@ -512,6 +551,7 @@ from .escalation_policy_list_data_item_type import EscalationPolicyListDataItemT
 from .escalation_policy_path import EscalationPolicyPath
 from .escalation_policy_path_list import EscalationPolicyPathList
 from .escalation_policy_path_list_data_item import EscalationPolicyPathListDataItem
+from .escalation_policy_path_match_mode import EscalationPolicyPathMatchMode
 from .escalation_policy_path_response import EscalationPolicyPathResponse
 from .escalation_policy_path_response_data import EscalationPolicyPathResponseData
 from .escalation_policy_path_response_data_type import EscalationPolicyPathResponseDataType
@@ -608,6 +648,16 @@ from .functionality_slack_aliases_type_0_item import FunctionalitySlackAliasesTy
 from .functionality_slack_channels_type_0_item import FunctionalitySlackChannelsType0Item
 from .generate_phone_number_live_call_router_country_code import GeneratePhoneNumberLiveCallRouterCountryCode
 from .generate_phone_number_live_call_router_phone_type import GeneratePhoneNumberLiveCallRouterPhoneType
+from .genius_create_openai_chat_completion_task_params import GeniusCreateOpenaiChatCompletionTaskParams
+from .genius_create_openai_chat_completion_task_params_model import GeniusCreateOpenaiChatCompletionTaskParamsModel
+from .genius_create_openai_chat_completion_task_params_task_type import (
+    GeniusCreateOpenaiChatCompletionTaskParamsTaskType,
+)
+from .genius_create_watsonx_chat_completion_task_params import GeniusCreateWatsonxChatCompletionTaskParams
+from .genius_create_watsonx_chat_completion_task_params_model import GeniusCreateWatsonxChatCompletionTaskParamsModel
+from .genius_create_watsonx_chat_completion_task_params_task_type import (
+    GeniusCreateWatsonxChatCompletionTaskParamsTaskType,
+)
 from .get_alerts_task_params import GetAlertsTaskParams
 from .get_alerts_task_params_parent_message_thread_task import GetAlertsTaskParamsParentMessageThreadTask
 from .get_alerts_task_params_post_to_slack_channels_item import GetAlertsTaskParamsPostToSlackChannelsItem
@@ -816,6 +866,7 @@ from .incident_trigger_params_incident_condition_started_at_type_1 import (
     IncidentTriggerParamsIncidentConditionStartedAtType1,
 )
 from .incident_trigger_params_incident_condition_status import IncidentTriggerParamsIncidentConditionStatus
+from .incident_trigger_params_incident_condition_sub_status import IncidentTriggerParamsIncidentConditionSubStatus
 from .incident_trigger_params_incident_condition_summary_type_1 import (
     IncidentTriggerParamsIncidentConditionSummaryType1,
 )
@@ -924,23 +975,42 @@ from .new_alert_data import NewAlertData
 from .new_alert_data_attributes import NewAlertDataAttributes
 from .new_alert_data_attributes_data_type_0 import NewAlertDataAttributesDataType0
 from .new_alert_data_attributes_labels_item_type_0 import NewAlertDataAttributesLabelsItemType0
+from .new_alert_data_attributes_noise import NewAlertDataAttributesNoise
 from .new_alert_data_attributes_notification_target_type import NewAlertDataAttributesNotificationTargetType
 from .new_alert_data_attributes_source import NewAlertDataAttributesSource
 from .new_alert_data_attributes_status import NewAlertDataAttributesStatus
 from .new_alert_data_type import NewAlertDataType
+from .new_alert_event import NewAlertEvent
+from .new_alert_event_data import NewAlertEventData
+from .new_alert_event_data_attributes import NewAlertEventDataAttributes
+from .new_alert_event_data_attributes_kind import NewAlertEventDataAttributesKind
+from .new_alert_event_data_type import NewAlertEventDataType
 from .new_alert_group import NewAlertGroup
 from .new_alert_group_data import NewAlertGroupData
 from .new_alert_group_data_attributes import NewAlertGroupDataAttributes
-from .new_alert_group_data_attributes_alert_group_targets_attributes import (
-    NewAlertGroupDataAttributesAlertGroupTargetsAttributes,
-)
-from .new_alert_group_data_attributes_alert_group_targets_attributes_target_type import (
-    NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType,
-)
+from .new_alert_group_data_attributes_attributes_item import NewAlertGroupDataAttributesAttributesItem
 from .new_alert_group_data_attributes_condition_type import NewAlertGroupDataAttributesConditionType
 from .new_alert_group_data_attributes_group_by_alert_title import NewAlertGroupDataAttributesGroupByAlertTitle
 from .new_alert_group_data_attributes_group_by_alert_urgency import NewAlertGroupDataAttributesGroupByAlertUrgency
+from .new_alert_group_data_attributes_targets_item import NewAlertGroupDataAttributesTargetsItem
+from .new_alert_group_data_attributes_targets_item_target_type import NewAlertGroupDataAttributesTargetsItemTargetType
 from .new_alert_group_data_type import NewAlertGroupDataType
+from .new_alert_routing_rule import NewAlertRoutingRule
+from .new_alert_routing_rule_data import NewAlertRoutingRuleData
+from .new_alert_routing_rule_data_attributes import NewAlertRoutingRuleDataAttributes
+from .new_alert_routing_rule_data_attributes_condition_type import NewAlertRoutingRuleDataAttributesConditionType
+from .new_alert_routing_rule_data_attributes_conditions_item import NewAlertRoutingRuleDataAttributesConditionsItem
+from .new_alert_routing_rule_data_attributes_conditions_item_property_field_condition_type import (
+    NewAlertRoutingRuleDataAttributesConditionsItemPropertyFieldConditionType,
+)
+from .new_alert_routing_rule_data_attributes_conditions_item_property_field_type import (
+    NewAlertRoutingRuleDataAttributesConditionsItemPropertyFieldType,
+)
+from .new_alert_routing_rule_data_attributes_destination import NewAlertRoutingRuleDataAttributesDestination
+from .new_alert_routing_rule_data_attributes_destination_target_type import (
+    NewAlertRoutingRuleDataAttributesDestinationTargetType,
+)
+from .new_alert_routing_rule_data_type import NewAlertRoutingRuleDataType
 from .new_alert_urgency import NewAlertUrgency
 from .new_alert_urgency_data import NewAlertUrgencyData
 from .new_alert_urgency_data_attributes import NewAlertUrgencyDataAttributes
@@ -953,6 +1023,21 @@ from .new_alerts_source_data_attributes_alert_source_urgency_rules_attributes_it
 )
 from .new_alerts_source_data_attributes_alert_source_urgency_rules_attributes_item_operator import (
     NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesItemOperator,
+)
+from .new_alerts_source_data_attributes_alert_template_attributes import (
+    NewAlertsSourceDataAttributesAlertTemplateAttributes,
+)
+from .new_alerts_source_data_attributes_resolution_rule_attributes import (
+    NewAlertsSourceDataAttributesResolutionRuleAttributes,
+)
+from .new_alerts_source_data_attributes_resolution_rule_attributes_condition_type import (
+    NewAlertsSourceDataAttributesResolutionRuleAttributesConditionType,
+)
+from .new_alerts_source_data_attributes_resolution_rule_attributes_conditions_attributes_item import (
+    NewAlertsSourceDataAttributesResolutionRuleAttributesConditionsAttributesItem,
+)
+from .new_alerts_source_data_attributes_resolution_rule_attributes_conditions_attributes_item_operator import (
+    NewAlertsSourceDataAttributesResolutionRuleAttributesConditionsAttributesItemOperator,
 )
 from .new_alerts_source_data_attributes_source_type import NewAlertsSourceDataAttributesSourceType
 from .new_alerts_source_data_attributes_sourceable_attributes import NewAlertsSourceDataAttributesSourceableAttributes
@@ -1060,6 +1145,12 @@ from .new_environment_data_type import NewEnvironmentDataType
 from .new_escalation_policy import NewEscalationPolicy
 from .new_escalation_policy_data import NewEscalationPolicyData
 from .new_escalation_policy_data_attributes import NewEscalationPolicyDataAttributes
+from .new_escalation_policy_data_attributes_business_hours_type_0 import (
+    NewEscalationPolicyDataAttributesBusinessHoursType0,
+)
+from .new_escalation_policy_data_attributes_business_hours_type_0_days_type_0_item import (
+    NewEscalationPolicyDataAttributesBusinessHoursType0DaysType0Item,
+)
 from .new_escalation_policy_data_type import NewEscalationPolicyDataType
 from .new_escalation_policy_level import NewEscalationPolicyLevel
 from .new_escalation_policy_level_data import NewEscalationPolicyLevelData
@@ -1067,8 +1158,17 @@ from .new_escalation_policy_level_data_attributes import NewEscalationPolicyLeve
 from .new_escalation_policy_level_data_attributes_notification_target_params_item_type_0 import (
     NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0,
 )
+from .new_escalation_policy_level_data_attributes_notification_target_params_item_type_0_team_members import (
+    NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers,
+)
 from .new_escalation_policy_level_data_attributes_notification_target_params_item_type_0_type import (
     NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type,
+)
+from .new_escalation_policy_level_data_attributes_paging_strategy_configuration_schedule_strategy import (
+    NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy,
+)
+from .new_escalation_policy_level_data_attributes_paging_strategy_configuration_strategy import (
+    NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy,
 )
 from .new_escalation_policy_level_data_type import NewEscalationPolicyLevelDataType
 from .new_form_field import NewFormField
@@ -1369,6 +1469,7 @@ from .new_role_data_attributes_incident_feedbacks_permissions_item import (
 from .new_role_data_attributes_incident_roles_permissions_item import NewRoleDataAttributesIncidentRolesPermissionsItem
 from .new_role_data_attributes_incident_types_permissions_item import NewRoleDataAttributesIncidentTypesPermissionsItem
 from .new_role_data_attributes_incidents_permissions_item import NewRoleDataAttributesIncidentsPermissionsItem
+from .new_role_data_attributes_integrations_permissions_item import NewRoleDataAttributesIntegrationsPermissionsItem
 from .new_role_data_attributes_invitations_permissions_item import NewRoleDataAttributesInvitationsPermissionsItem
 from .new_role_data_attributes_playbooks_permissions_item import NewRoleDataAttributesPlaybooksPermissionsItem
 from .new_role_data_attributes_private_incidents_permissions_item import (
@@ -1387,6 +1488,7 @@ from .new_role_data_type import NewRoleDataType
 from .new_schedule import NewSchedule
 from .new_schedule_data import NewScheduleData
 from .new_schedule_data_attributes import NewScheduleDataAttributes
+from .new_schedule_data_attributes_slack_user_group import NewScheduleDataAttributesSlackUserGroup
 from .new_schedule_data_type import NewScheduleDataType
 from .new_schedule_rotation import NewScheduleRotation
 from .new_schedule_rotation_active_day import NewScheduleRotationActiveDay
@@ -1513,11 +1615,17 @@ from .new_workflow_group_data_type import NewWorkflowGroupDataType
 from .new_workflow_run import NewWorkflowRun
 from .new_workflow_run_data import NewWorkflowRunData
 from .new_workflow_run_data_attributes_type_0 import NewWorkflowRunDataAttributesType0
+from .new_workflow_run_data_attributes_type_0_context import NewWorkflowRunDataAttributesType0Context
 from .new_workflow_run_data_attributes_type_1 import NewWorkflowRunDataAttributesType1
+from .new_workflow_run_data_attributes_type_1_context import NewWorkflowRunDataAttributesType1Context
 from .new_workflow_run_data_attributes_type_2 import NewWorkflowRunDataAttributesType2
+from .new_workflow_run_data_attributes_type_2_context import NewWorkflowRunDataAttributesType2Context
 from .new_workflow_run_data_attributes_type_3 import NewWorkflowRunDataAttributesType3
+from .new_workflow_run_data_attributes_type_3_context import NewWorkflowRunDataAttributesType3Context
 from .new_workflow_run_data_attributes_type_4 import NewWorkflowRunDataAttributesType4
+from .new_workflow_run_data_attributes_type_4_context import NewWorkflowRunDataAttributesType4Context
 from .new_workflow_run_data_attributes_type_5 import NewWorkflowRunDataAttributesType5
+from .new_workflow_run_data_attributes_type_5_context import NewWorkflowRunDataAttributesType5Context
 from .new_workflow_run_data_type import NewWorkflowRunDataType
 from .new_workflow_task import NewWorkflowTask
 from .new_workflow_task_data import NewWorkflowTaskData
@@ -1640,6 +1748,7 @@ from .post_mortem_trigger_params_incident_condition_started_at_type_1 import (
     PostMortemTriggerParamsIncidentConditionStartedAtType1,
 )
 from .post_mortem_trigger_params_incident_condition_status import PostMortemTriggerParamsIncidentConditionStatus
+from .post_mortem_trigger_params_incident_condition_sub_status import PostMortemTriggerParamsIncidentConditionSubStatus
 from .post_mortem_trigger_params_incident_condition_summary_type_1 import (
     PostMortemTriggerParamsIncidentConditionSummaryType1,
 )
@@ -1776,6 +1885,7 @@ from .role_incident_feedbacks_permissions_item import RoleIncidentFeedbacksPermi
 from .role_incident_roles_permissions_item import RoleIncidentRolesPermissionsItem
 from .role_incident_types_permissions_item import RoleIncidentTypesPermissionsItem
 from .role_incidents_permissions_item import RoleIncidentsPermissionsItem
+from .role_integrations_permissions_item import RoleIntegrationsPermissionsItem
 from .role_invitations_permissions_item import RoleInvitationsPermissionsItem
 from .role_list import RoleList
 from .role_list_data_item import RoleListDataItem
@@ -1854,6 +1964,7 @@ from .schedule_rotation_user_list_data_item_type import ScheduleRotationUserList
 from .schedule_rotation_user_response import ScheduleRotationUserResponse
 from .schedule_rotation_user_response_data import ScheduleRotationUserResponseData
 from .schedule_rotation_user_response_data_type import ScheduleRotationUserResponseDataType
+from .schedule_slack_user_group_type_0 import ScheduleSlackUserGroupType0
 from .secret import Secret
 from .secret_list import SecretList
 from .secret_list_data_item import SecretListDataItem
@@ -1981,21 +2092,43 @@ from .update_alert_data import UpdateAlertData
 from .update_alert_data_attributes import UpdateAlertDataAttributes
 from .update_alert_data_attributes_data_type_0 import UpdateAlertDataAttributesDataType0
 from .update_alert_data_attributes_labels_item_type_0 import UpdateAlertDataAttributesLabelsItemType0
+from .update_alert_data_attributes_noise import UpdateAlertDataAttributesNoise
 from .update_alert_data_attributes_source import UpdateAlertDataAttributesSource
 from .update_alert_data_type import UpdateAlertDataType
+from .update_alert_event import UpdateAlertEvent
+from .update_alert_event_data import UpdateAlertEventData
+from .update_alert_event_data_attributes import UpdateAlertEventDataAttributes
+from .update_alert_event_data_type import UpdateAlertEventDataType
 from .update_alert_group import UpdateAlertGroup
 from .update_alert_group_data import UpdateAlertGroupData
 from .update_alert_group_data_attributes import UpdateAlertGroupDataAttributes
-from .update_alert_group_data_attributes_alert_group_targets_attributes import (
-    UpdateAlertGroupDataAttributesAlertGroupTargetsAttributes,
-)
-from .update_alert_group_data_attributes_alert_group_targets_attributes_target_type import (
-    UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType,
-)
+from .update_alert_group_data_attributes_attributes_item import UpdateAlertGroupDataAttributesAttributesItem
 from .update_alert_group_data_attributes_condition_type import UpdateAlertGroupDataAttributesConditionType
 from .update_alert_group_data_attributes_group_by_alert_title import UpdateAlertGroupDataAttributesGroupByAlertTitle
 from .update_alert_group_data_attributes_group_by_alert_urgency import UpdateAlertGroupDataAttributesGroupByAlertUrgency
+from .update_alert_group_data_attributes_targets_item import UpdateAlertGroupDataAttributesTargetsItem
+from .update_alert_group_data_attributes_targets_item_target_type import (
+    UpdateAlertGroupDataAttributesTargetsItemTargetType,
+)
 from .update_alert_group_data_type import UpdateAlertGroupDataType
+from .update_alert_routing_rule import UpdateAlertRoutingRule
+from .update_alert_routing_rule_data import UpdateAlertRoutingRuleData
+from .update_alert_routing_rule_data_attributes import UpdateAlertRoutingRuleDataAttributes
+from .update_alert_routing_rule_data_attributes_condition_type import UpdateAlertRoutingRuleDataAttributesConditionType
+from .update_alert_routing_rule_data_attributes_conditions_item import (
+    UpdateAlertRoutingRuleDataAttributesConditionsItem,
+)
+from .update_alert_routing_rule_data_attributes_conditions_item_property_field_condition_type import (
+    UpdateAlertRoutingRuleDataAttributesConditionsItemPropertyFieldConditionType,
+)
+from .update_alert_routing_rule_data_attributes_conditions_item_property_field_type import (
+    UpdateAlertRoutingRuleDataAttributesConditionsItemPropertyFieldType,
+)
+from .update_alert_routing_rule_data_attributes_destination import UpdateAlertRoutingRuleDataAttributesDestination
+from .update_alert_routing_rule_data_attributes_destination_target_type import (
+    UpdateAlertRoutingRuleDataAttributesDestinationTargetType,
+)
+from .update_alert_routing_rule_data_type import UpdateAlertRoutingRuleDataType
 from .update_alert_urgency import UpdateAlertUrgency
 from .update_alert_urgency_data import UpdateAlertUrgencyData
 from .update_alert_urgency_data_attributes import UpdateAlertUrgencyDataAttributes
@@ -2008,6 +2141,21 @@ from .update_alerts_source_data_attributes_alert_source_urgency_rules_attributes
 )
 from .update_alerts_source_data_attributes_alert_source_urgency_rules_attributes_item_operator import (
     UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesItemOperator,
+)
+from .update_alerts_source_data_attributes_alert_template_attributes import (
+    UpdateAlertsSourceDataAttributesAlertTemplateAttributes,
+)
+from .update_alerts_source_data_attributes_resolution_rule_attributes import (
+    UpdateAlertsSourceDataAttributesResolutionRuleAttributes,
+)
+from .update_alerts_source_data_attributes_resolution_rule_attributes_condition_type import (
+    UpdateAlertsSourceDataAttributesResolutionRuleAttributesConditionType,
+)
+from .update_alerts_source_data_attributes_resolution_rule_attributes_conditions_attributes_item import (
+    UpdateAlertsSourceDataAttributesResolutionRuleAttributesConditionsAttributesItem,
+)
+from .update_alerts_source_data_attributes_resolution_rule_attributes_conditions_attributes_item_operator import (
+    UpdateAlertsSourceDataAttributesResolutionRuleAttributesConditionsAttributesItemOperator,
 )
 from .update_alerts_source_data_attributes_source_type import UpdateAlertsSourceDataAttributesSourceType
 from .update_alerts_source_data_attributes_sourceable_attributes import (
@@ -2131,6 +2279,12 @@ from .update_environment_data_type import UpdateEnvironmentDataType
 from .update_escalation_policy import UpdateEscalationPolicy
 from .update_escalation_policy_data import UpdateEscalationPolicyData
 from .update_escalation_policy_data_attributes import UpdateEscalationPolicyDataAttributes
+from .update_escalation_policy_data_attributes_business_hours_type_0 import (
+    UpdateEscalationPolicyDataAttributesBusinessHoursType0,
+)
+from .update_escalation_policy_data_attributes_business_hours_type_0_days_type_0_item import (
+    UpdateEscalationPolicyDataAttributesBusinessHoursType0DaysType0Item,
+)
 from .update_escalation_policy_data_type import UpdateEscalationPolicyDataType
 from .update_escalation_policy_level import UpdateEscalationPolicyLevel
 from .update_escalation_policy_level_data import UpdateEscalationPolicyLevelData
@@ -2138,8 +2292,17 @@ from .update_escalation_policy_level_data_attributes import UpdateEscalationPoli
 from .update_escalation_policy_level_data_attributes_notification_target_params_item_type_0 import (
     UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0,
 )
+from .update_escalation_policy_level_data_attributes_notification_target_params_item_type_0_team_members import (
+    UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers,
+)
 from .update_escalation_policy_level_data_attributes_notification_target_params_item_type_0_type import (
     UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type,
+)
+from .update_escalation_policy_level_data_attributes_paging_strategy_configuration_schedule_strategy import (
+    UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy,
+)
+from .update_escalation_policy_level_data_attributes_paging_strategy_configuration_strategy import (
+    UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy,
 )
 from .update_escalation_policy_level_data_type import UpdateEscalationPolicyLevelDataType
 from .update_form_field import UpdateFormField
@@ -2529,6 +2692,9 @@ from .update_role_data_attributes_incident_types_permissions_item import (
     UpdateRoleDataAttributesIncidentTypesPermissionsItem,
 )
 from .update_role_data_attributes_incidents_permissions_item import UpdateRoleDataAttributesIncidentsPermissionsItem
+from .update_role_data_attributes_integrations_permissions_item import (
+    UpdateRoleDataAttributesIntegrationsPermissionsItem,
+)
 from .update_role_data_attributes_invitations_permissions_item import UpdateRoleDataAttributesInvitationsPermissionsItem
 from .update_role_data_attributes_playbooks_permissions_item import UpdateRoleDataAttributesPlaybooksPermissionsItem
 from .update_role_data_attributes_private_incidents_permissions_item import (
@@ -2550,6 +2716,7 @@ from .update_role_data_type import UpdateRoleDataType
 from .update_schedule import UpdateSchedule
 from .update_schedule_data import UpdateScheduleData
 from .update_schedule_data_attributes import UpdateScheduleDataAttributes
+from .update_schedule_data_attributes_slack_user_group import UpdateScheduleDataAttributesSlackUserGroup
 from .update_schedule_data_type import UpdateScheduleDataType
 from .update_schedule_rotation import UpdateScheduleRotation
 from .update_schedule_rotation_active_day import UpdateScheduleRotationActiveDay
@@ -2818,6 +2985,7 @@ __all__ = (
     "ActionItemTriggerParamsIncidentConditionSeverity",
     "ActionItemTriggerParamsIncidentConditionStartedAtType1",
     "ActionItemTriggerParamsIncidentConditionStatus",
+    "ActionItemTriggerParamsIncidentConditionSubStatus",
     "ActionItemTriggerParamsIncidentConditionSummaryType1",
     "ActionItemTriggerParamsIncidentConditionVisibility",
     "ActionItemTriggerParamsIncidentKindsItem",
@@ -2844,36 +3012,65 @@ __all__ = (
     "AddToTimelineTaskParamsTaskType",
     "Alert",
     "AlertDataType0",
+    "AlertEvent",
+    "AlertEventAction",
+    "AlertEventKind",
+    "AlertEventList",
+    "AlertEventListDataItem",
+    "AlertEventListDataItemType",
+    "AlertEventResponse",
+    "AlertEventResponseData",
+    "AlertEventResponseDataType",
     "AlertGroup",
+    "AlertGroupAttributesItem",
     "AlertGroupList",
     "AlertGroupListDataItem",
     "AlertGroupListDataItemType",
     "AlertGroupResponse",
     "AlertGroupResponseData",
     "AlertGroupResponseDataType",
+    "AlertGroupTargetsItem",
+    "AlertGroupTargetsItemTargetType",
     "AlertLabelsItemType0",
     "AlertList",
     "AlertListDataItem",
     "AlertListDataItemSource",
     "AlertListDataItemType",
+    "AlertNoise",
     "AlertResponse",
     "AlertResponseData",
     "AlertResponseDataSource",
     "AlertResponseDataType",
+    "AlertRoutingRule",
+    "AlertRoutingRuleConditionsItem",
+    "AlertRoutingRuleConditionsItemPropertyFieldConditionType",
+    "AlertRoutingRuleConditionsItemPropertyFieldType",
+    "AlertRoutingRuleConditionType",
+    "AlertRoutingRuleDestination",
+    "AlertRoutingRuleDestinationTargetType",
+    "AlertRoutingRuleList",
+    "AlertRoutingRuleListDataItem",
+    "AlertRoutingRuleListDataItemType",
+    "AlertRoutingRuleResponse",
+    "AlertRoutingRuleResponseData",
+    "AlertRoutingRuleResponseDataType",
     "AlertSource",
     "AlertsSource",
     "AlertsSourceList",
     "AlertsSourceListDataItem",
     "AlertsSourceListDataItemType",
+    "AlertsSourceResolutionRuleAttributesType0",
     "AlertsSourceResponse",
     "AlertsSourceResponseData",
     "AlertsSourceResponseDataType",
-    "AlertsSourceSourceableAttributes",
+    "AlertsSourceSourceableAttributesType0",
+    "AlertStatus",
     "AlertTriggerParams",
     "AlertTriggerParamsAlertCondition",
     "AlertTriggerParamsAlertConditionLabel",
     "AlertTriggerParamsAlertConditionPayload",
     "AlertTriggerParamsAlertConditionSource",
+    "AlertTriggerParamsAlertConditionStatus",
     "AlertTriggerParamsTriggersItem",
     "AlertTriggerParamsTriggerType",
     "AlertUrgency",
@@ -3063,6 +3260,7 @@ __all__ = (
     "CreateLinearIssueTaskParamsTaskType",
     "CreateLinearIssueTaskParamsTeam",
     "CreateLinearSubtaskIssueTaskParams",
+    "CreateLinearSubtaskIssueTaskParamsLabelsItem",
     "CreateLinearSubtaskIssueTaskParamsPriority",
     "CreateLinearSubtaskIssueTaskParamsState",
     "CreateLinearSubtaskIssueTaskParamsTaskType",
@@ -3112,11 +3310,6 @@ __all__ = (
     "CreateSharepointPageTaskParamsParentFolder",
     "CreateSharepointPageTaskParamsSite",
     "CreateSharepointPageTaskParamsTaskType",
-    "CreateShortcutStoryTaskParams",
-    "CreateShortcutStoryTaskParamsArchivation",
-    "CreateShortcutStoryTaskParamsKind",
-    "CreateShortcutStoryTaskParamsProject",
-    "CreateShortcutStoryTaskParamsTaskType",
     "CreateShortcutTaskTaskParams",
     "CreateShortcutTaskTaskParamsCompletion",
     "CreateShortcutTaskTaskParamsTaskType",
@@ -3215,11 +3408,16 @@ __all__ = (
     "ErrorsList",
     "ErrorsListErrorsItem",
     "EscalationPolicy",
+    "EscalationPolicyBusinessHoursType0",
+    "EscalationPolicyBusinessHoursType0DaysType0Item",
     "EscalationPolicyLevel",
     "EscalationPolicyLevelList",
     "EscalationPolicyLevelListDataItem",
     "EscalationPolicyLevelNotificationTargetParamsItemType0",
+    "EscalationPolicyLevelNotificationTargetParamsItemType0TeamMembers",
     "EscalationPolicyLevelNotificationTargetParamsItemType0Type",
+    "EscalationPolicyLevelPagingStrategyConfigurationScheduleStrategy",
+    "EscalationPolicyLevelPagingStrategyConfigurationStrategy",
     "EscalationPolicyLevelResponse",
     "EscalationPolicyLevelResponseData",
     "EscalationPolicyLevelResponseDataType",
@@ -3229,6 +3427,7 @@ __all__ = (
     "EscalationPolicyPath",
     "EscalationPolicyPathList",
     "EscalationPolicyPathListDataItem",
+    "EscalationPolicyPathMatchMode",
     "EscalationPolicyPathResponse",
     "EscalationPolicyPathResponseData",
     "EscalationPolicyPathResponseDataType",
@@ -3325,6 +3524,12 @@ __all__ = (
     "FunctionalitySlackChannelsType0Item",
     "GeneratePhoneNumberLiveCallRouterCountryCode",
     "GeneratePhoneNumberLiveCallRouterPhoneType",
+    "GeniusCreateOpenaiChatCompletionTaskParams",
+    "GeniusCreateOpenaiChatCompletionTaskParamsModel",
+    "GeniusCreateOpenaiChatCompletionTaskParamsTaskType",
+    "GeniusCreateWatsonxChatCompletionTaskParams",
+    "GeniusCreateWatsonxChatCompletionTaskParamsModel",
+    "GeniusCreateWatsonxChatCompletionTaskParamsTaskType",
     "GetAlertsTaskParams",
     "GetAlertsTaskParamsParentMessageThreadTask",
     "GetAlertsTaskParamsPostToSlackChannelsItem",
@@ -3516,6 +3721,7 @@ __all__ = (
     "IncidentTriggerParamsIncidentConditionSeverity",
     "IncidentTriggerParamsIncidentConditionStartedAtType1",
     "IncidentTriggerParamsIncidentConditionStatus",
+    "IncidentTriggerParamsIncidentConditionSubStatus",
     "IncidentTriggerParamsIncidentConditionSummaryType1",
     "IncidentTriggerParamsIncidentConditionVisibility",
     "IncidentTriggerParamsIncidentKindsItem",
@@ -3609,24 +3815,46 @@ __all__ = (
     "NewAlertDataAttributes",
     "NewAlertDataAttributesDataType0",
     "NewAlertDataAttributesLabelsItemType0",
+    "NewAlertDataAttributesNoise",
     "NewAlertDataAttributesNotificationTargetType",
     "NewAlertDataAttributesSource",
     "NewAlertDataAttributesStatus",
     "NewAlertDataType",
+    "NewAlertEvent",
+    "NewAlertEventData",
+    "NewAlertEventDataAttributes",
+    "NewAlertEventDataAttributesKind",
+    "NewAlertEventDataType",
     "NewAlertGroup",
     "NewAlertGroupData",
     "NewAlertGroupDataAttributes",
-    "NewAlertGroupDataAttributesAlertGroupTargetsAttributes",
-    "NewAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType",
+    "NewAlertGroupDataAttributesAttributesItem",
     "NewAlertGroupDataAttributesConditionType",
     "NewAlertGroupDataAttributesGroupByAlertTitle",
     "NewAlertGroupDataAttributesGroupByAlertUrgency",
+    "NewAlertGroupDataAttributesTargetsItem",
+    "NewAlertGroupDataAttributesTargetsItemTargetType",
     "NewAlertGroupDataType",
+    "NewAlertRoutingRule",
+    "NewAlertRoutingRuleData",
+    "NewAlertRoutingRuleDataAttributes",
+    "NewAlertRoutingRuleDataAttributesConditionsItem",
+    "NewAlertRoutingRuleDataAttributesConditionsItemPropertyFieldConditionType",
+    "NewAlertRoutingRuleDataAttributesConditionsItemPropertyFieldType",
+    "NewAlertRoutingRuleDataAttributesConditionType",
+    "NewAlertRoutingRuleDataAttributesDestination",
+    "NewAlertRoutingRuleDataAttributesDestinationTargetType",
+    "NewAlertRoutingRuleDataType",
     "NewAlertsSource",
     "NewAlertsSourceData",
     "NewAlertsSourceDataAttributes",
     "NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesItem",
     "NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesItemOperator",
+    "NewAlertsSourceDataAttributesAlertTemplateAttributes",
+    "NewAlertsSourceDataAttributesResolutionRuleAttributes",
+    "NewAlertsSourceDataAttributesResolutionRuleAttributesConditionsAttributesItem",
+    "NewAlertsSourceDataAttributesResolutionRuleAttributesConditionsAttributesItemOperator",
+    "NewAlertsSourceDataAttributesResolutionRuleAttributesConditionType",
     "NewAlertsSourceDataAttributesSourceableAttributes",
     "NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesItem",
     "NewAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesItemField",
@@ -3715,12 +3943,17 @@ __all__ = (
     "NewEscalationPolicy",
     "NewEscalationPolicyData",
     "NewEscalationPolicyDataAttributes",
+    "NewEscalationPolicyDataAttributesBusinessHoursType0",
+    "NewEscalationPolicyDataAttributesBusinessHoursType0DaysType0Item",
     "NewEscalationPolicyDataType",
     "NewEscalationPolicyLevel",
     "NewEscalationPolicyLevelData",
     "NewEscalationPolicyLevelDataAttributes",
     "NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0",
+    "NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers",
     "NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type",
+    "NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy",
+    "NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy",
     "NewEscalationPolicyLevelDataType",
     "NewFormField",
     "NewFormFieldData",
@@ -3950,6 +4183,7 @@ __all__ = (
     "NewRoleDataAttributesIncidentRolesPermissionsItem",
     "NewRoleDataAttributesIncidentsPermissionsItem",
     "NewRoleDataAttributesIncidentTypesPermissionsItem",
+    "NewRoleDataAttributesIntegrationsPermissionsItem",
     "NewRoleDataAttributesInvitationsPermissionsItem",
     "NewRoleDataAttributesPlaybooksPermissionsItem",
     "NewRoleDataAttributesPrivateIncidentsPermissionsItem",
@@ -3966,6 +4200,7 @@ __all__ = (
     "NewSchedule",
     "NewScheduleData",
     "NewScheduleDataAttributes",
+    "NewScheduleDataAttributesSlackUserGroup",
     "NewScheduleDataType",
     "NewScheduleRotation",
     "NewScheduleRotationActiveDay",
@@ -4066,11 +4301,17 @@ __all__ = (
     "NewWorkflowRun",
     "NewWorkflowRunData",
     "NewWorkflowRunDataAttributesType0",
+    "NewWorkflowRunDataAttributesType0Context",
     "NewWorkflowRunDataAttributesType1",
+    "NewWorkflowRunDataAttributesType1Context",
     "NewWorkflowRunDataAttributesType2",
+    "NewWorkflowRunDataAttributesType2Context",
     "NewWorkflowRunDataAttributesType3",
+    "NewWorkflowRunDataAttributesType3Context",
     "NewWorkflowRunDataAttributesType4",
+    "NewWorkflowRunDataAttributesType4Context",
     "NewWorkflowRunDataAttributesType5",
+    "NewWorkflowRunDataAttributesType5Context",
     "NewWorkflowRunDataType",
     "NewWorkflowTask",
     "NewWorkflowTaskData",
@@ -4172,6 +4413,7 @@ __all__ = (
     "PostMortemTriggerParamsIncidentConditionSeverity",
     "PostMortemTriggerParamsIncidentConditionStartedAtType1",
     "PostMortemTriggerParamsIncidentConditionStatus",
+    "PostMortemTriggerParamsIncidentConditionSubStatus",
     "PostMortemTriggerParamsIncidentConditionSummaryType1",
     "PostMortemTriggerParamsIncidentConditionVisibility",
     "PostMortemTriggerParamsIncidentKindsItem",
@@ -4287,6 +4529,7 @@ __all__ = (
     "RoleIncidentRolesPermissionsItem",
     "RoleIncidentsPermissionsItem",
     "RoleIncidentTypesPermissionsItem",
+    "RoleIntegrationsPermissionsItem",
     "RoleInvitationsPermissionsItem",
     "RoleList",
     "RoleListDataItem",
@@ -4349,6 +4592,7 @@ __all__ = (
     "ScheduleRotationUserResponse",
     "ScheduleRotationUserResponseData",
     "ScheduleRotationUserResponseDataType",
+    "ScheduleSlackUserGroupType0",
     "Secret",
     "SecretList",
     "SecretListDataItem",
@@ -4468,22 +4712,43 @@ __all__ = (
     "UpdateAlertDataAttributes",
     "UpdateAlertDataAttributesDataType0",
     "UpdateAlertDataAttributesLabelsItemType0",
+    "UpdateAlertDataAttributesNoise",
     "UpdateAlertDataAttributesSource",
     "UpdateAlertDataType",
+    "UpdateAlertEvent",
+    "UpdateAlertEventData",
+    "UpdateAlertEventDataAttributes",
+    "UpdateAlertEventDataType",
     "UpdateAlertGroup",
     "UpdateAlertGroupData",
     "UpdateAlertGroupDataAttributes",
-    "UpdateAlertGroupDataAttributesAlertGroupTargetsAttributes",
-    "UpdateAlertGroupDataAttributesAlertGroupTargetsAttributesTargetType",
+    "UpdateAlertGroupDataAttributesAttributesItem",
     "UpdateAlertGroupDataAttributesConditionType",
     "UpdateAlertGroupDataAttributesGroupByAlertTitle",
     "UpdateAlertGroupDataAttributesGroupByAlertUrgency",
+    "UpdateAlertGroupDataAttributesTargetsItem",
+    "UpdateAlertGroupDataAttributesTargetsItemTargetType",
     "UpdateAlertGroupDataType",
+    "UpdateAlertRoutingRule",
+    "UpdateAlertRoutingRuleData",
+    "UpdateAlertRoutingRuleDataAttributes",
+    "UpdateAlertRoutingRuleDataAttributesConditionsItem",
+    "UpdateAlertRoutingRuleDataAttributesConditionsItemPropertyFieldConditionType",
+    "UpdateAlertRoutingRuleDataAttributesConditionsItemPropertyFieldType",
+    "UpdateAlertRoutingRuleDataAttributesConditionType",
+    "UpdateAlertRoutingRuleDataAttributesDestination",
+    "UpdateAlertRoutingRuleDataAttributesDestinationTargetType",
+    "UpdateAlertRoutingRuleDataType",
     "UpdateAlertsSource",
     "UpdateAlertsSourceData",
     "UpdateAlertsSourceDataAttributes",
     "UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesItem",
     "UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesItemOperator",
+    "UpdateAlertsSourceDataAttributesAlertTemplateAttributes",
+    "UpdateAlertsSourceDataAttributesResolutionRuleAttributes",
+    "UpdateAlertsSourceDataAttributesResolutionRuleAttributesConditionsAttributesItem",
+    "UpdateAlertsSourceDataAttributesResolutionRuleAttributesConditionsAttributesItemOperator",
+    "UpdateAlertsSourceDataAttributesResolutionRuleAttributesConditionType",
     "UpdateAlertsSourceDataAttributesSourceableAttributes",
     "UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesItem",
     "UpdateAlertsSourceDataAttributesSourceableAttributesFieldMappingsAttributesItemField",
@@ -4580,12 +4845,17 @@ __all__ = (
     "UpdateEscalationPolicy",
     "UpdateEscalationPolicyData",
     "UpdateEscalationPolicyDataAttributes",
+    "UpdateEscalationPolicyDataAttributesBusinessHoursType0",
+    "UpdateEscalationPolicyDataAttributesBusinessHoursType0DaysType0Item",
     "UpdateEscalationPolicyDataType",
     "UpdateEscalationPolicyLevel",
     "UpdateEscalationPolicyLevelData",
     "UpdateEscalationPolicyLevelDataAttributes",
     "UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0",
+    "UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers",
     "UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type",
+    "UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy",
+    "UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy",
     "UpdateEscalationPolicyLevelDataType",
     "UpdateFormField",
     "UpdateFormFieldData",
@@ -4880,6 +5150,7 @@ __all__ = (
     "UpdateRoleDataAttributesIncidentRolesPermissionsItem",
     "UpdateRoleDataAttributesIncidentsPermissionsItem",
     "UpdateRoleDataAttributesIncidentTypesPermissionsItem",
+    "UpdateRoleDataAttributesIntegrationsPermissionsItem",
     "UpdateRoleDataAttributesInvitationsPermissionsItem",
     "UpdateRoleDataAttributesPlaybooksPermissionsItem",
     "UpdateRoleDataAttributesPrivateIncidentsPermissionsItem",
@@ -4895,6 +5166,7 @@ __all__ = (
     "UpdateSchedule",
     "UpdateScheduleData",
     "UpdateScheduleDataAttributes",
+    "UpdateScheduleDataAttributesSlackUserGroup",
     "UpdateScheduleDataType",
     "UpdateScheduleRotation",
     "UpdateScheduleRotationActiveDay",

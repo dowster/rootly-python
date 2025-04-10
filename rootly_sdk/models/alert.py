@@ -3,7 +3,9 @@ from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.alert_noise import AlertNoise
 from ..models.alert_source import AlertSource
+from ..models.alert_status import AlertStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -25,10 +27,17 @@ class Alert:
         summary (str): The summary of the alert
         created_at (str): Date of creation
         updated_at (str): Date of last update
+        noise (Union[Unset, AlertNoise]): Whether the alert is marked as noise
+        status (Union[Unset, AlertStatus]): The status of the alert
         description (Union[None, Unset, str]): The description of the alert
         services (Union[Unset, list['Service']]): Services attached to the alert
         groups (Union[Unset, list['Team']]): Groups attached to the alert
         environments (Union[Unset, list['Environment']]): Environments attached to the alert
+        service_ids (Union[None, Unset, list[str]]): The Service ID's to attach to the alert. If your organization has
+            On-Call enabled and your notification target is a Service. This field will be automatically set for you.
+        group_ids (Union[None, Unset, list[str]]): The Group ID's to attach to the alert. If your organization has On-
+            Call enabled and your notification target is a Group. This field will be automatically set for you.
+        environment_ids (Union[None, Unset, list[str]]): The Environment ID's to attach to the alert
         external_id (Union[None, Unset, str]): External ID
         external_url (Union[None, Unset, str]): External Url
         alert_urgency_id (Union[None, Unset, str]): The ID of the alert urgency
@@ -40,10 +49,15 @@ class Alert:
     summary: str
     created_at: str
     updated_at: str
+    noise: Union[Unset, AlertNoise] = UNSET
+    status: Union[Unset, AlertStatus] = UNSET
     description: Union[None, Unset, str] = UNSET
     services: Union[Unset, list["Service"]] = UNSET
     groups: Union[Unset, list["Team"]] = UNSET
     environments: Union[Unset, list["Environment"]] = UNSET
+    service_ids: Union[None, Unset, list[str]] = UNSET
+    group_ids: Union[None, Unset, list[str]] = UNSET
+    environment_ids: Union[None, Unset, list[str]] = UNSET
     external_id: Union[None, Unset, str] = UNSET
     external_url: Union[None, Unset, str] = UNSET
     alert_urgency_id: Union[None, Unset, str] = UNSET
@@ -62,6 +76,14 @@ class Alert:
         created_at = self.created_at
 
         updated_at = self.updated_at
+
+        noise: Union[Unset, str] = UNSET
+        if not isinstance(self.noise, Unset):
+            noise = self.noise.value
+
+        status: Union[Unset, str] = UNSET
+        if not isinstance(self.status, Unset):
+            status = self.status.value
 
         description: Union[None, Unset, str]
         if isinstance(self.description, Unset):
@@ -89,6 +111,33 @@ class Alert:
             for environments_item_data in self.environments:
                 environments_item = environments_item_data.to_dict()
                 environments.append(environments_item)
+
+        service_ids: Union[None, Unset, list[str]]
+        if isinstance(self.service_ids, Unset):
+            service_ids = UNSET
+        elif isinstance(self.service_ids, list):
+            service_ids = self.service_ids
+
+        else:
+            service_ids = self.service_ids
+
+        group_ids: Union[None, Unset, list[str]]
+        if isinstance(self.group_ids, Unset):
+            group_ids = UNSET
+        elif isinstance(self.group_ids, list):
+            group_ids = self.group_ids
+
+        else:
+            group_ids = self.group_ids
+
+        environment_ids: Union[None, Unset, list[str]]
+        if isinstance(self.environment_ids, Unset):
+            environment_ids = UNSET
+        elif isinstance(self.environment_ids, list):
+            environment_ids = self.environment_ids
+
+        else:
+            environment_ids = self.environment_ids
 
         external_id: Union[None, Unset, str]
         if isinstance(self.external_id, Unset):
@@ -137,6 +186,10 @@ class Alert:
                 "updated_at": updated_at,
             }
         )
+        if noise is not UNSET:
+            field_dict["noise"] = noise
+        if status is not UNSET:
+            field_dict["status"] = status
         if description is not UNSET:
             field_dict["description"] = description
         if services is not UNSET:
@@ -145,6 +198,12 @@ class Alert:
             field_dict["groups"] = groups
         if environments is not UNSET:
             field_dict["environments"] = environments
+        if service_ids is not UNSET:
+            field_dict["service_ids"] = service_ids
+        if group_ids is not UNSET:
+            field_dict["group_ids"] = group_ids
+        if environment_ids is not UNSET:
+            field_dict["environment_ids"] = environment_ids
         if external_id is not UNSET:
             field_dict["external_id"] = external_id
         if external_url is not UNSET:
@@ -175,6 +234,20 @@ class Alert:
 
         updated_at = d.pop("updated_at")
 
+        _noise = d.pop("noise", UNSET)
+        noise: Union[Unset, AlertNoise]
+        if isinstance(_noise, Unset):
+            noise = UNSET
+        else:
+            noise = AlertNoise(_noise)
+
+        _status = d.pop("status", UNSET)
+        status: Union[Unset, AlertStatus]
+        if isinstance(_status, Unset):
+            status = UNSET
+        else:
+            status = AlertStatus(_status)
+
         def _parse_description(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
@@ -204,6 +277,57 @@ class Alert:
             environments_item = Environment.from_dict(environments_item_data)
 
             environments.append(environments_item)
+
+        def _parse_service_ids(data: object) -> Union[None, Unset, list[str]]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                service_ids_type_0 = cast(list[str], data)
+
+                return service_ids_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, list[str]], data)
+
+        service_ids = _parse_service_ids(d.pop("service_ids", UNSET))
+
+        def _parse_group_ids(data: object) -> Union[None, Unset, list[str]]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                group_ids_type_0 = cast(list[str], data)
+
+                return group_ids_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, list[str]], data)
+
+        group_ids = _parse_group_ids(d.pop("group_ids", UNSET))
+
+        def _parse_environment_ids(data: object) -> Union[None, Unset, list[str]]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                environment_ids_type_0 = cast(list[str], data)
+
+                return environment_ids_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, list[str]], data)
+
+        environment_ids = _parse_environment_ids(d.pop("environment_ids", UNSET))
 
         def _parse_external_id(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -275,10 +399,15 @@ class Alert:
             summary=summary,
             created_at=created_at,
             updated_at=updated_at,
+            noise=noise,
+            status=status,
             description=description,
             services=services,
             groups=groups,
             environments=environments,
+            service_ids=service_ids,
+            group_ids=group_ids,
+            environment_ids=environment_ids,
             external_id=external_id,
             external_url=external_url,
             alert_urgency_id=alert_urgency_id,

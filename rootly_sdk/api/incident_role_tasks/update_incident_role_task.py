@@ -66,7 +66,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateIncidentRoleTask,
 ) -> Response[Union[ErrorsList, IncidentRoleTaskResponse]]:
-    """Update a incident role task
+    """Update an incident role task
 
      Update a specific incident_role task by id
 
@@ -100,7 +100,7 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateIncidentRoleTask,
 ) -> Optional[Union[ErrorsList, IncidentRoleTaskResponse]]:
-    """Update a incident role task
+    """Update an incident role task
 
      Update a specific incident_role task by id
 
@@ -129,7 +129,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateIncidentRoleTask,
 ) -> Response[Union[ErrorsList, IncidentRoleTaskResponse]]:
-    """Update a incident role task
+    """Update an incident role task
 
      Update a specific incident_role task by id
 
@@ -161,7 +161,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateIncidentRoleTask,
 ) -> Optional[Union[ErrorsList, IncidentRoleTaskResponse]]:
-    """Update a incident role task
+    """Update an incident role task
 
      Update a specific incident_role task by id
 

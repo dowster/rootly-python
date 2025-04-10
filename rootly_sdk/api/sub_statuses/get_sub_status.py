@@ -54,9 +54,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, SubStatusResponse]]:
-    """Retrieves a sub_status
+    """Retrieves a Sub-Status
 
-     Retrieves a specific sub_status by id
+     Retrieves a specific Sub-Status by id
 
     Args:
         id (str):
@@ -85,9 +85,9 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, SubStatusResponse]]:
-    """Retrieves a sub_status
+    """Retrieves a Sub-Status
 
-     Retrieves a specific sub_status by id
+     Retrieves a specific Sub-Status by id
 
     Args:
         id (str):
@@ -111,9 +111,9 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, SubStatusResponse]]:
-    """Retrieves a sub_status
+    """Retrieves a Sub-Status
 
-     Retrieves a specific sub_status by id
+     Retrieves a specific Sub-Status by id
 
     Args:
         id (str):
@@ -140,9 +140,9 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, SubStatusResponse]]:
-    """Retrieves a sub_status
+    """Retrieves a Sub-Status
 
-     Retrieves a specific sub_status by id
+     Retrieves a specific Sub-Status by id
 
     Args:
         id (str):

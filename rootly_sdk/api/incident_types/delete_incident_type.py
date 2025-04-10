@@ -54,7 +54,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentTypeResponse]]:
-    """Delete a incident type
+    """Delete an incident type
 
      Delete a specific incident_type by id
 
@@ -85,7 +85,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentTypeResponse]]:
-    """Delete a incident type
+    """Delete an incident type
 
      Delete a specific incident_type by id
 
@@ -111,7 +111,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentTypeResponse]]:
-    """Delete a incident type
+    """Delete an incident type
 
      Delete a specific incident_type by id
 
@@ -140,7 +140,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentTypeResponse]]:
-    """Delete a incident type
+    """Delete an incident type
 
      Delete a specific incident_type by id
 

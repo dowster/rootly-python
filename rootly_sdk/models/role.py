@@ -16,6 +16,7 @@ from ..models.role_incident_feedbacks_permissions_item import RoleIncidentFeedba
 from ..models.role_incident_roles_permissions_item import RoleIncidentRolesPermissionsItem
 from ..models.role_incident_types_permissions_item import RoleIncidentTypesPermissionsItem
 from ..models.role_incidents_permissions_item import RoleIncidentsPermissionsItem
+from ..models.role_integrations_permissions_item import RoleIntegrationsPermissionsItem
 from ..models.role_invitations_permissions_item import RoleInvitationsPermissionsItem
 from ..models.role_playbooks_permissions_item import RolePlaybooksPermissionsItem
 from ..models.role_private_incidents_permissions_item import RolePrivateIncidentsPermissionsItem
@@ -45,7 +46,6 @@ class Role:
         is_deletable (Union[Unset, bool]): Whether the role can be deleted.
         is_editable (Union[Unset, bool]): Whether the role can be edited.
         alerts_permissions (Union[Unset, list[RoleAlertsPermissionsItem]]):
-        pulses_permissions (Union[Unset, list[RolePulsesPermissionsItem]]):
         api_keys_permissions (Union[Unset, list[RoleApiKeysPermissionsItem]]):
         audits_permissions (Union[Unset, list[RoleAuditsPermissionsItem]]):
         billing_permissions (Union[Unset, list[RoleBillingPermissionsItem]]):
@@ -58,9 +58,11 @@ class Role:
         incident_roles_permissions (Union[Unset, list[RoleIncidentRolesPermissionsItem]]):
         incident_types_permissions (Union[Unset, list[RoleIncidentTypesPermissionsItem]]):
         incidents_permissions (Union[Unset, list[RoleIncidentsPermissionsItem]]):
+        integrations_permissions (Union[Unset, list[RoleIntegrationsPermissionsItem]]):
         invitations_permissions (Union[Unset, list[RoleInvitationsPermissionsItem]]):
         playbooks_permissions (Union[Unset, list[RolePlaybooksPermissionsItem]]):
         private_incidents_permissions (Union[Unset, list[RolePrivateIncidentsPermissionsItem]]):
+        pulses_permissions (Union[Unset, list[RolePulsesPermissionsItem]]):
         retrospective_permissions (Union[Unset, list[RoleRetrospectivePermissionsItem]]):
         roles_permissions (Union[Unset, list[RoleRolesPermissionsItem]]):
         secrets_permissions (Union[Unset, list[RoleSecretsPermissionsItem]]):
@@ -79,7 +81,6 @@ class Role:
     is_deletable: Union[Unset, bool] = UNSET
     is_editable: Union[Unset, bool] = UNSET
     alerts_permissions: Union[Unset, list[RoleAlertsPermissionsItem]] = UNSET
-    pulses_permissions: Union[Unset, list[RolePulsesPermissionsItem]] = UNSET
     api_keys_permissions: Union[Unset, list[RoleApiKeysPermissionsItem]] = UNSET
     audits_permissions: Union[Unset, list[RoleAuditsPermissionsItem]] = UNSET
     billing_permissions: Union[Unset, list[RoleBillingPermissionsItem]] = UNSET
@@ -92,9 +93,11 @@ class Role:
     incident_roles_permissions: Union[Unset, list[RoleIncidentRolesPermissionsItem]] = UNSET
     incident_types_permissions: Union[Unset, list[RoleIncidentTypesPermissionsItem]] = UNSET
     incidents_permissions: Union[Unset, list[RoleIncidentsPermissionsItem]] = UNSET
+    integrations_permissions: Union[Unset, list[RoleIntegrationsPermissionsItem]] = UNSET
     invitations_permissions: Union[Unset, list[RoleInvitationsPermissionsItem]] = UNSET
     playbooks_permissions: Union[Unset, list[RolePlaybooksPermissionsItem]] = UNSET
     private_incidents_permissions: Union[Unset, list[RolePrivateIncidentsPermissionsItem]] = UNSET
+    pulses_permissions: Union[Unset, list[RolePulsesPermissionsItem]] = UNSET
     retrospective_permissions: Union[Unset, list[RoleRetrospectivePermissionsItem]] = UNSET
     roles_permissions: Union[Unset, list[RoleRolesPermissionsItem]] = UNSET
     secrets_permissions: Union[Unset, list[RoleSecretsPermissionsItem]] = UNSET
@@ -130,13 +133,6 @@ class Role:
             for alerts_permissions_item_data in self.alerts_permissions:
                 alerts_permissions_item = alerts_permissions_item_data.value
                 alerts_permissions.append(alerts_permissions_item)
-
-        pulses_permissions: Union[Unset, list[str]] = UNSET
-        if not isinstance(self.pulses_permissions, Unset):
-            pulses_permissions = []
-            for pulses_permissions_item_data in self.pulses_permissions:
-                pulses_permissions_item = pulses_permissions_item_data.value
-                pulses_permissions.append(pulses_permissions_item)
 
         api_keys_permissions: Union[Unset, list[str]] = UNSET
         if not isinstance(self.api_keys_permissions, Unset):
@@ -222,6 +218,13 @@ class Role:
                 incidents_permissions_item = incidents_permissions_item_data.value
                 incidents_permissions.append(incidents_permissions_item)
 
+        integrations_permissions: Union[Unset, list[str]] = UNSET
+        if not isinstance(self.integrations_permissions, Unset):
+            integrations_permissions = []
+            for integrations_permissions_item_data in self.integrations_permissions:
+                integrations_permissions_item = integrations_permissions_item_data.value
+                integrations_permissions.append(integrations_permissions_item)
+
         invitations_permissions: Union[Unset, list[str]] = UNSET
         if not isinstance(self.invitations_permissions, Unset):
             invitations_permissions = []
@@ -242,6 +245,13 @@ class Role:
             for private_incidents_permissions_item_data in self.private_incidents_permissions:
                 private_incidents_permissions_item = private_incidents_permissions_item_data.value
                 private_incidents_permissions.append(private_incidents_permissions_item)
+
+        pulses_permissions: Union[Unset, list[str]] = UNSET
+        if not isinstance(self.pulses_permissions, Unset):
+            pulses_permissions = []
+            for pulses_permissions_item_data in self.pulses_permissions:
+                pulses_permissions_item = pulses_permissions_item_data.value
+                pulses_permissions.append(pulses_permissions_item)
 
         retrospective_permissions: Union[Unset, list[str]] = UNSET
         if not isinstance(self.retrospective_permissions, Unset):
@@ -317,8 +327,6 @@ class Role:
             field_dict["is_editable"] = is_editable
         if alerts_permissions is not UNSET:
             field_dict["alerts_permissions"] = alerts_permissions
-        if pulses_permissions is not UNSET:
-            field_dict["pulses_permissions"] = pulses_permissions
         if api_keys_permissions is not UNSET:
             field_dict["api_keys_permissions"] = api_keys_permissions
         if audits_permissions is not UNSET:
@@ -343,12 +351,16 @@ class Role:
             field_dict["incident_types_permissions"] = incident_types_permissions
         if incidents_permissions is not UNSET:
             field_dict["incidents_permissions"] = incidents_permissions
+        if integrations_permissions is not UNSET:
+            field_dict["integrations_permissions"] = integrations_permissions
         if invitations_permissions is not UNSET:
             field_dict["invitations_permissions"] = invitations_permissions
         if playbooks_permissions is not UNSET:
             field_dict["playbooks_permissions"] = playbooks_permissions
         if private_incidents_permissions is not UNSET:
             field_dict["private_incidents_permissions"] = private_incidents_permissions
+        if pulses_permissions is not UNSET:
+            field_dict["pulses_permissions"] = pulses_permissions
         if retrospective_permissions is not UNSET:
             field_dict["retrospective_permissions"] = retrospective_permissions
         if roles_permissions is not UNSET:
@@ -398,13 +410,6 @@ class Role:
             alerts_permissions_item = RoleAlertsPermissionsItem(alerts_permissions_item_data)
 
             alerts_permissions.append(alerts_permissions_item)
-
-        pulses_permissions = []
-        _pulses_permissions = d.pop("pulses_permissions", UNSET)
-        for pulses_permissions_item_data in _pulses_permissions or []:
-            pulses_permissions_item = RolePulsesPermissionsItem(pulses_permissions_item_data)
-
-            pulses_permissions.append(pulses_permissions_item)
 
         api_keys_permissions = []
         _api_keys_permissions = d.pop("api_keys_permissions", UNSET)
@@ -492,6 +497,13 @@ class Role:
 
             incidents_permissions.append(incidents_permissions_item)
 
+        integrations_permissions = []
+        _integrations_permissions = d.pop("integrations_permissions", UNSET)
+        for integrations_permissions_item_data in _integrations_permissions or []:
+            integrations_permissions_item = RoleIntegrationsPermissionsItem(integrations_permissions_item_data)
+
+            integrations_permissions.append(integrations_permissions_item)
+
         invitations_permissions = []
         _invitations_permissions = d.pop("invitations_permissions", UNSET)
         for invitations_permissions_item_data in _invitations_permissions or []:
@@ -514,6 +526,13 @@ class Role:
             )
 
             private_incidents_permissions.append(private_incidents_permissions_item)
+
+        pulses_permissions = []
+        _pulses_permissions = d.pop("pulses_permissions", UNSET)
+        for pulses_permissions_item_data in _pulses_permissions or []:
+            pulses_permissions_item = RolePulsesPermissionsItem(pulses_permissions_item_data)
+
+            pulses_permissions.append(pulses_permissions_item)
 
         retrospective_permissions = []
         _retrospective_permissions = d.pop("retrospective_permissions", UNSET)
@@ -580,7 +599,6 @@ class Role:
             is_deletable=is_deletable,
             is_editable=is_editable,
             alerts_permissions=alerts_permissions,
-            pulses_permissions=pulses_permissions,
             api_keys_permissions=api_keys_permissions,
             audits_permissions=audits_permissions,
             billing_permissions=billing_permissions,
@@ -593,9 +611,11 @@ class Role:
             incident_roles_permissions=incident_roles_permissions,
             incident_types_permissions=incident_types_permissions,
             incidents_permissions=incidents_permissions,
+            integrations_permissions=integrations_permissions,
             invitations_permissions=invitations_permissions,
             playbooks_permissions=playbooks_permissions,
             private_incidents_permissions=private_incidents_permissions,
+            pulses_permissions=pulses_permissions,
             retrospective_permissions=retrospective_permissions,
             roles_permissions=roles_permissions,
             secrets_permissions=secrets_permissions,

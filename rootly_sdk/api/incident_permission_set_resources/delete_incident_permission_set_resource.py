@@ -54,7 +54,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentPermissionSetResourceResponse]]:
-    """Delete a incident_permission_set_resource
+    """Delete an incident_permission_set_resource
 
      Delete a specific incident_permission_set_resource by id
 
@@ -85,7 +85,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentPermissionSetResourceResponse]]:
-    """Delete a incident_permission_set_resource
+    """Delete an incident_permission_set_resource
 
      Delete a specific incident_permission_set_resource by id
 
@@ -111,7 +111,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentPermissionSetResourceResponse]]:
-    """Delete a incident_permission_set_resource
+    """Delete an incident_permission_set_resource
 
      Delete a specific incident_permission_set_resource by id
 
@@ -140,7 +140,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentPermissionSetResourceResponse]]:
-    """Delete a incident_permission_set_resource
+    """Delete an incident_permission_set_resource
 
      Delete a specific incident_permission_set_resource by id
 

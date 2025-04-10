@@ -49,9 +49,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[RetrospectiveProcessGroupStepResponse]:
-    """Retrieves retrospective_process_group_step
+    """Retrieves a RetrospectiveProcessGroup Step
 
-     Retrieves a specific retrospective_process_group_step by id
+     Retrieves a specific RetrospectiveProcessGroup Step by id
 
     Args:
         id (str):
@@ -80,9 +80,9 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[RetrospectiveProcessGroupStepResponse]:
-    """Retrieves retrospective_process_group_step
+    """Retrieves a RetrospectiveProcessGroup Step
 
-     Retrieves a specific retrospective_process_group_step by id
+     Retrieves a specific RetrospectiveProcessGroup Step by id
 
     Args:
         id (str):
@@ -106,9 +106,9 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[RetrospectiveProcessGroupStepResponse]:
-    """Retrieves retrospective_process_group_step
+    """Retrieves a RetrospectiveProcessGroup Step
 
-     Retrieves a specific retrospective_process_group_step by id
+     Retrieves a specific RetrospectiveProcessGroup Step by id
 
     Args:
         id (str):
@@ -135,9 +135,9 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[RetrospectiveProcessGroupStepResponse]:
-    """Retrieves retrospective_process_group_step
+    """Retrieves a RetrospectiveProcessGroup Step
 
-     Retrieves a specific retrospective_process_group_step by id
+     Retrieves a specific RetrospectiveProcessGroup Step by id
 
     Args:
         id (str):

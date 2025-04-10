@@ -66,9 +66,9 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateOnCallRole,
 ) -> Response[Union[ErrorsList, OnCallRoleResponse]]:
-    """Update a on_call_role
+    """Update an On-Call Role
 
-     Update a specific on_call_role by id
+     Update a specific On-Call Role by id
 
     Args:
         id (str):
@@ -100,9 +100,9 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateOnCallRole,
 ) -> Optional[Union[ErrorsList, OnCallRoleResponse]]:
-    """Update a on_call_role
+    """Update an On-Call Role
 
-     Update a specific on_call_role by id
+     Update a specific On-Call Role by id
 
     Args:
         id (str):
@@ -129,9 +129,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateOnCallRole,
 ) -> Response[Union[ErrorsList, OnCallRoleResponse]]:
-    """Update a on_call_role
+    """Update an On-Call Role
 
-     Update a specific on_call_role by id
+     Update a specific On-Call Role by id
 
     Args:
         id (str):
@@ -161,9 +161,9 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateOnCallRole,
 ) -> Optional[Union[ErrorsList, OnCallRoleResponse]]:
-    """Update a on_call_role
+    """Update an On-Call Role
 
-     Update a specific on_call_role by id
+     Update a specific On-Call Role by id
 
     Args:
         id (str):

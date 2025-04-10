@@ -1,9 +1,13 @@
-from typing import Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.escalation_policy_business_hours_type_0 import EscalationPolicyBusinessHoursType0
+
 
 T = TypeVar("T", bound="EscalationPolicy")
 
@@ -19,6 +23,7 @@ class EscalationPolicy:
         last_updated_by_user_id (Union[Unset, int]): User who updated the escalation policy
         group_ids (Union[Unset, list[str]]): Associated groups (alerting the group will trigger escalation policy)
         service_ids (Union[Unset, list[str]]): Associated services (alerting the service will trigger escalation policy)
+        business_hours (Union['EscalationPolicyBusinessHoursType0', None, Unset]):
         created_at (Union[Unset, str]): Date of creation
         updated_at (Union[Unset, str]): Date of last update
     """
@@ -30,11 +35,14 @@ class EscalationPolicy:
     last_updated_by_user_id: Union[Unset, int] = UNSET
     group_ids: Union[Unset, list[str]] = UNSET
     service_ids: Union[Unset, list[str]] = UNSET
+    business_hours: Union["EscalationPolicyBusinessHoursType0", None, Unset] = UNSET
     created_at: Union[Unset, str] = UNSET
     updated_at: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.escalation_policy_business_hours_type_0 import EscalationPolicyBusinessHoursType0
+
         name = self.name
 
         repeat_count = self.repeat_count
@@ -57,6 +65,14 @@ class EscalationPolicy:
         if not isinstance(self.service_ids, Unset):
             service_ids = self.service_ids
 
+        business_hours: Union[None, Unset, dict[str, Any]]
+        if isinstance(self.business_hours, Unset):
+            business_hours = UNSET
+        elif isinstance(self.business_hours, EscalationPolicyBusinessHoursType0):
+            business_hours = self.business_hours.to_dict()
+        else:
+            business_hours = self.business_hours
+
         created_at = self.created_at
 
         updated_at = self.updated_at
@@ -78,6 +94,8 @@ class EscalationPolicy:
             field_dict["group_ids"] = group_ids
         if service_ids is not UNSET:
             field_dict["service_ids"] = service_ids
+        if business_hours is not UNSET:
+            field_dict["business_hours"] = business_hours
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if updated_at is not UNSET:
@@ -87,6 +105,8 @@ class EscalationPolicy:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+        from ..models.escalation_policy_business_hours_type_0 import EscalationPolicyBusinessHoursType0
+
         d = src_dict.copy()
         name = d.pop("name")
 
@@ -109,6 +129,23 @@ class EscalationPolicy:
 
         service_ids = cast(list[str], d.pop("service_ids", UNSET))
 
+        def _parse_business_hours(data: object) -> Union["EscalationPolicyBusinessHoursType0", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                business_hours_type_0 = EscalationPolicyBusinessHoursType0.from_dict(data)
+
+                return business_hours_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union["EscalationPolicyBusinessHoursType0", None, Unset], data)
+
+        business_hours = _parse_business_hours(d.pop("business_hours", UNSET))
+
         created_at = d.pop("created_at", UNSET)
 
         updated_at = d.pop("updated_at", UNSET)
@@ -121,6 +158,7 @@ class EscalationPolicy:
             last_updated_by_user_id=last_updated_by_user_id,
             group_ids=group_ids,
             service_ids=service_ids,
+            business_hours=business_hours,
             created_at=created_at,
             updated_at=updated_at,
         )

@@ -54,7 +54,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[EnvironmentResponse, ErrorsList]]:
-    """Delete a environment
+    """Delete an environment
 
      Delete a specific environment by id
 
@@ -85,7 +85,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[EnvironmentResponse, ErrorsList]]:
-    """Delete a environment
+    """Delete an environment
 
      Delete a specific environment by id
 
@@ -111,7 +111,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[EnvironmentResponse, ErrorsList]]:
-    """Delete a environment
+    """Delete an environment
 
      Delete a specific environment by id
 
@@ -140,7 +140,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[EnvironmentResponse, ErrorsList]]:
-    """Delete a environment
+    """Delete an environment
 
      Delete a specific environment by id
 

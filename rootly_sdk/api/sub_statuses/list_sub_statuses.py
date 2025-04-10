@@ -89,9 +89,9 @@ def sync_detailed(
     filtercreated_atlt: Union[Unset, str] = UNSET,
     filtercreated_atlte: Union[Unset, str] = UNSET,
 ) -> Response[SubStatusList]:
-    """List sub_statuses
+    """List Sub-Statuses
 
-     List sub_statuses
+     List Sub-Statuses
 
     Args:
         include (Union[Unset, str]):
@@ -147,9 +147,9 @@ def sync(
     filtercreated_atlt: Union[Unset, str] = UNSET,
     filtercreated_atlte: Union[Unset, str] = UNSET,
 ) -> Optional[SubStatusList]:
-    """List sub_statuses
+    """List Sub-Statuses
 
-     List sub_statuses
+     List Sub-Statuses
 
     Args:
         include (Union[Unset, str]):
@@ -200,9 +200,9 @@ async def asyncio_detailed(
     filtercreated_atlt: Union[Unset, str] = UNSET,
     filtercreated_atlte: Union[Unset, str] = UNSET,
 ) -> Response[SubStatusList]:
-    """List sub_statuses
+    """List Sub-Statuses
 
-     List sub_statuses
+     List Sub-Statuses
 
     Args:
         include (Union[Unset, str]):
@@ -256,9 +256,9 @@ async def asyncio(
     filtercreated_atlt: Union[Unset, str] = UNSET,
     filtercreated_atlte: Union[Unset, str] = UNSET,
 ) -> Optional[SubStatusList]:
-    """List sub_statuses
+    """List Sub-Statuses
 
-     List sub_statuses
+     List Sub-Statuses
 
     Args:
         include (Union[Unset, str]):

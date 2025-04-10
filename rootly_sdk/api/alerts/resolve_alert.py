@@ -66,7 +66,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: ResolveAlert,
 ) -> Response[Union[AlertResponse, ErrorsList]]:
-    """Resolves a alert
+    """Resolves an alert
 
      Resolves a specific alert by id
 
@@ -100,7 +100,7 @@ def sync(
     client: AuthenticatedClient,
     body: ResolveAlert,
 ) -> Optional[Union[AlertResponse, ErrorsList]]:
-    """Resolves a alert
+    """Resolves an alert
 
      Resolves a specific alert by id
 
@@ -129,7 +129,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: ResolveAlert,
 ) -> Response[Union[AlertResponse, ErrorsList]]:
-    """Resolves a alert
+    """Resolves an alert
 
      Resolves a specific alert by id
 
@@ -161,7 +161,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: ResolveAlert,
 ) -> Optional[Union[AlertResponse, ErrorsList]]:
-    """Resolves a alert
+    """Resolves an alert
 
      Resolves a specific alert by id
 

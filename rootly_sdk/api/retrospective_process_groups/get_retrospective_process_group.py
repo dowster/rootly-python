@@ -64,9 +64,9 @@ def sync_detailed(
     client: AuthenticatedClient,
     include: Union[Unset, GetRetrospectiveProcessGroupInclude] = UNSET,
 ) -> Response[RetrospectiveProcessGroupResponse]:
-    """Retrieves retrospective_process_group
+    """Retrieves a Retrospective Process Group
 
-     Retrieves a specific retrospective_process_group by id
+     Retrieves a specific Retrospective Process Group by id
 
     Args:
         id (str):
@@ -98,9 +98,9 @@ def sync(
     client: AuthenticatedClient,
     include: Union[Unset, GetRetrospectiveProcessGroupInclude] = UNSET,
 ) -> Optional[RetrospectiveProcessGroupResponse]:
-    """Retrieves retrospective_process_group
+    """Retrieves a Retrospective Process Group
 
-     Retrieves a specific retrospective_process_group by id
+     Retrieves a specific Retrospective Process Group by id
 
     Args:
         id (str):
@@ -127,9 +127,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     include: Union[Unset, GetRetrospectiveProcessGroupInclude] = UNSET,
 ) -> Response[RetrospectiveProcessGroupResponse]:
-    """Retrieves retrospective_process_group
+    """Retrieves a Retrospective Process Group
 
-     Retrieves a specific retrospective_process_group by id
+     Retrieves a specific Retrospective Process Group by id
 
     Args:
         id (str):
@@ -159,9 +159,9 @@ async def asyncio(
     client: AuthenticatedClient,
     include: Union[Unset, GetRetrospectiveProcessGroupInclude] = UNSET,
 ) -> Optional[RetrospectiveProcessGroupResponse]:
-    """Retrieves retrospective_process_group
+    """Retrieves a Retrospective Process Group
 
-     Retrieves a specific retrospective_process_group by id
+     Retrieves a specific Retrospective Process Group by id
 
     Args:
         id (str):

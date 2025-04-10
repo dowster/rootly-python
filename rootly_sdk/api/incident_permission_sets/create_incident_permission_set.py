@@ -38,14 +38,14 @@ def _parse_response(
         response_201 = IncidentPermissionSetResponse.from_dict(response.json())
 
         return response_201
-    if response.status_code == 401:
-        response_401 = ErrorsList.from_dict(response.json())
-
-        return response_401
     if response.status_code == 422:
         response_422 = ErrorsList.from_dict(response.json())
 
         return response_422
+    if response.status_code == 401:
+        response_401 = ErrorsList.from_dict(response.json())
+
+        return response_401
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -68,7 +68,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: NewIncidentPermissionSet,
 ) -> Response[Union[ErrorsList, IncidentPermissionSetResponse]]:
-    """Creates a incident_permission_set
+    """Creates an incident_permission_set
 
      Creates a new incident_permission_set from provided data
 
@@ -99,7 +99,7 @@ def sync(
     client: AuthenticatedClient,
     body: NewIncidentPermissionSet,
 ) -> Optional[Union[ErrorsList, IncidentPermissionSetResponse]]:
-    """Creates a incident_permission_set
+    """Creates an incident_permission_set
 
      Creates a new incident_permission_set from provided data
 
@@ -125,7 +125,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: NewIncidentPermissionSet,
 ) -> Response[Union[ErrorsList, IncidentPermissionSetResponse]]:
-    """Creates a incident_permission_set
+    """Creates an incident_permission_set
 
      Creates a new incident_permission_set from provided data
 
@@ -154,7 +154,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: NewIncidentPermissionSet,
 ) -> Optional[Union[ErrorsList, IncidentPermissionSetResponse]]:
-    """Creates a incident_permission_set
+    """Creates an incident_permission_set
 
      Creates a new incident_permission_set from provided data
 

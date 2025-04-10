@@ -66,9 +66,9 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateLiveCallRouter,
 ) -> Response[Union[ErrorsList, LiveCallRouterResponse]]:
-    """Update a live_call_router
+    """Update a Live Call Router
 
-     Update a specific live_call_router by id
+     Update a specific Live Call Router by id
 
     Args:
         id (str):
@@ -100,9 +100,9 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateLiveCallRouter,
 ) -> Optional[Union[ErrorsList, LiveCallRouterResponse]]:
-    """Update a live_call_router
+    """Update a Live Call Router
 
-     Update a specific live_call_router by id
+     Update a specific Live Call Router by id
 
     Args:
         id (str):
@@ -129,9 +129,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateLiveCallRouter,
 ) -> Response[Union[ErrorsList, LiveCallRouterResponse]]:
-    """Update a live_call_router
+    """Update a Live Call Router
 
-     Update a specific live_call_router by id
+     Update a specific Live Call Router by id
 
     Args:
         id (str):
@@ -161,9 +161,9 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateLiveCallRouter,
 ) -> Optional[Union[ErrorsList, LiveCallRouterResponse]]:
-    """Update a live_call_router
+    """Update a Live Call Router
 
-     Update a specific live_call_router by id
+     Update a specific Live Call Router by id
 
     Args:
         id (str):

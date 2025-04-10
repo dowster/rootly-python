@@ -66,7 +66,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateEnvironment,
 ) -> Response[Union[EnvironmentResponse, ErrorsList]]:
-    """Update a environment
+    """Update an environment
 
      Update a specific environment by id
 
@@ -100,7 +100,7 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateEnvironment,
 ) -> Optional[Union[EnvironmentResponse, ErrorsList]]:
-    """Update a environment
+    """Update an environment
 
      Update a specific environment by id
 
@@ -129,7 +129,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateEnvironment,
 ) -> Response[Union[EnvironmentResponse, ErrorsList]]:
-    """Update a environment
+    """Update an environment
 
      Update a specific environment by id
 
@@ -161,7 +161,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateEnvironment,
 ) -> Optional[Union[EnvironmentResponse, ErrorsList]]:
-    """Update a environment
+    """Update an environment
 
      Update a specific environment by id
 

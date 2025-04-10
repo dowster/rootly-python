@@ -54,7 +54,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentEventServiceResponse]]:
-    """Retrieves a incident event service
+    """Retrieves an incident event service
 
      Retrieves a specific incident_event_service by id
 
@@ -85,7 +85,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentEventServiceResponse]]:
-    """Retrieves a incident event service
+    """Retrieves an incident event service
 
      Retrieves a specific incident_event_service by id
 
@@ -111,7 +111,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentEventServiceResponse]]:
-    """Retrieves a incident event service
+    """Retrieves an incident event service
 
      Retrieves a specific incident_event_service by id
 
@@ -140,7 +140,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentEventServiceResponse]]:
-    """Retrieves a incident event service
+    """Retrieves an incident event service
 
      Retrieves a specific incident_event_service by id
 

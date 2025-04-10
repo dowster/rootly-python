@@ -66,9 +66,9 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateCatalogEntityProperty,
 ) -> Response[Union[CatalogEntityPropertyResponse, ErrorsList]]:
-    """Update a catalog_entity_property
+    """Update a Catalog Entity Property
 
-     Update a specific catalog_entity_property by id
+     Update a specific Catalog Entity Property by id
 
     Args:
         id (str):
@@ -100,9 +100,9 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateCatalogEntityProperty,
 ) -> Optional[Union[CatalogEntityPropertyResponse, ErrorsList]]:
-    """Update a catalog_entity_property
+    """Update a Catalog Entity Property
 
-     Update a specific catalog_entity_property by id
+     Update a specific Catalog Entity Property by id
 
     Args:
         id (str):
@@ -129,9 +129,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateCatalogEntityProperty,
 ) -> Response[Union[CatalogEntityPropertyResponse, ErrorsList]]:
-    """Update a catalog_entity_property
+    """Update a Catalog Entity Property
 
-     Update a specific catalog_entity_property by id
+     Update a specific Catalog Entity Property by id
 
     Args:
         id (str):
@@ -161,9 +161,9 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateCatalogEntityProperty,
 ) -> Optional[Union[CatalogEntityPropertyResponse, ErrorsList]]:
-    """Update a catalog_entity_property
+    """Update a Catalog Entity Property
 
-     Update a specific catalog_entity_property by id
+     Update a specific Catalog Entity Property by id
 
     Args:
         id (str):

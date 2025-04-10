@@ -87,9 +87,9 @@ def sync_detailed(
     filtercreated_atlt: Union[Unset, str] = UNSET,
     filtercreated_atlte: Union[Unset, str] = UNSET,
 ) -> Response[RetrospectiveProcessGroupStepList]:
-    """List retrospective_process_group_steps
+    """List RetrospectiveProcessGroup Steps
 
-     List retrospective_process_group_steps
+     List RetrospectiveProcessGroup Steps
 
     Args:
         retrospective_process_group_id (str):
@@ -142,9 +142,9 @@ def sync(
     filtercreated_atlt: Union[Unset, str] = UNSET,
     filtercreated_atlte: Union[Unset, str] = UNSET,
 ) -> Optional[RetrospectiveProcessGroupStepList]:
-    """List retrospective_process_group_steps
+    """List RetrospectiveProcessGroup Steps
 
-     List retrospective_process_group_steps
+     List RetrospectiveProcessGroup Steps
 
     Args:
         retrospective_process_group_id (str):
@@ -192,9 +192,9 @@ async def asyncio_detailed(
     filtercreated_atlt: Union[Unset, str] = UNSET,
     filtercreated_atlte: Union[Unset, str] = UNSET,
 ) -> Response[RetrospectiveProcessGroupStepList]:
-    """List retrospective_process_group_steps
+    """List RetrospectiveProcessGroup Steps
 
-     List retrospective_process_group_steps
+     List RetrospectiveProcessGroup Steps
 
     Args:
         retrospective_process_group_id (str):
@@ -245,9 +245,9 @@ async def asyncio(
     filtercreated_atlt: Union[Unset, str] = UNSET,
     filtercreated_atlte: Union[Unset, str] = UNSET,
 ) -> Optional[RetrospectiveProcessGroupStepList]:
-    """List retrospective_process_group_steps
+    """List RetrospectiveProcessGroup Steps
 
-     List retrospective_process_group_steps
+     List RetrospectiveProcessGroup Steps
 
     Args:
         retrospective_process_group_id (str):

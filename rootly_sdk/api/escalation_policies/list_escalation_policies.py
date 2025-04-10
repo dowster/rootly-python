@@ -13,6 +13,12 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     *,
     include: Union[Unset, ListEscalationPoliciesInclude] = UNSET,
+    filtersearch: Union[Unset, str] = UNSET,
+    filtername: Union[Unset, str] = UNSET,
+    filtercreated_atgt: Union[Unset, str] = UNSET,
+    filtercreated_atgte: Union[Unset, str] = UNSET,
+    filtercreated_atlt: Union[Unset, str] = UNSET,
+    filtercreated_atlte: Union[Unset, str] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
 ) -> dict[str, Any]:
@@ -23,6 +29,18 @@ def _get_kwargs(
         json_include = include.value
 
     params["include"] = json_include
+
+    params["filter[search]"] = filtersearch
+
+    params["filter[name]"] = filtername
+
+    params["filter[created_at][gt]"] = filtercreated_atgt
+
+    params["filter[created_at][gte]"] = filtercreated_atgte
+
+    params["filter[created_at][lt]"] = filtercreated_atlt
+
+    params["filter[created_at][lte]"] = filtercreated_atlte
 
     params["page[number]"] = pagenumber
 
@@ -67,6 +85,12 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     include: Union[Unset, ListEscalationPoliciesInclude] = UNSET,
+    filtersearch: Union[Unset, str] = UNSET,
+    filtername: Union[Unset, str] = UNSET,
+    filtercreated_atgt: Union[Unset, str] = UNSET,
+    filtercreated_atgte: Union[Unset, str] = UNSET,
+    filtercreated_atlt: Union[Unset, str] = UNSET,
+    filtercreated_atlte: Union[Unset, str] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
 ) -> Response[EscalationPolicyList]:
@@ -76,6 +100,12 @@ def sync_detailed(
 
     Args:
         include (Union[Unset, ListEscalationPoliciesInclude]):
+        filtersearch (Union[Unset, str]):
+        filtername (Union[Unset, str]):
+        filtercreated_atgt (Union[Unset, str]):
+        filtercreated_atgte (Union[Unset, str]):
+        filtercreated_atlt (Union[Unset, str]):
+        filtercreated_atlte (Union[Unset, str]):
         pagenumber (Union[Unset, int]):
         pagesize (Union[Unset, int]):
 
@@ -89,6 +119,12 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         include=include,
+        filtersearch=filtersearch,
+        filtername=filtername,
+        filtercreated_atgt=filtercreated_atgt,
+        filtercreated_atgte=filtercreated_atgte,
+        filtercreated_atlt=filtercreated_atlt,
+        filtercreated_atlte=filtercreated_atlte,
         pagenumber=pagenumber,
         pagesize=pagesize,
     )
@@ -104,6 +140,12 @@ def sync(
     *,
     client: AuthenticatedClient,
     include: Union[Unset, ListEscalationPoliciesInclude] = UNSET,
+    filtersearch: Union[Unset, str] = UNSET,
+    filtername: Union[Unset, str] = UNSET,
+    filtercreated_atgt: Union[Unset, str] = UNSET,
+    filtercreated_atgte: Union[Unset, str] = UNSET,
+    filtercreated_atlt: Union[Unset, str] = UNSET,
+    filtercreated_atlte: Union[Unset, str] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
 ) -> Optional[EscalationPolicyList]:
@@ -113,6 +155,12 @@ def sync(
 
     Args:
         include (Union[Unset, ListEscalationPoliciesInclude]):
+        filtersearch (Union[Unset, str]):
+        filtername (Union[Unset, str]):
+        filtercreated_atgt (Union[Unset, str]):
+        filtercreated_atgte (Union[Unset, str]):
+        filtercreated_atlt (Union[Unset, str]):
+        filtercreated_atlte (Union[Unset, str]):
         pagenumber (Union[Unset, int]):
         pagesize (Union[Unset, int]):
 
@@ -127,6 +175,12 @@ def sync(
     return sync_detailed(
         client=client,
         include=include,
+        filtersearch=filtersearch,
+        filtername=filtername,
+        filtercreated_atgt=filtercreated_atgt,
+        filtercreated_atgte=filtercreated_atgte,
+        filtercreated_atlt=filtercreated_atlt,
+        filtercreated_atlte=filtercreated_atlte,
         pagenumber=pagenumber,
         pagesize=pagesize,
     ).parsed
@@ -136,6 +190,12 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     include: Union[Unset, ListEscalationPoliciesInclude] = UNSET,
+    filtersearch: Union[Unset, str] = UNSET,
+    filtername: Union[Unset, str] = UNSET,
+    filtercreated_atgt: Union[Unset, str] = UNSET,
+    filtercreated_atgte: Union[Unset, str] = UNSET,
+    filtercreated_atlt: Union[Unset, str] = UNSET,
+    filtercreated_atlte: Union[Unset, str] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
 ) -> Response[EscalationPolicyList]:
@@ -145,6 +205,12 @@ async def asyncio_detailed(
 
     Args:
         include (Union[Unset, ListEscalationPoliciesInclude]):
+        filtersearch (Union[Unset, str]):
+        filtername (Union[Unset, str]):
+        filtercreated_atgt (Union[Unset, str]):
+        filtercreated_atgte (Union[Unset, str]):
+        filtercreated_atlt (Union[Unset, str]):
+        filtercreated_atlte (Union[Unset, str]):
         pagenumber (Union[Unset, int]):
         pagesize (Union[Unset, int]):
 
@@ -158,6 +224,12 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         include=include,
+        filtersearch=filtersearch,
+        filtername=filtername,
+        filtercreated_atgt=filtercreated_atgt,
+        filtercreated_atgte=filtercreated_atgte,
+        filtercreated_atlt=filtercreated_atlt,
+        filtercreated_atlte=filtercreated_atlte,
         pagenumber=pagenumber,
         pagesize=pagesize,
     )
@@ -171,6 +243,12 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     include: Union[Unset, ListEscalationPoliciesInclude] = UNSET,
+    filtersearch: Union[Unset, str] = UNSET,
+    filtername: Union[Unset, str] = UNSET,
+    filtercreated_atgt: Union[Unset, str] = UNSET,
+    filtercreated_atgte: Union[Unset, str] = UNSET,
+    filtercreated_atlt: Union[Unset, str] = UNSET,
+    filtercreated_atlte: Union[Unset, str] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
 ) -> Optional[EscalationPolicyList]:
@@ -180,6 +258,12 @@ async def asyncio(
 
     Args:
         include (Union[Unset, ListEscalationPoliciesInclude]):
+        filtersearch (Union[Unset, str]):
+        filtername (Union[Unset, str]):
+        filtercreated_atgt (Union[Unset, str]):
+        filtercreated_atgte (Union[Unset, str]):
+        filtercreated_atlt (Union[Unset, str]):
+        filtercreated_atlte (Union[Unset, str]):
         pagenumber (Union[Unset, int]):
         pagesize (Union[Unset, int]):
 
@@ -195,6 +279,12 @@ async def asyncio(
         await asyncio_detailed(
             client=client,
             include=include,
+            filtersearch=filtersearch,
+            filtername=filtername,
+            filtercreated_atgt=filtercreated_atgt,
+            filtercreated_atgte=filtercreated_atgte,
+            filtercreated_atlt=filtercreated_atlt,
+            filtercreated_atlte=filtercreated_atlte,
             pagenumber=pagenumber,
             pagesize=pagesize,
         )

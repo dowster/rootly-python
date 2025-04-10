@@ -64,6 +64,10 @@ def _get_kwargs(
     filterresolved_atgte: Union[Unset, str] = UNSET,
     filterresolved_atlt: Union[Unset, str] = UNSET,
     filterresolved_atlte: Union[Unset, str] = UNSET,
+    filterclosed_atgt: Union[Unset, str] = UNSET,
+    filterclosed_atgte: Union[Unset, str] = UNSET,
+    filterclosed_atlt: Union[Unset, str] = UNSET,
+    filterclosed_atlte: Union[Unset, str] = UNSET,
     filterin_triage_atgt: Union[Unset, str] = UNSET,
     filterin_triage_atgte: Union[Unset, str] = UNSET,
     filterin_triage_atlt: Union[Unset, str] = UNSET,
@@ -175,6 +179,14 @@ def _get_kwargs(
 
     params["filter[resolved_at][lte]"] = filterresolved_atlte
 
+    params["filter[closed_at][gt]"] = filterclosed_atgt
+
+    params["filter[closed_at][gte]"] = filterclosed_atgte
+
+    params["filter[closed_at][lt]"] = filterclosed_atlt
+
+    params["filter[closed_at][lte]"] = filterclosed_atlte
+
     params["filter[in_triage_at][gt]"] = filterin_triage_atgt
 
     params["filter[in_triage_at][gte]"] = filterin_triage_atgte
@@ -280,6 +292,10 @@ def sync_detailed(
     filterresolved_atgte: Union[Unset, str] = UNSET,
     filterresolved_atlt: Union[Unset, str] = UNSET,
     filterresolved_atlte: Union[Unset, str] = UNSET,
+    filterclosed_atgt: Union[Unset, str] = UNSET,
+    filterclosed_atgte: Union[Unset, str] = UNSET,
+    filterclosed_atlt: Union[Unset, str] = UNSET,
+    filterclosed_atlte: Union[Unset, str] = UNSET,
     filterin_triage_atgt: Union[Unset, str] = UNSET,
     filterin_triage_atgte: Union[Unset, str] = UNSET,
     filterin_triage_atlt: Union[Unset, str] = UNSET,
@@ -343,6 +359,10 @@ def sync_detailed(
         filterresolved_atgte (Union[Unset, str]):
         filterresolved_atlt (Union[Unset, str]):
         filterresolved_atlte (Union[Unset, str]):
+        filterclosed_atgt (Union[Unset, str]):
+        filterclosed_atgte (Union[Unset, str]):
+        filterclosed_atlt (Union[Unset, str]):
+        filterclosed_atlte (Union[Unset, str]):
         filterin_triage_atgt (Union[Unset, str]):
         filterin_triage_atgte (Union[Unset, str]):
         filterin_triage_atlt (Union[Unset, str]):
@@ -410,6 +430,10 @@ def sync_detailed(
         filterresolved_atgte=filterresolved_atgte,
         filterresolved_atlt=filterresolved_atlt,
         filterresolved_atlte=filterresolved_atlte,
+        filterclosed_atgt=filterclosed_atgt,
+        filterclosed_atgte=filterclosed_atgte,
+        filterclosed_atlt=filterclosed_atlt,
+        filterclosed_atlte=filterclosed_atlte,
         filterin_triage_atgt=filterin_triage_atgt,
         filterin_triage_atgte=filterin_triage_atgte,
         filterin_triage_atlt=filterin_triage_atlt,
@@ -479,6 +503,10 @@ def sync(
     filterresolved_atgte: Union[Unset, str] = UNSET,
     filterresolved_atlt: Union[Unset, str] = UNSET,
     filterresolved_atlte: Union[Unset, str] = UNSET,
+    filterclosed_atgt: Union[Unset, str] = UNSET,
+    filterclosed_atgte: Union[Unset, str] = UNSET,
+    filterclosed_atlt: Union[Unset, str] = UNSET,
+    filterclosed_atlte: Union[Unset, str] = UNSET,
     filterin_triage_atgt: Union[Unset, str] = UNSET,
     filterin_triage_atgte: Union[Unset, str] = UNSET,
     filterin_triage_atlt: Union[Unset, str] = UNSET,
@@ -542,6 +570,10 @@ def sync(
         filterresolved_atgte (Union[Unset, str]):
         filterresolved_atlt (Union[Unset, str]):
         filterresolved_atlte (Union[Unset, str]):
+        filterclosed_atgt (Union[Unset, str]):
+        filterclosed_atgte (Union[Unset, str]):
+        filterclosed_atlt (Union[Unset, str]):
+        filterclosed_atlte (Union[Unset, str]):
         filterin_triage_atgt (Union[Unset, str]):
         filterin_triage_atgte (Union[Unset, str]):
         filterin_triage_atlt (Union[Unset, str]):
@@ -610,6 +642,10 @@ def sync(
         filterresolved_atgte=filterresolved_atgte,
         filterresolved_atlt=filterresolved_atlt,
         filterresolved_atlte=filterresolved_atlte,
+        filterclosed_atgt=filterclosed_atgt,
+        filterclosed_atgte=filterclosed_atgte,
+        filterclosed_atlt=filterclosed_atlt,
+        filterclosed_atlte=filterclosed_atlte,
         filterin_triage_atgt=filterin_triage_atgt,
         filterin_triage_atgte=filterin_triage_atgte,
         filterin_triage_atlt=filterin_triage_atlt,
@@ -673,6 +709,10 @@ async def asyncio_detailed(
     filterresolved_atgte: Union[Unset, str] = UNSET,
     filterresolved_atlt: Union[Unset, str] = UNSET,
     filterresolved_atlte: Union[Unset, str] = UNSET,
+    filterclosed_atgt: Union[Unset, str] = UNSET,
+    filterclosed_atgte: Union[Unset, str] = UNSET,
+    filterclosed_atlt: Union[Unset, str] = UNSET,
+    filterclosed_atlte: Union[Unset, str] = UNSET,
     filterin_triage_atgt: Union[Unset, str] = UNSET,
     filterin_triage_atgte: Union[Unset, str] = UNSET,
     filterin_triage_atlt: Union[Unset, str] = UNSET,
@@ -736,6 +776,10 @@ async def asyncio_detailed(
         filterresolved_atgte (Union[Unset, str]):
         filterresolved_atlt (Union[Unset, str]):
         filterresolved_atlte (Union[Unset, str]):
+        filterclosed_atgt (Union[Unset, str]):
+        filterclosed_atgte (Union[Unset, str]):
+        filterclosed_atlt (Union[Unset, str]):
+        filterclosed_atlte (Union[Unset, str]):
         filterin_triage_atgt (Union[Unset, str]):
         filterin_triage_atgte (Union[Unset, str]):
         filterin_triage_atlt (Union[Unset, str]):
@@ -803,6 +847,10 @@ async def asyncio_detailed(
         filterresolved_atgte=filterresolved_atgte,
         filterresolved_atlt=filterresolved_atlt,
         filterresolved_atlte=filterresolved_atlte,
+        filterclosed_atgt=filterclosed_atgt,
+        filterclosed_atgte=filterclosed_atgte,
+        filterclosed_atlt=filterclosed_atlt,
+        filterclosed_atlte=filterclosed_atlte,
         filterin_triage_atgt=filterin_triage_atgt,
         filterin_triage_atgte=filterin_triage_atgte,
         filterin_triage_atlt=filterin_triage_atlt,
@@ -870,6 +918,10 @@ async def asyncio(
     filterresolved_atgte: Union[Unset, str] = UNSET,
     filterresolved_atlt: Union[Unset, str] = UNSET,
     filterresolved_atlte: Union[Unset, str] = UNSET,
+    filterclosed_atgt: Union[Unset, str] = UNSET,
+    filterclosed_atgte: Union[Unset, str] = UNSET,
+    filterclosed_atlt: Union[Unset, str] = UNSET,
+    filterclosed_atlte: Union[Unset, str] = UNSET,
     filterin_triage_atgt: Union[Unset, str] = UNSET,
     filterin_triage_atgte: Union[Unset, str] = UNSET,
     filterin_triage_atlt: Union[Unset, str] = UNSET,
@@ -933,6 +985,10 @@ async def asyncio(
         filterresolved_atgte (Union[Unset, str]):
         filterresolved_atlt (Union[Unset, str]):
         filterresolved_atlte (Union[Unset, str]):
+        filterclosed_atgt (Union[Unset, str]):
+        filterclosed_atgte (Union[Unset, str]):
+        filterclosed_atlt (Union[Unset, str]):
+        filterclosed_atlte (Union[Unset, str]):
         filterin_triage_atgt (Union[Unset, str]):
         filterin_triage_atgte (Union[Unset, str]):
         filterin_triage_atlt (Union[Unset, str]):
@@ -1002,6 +1058,10 @@ async def asyncio(
             filterresolved_atgte=filterresolved_atgte,
             filterresolved_atlt=filterresolved_atlt,
             filterresolved_atlte=filterresolved_atlte,
+            filterclosed_atgt=filterclosed_atgt,
+            filterclosed_atgte=filterclosed_atgte,
+            filterclosed_atlt=filterclosed_atlt,
+            filterclosed_atlte=filterclosed_atlte,
             filterin_triage_atgt=filterin_triage_atgt,
             filterin_triage_atgte=filterin_triage_atgte,
             filterin_triage_atlt=filterin_triage_atlt,

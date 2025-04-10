@@ -61,9 +61,9 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateRetrospectiveProcessGroup,
 ) -> Response[RetrospectiveProcessGroupResponse]:
-    """Update retrospective_process_group
+    """Update a Retrospective Process Group
 
-     Update a specific retrospective_process_group by id
+     Update a specific Retrospective Process Group by id
 
     Args:
         id (str):
@@ -95,9 +95,9 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateRetrospectiveProcessGroup,
 ) -> Optional[RetrospectiveProcessGroupResponse]:
-    """Update retrospective_process_group
+    """Update a Retrospective Process Group
 
-     Update a specific retrospective_process_group by id
+     Update a specific Retrospective Process Group by id
 
     Args:
         id (str):
@@ -124,9 +124,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateRetrospectiveProcessGroup,
 ) -> Response[RetrospectiveProcessGroupResponse]:
-    """Update retrospective_process_group
+    """Update a Retrospective Process Group
 
-     Update a specific retrospective_process_group by id
+     Update a specific Retrospective Process Group by id
 
     Args:
         id (str):
@@ -156,9 +156,9 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateRetrospectiveProcessGroup,
 ) -> Optional[RetrospectiveProcessGroupResponse]:
-    """Update retrospective_process_group
+    """Update a Retrospective Process Group
 
-     Update a specific retrospective_process_group by id
+     Update a specific Retrospective Process Group by id
 
     Args:
         id (str):

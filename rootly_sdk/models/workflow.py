@@ -30,6 +30,13 @@ class Workflow:
         command_feedback_enabled (Union[None, Unset, bool]): This will notify you back when the workflow is starting
         wait (Union[None, Unset, str]): Wait this duration before executing
         repeat_every_duration (Union[None, Unset, str]): Repeat workflow every duration
+        repeat_condition_duration_since_first_run (Union[None, Unset, str]): The workflow will stop repeating if its
+            runtime since it's first workflow run exceeds the duration set in this field
+        repeat_condition_number_of_repeats (Union[Unset, int]): The workflow will stop repeating if the number of
+            repeats exceeds the value set in this field
+        continuously_repeat (Union[Unset, bool]): When continuously repeat is true, repeat workflows aren't
+            automatically stopped when conditions aren't met. This setting won't override your conditions set by
+            repeat_condition_duration_since_first_run and repeat_condition_number_of_repeats parameters.
         repeat_on (Union[None, Unset, list[WorkflowRepeatOnType0Item]]):
         enabled (Union[Unset, bool]):
         locked (Union[Unset, bool]): Restricts workflow edits to admins when turned on. Only admins can set this field.
@@ -45,6 +52,7 @@ class Workflow:
         functionality_ids (Union[Unset, list[str]]):
         group_ids (Union[Unset, list[str]]):
         cause_ids (Union[Unset, list[str]]):
+        sub_status_ids (Union[Unset, list[str]]):
     """
 
     name: str
@@ -56,6 +64,9 @@ class Workflow:
     command_feedback_enabled: Union[None, Unset, bool] = UNSET
     wait: Union[None, Unset, str] = UNSET
     repeat_every_duration: Union[None, Unset, str] = UNSET
+    repeat_condition_duration_since_first_run: Union[None, Unset, str] = UNSET
+    repeat_condition_number_of_repeats: Union[Unset, int] = UNSET
+    continuously_repeat: Union[Unset, bool] = UNSET
     repeat_on: Union[None, Unset, list[WorkflowRepeatOnType0Item]] = UNSET
     enabled: Union[Unset, bool] = UNSET
     locked: Union[Unset, bool] = UNSET
@@ -77,6 +88,7 @@ class Workflow:
     functionality_ids: Union[Unset, list[str]] = UNSET
     group_ids: Union[Unset, list[str]] = UNSET
     cause_ids: Union[Unset, list[str]] = UNSET
+    sub_status_ids: Union[Unset, list[str]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -122,6 +134,16 @@ class Workflow:
             repeat_every_duration = UNSET
         else:
             repeat_every_duration = self.repeat_every_duration
+
+        repeat_condition_duration_since_first_run: Union[None, Unset, str]
+        if isinstance(self.repeat_condition_duration_since_first_run, Unset):
+            repeat_condition_duration_since_first_run = UNSET
+        else:
+            repeat_condition_duration_since_first_run = self.repeat_condition_duration_since_first_run
+
+        repeat_condition_number_of_repeats = self.repeat_condition_number_of_repeats
+
+        continuously_repeat = self.continuously_repeat
 
         repeat_on: Union[None, Unset, list[str]]
         if isinstance(self.repeat_on, Unset):
@@ -193,6 +215,10 @@ class Workflow:
         if not isinstance(self.cause_ids, Unset):
             cause_ids = self.cause_ids
 
+        sub_status_ids: Union[Unset, list[str]] = UNSET
+        if not isinstance(self.sub_status_ids, Unset):
+            sub_status_ids = self.sub_status_ids
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -214,6 +240,12 @@ class Workflow:
             field_dict["wait"] = wait
         if repeat_every_duration is not UNSET:
             field_dict["repeat_every_duration"] = repeat_every_duration
+        if repeat_condition_duration_since_first_run is not UNSET:
+            field_dict["repeat_condition_duration_since_first_run"] = repeat_condition_duration_since_first_run
+        if repeat_condition_number_of_repeats is not UNSET:
+            field_dict["repeat_condition_number_of_repeats"] = repeat_condition_number_of_repeats
+        if continuously_repeat is not UNSET:
+            field_dict["continuously_repeat"] = continuously_repeat
         if repeat_on is not UNSET:
             field_dict["repeat_on"] = repeat_on
         if enabled is not UNSET:
@@ -242,6 +274,8 @@ class Workflow:
             field_dict["group_ids"] = group_ids
         if cause_ids is not UNSET:
             field_dict["cause_ids"] = cause_ids
+        if sub_status_ids is not UNSET:
+            field_dict["sub_status_ids"] = sub_status_ids
 
         return field_dict
 
@@ -306,6 +340,21 @@ class Workflow:
             return cast(Union[None, Unset, str], data)
 
         repeat_every_duration = _parse_repeat_every_duration(d.pop("repeat_every_duration", UNSET))
+
+        def _parse_repeat_condition_duration_since_first_run(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        repeat_condition_duration_since_first_run = _parse_repeat_condition_duration_since_first_run(
+            d.pop("repeat_condition_duration_since_first_run", UNSET)
+        )
+
+        repeat_condition_number_of_repeats = d.pop("repeat_condition_number_of_repeats", UNSET)
+
+        continuously_repeat = d.pop("continuously_repeat", UNSET)
 
         def _parse_repeat_on(data: object) -> Union[None, Unset, list[WorkflowRepeatOnType0Item]]:
             if data is None:
@@ -412,6 +461,8 @@ class Workflow:
 
         cause_ids = cast(list[str], d.pop("cause_ids", UNSET))
 
+        sub_status_ids = cast(list[str], d.pop("sub_status_ids", UNSET))
+
         workflow = cls(
             name=name,
             created_at=created_at,
@@ -422,6 +473,9 @@ class Workflow:
             command_feedback_enabled=command_feedback_enabled,
             wait=wait,
             repeat_every_duration=repeat_every_duration,
+            repeat_condition_duration_since_first_run=repeat_condition_duration_since_first_run,
+            repeat_condition_number_of_repeats=repeat_condition_number_of_repeats,
+            continuously_repeat=continuously_repeat,
             repeat_on=repeat_on,
             enabled=enabled,
             locked=locked,
@@ -436,6 +490,7 @@ class Workflow:
             functionality_ids=functionality_ids,
             group_ids=group_ids,
             cause_ids=cause_ids,
+            sub_status_ids=sub_status_ids,
         )
 
         workflow.additional_properties = d

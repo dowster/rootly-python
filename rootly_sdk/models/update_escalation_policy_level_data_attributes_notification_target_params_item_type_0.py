@@ -1,11 +1,15 @@
-from typing import Any, TypeVar
+from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.update_escalation_policy_level_data_attributes_notification_target_params_item_type_0_team_members import (
+    UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers,
+)
 from ..models.update_escalation_policy_level_data_attributes_notification_target_params_item_type_0_type import (
     UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type,
 )
+from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0")
 
@@ -17,16 +21,26 @@ class UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0
         id (str): The ID of notification target
         type_ (UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type): The type of the
             notification target
+        team_members (Union[Unset,
+            UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers]): For targets with
+            type=team, controls whether to notify admins or all team members.
     """
 
     id: str
     type_: UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type
+    team_members: Union[
+        Unset, UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers
+    ] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         type_ = self.type_.value
+
+        team_members: Union[Unset, str] = UNSET
+        if not isinstance(self.team_members, Unset):
+            team_members = self.team_members.value
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -36,6 +50,8 @@ class UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0
                 "type": type_,
             }
         )
+        if team_members is not UNSET:
+            field_dict["team_members"] = team_members
 
         return field_dict
 
@@ -46,9 +62,21 @@ class UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0
 
         type_ = UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type(d.pop("type"))
 
+        _team_members = d.pop("team_members", UNSET)
+        team_members: Union[
+            Unset, UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers
+        ]
+        if isinstance(_team_members, Unset):
+            team_members = UNSET
+        else:
+            team_members = UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers(
+                _team_members
+            )
+
         update_escalation_policy_level_data_attributes_notification_target_params_item_type_0 = cls(
             id=id,
             type_=type_,
+            team_members=team_members,
         )
 
         update_escalation_policy_level_data_attributes_notification_target_params_item_type_0.additional_properties = d

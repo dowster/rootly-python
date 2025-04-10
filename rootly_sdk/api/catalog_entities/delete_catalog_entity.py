@@ -54,9 +54,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[CatalogEntityResponse, ErrorsList]]:
-    """Delete a catalog_entity
+    """Delete a Catalog Entity
 
-     Delete a specific catalog_entity by id
+     Delete a specific Catalog Entity by id
 
     Args:
         id (str):
@@ -85,9 +85,9 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[CatalogEntityResponse, ErrorsList]]:
-    """Delete a catalog_entity
+    """Delete a Catalog Entity
 
-     Delete a specific catalog_entity by id
+     Delete a specific Catalog Entity by id
 
     Args:
         id (str):
@@ -111,9 +111,9 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[CatalogEntityResponse, ErrorsList]]:
-    """Delete a catalog_entity
+    """Delete a Catalog Entity
 
-     Delete a specific catalog_entity by id
+     Delete a specific Catalog Entity by id
 
     Args:
         id (str):
@@ -140,9 +140,9 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[CatalogEntityResponse, ErrorsList]]:
-    """Delete a catalog_entity
+    """Delete a Catalog Entity
 
-     Delete a specific catalog_entity by id
+     Delete a specific Catalog Entity by id
 
     Args:
         id (str):

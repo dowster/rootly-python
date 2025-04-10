@@ -16,6 +16,7 @@ class PostMortemTemplate:
         name (str): The name of the postmortem template
         created_at (str): Date of creation
         updated_at (str): Date of last update
+        slug (Union[Unset, str]): The slugified name of the postmortem template
         default (Union[None, Unset, bool]): Default selected template when editing a postmortem
         content (Union[Unset, str]): The postmortem template. Liquid syntax and markdown are supported
         format_ (Union[Unset, PostMortemTemplateFormat]): The format of the input
@@ -24,6 +25,7 @@ class PostMortemTemplate:
     name: str
     created_at: str
     updated_at: str
+    slug: Union[Unset, str] = UNSET
     default: Union[None, Unset, bool] = UNSET
     content: Union[Unset, str] = UNSET
     format_: Union[Unset, PostMortemTemplateFormat] = UNSET
@@ -35,6 +37,8 @@ class PostMortemTemplate:
         created_at = self.created_at
 
         updated_at = self.updated_at
+
+        slug = self.slug
 
         default: Union[None, Unset, bool]
         if isinstance(self.default, Unset):
@@ -57,6 +61,8 @@ class PostMortemTemplate:
                 "updated_at": updated_at,
             }
         )
+        if slug is not UNSET:
+            field_dict["slug"] = slug
         if default is not UNSET:
             field_dict["default"] = default
         if content is not UNSET:
@@ -74,6 +80,8 @@ class PostMortemTemplate:
         created_at = d.pop("created_at")
 
         updated_at = d.pop("updated_at")
+
+        slug = d.pop("slug", UNSET)
 
         def _parse_default(data: object) -> Union[None, Unset, bool]:
             if data is None:
@@ -97,6 +105,7 @@ class PostMortemTemplate:
             name=name,
             created_at=created_at,
             updated_at=updated_at,
+            slug=slug,
             default=default,
             content=content,
             format_=format_,

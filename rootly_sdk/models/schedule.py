@@ -1,9 +1,13 @@
-from typing import Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.schedule_slack_user_group_type_0 import ScheduleSlackUserGroupType0
+
 
 T = TypeVar("T", bound="Schedule")
 
@@ -17,7 +21,8 @@ class Schedule:
         updated_at (str): Date of last update
         description (Union[None, Unset, str]): The description of the schedule
         all_time_coverage (Union[None, Unset, bool]): 24/7 coverage of the schedule
-        slack_user_group (Union[None, Unset, str]): Synced slack group of the schedule
+        slack_user_group (Union['ScheduleSlackUserGroupType0', None, Unset]): Synced slack group of the schedule
+        owner_group_ids (Union[Unset, list[str]]): Owning teams.
         owner_user_id (Union[None, Unset, int]): ID of user assigned as owner of the schedule
     """
 
@@ -26,11 +31,14 @@ class Schedule:
     updated_at: str
     description: Union[None, Unset, str] = UNSET
     all_time_coverage: Union[None, Unset, bool] = UNSET
-    slack_user_group: Union[None, Unset, str] = UNSET
+    slack_user_group: Union["ScheduleSlackUserGroupType0", None, Unset] = UNSET
+    owner_group_ids: Union[Unset, list[str]] = UNSET
     owner_user_id: Union[None, Unset, int] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.schedule_slack_user_group_type_0 import ScheduleSlackUserGroupType0
+
         name = self.name
 
         created_at = self.created_at
@@ -49,11 +57,17 @@ class Schedule:
         else:
             all_time_coverage = self.all_time_coverage
 
-        slack_user_group: Union[None, Unset, str]
+        slack_user_group: Union[None, Unset, dict[str, Any]]
         if isinstance(self.slack_user_group, Unset):
             slack_user_group = UNSET
+        elif isinstance(self.slack_user_group, ScheduleSlackUserGroupType0):
+            slack_user_group = self.slack_user_group.to_dict()
         else:
             slack_user_group = self.slack_user_group
+
+        owner_group_ids: Union[Unset, list[str]] = UNSET
+        if not isinstance(self.owner_group_ids, Unset):
+            owner_group_ids = self.owner_group_ids
 
         owner_user_id: Union[None, Unset, int]
         if isinstance(self.owner_user_id, Unset):
@@ -76,6 +90,8 @@ class Schedule:
             field_dict["all_time_coverage"] = all_time_coverage
         if slack_user_group is not UNSET:
             field_dict["slack_user_group"] = slack_user_group
+        if owner_group_ids is not UNSET:
+            field_dict["owner_group_ids"] = owner_group_ids
         if owner_user_id is not UNSET:
             field_dict["owner_user_id"] = owner_user_id
 
@@ -83,6 +99,8 @@ class Schedule:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+        from ..models.schedule_slack_user_group_type_0 import ScheduleSlackUserGroupType0
+
         d = src_dict.copy()
         name = d.pop("name")
 
@@ -108,14 +126,24 @@ class Schedule:
 
         all_time_coverage = _parse_all_time_coverage(d.pop("all_time_coverage", UNSET))
 
-        def _parse_slack_user_group(data: object) -> Union[None, Unset, str]:
+        def _parse_slack_user_group(data: object) -> Union["ScheduleSlackUserGroupType0", None, Unset]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(Union[None, Unset, str], data)
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                slack_user_group_type_0 = ScheduleSlackUserGroupType0.from_dict(data)
+
+                return slack_user_group_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union["ScheduleSlackUserGroupType0", None, Unset], data)
 
         slack_user_group = _parse_slack_user_group(d.pop("slack_user_group", UNSET))
+
+        owner_group_ids = cast(list[str], d.pop("owner_group_ids", UNSET))
 
         def _parse_owner_user_id(data: object) -> Union[None, Unset, int]:
             if data is None:
@@ -133,6 +161,7 @@ class Schedule:
             description=description,
             all_time_coverage=all_time_coverage,
             slack_user_group=slack_user_group,
+            owner_group_ids=owner_group_ids,
             owner_user_id=owner_user_id,
         )
 

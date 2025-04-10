@@ -1,9 +1,13 @@
-from typing import Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.new_workflow_run_data_attributes_type_5_context import NewWorkflowRunDataAttributesType5Context
+
 
 T = TypeVar("T", bound="NewWorkflowRunDataAttributesType5")
 
@@ -17,11 +21,13 @@ class NewWorkflowRunDataAttributesType5:
             True.
         check_conditions (Union[None, Unset, bool]): If true, this will check conditions. If conditions are not
             satisfied the run will not be created Default: False.
+        context (Union[Unset, NewWorkflowRunDataAttributesType5Context]):
     """
 
     pulse_id: str
     immediate: Union[None, Unset, bool] = True
     check_conditions: Union[None, Unset, bool] = False
+    context: Union[Unset, "NewWorkflowRunDataAttributesType5Context"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -39,6 +45,10 @@ class NewWorkflowRunDataAttributesType5:
         else:
             check_conditions = self.check_conditions
 
+        context: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.context, Unset):
+            context = self.context.to_dict()
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -50,11 +60,15 @@ class NewWorkflowRunDataAttributesType5:
             field_dict["immediate"] = immediate
         if check_conditions is not UNSET:
             field_dict["check_conditions"] = check_conditions
+        if context is not UNSET:
+            field_dict["context"] = context
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+        from ..models.new_workflow_run_data_attributes_type_5_context import NewWorkflowRunDataAttributesType5Context
+
         d = src_dict.copy()
         pulse_id = d.pop("pulse_id")
 
@@ -76,10 +90,18 @@ class NewWorkflowRunDataAttributesType5:
 
         check_conditions = _parse_check_conditions(d.pop("check_conditions", UNSET))
 
+        _context = d.pop("context", UNSET)
+        context: Union[Unset, NewWorkflowRunDataAttributesType5Context]
+        if isinstance(_context, Unset):
+            context = UNSET
+        else:
+            context = NewWorkflowRunDataAttributesType5Context.from_dict(_context)
+
         new_workflow_run_data_attributes_type_5 = cls(
             pulse_id=pulse_id,
             immediate=immediate,
             check_conditions=check_conditions,
+            context=context,
         )
 
         new_workflow_run_data_attributes_type_5.additional_properties = d

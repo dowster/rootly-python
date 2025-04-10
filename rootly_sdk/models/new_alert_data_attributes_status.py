@@ -2,9 +2,7 @@ from enum import Enum
 
 
 class NewAlertDataAttributesStatus(str, Enum):
-    ACKNOWLEDGED = "acknowledged"
     OPEN = "open"
-    RESOLVED = "resolved"
     TRIGGERED = "triggered"
 
     def __str__(self) -> str:

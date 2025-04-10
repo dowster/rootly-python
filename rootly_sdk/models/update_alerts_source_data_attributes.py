@@ -9,6 +9,12 @@ if TYPE_CHECKING:
     from ..models.update_alerts_source_data_attributes_alert_source_urgency_rules_attributes_item import (
         UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesItem,
     )
+    from ..models.update_alerts_source_data_attributes_alert_template_attributes import (
+        UpdateAlertsSourceDataAttributesAlertTemplateAttributes,
+    )
+    from ..models.update_alerts_source_data_attributes_resolution_rule_attributes import (
+        UpdateAlertsSourceDataAttributesResolutionRuleAttributes,
+    )
     from ..models.update_alerts_source_data_attributes_sourceable_attributes import (
         UpdateAlertsSourceDataAttributesSourceableAttributes,
     )
@@ -24,20 +30,25 @@ class UpdateAlertsSourceDataAttributes:
         name (Union[Unset, str]): The name of the alert source
         source_type (Union[Unset, UpdateAlertsSourceDataAttributesSourceType]): The alert source type
         alert_urgency_id (Union[Unset, str]): ID for the default alert urgency assigned to this alert source
+        alert_template_attributes (Union[Unset, UpdateAlertsSourceDataAttributesAlertTemplateAttributes]):
         alert_source_urgency_rules_attributes (Union[Unset,
             list['UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesItem']]): List of rules that define the
             conditions under which the alert urgency will be set automatically based on the alert payload
         sourceable_attributes (Union[Unset, UpdateAlertsSourceDataAttributesSourceableAttributes]): Provide additional
             attributes for generic_webhook alerts source
+        resolution_rule_attributes (Union[Unset, UpdateAlertsSourceDataAttributesResolutionRuleAttributes]): Provide
+            additional attributes for email alerts source
     """
 
     name: Union[Unset, str] = UNSET
     source_type: Union[Unset, UpdateAlertsSourceDataAttributesSourceType] = UNSET
     alert_urgency_id: Union[Unset, str] = UNSET
+    alert_template_attributes: Union[Unset, "UpdateAlertsSourceDataAttributesAlertTemplateAttributes"] = UNSET
     alert_source_urgency_rules_attributes: Union[
         Unset, list["UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesItem"]
     ] = UNSET
     sourceable_attributes: Union[Unset, "UpdateAlertsSourceDataAttributesSourceableAttributes"] = UNSET
+    resolution_rule_attributes: Union[Unset, "UpdateAlertsSourceDataAttributesResolutionRuleAttributes"] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
         name = self.name
@@ -47,6 +58,10 @@ class UpdateAlertsSourceDataAttributes:
             source_type = self.source_type.value
 
         alert_urgency_id = self.alert_urgency_id
+
+        alert_template_attributes: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.alert_template_attributes, Unset):
+            alert_template_attributes = self.alert_template_attributes.to_dict()
 
         alert_source_urgency_rules_attributes: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.alert_source_urgency_rules_attributes, Unset):
@@ -59,6 +74,10 @@ class UpdateAlertsSourceDataAttributes:
         if not isinstance(self.sourceable_attributes, Unset):
             sourceable_attributes = self.sourceable_attributes.to_dict()
 
+        resolution_rule_attributes: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.resolution_rule_attributes, Unset):
+            resolution_rule_attributes = self.resolution_rule_attributes.to_dict()
+
         field_dict: dict[str, Any] = {}
         field_dict.update({})
         if name is not UNSET:
@@ -67,10 +86,14 @@ class UpdateAlertsSourceDataAttributes:
             field_dict["source_type"] = source_type
         if alert_urgency_id is not UNSET:
             field_dict["alert_urgency_id"] = alert_urgency_id
+        if alert_template_attributes is not UNSET:
+            field_dict["alert_template_attributes"] = alert_template_attributes
         if alert_source_urgency_rules_attributes is not UNSET:
             field_dict["alert_source_urgency_rules_attributes"] = alert_source_urgency_rules_attributes
         if sourceable_attributes is not UNSET:
             field_dict["sourceable_attributes"] = sourceable_attributes
+        if resolution_rule_attributes is not UNSET:
+            field_dict["resolution_rule_attributes"] = resolution_rule_attributes
 
         return field_dict
 
@@ -78,6 +101,12 @@ class UpdateAlertsSourceDataAttributes:
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.update_alerts_source_data_attributes_alert_source_urgency_rules_attributes_item import (
             UpdateAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesItem,
+        )
+        from ..models.update_alerts_source_data_attributes_alert_template_attributes import (
+            UpdateAlertsSourceDataAttributesAlertTemplateAttributes,
+        )
+        from ..models.update_alerts_source_data_attributes_resolution_rule_attributes import (
+            UpdateAlertsSourceDataAttributesResolutionRuleAttributes,
         )
         from ..models.update_alerts_source_data_attributes_sourceable_attributes import (
             UpdateAlertsSourceDataAttributesSourceableAttributes,
@@ -94,6 +123,15 @@ class UpdateAlertsSourceDataAttributes:
             source_type = UpdateAlertsSourceDataAttributesSourceType(_source_type)
 
         alert_urgency_id = d.pop("alert_urgency_id", UNSET)
+
+        _alert_template_attributes = d.pop("alert_template_attributes", UNSET)
+        alert_template_attributes: Union[Unset, UpdateAlertsSourceDataAttributesAlertTemplateAttributes]
+        if isinstance(_alert_template_attributes, Unset):
+            alert_template_attributes = UNSET
+        else:
+            alert_template_attributes = UpdateAlertsSourceDataAttributesAlertTemplateAttributes.from_dict(
+                _alert_template_attributes
+            )
 
         alert_source_urgency_rules_attributes = []
         _alert_source_urgency_rules_attributes = d.pop("alert_source_urgency_rules_attributes", UNSET)
@@ -115,12 +153,23 @@ class UpdateAlertsSourceDataAttributes:
                 _sourceable_attributes
             )
 
+        _resolution_rule_attributes = d.pop("resolution_rule_attributes", UNSET)
+        resolution_rule_attributes: Union[Unset, UpdateAlertsSourceDataAttributesResolutionRuleAttributes]
+        if isinstance(_resolution_rule_attributes, Unset):
+            resolution_rule_attributes = UNSET
+        else:
+            resolution_rule_attributes = UpdateAlertsSourceDataAttributesResolutionRuleAttributes.from_dict(
+                _resolution_rule_attributes
+            )
+
         update_alerts_source_data_attributes = cls(
             name=name,
             source_type=source_type,
             alert_urgency_id=alert_urgency_id,
+            alert_template_attributes=alert_template_attributes,
             alert_source_urgency_rules_attributes=alert_source_urgency_rules_attributes,
             sourceable_attributes=sourceable_attributes,
+            resolution_rule_attributes=resolution_rule_attributes,
         )
 
         return update_alerts_source_data_attributes

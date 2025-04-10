@@ -69,9 +69,9 @@ def sync_detailed(
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogEntityInclude] = UNSET,
 ) -> Response[Union[CatalogEntityResponse, ErrorsList]]:
-    """Retrieves a catalog_entity
+    """Retrieves a Catalog Entity
 
-     Retrieves a specific catalog_entity by id
+     Retrieves a specific Catalog Entity by id
 
     Args:
         id (str):
@@ -103,9 +103,9 @@ def sync(
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogEntityInclude] = UNSET,
 ) -> Optional[Union[CatalogEntityResponse, ErrorsList]]:
-    """Retrieves a catalog_entity
+    """Retrieves a Catalog Entity
 
-     Retrieves a specific catalog_entity by id
+     Retrieves a specific Catalog Entity by id
 
     Args:
         id (str):
@@ -132,9 +132,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogEntityInclude] = UNSET,
 ) -> Response[Union[CatalogEntityResponse, ErrorsList]]:
-    """Retrieves a catalog_entity
+    """Retrieves a Catalog Entity
 
-     Retrieves a specific catalog_entity by id
+     Retrieves a specific Catalog Entity by id
 
     Args:
         id (str):
@@ -164,9 +164,9 @@ async def asyncio(
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogEntityInclude] = UNSET,
 ) -> Optional[Union[CatalogEntityResponse, ErrorsList]]:
-    """Retrieves a catalog_entity
+    """Retrieves a Catalog Entity
 
-     Retrieves a specific catalog_entity by id
+     Retrieves a specific Catalog Entity by id
 
     Args:
         id (str):

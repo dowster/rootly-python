@@ -41,6 +41,9 @@ from ..models.post_mortem_trigger_params_incident_condition_started_at_type_1 im
     PostMortemTriggerParamsIncidentConditionStartedAtType1,
 )
 from ..models.post_mortem_trigger_params_incident_condition_status import PostMortemTriggerParamsIncidentConditionStatus
+from ..models.post_mortem_trigger_params_incident_condition_sub_status import (
+    PostMortemTriggerParamsIncidentConditionSubStatus,
+)
 from ..models.post_mortem_trigger_params_incident_condition_summary_type_1 import (
     PostMortemTriggerParamsIncidentConditionSummaryType1,
 )
@@ -88,6 +91,8 @@ class PostMortemTriggerParams:
             PostMortemTriggerParamsIncidentConditionKind.IS.
         incident_condition_status (Union[Unset, PostMortemTriggerParamsIncidentConditionStatus]):  Default:
             PostMortemTriggerParamsIncidentConditionStatus.ANY.
+        incident_condition_sub_status (Union[Unset, PostMortemTriggerParamsIncidentConditionSubStatus]):  Default:
+            PostMortemTriggerParamsIncidentConditionSubStatus.ANY.
         incident_condition_environment (Union[Unset, PostMortemTriggerParamsIncidentConditionEnvironment]):  Default:
             PostMortemTriggerParamsIncidentConditionEnvironment.ANY.
         incident_condition_severity (Union[Unset, PostMortemTriggerParamsIncidentConditionSeverity]):  Default:
@@ -138,6 +143,9 @@ class PostMortemTriggerParams:
     )
     incident_condition_status: Union[Unset, PostMortemTriggerParamsIncidentConditionStatus] = (
         PostMortemTriggerParamsIncidentConditionStatus.ANY
+    )
+    incident_condition_sub_status: Union[Unset, PostMortemTriggerParamsIncidentConditionSubStatus] = (
+        PostMortemTriggerParamsIncidentConditionSubStatus.ANY
     )
     incident_condition_environment: Union[Unset, PostMortemTriggerParamsIncidentConditionEnvironment] = (
         PostMortemTriggerParamsIncidentConditionEnvironment.ANY
@@ -232,6 +240,10 @@ class PostMortemTriggerParams:
         incident_condition_status: Union[Unset, str] = UNSET
         if not isinstance(self.incident_condition_status, Unset):
             incident_condition_status = self.incident_condition_status.value
+
+        incident_condition_sub_status: Union[Unset, str] = UNSET
+        if not isinstance(self.incident_condition_sub_status, Unset):
+            incident_condition_sub_status = self.incident_condition_sub_status.value
 
         incident_condition_environment: Union[Unset, str] = UNSET
         if not isinstance(self.incident_condition_environment, Unset):
@@ -369,6 +381,8 @@ class PostMortemTriggerParams:
             field_dict["incident_condition_kind"] = incident_condition_kind
         if incident_condition_status is not UNSET:
             field_dict["incident_condition_status"] = incident_condition_status
+        if incident_condition_sub_status is not UNSET:
+            field_dict["incident_condition_sub_status"] = incident_condition_sub_status
         if incident_condition_environment is not UNSET:
             field_dict["incident_condition_environment"] = incident_condition_environment
         if incident_condition_severity is not UNSET:
@@ -471,6 +485,15 @@ class PostMortemTriggerParams:
             incident_condition_status = UNSET
         else:
             incident_condition_status = PostMortemTriggerParamsIncidentConditionStatus(_incident_condition_status)
+
+        _incident_condition_sub_status = d.pop("incident_condition_sub_status", UNSET)
+        incident_condition_sub_status: Union[Unset, PostMortemTriggerParamsIncidentConditionSubStatus]
+        if isinstance(_incident_condition_sub_status, Unset):
+            incident_condition_sub_status = UNSET
+        else:
+            incident_condition_sub_status = PostMortemTriggerParamsIncidentConditionSubStatus(
+                _incident_condition_sub_status
+            )
 
         _incident_condition_environment = d.pop("incident_condition_environment", UNSET)
         incident_condition_environment: Union[Unset, PostMortemTriggerParamsIncidentConditionEnvironment]
@@ -730,6 +753,7 @@ class PostMortemTriggerParams:
             incident_condition_visibility=incident_condition_visibility,
             incident_condition_kind=incident_condition_kind,
             incident_condition_status=incident_condition_status,
+            incident_condition_sub_status=incident_condition_sub_status,
             incident_condition_environment=incident_condition_environment,
             incident_condition_severity=incident_condition_severity,
             incident_condition_incident_type=incident_condition_incident_type,

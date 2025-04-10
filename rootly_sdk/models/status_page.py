@@ -37,6 +37,7 @@ class StatusPage:
         public (Union[None, Unset, bool]): Make the status page accessible to the public
         service_ids (Union[Unset, list[str]]): Services attached to the status page
         functionality_ids (Union[Unset, list[str]]): Functionalities attached to the status page
+        external_domain_names (Union[Unset, list[str]]): External domain names attached to the status page
         enabled (Union[None, Unset, bool]): Enabled / Disable the status page
     """
 
@@ -63,6 +64,7 @@ class StatusPage:
     public: Union[None, Unset, bool] = UNSET
     service_ids: Union[Unset, list[str]] = UNSET
     functionality_ids: Union[Unset, list[str]] = UNSET
+    external_domain_names: Union[Unset, list[str]] = UNSET
     enabled: Union[None, Unset, bool] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -187,6 +189,10 @@ class StatusPage:
         if not isinstance(self.functionality_ids, Unset):
             functionality_ids = self.functionality_ids
 
+        external_domain_names: Union[Unset, list[str]] = UNSET
+        if not isinstance(self.external_domain_names, Unset):
+            external_domain_names = self.external_domain_names
+
         enabled: Union[None, Unset, bool]
         if isinstance(self.enabled, Unset):
             enabled = UNSET
@@ -242,6 +248,8 @@ class StatusPage:
             field_dict["service_ids"] = service_ids
         if functionality_ids is not UNSET:
             field_dict["functionality_ids"] = functionality_ids
+        if external_domain_names is not UNSET:
+            field_dict["external_domain_names"] = external_domain_names
         if enabled is not UNSET:
             field_dict["enabled"] = enabled
 
@@ -420,6 +428,8 @@ class StatusPage:
 
         functionality_ids = cast(list[str], d.pop("functionality_ids", UNSET))
 
+        external_domain_names = cast(list[str], d.pop("external_domain_names", UNSET))
+
         def _parse_enabled(data: object) -> Union[None, Unset, bool]:
             if data is None:
                 return data
@@ -453,6 +463,7 @@ class StatusPage:
             public=public,
             service_ids=service_ids,
             functionality_ids=functionality_ids,
+            external_domain_names=external_domain_names,
             enabled=enabled,
         )
 

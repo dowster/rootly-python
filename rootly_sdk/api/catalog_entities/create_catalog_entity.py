@@ -39,14 +39,14 @@ def _parse_response(
         response_201 = CatalogEntityResponse.from_dict(response.json())
 
         return response_201
-    if response.status_code == 401:
-        response_401 = ErrorsList.from_dict(response.json())
-
-        return response_401
     if response.status_code == 422:
         response_422 = ErrorsList.from_dict(response.json())
 
         return response_422
+    if response.status_code == 401:
+        response_401 = ErrorsList.from_dict(response.json())
+
+        return response_401
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -70,9 +70,9 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: NewCatalogEntity,
 ) -> Response[Union[CatalogEntityResponse, ErrorsList]]:
-    """Creates a catalog_entity
+    """Creates a Catalog Entity
 
-     Creates a new catalog_entity from provided data
+     Creates a new Catalog Entity from provided data
 
     Args:
         catalog_id (str):
@@ -104,9 +104,9 @@ def sync(
     client: AuthenticatedClient,
     body: NewCatalogEntity,
 ) -> Optional[Union[CatalogEntityResponse, ErrorsList]]:
-    """Creates a catalog_entity
+    """Creates a Catalog Entity
 
-     Creates a new catalog_entity from provided data
+     Creates a new Catalog Entity from provided data
 
     Args:
         catalog_id (str):
@@ -133,9 +133,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: NewCatalogEntity,
 ) -> Response[Union[CatalogEntityResponse, ErrorsList]]:
-    """Creates a catalog_entity
+    """Creates a Catalog Entity
 
-     Creates a new catalog_entity from provided data
+     Creates a new Catalog Entity from provided data
 
     Args:
         catalog_id (str):
@@ -165,9 +165,9 @@ async def asyncio(
     client: AuthenticatedClient,
     body: NewCatalogEntity,
 ) -> Optional[Union[CatalogEntityResponse, ErrorsList]]:
-    """Creates a catalog_entity
+    """Creates a Catalog Entity
 
-     Creates a new catalog_entity from provided data
+     Creates a new Catalog Entity from provided data
 
     Args:
         catalog_id (str):

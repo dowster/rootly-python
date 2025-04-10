@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 from attrs import define as _attrs_define
 from dateutil.parser import isoparse
 
+from ..models.new_alert_data_attributes_noise import NewAlertDataAttributesNoise
 from ..models.new_alert_data_attributes_notification_target_type import NewAlertDataAttributesNotificationTargetType
 from ..models.new_alert_data_attributes_source import NewAlertDataAttributesSource
 from ..models.new_alert_data_attributes_status import NewAlertDataAttributesStatus
@@ -23,6 +24,7 @@ class NewAlertDataAttributes:
     Attributes:
         source (NewAlertDataAttributesSource): The source of the alert
         summary (str): The summary of the alert
+        noise (Union[Unset, NewAlertDataAttributesNoise]): Whether the alert is marked as noise
         status (Union[Unset, NewAlertDataAttributesStatus]): Only available for organizations with Rootly On-Call
             enabled. Can be one of open, triggered, acknowledged or resolved.
         description (Union[None, Unset, str]): The description of the alert
@@ -46,6 +48,7 @@ class NewAlertDataAttributes:
 
     source: NewAlertDataAttributesSource
     summary: str
+    noise: Union[Unset, NewAlertDataAttributesNoise] = UNSET
     status: Union[Unset, NewAlertDataAttributesStatus] = UNSET
     description: Union[None, Unset, str] = UNSET
     service_ids: Union[None, Unset, list[str]] = UNSET
@@ -68,6 +71,10 @@ class NewAlertDataAttributes:
         source = self.source.value
 
         summary = self.summary
+
+        noise: Union[Unset, str] = UNSET
+        if not isinstance(self.noise, Unset):
+            noise = self.noise.value
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
@@ -176,6 +183,8 @@ class NewAlertDataAttributes:
                 "summary": summary,
             }
         )
+        if noise is not UNSET:
+            field_dict["noise"] = noise
         if status is not UNSET:
             field_dict["status"] = status
         if description is not UNSET:
@@ -216,6 +225,13 @@ class NewAlertDataAttributes:
         source = NewAlertDataAttributesSource(d.pop("source"))
 
         summary = d.pop("summary")
+
+        _noise = d.pop("noise", UNSET)
+        noise: Union[Unset, NewAlertDataAttributesNoise]
+        if isinstance(_noise, Unset):
+            noise = UNSET
+        else:
+            noise = NewAlertDataAttributesNoise(_noise)
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, NewAlertDataAttributesStatus]
@@ -402,6 +418,7 @@ class NewAlertDataAttributes:
         new_alert_data_attributes = cls(
             source=source,
             summary=summary,
+            noise=noise,
             status=status,
             description=description,
             service_ids=service_ids,

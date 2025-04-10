@@ -32,7 +32,9 @@ class NewTeamDataAttributes:
         pagertree_id (Union[None, Unset, str]): The PagerTree group id associated to this team
         cortex_id (Union[None, Unset, str]): The Cortex group id associated to this team
         service_now_ci_sys_id (Union[None, Unset, str]): The Service Now CI sys id associated to this team
-        user_ids (Union[None, Unset, list[int]]): The User ID's members of this team
+        user_ids (Union[None, Unset, list[int]]): The user ids of the members of this team.
+        admin_ids (Union[None, Unset, list[int]]): The user ids of the admins of this team. These users must also be
+            present in user_ids attribute.
         alerts_email_enabled (Union[None, Unset, bool]): Enable alerts through email
         alert_urgency_id (Union[None, Unset, str]): The alert urgency id of the team
         slack_channels (Union[None, Unset, list['NewTeamDataAttributesSlackChannelsType0Item']]): Slack Channels
@@ -57,6 +59,7 @@ class NewTeamDataAttributes:
     cortex_id: Union[None, Unset, str] = UNSET
     service_now_ci_sys_id: Union[None, Unset, str] = UNSET
     user_ids: Union[None, Unset, list[int]] = UNSET
+    admin_ids: Union[None, Unset, list[int]] = UNSET
     alerts_email_enabled: Union[None, Unset, bool] = UNSET
     alert_urgency_id: Union[None, Unset, str] = UNSET
     slack_channels: Union[None, Unset, list["NewTeamDataAttributesSlackChannelsType0Item"]] = UNSET
@@ -161,6 +164,15 @@ class NewTeamDataAttributes:
         else:
             user_ids = self.user_ids
 
+        admin_ids: Union[None, Unset, list[int]]
+        if isinstance(self.admin_ids, Unset):
+            admin_ids = UNSET
+        elif isinstance(self.admin_ids, list):
+            admin_ids = self.admin_ids
+
+        else:
+            admin_ids = self.admin_ids
+
         alerts_email_enabled: Union[None, Unset, bool]
         if isinstance(self.alerts_email_enabled, Unset):
             alerts_email_enabled = UNSET
@@ -233,6 +245,8 @@ class NewTeamDataAttributes:
             field_dict["service_now_ci_sys_id"] = service_now_ci_sys_id
         if user_ids is not UNSET:
             field_dict["user_ids"] = user_ids
+        if admin_ids is not UNSET:
+            field_dict["admin_ids"] = admin_ids
         if alerts_email_enabled is not UNSET:
             field_dict["alerts_email_enabled"] = alerts_email_enabled
         if alert_urgency_id is not UNSET:
@@ -407,6 +421,23 @@ class NewTeamDataAttributes:
 
         user_ids = _parse_user_ids(d.pop("user_ids", UNSET))
 
+        def _parse_admin_ids(data: object) -> Union[None, Unset, list[int]]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                admin_ids_type_0 = cast(list[int], data)
+
+                return admin_ids_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, list[int]], data)
+
+        admin_ids = _parse_admin_ids(d.pop("admin_ids", UNSET))
+
         def _parse_alerts_email_enabled(data: object) -> Union[None, Unset, bool]:
             if data is None:
                 return data
@@ -494,6 +525,7 @@ class NewTeamDataAttributes:
             cortex_id=cortex_id,
             service_now_ci_sys_id=service_now_ci_sys_id,
             user_ids=user_ids,
+            admin_ids=admin_ids,
             alerts_email_enabled=alerts_email_enabled,
             alert_urgency_id=alert_urgency_id,
             slack_channels=slack_channels,

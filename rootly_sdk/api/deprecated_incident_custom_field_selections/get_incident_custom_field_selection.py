@@ -54,7 +54,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentCustomFieldSelectionResponse]]:
-    """[DEPRECATED] Retrieves a incident custom field selection
+    """[DEPRECATED] Retrieves an incident custom field selection
 
      [DEPRECATED] Use form field endpoints instead. Retrieves a specific incident custom field selection
     by id
@@ -86,7 +86,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentCustomFieldSelectionResponse]]:
-    """[DEPRECATED] Retrieves a incident custom field selection
+    """[DEPRECATED] Retrieves an incident custom field selection
 
      [DEPRECATED] Use form field endpoints instead. Retrieves a specific incident custom field selection
     by id
@@ -113,7 +113,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, IncidentCustomFieldSelectionResponse]]:
-    """[DEPRECATED] Retrieves a incident custom field selection
+    """[DEPRECATED] Retrieves an incident custom field selection
 
      [DEPRECATED] Use form field endpoints instead. Retrieves a specific incident custom field selection
     by id
@@ -143,7 +143,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, IncidentCustomFieldSelectionResponse]]:
-    """[DEPRECATED] Retrieves a incident custom field selection
+    """[DEPRECATED] Retrieves an incident custom field selection
 
      [DEPRECATED] Use form field endpoints instead. Retrieves a specific incident custom field selection
     by id

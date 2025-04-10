@@ -39,14 +39,14 @@ def _parse_response(
         response_201 = IncidentCustomFieldSelectionResponse.from_dict(response.json())
 
         return response_201
-    if response.status_code == 401:
-        response_401 = ErrorsList.from_dict(response.json())
-
-        return response_401
     if response.status_code == 422:
         response_422 = ErrorsList.from_dict(response.json())
 
         return response_422
+    if response.status_code == 401:
+        response_401 = ErrorsList.from_dict(response.json())
+
+        return response_401
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -70,7 +70,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: NewIncidentCustomFieldSelection,
 ) -> Response[Union[ErrorsList, IncidentCustomFieldSelectionResponse]]:
-    """[DEPRECATED] Creates a incident custom field selection
+    """[DEPRECATED] Creates an incident custom field selection
 
      [DEPRECATED] Use form field endpoints instead. Creates a new incident custom field selection from
     provided data
@@ -105,7 +105,7 @@ def sync(
     client: AuthenticatedClient,
     body: NewIncidentCustomFieldSelection,
 ) -> Optional[Union[ErrorsList, IncidentCustomFieldSelectionResponse]]:
-    """[DEPRECATED] Creates a incident custom field selection
+    """[DEPRECATED] Creates an incident custom field selection
 
      [DEPRECATED] Use form field endpoints instead. Creates a new incident custom field selection from
     provided data
@@ -135,7 +135,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: NewIncidentCustomFieldSelection,
 ) -> Response[Union[ErrorsList, IncidentCustomFieldSelectionResponse]]:
-    """[DEPRECATED] Creates a incident custom field selection
+    """[DEPRECATED] Creates an incident custom field selection
 
      [DEPRECATED] Use form field endpoints instead. Creates a new incident custom field selection from
     provided data
@@ -168,7 +168,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: NewIncidentCustomFieldSelection,
 ) -> Optional[Union[ErrorsList, IncidentCustomFieldSelectionResponse]]:
-    """[DEPRECATED] Creates a incident custom field selection
+    """[DEPRECATED] Creates an incident custom field selection
 
      [DEPRECATED] Use form field endpoints instead. Creates a new incident custom field selection from
     provided data

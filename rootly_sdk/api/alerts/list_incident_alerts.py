@@ -131,7 +131,7 @@ def sync_detailed(
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
 ) -> Response[AlertList]:
-    """List alerts
+    """List Incident alerts
 
      List incident alerts
 
@@ -222,7 +222,7 @@ def sync(
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
 ) -> Optional[AlertList]:
-    """List alerts
+    """List Incident alerts
 
      List incident alerts
 
@@ -308,7 +308,7 @@ async def asyncio_detailed(
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
 ) -> Response[AlertList]:
-    """List alerts
+    """List Incident alerts
 
      List incident alerts
 
@@ -397,7 +397,7 @@ async def asyncio(
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
 ) -> Optional[AlertList]:
-    """List alerts
+    """List Incident alerts
 
      List incident alerts
 

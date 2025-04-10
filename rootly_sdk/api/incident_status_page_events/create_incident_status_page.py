@@ -39,14 +39,14 @@ def _parse_response(
         response_201 = IncidentStatusPageEventResponse.from_dict(response.json())
 
         return response_201
-    if response.status_code == 401:
-        response_401 = ErrorsList.from_dict(response.json())
-
-        return response_401
     if response.status_code == 422:
         response_422 = ErrorsList.from_dict(response.json())
 
         return response_422
+    if response.status_code == 401:
+        response_401 = ErrorsList.from_dict(response.json())
+
+        return response_401
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -70,7 +70,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: NewIncidentStatusPageEvent,
 ) -> Response[Union[ErrorsList, IncidentStatusPageEventResponse]]:
-    """Creates a incident status page event
+    """Creates an incident status page event
 
      Creates a new event from provided data
 
@@ -104,7 +104,7 @@ def sync(
     client: AuthenticatedClient,
     body: NewIncidentStatusPageEvent,
 ) -> Optional[Union[ErrorsList, IncidentStatusPageEventResponse]]:
-    """Creates a incident status page event
+    """Creates an incident status page event
 
      Creates a new event from provided data
 
@@ -133,7 +133,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: NewIncidentStatusPageEvent,
 ) -> Response[Union[ErrorsList, IncidentStatusPageEventResponse]]:
-    """Creates a incident status page event
+    """Creates an incident status page event
 
      Creates a new event from provided data
 
@@ -165,7 +165,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: NewIncidentStatusPageEvent,
 ) -> Optional[Union[ErrorsList, IncidentStatusPageEventResponse]]:
-    """Creates a incident status page event
+    """Creates an incident status page event
 
      Creates a new event from provided data
 

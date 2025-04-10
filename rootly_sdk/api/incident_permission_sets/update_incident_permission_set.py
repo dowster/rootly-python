@@ -66,7 +66,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateIncidentPermissionSet,
 ) -> Response[Union[ErrorsList, IncidentPermissionSetResponse]]:
-    """Update a incident_permission_set
+    """Update an incident_permission_set
 
      Update a specific incident_permission_set by id
 
@@ -100,7 +100,7 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateIncidentPermissionSet,
 ) -> Optional[Union[ErrorsList, IncidentPermissionSetResponse]]:
-    """Update a incident_permission_set
+    """Update an incident_permission_set
 
      Update a specific incident_permission_set by id
 
@@ -129,7 +129,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateIncidentPermissionSet,
 ) -> Response[Union[ErrorsList, IncidentPermissionSetResponse]]:
-    """Update a incident_permission_set
+    """Update an incident_permission_set
 
      Update a specific incident_permission_set by id
 
@@ -161,7 +161,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateIncidentPermissionSet,
 ) -> Optional[Union[ErrorsList, IncidentPermissionSetResponse]]:
-    """Update a incident_permission_set
+    """Update an incident_permission_set
 
      Update a specific incident_permission_set by id
 

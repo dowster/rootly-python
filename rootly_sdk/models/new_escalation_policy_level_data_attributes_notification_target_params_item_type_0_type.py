@@ -4,6 +4,7 @@ from enum import Enum
 class NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type(str, Enum):
     SCHEDULE = "schedule"
     SLACK_CHANNEL = "slack_channel"
+    TEAM = "team"
     USER = "user"
 
     def __str__(self) -> str:

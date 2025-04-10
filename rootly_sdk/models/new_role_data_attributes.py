@@ -29,6 +29,9 @@ from ..models.new_role_data_attributes_incident_types_permissions_item import (
     NewRoleDataAttributesIncidentTypesPermissionsItem,
 )
 from ..models.new_role_data_attributes_incidents_permissions_item import NewRoleDataAttributesIncidentsPermissionsItem
+from ..models.new_role_data_attributes_integrations_permissions_item import (
+    NewRoleDataAttributesIntegrationsPermissionsItem,
+)
 from ..models.new_role_data_attributes_invitations_permissions_item import (
     NewRoleDataAttributesInvitationsPermissionsItem,
 )
@@ -74,6 +77,7 @@ class NewRoleDataAttributes:
         incident_roles_permissions (Union[Unset, list[NewRoleDataAttributesIncidentRolesPermissionsItem]]):
         incident_types_permissions (Union[Unset, list[NewRoleDataAttributesIncidentTypesPermissionsItem]]):
         incidents_permissions (Union[Unset, list[NewRoleDataAttributesIncidentsPermissionsItem]]):
+        integrations_permissions (Union[Unset, list[NewRoleDataAttributesIntegrationsPermissionsItem]]):
         invitations_permissions (Union[Unset, list[NewRoleDataAttributesInvitationsPermissionsItem]]):
         playbooks_permissions (Union[Unset, list[NewRoleDataAttributesPlaybooksPermissionsItem]]):
         private_incidents_permissions (Union[Unset, list[NewRoleDataAttributesPrivateIncidentsPermissionsItem]]):
@@ -104,6 +108,7 @@ class NewRoleDataAttributes:
     incident_roles_permissions: Union[Unset, list[NewRoleDataAttributesIncidentRolesPermissionsItem]] = UNSET
     incident_types_permissions: Union[Unset, list[NewRoleDataAttributesIncidentTypesPermissionsItem]] = UNSET
     incidents_permissions: Union[Unset, list[NewRoleDataAttributesIncidentsPermissionsItem]] = UNSET
+    integrations_permissions: Union[Unset, list[NewRoleDataAttributesIntegrationsPermissionsItem]] = UNSET
     invitations_permissions: Union[Unset, list[NewRoleDataAttributesInvitationsPermissionsItem]] = UNSET
     playbooks_permissions: Union[Unset, list[NewRoleDataAttributesPlaybooksPermissionsItem]] = UNSET
     private_incidents_permissions: Union[Unset, list[NewRoleDataAttributesPrivateIncidentsPermissionsItem]] = UNSET
@@ -218,6 +223,13 @@ class NewRoleDataAttributes:
             for incidents_permissions_item_data in self.incidents_permissions:
                 incidents_permissions_item = incidents_permissions_item_data.value
                 incidents_permissions.append(incidents_permissions_item)
+
+        integrations_permissions: Union[Unset, list[str]] = UNSET
+        if not isinstance(self.integrations_permissions, Unset):
+            integrations_permissions = []
+            for integrations_permissions_item_data in self.integrations_permissions:
+                integrations_permissions_item = integrations_permissions_item_data.value
+                integrations_permissions.append(integrations_permissions_item)
 
         invitations_permissions: Union[Unset, list[str]] = UNSET
         if not isinstance(self.invitations_permissions, Unset):
@@ -339,6 +351,8 @@ class NewRoleDataAttributes:
             field_dict["incident_types_permissions"] = incident_types_permissions
         if incidents_permissions is not UNSET:
             field_dict["incidents_permissions"] = incidents_permissions
+        if integrations_permissions is not UNSET:
+            field_dict["integrations_permissions"] = integrations_permissions
         if invitations_permissions is not UNSET:
             field_dict["invitations_permissions"] = invitations_permissions
         if playbooks_permissions is not UNSET:
@@ -487,6 +501,15 @@ class NewRoleDataAttributes:
 
             incidents_permissions.append(incidents_permissions_item)
 
+        integrations_permissions = []
+        _integrations_permissions = d.pop("integrations_permissions", UNSET)
+        for integrations_permissions_item_data in _integrations_permissions or []:
+            integrations_permissions_item = NewRoleDataAttributesIntegrationsPermissionsItem(
+                integrations_permissions_item_data
+            )
+
+            integrations_permissions.append(integrations_permissions_item)
+
         invitations_permissions = []
         _invitations_permissions = d.pop("invitations_permissions", UNSET)
         for invitations_permissions_item_data in _invitations_permissions or []:
@@ -598,6 +621,7 @@ class NewRoleDataAttributes:
             incident_roles_permissions=incident_roles_permissions,
             incident_types_permissions=incident_types_permissions,
             incidents_permissions=incidents_permissions,
+            integrations_permissions=integrations_permissions,
             invitations_permissions=invitations_permissions,
             playbooks_permissions=playbooks_permissions,
             private_incidents_permissions=private_incidents_permissions,

@@ -54,9 +54,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, OnCallRoleResponse]]:
-    """Retrieves an on_call_role
+    """Retrieves an On-Call Role
 
-     Retrieves a specific on_call_role by id
+     Retrieves a specific On-Call Role by id
 
     Args:
         id (str):
@@ -85,9 +85,9 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, OnCallRoleResponse]]:
-    """Retrieves an on_call_role
+    """Retrieves an On-Call Role
 
-     Retrieves a specific on_call_role by id
+     Retrieves a specific On-Call Role by id
 
     Args:
         id (str):
@@ -111,9 +111,9 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, OnCallRoleResponse]]:
-    """Retrieves an on_call_role
+    """Retrieves an On-Call Role
 
-     Retrieves a specific on_call_role by id
+     Retrieves a specific On-Call Role by id
 
     Args:
         id (str):
@@ -140,9 +140,9 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, OnCallRoleResponse]]:
-    """Retrieves an on_call_role
+    """Retrieves an On-Call Role
 
-     Retrieves a specific on_call_role by id
+     Retrieves a specific On-Call Role by id
 
     Args:
         id (str):

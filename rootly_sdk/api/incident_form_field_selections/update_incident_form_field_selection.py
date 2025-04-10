@@ -66,7 +66,7 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateIncidentFormFieldSelection,
 ) -> Response[Union[ErrorsList, IncidentFormFieldSelectionResponse]]:
-    """Update a incident form field selection
+    """Update an incident form field selection
 
      Update a specific incident form field selection by id
 
@@ -100,7 +100,7 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateIncidentFormFieldSelection,
 ) -> Optional[Union[ErrorsList, IncidentFormFieldSelectionResponse]]:
-    """Update a incident form field selection
+    """Update an incident form field selection
 
      Update a specific incident form field selection by id
 
@@ -129,7 +129,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateIncidentFormFieldSelection,
 ) -> Response[Union[ErrorsList, IncidentFormFieldSelectionResponse]]:
-    """Update a incident form field selection
+    """Update an incident form field selection
 
      Update a specific incident form field selection by id
 
@@ -161,7 +161,7 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateIncidentFormFieldSelection,
 ) -> Optional[Union[ErrorsList, IncidentFormFieldSelectionResponse]]:
-    """Update a incident form field selection
+    """Update an incident form field selection
 
      Update a specific incident form field selection by id
 

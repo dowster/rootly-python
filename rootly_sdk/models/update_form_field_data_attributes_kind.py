@@ -5,6 +5,7 @@ class UpdateFormFieldDataAttributesKind(str, Enum):
     ACKNOWLEDGED_AT = "acknowledged_at"
     ATTACH_ALERTS = "attach_alerts"
     CAUSES = "causes"
+    CLOSED_AT = "closed_at"
     CUSTOM = "custom"
     DETECTED_AT = "detected_at"
     ENVIRONMENTS = "environments"

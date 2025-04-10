@@ -66,9 +66,9 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateSubStatus,
 ) -> Response[Union[ErrorsList, SubStatusResponse]]:
-    """Update a sub_status
+    """Update a Sub-Status
 
-     Update a specific sub_status by id
+     Update a specific Sub-Status by id
 
     Args:
         id (str):
@@ -100,9 +100,9 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateSubStatus,
 ) -> Optional[Union[ErrorsList, SubStatusResponse]]:
-    """Update a sub_status
+    """Update a Sub-Status
 
-     Update a specific sub_status by id
+     Update a specific Sub-Status by id
 
     Args:
         id (str):
@@ -129,9 +129,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateSubStatus,
 ) -> Response[Union[ErrorsList, SubStatusResponse]]:
-    """Update a sub_status
+    """Update a Sub-Status
 
-     Update a specific sub_status by id
+     Update a specific Sub-Status by id
 
     Args:
         id (str):
@@ -161,9 +161,9 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateSubStatus,
 ) -> Optional[Union[ErrorsList, SubStatusResponse]]:
-    """Update a sub_status
+    """Update a Sub-Status
 
-     Update a specific sub_status by id
+     Update a specific Sub-Status by id
 
     Args:
         id (str):
