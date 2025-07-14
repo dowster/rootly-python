@@ -1,15 +1,21 @@
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
 from ..models.update_live_call_router_data_attributes_country_code import UpdateLiveCallRouterDataAttributesCountryCode
 from ..models.update_live_call_router_data_attributes_kind import UpdateLiveCallRouterDataAttributesKind
 from ..models.update_live_call_router_data_attributes_phone_type import UpdateLiveCallRouterDataAttributesPhoneType
+from ..models.update_live_call_router_data_attributes_waiting_music_url import (
+    UpdateLiveCallRouterDataAttributesWaitingMusicUrl,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.update_live_call_router_data_attributes_escalation_policy_trigger_params_type_0 import (
-        UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType0,
+    from ..models.update_live_call_router_data_attributes_escalation_policy_trigger_params import (
+        UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParams,
+    )
+    from ..models.update_live_call_router_data_attributes_paging_targets_item import (
+        UpdateLiveCallRouterDataAttributesPagingTargetsItem,
     )
 
 
@@ -28,7 +34,8 @@ class UpdateLiveCallRouterDataAttributes:
         phone_type (Union[Unset, UpdateLiveCallRouterDataAttributesPhoneType]): The phone type of the live_call_router
         voicemail_greeting (Union[Unset, str]): The voicemail greeting of the live_call_router
         caller_greeting (Union[Unset, str]): The caller greeting message of the live_call_router
-        waiting_music_url (Union[Unset, str]): The waiting music URL of the live_call_router
+        waiting_music_url (Union[Unset, UpdateLiveCallRouterDataAttributesWaitingMusicUrl]): The waiting music URL of
+            the live_call_router
         sent_to_voicemail_delay (Union[Unset, int]): The delay (seconds) after which the caller in redirected to
             voicemail
         should_redirect_to_voicemail_on_no_answer (Union[Unset, bool]): This prompts the caller to choose voicemail or
@@ -37,8 +44,12 @@ class UpdateLiveCallRouterDataAttributes:
         should_auto_resolve_alert_on_call_end (Union[Unset, bool]): This overrides the delay (seconds) in escalation
             levels
         alert_urgency_id (Union[Unset, str]): This is used in escalation paths to determine who to page
-        escalation_policy_trigger_params (Union['UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType0',
-            None, Unset]):
+        calling_tree_prompt (Union[Unset, str]): The audio instructions callers will hear when they call this number,
+            prompting them to select from available options to route their call
+        paging_targets (Union[Unset, list['UpdateLiveCallRouterDataAttributesPagingTargetsItem']]): Paging targets that
+            callers can select from when this live call router is configured as a phone tree.
+        escalation_policy_trigger_params (Union[Unset,
+            UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParams]):
     """
 
     kind: Union[Unset, UpdateLiveCallRouterDataAttributesKind] = UNSET
@@ -48,21 +59,19 @@ class UpdateLiveCallRouterDataAttributes:
     phone_type: Union[Unset, UpdateLiveCallRouterDataAttributesPhoneType] = UNSET
     voicemail_greeting: Union[Unset, str] = UNSET
     caller_greeting: Union[Unset, str] = UNSET
-    waiting_music_url: Union[Unset, str] = UNSET
+    waiting_music_url: Union[Unset, UpdateLiveCallRouterDataAttributesWaitingMusicUrl] = UNSET
     sent_to_voicemail_delay: Union[Unset, int] = UNSET
     should_redirect_to_voicemail_on_no_answer: Union[Unset, bool] = UNSET
     escalation_level_delay_in_seconds: Union[Unset, int] = UNSET
     should_auto_resolve_alert_on_call_end: Union[Unset, bool] = UNSET
     alert_urgency_id: Union[Unset, str] = UNSET
+    calling_tree_prompt: Union[Unset, str] = UNSET
+    paging_targets: Union[Unset, list["UpdateLiveCallRouterDataAttributesPagingTargetsItem"]] = UNSET
     escalation_policy_trigger_params: Union[
-        "UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType0", None, Unset
+        Unset, "UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParams"
     ] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.update_live_call_router_data_attributes_escalation_policy_trigger_params_type_0 import (
-            UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType0,
-        )
-
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
             kind = self.kind.value
@@ -83,7 +92,9 @@ class UpdateLiveCallRouterDataAttributes:
 
         caller_greeting = self.caller_greeting
 
-        waiting_music_url = self.waiting_music_url
+        waiting_music_url: Union[Unset, str] = UNSET
+        if not isinstance(self.waiting_music_url, Unset):
+            waiting_music_url = self.waiting_music_url.value
 
         sent_to_voicemail_delay = self.sent_to_voicemail_delay
 
@@ -95,15 +106,18 @@ class UpdateLiveCallRouterDataAttributes:
 
         alert_urgency_id = self.alert_urgency_id
 
-        escalation_policy_trigger_params: Union[None, Unset, dict[str, Any]]
-        if isinstance(self.escalation_policy_trigger_params, Unset):
-            escalation_policy_trigger_params = UNSET
-        elif isinstance(
-            self.escalation_policy_trigger_params, UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType0
-        ):
+        calling_tree_prompt = self.calling_tree_prompt
+
+        paging_targets: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.paging_targets, Unset):
+            paging_targets = []
+            for paging_targets_item_data in self.paging_targets:
+                paging_targets_item = paging_targets_item_data.to_dict()
+                paging_targets.append(paging_targets_item)
+
+        escalation_policy_trigger_params: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.escalation_policy_trigger_params, Unset):
             escalation_policy_trigger_params = self.escalation_policy_trigger_params.to_dict()
-        else:
-            escalation_policy_trigger_params = self.escalation_policy_trigger_params
 
         field_dict: dict[str, Any] = {}
         field_dict.update({})
@@ -133,6 +147,10 @@ class UpdateLiveCallRouterDataAttributes:
             field_dict["should_auto_resolve_alert_on_call_end"] = should_auto_resolve_alert_on_call_end
         if alert_urgency_id is not UNSET:
             field_dict["alert_urgency_id"] = alert_urgency_id
+        if calling_tree_prompt is not UNSET:
+            field_dict["calling_tree_prompt"] = calling_tree_prompt
+        if paging_targets is not UNSET:
+            field_dict["paging_targets"] = paging_targets
         if escalation_policy_trigger_params is not UNSET:
             field_dict["escalation_policy_trigger_params"] = escalation_policy_trigger_params
 
@@ -140,8 +158,11 @@ class UpdateLiveCallRouterDataAttributes:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        from ..models.update_live_call_router_data_attributes_escalation_policy_trigger_params_type_0 import (
-            UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType0,
+        from ..models.update_live_call_router_data_attributes_escalation_policy_trigger_params import (
+            UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParams,
+        )
+        from ..models.update_live_call_router_data_attributes_paging_targets_item import (
+            UpdateLiveCallRouterDataAttributesPagingTargetsItem,
         )
 
         d = src_dict.copy()
@@ -174,7 +195,12 @@ class UpdateLiveCallRouterDataAttributes:
 
         caller_greeting = d.pop("caller_greeting", UNSET)
 
-        waiting_music_url = d.pop("waiting_music_url", UNSET)
+        _waiting_music_url = d.pop("waiting_music_url", UNSET)
+        waiting_music_url: Union[Unset, UpdateLiveCallRouterDataAttributesWaitingMusicUrl]
+        if isinstance(_waiting_music_url, Unset):
+            waiting_music_url = UNSET
+        else:
+            waiting_music_url = UpdateLiveCallRouterDataAttributesWaitingMusicUrl(_waiting_music_url)
 
         sent_to_voicemail_delay = d.pop("sent_to_voicemail_delay", UNSET)
 
@@ -186,30 +212,27 @@ class UpdateLiveCallRouterDataAttributes:
 
         alert_urgency_id = d.pop("alert_urgency_id", UNSET)
 
-        def _parse_escalation_policy_trigger_params(
-            data: object,
-        ) -> Union["UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType0", None, Unset]:
-            if data is None:
-                return data
-            if isinstance(data, Unset):
-                return data
-            try:
-                if not isinstance(data, dict):
-                    raise TypeError()
-                escalation_policy_trigger_params_type_0 = (
-                    UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType0.from_dict(data)
-                )
+        calling_tree_prompt = d.pop("calling_tree_prompt", UNSET)
 
-                return escalation_policy_trigger_params_type_0
-            except:  # noqa: E722
-                pass
-            return cast(
-                Union["UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType0", None, Unset], data
+        paging_targets = []
+        _paging_targets = d.pop("paging_targets", UNSET)
+        for paging_targets_item_data in _paging_targets or []:
+            paging_targets_item = UpdateLiveCallRouterDataAttributesPagingTargetsItem.from_dict(
+                paging_targets_item_data
             )
 
-        escalation_policy_trigger_params = _parse_escalation_policy_trigger_params(
-            d.pop("escalation_policy_trigger_params", UNSET)
-        )
+            paging_targets.append(paging_targets_item)
+
+        _escalation_policy_trigger_params = d.pop("escalation_policy_trigger_params", UNSET)
+        escalation_policy_trigger_params: Union[Unset, UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParams]
+        if isinstance(_escalation_policy_trigger_params, Unset):
+            escalation_policy_trigger_params = UNSET
+        else:
+            escalation_policy_trigger_params = (
+                UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParams.from_dict(
+                    _escalation_policy_trigger_params
+                )
+            )
 
         update_live_call_router_data_attributes = cls(
             kind=kind,
@@ -225,6 +248,8 @@ class UpdateLiveCallRouterDataAttributes:
             escalation_level_delay_in_seconds=escalation_level_delay_in_seconds,
             should_auto_resolve_alert_on_call_end=should_auto_resolve_alert_on_call_end,
             alert_urgency_id=alert_urgency_id,
+            calling_tree_prompt=calling_tree_prompt,
+            paging_targets=paging_targets,
             escalation_policy_trigger_params=escalation_policy_trigger_params,
         )
 

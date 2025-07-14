@@ -6,6 +6,9 @@ from ..models.new_alerts_source_data_attributes_source_type import NewAlertsSour
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.new_alerts_source_data_attributes_alert_source_fields_attributes_item import (
+        NewAlertsSourceDataAttributesAlertSourceFieldsAttributesItem,
+    )
     from ..models.new_alerts_source_data_attributes_alert_source_urgency_rules_attributes_item import (
         NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesItem,
     )
@@ -39,6 +42,9 @@ class NewAlertsSourceDataAttributes:
             attributes for generic_webhook alerts source
         resolution_rule_attributes (Union[Unset, NewAlertsSourceDataAttributesResolutionRuleAttributes]): Provide
             additional attributes for email alerts source
+        alert_source_fields_attributes (Union[Unset,
+            list['NewAlertsSourceDataAttributesAlertSourceFieldsAttributesItem']]): List of alert fields to be added to the
+            alert source
     """
 
     name: str
@@ -51,6 +57,9 @@ class NewAlertsSourceDataAttributes:
     ] = UNSET
     sourceable_attributes: Union[Unset, "NewAlertsSourceDataAttributesSourceableAttributes"] = UNSET
     resolution_rule_attributes: Union[Unset, "NewAlertsSourceDataAttributesResolutionRuleAttributes"] = UNSET
+    alert_source_fields_attributes: Union[
+        Unset, list["NewAlertsSourceDataAttributesAlertSourceFieldsAttributesItem"]
+    ] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
         name = self.name
@@ -84,6 +93,13 @@ class NewAlertsSourceDataAttributes:
         if not isinstance(self.resolution_rule_attributes, Unset):
             resolution_rule_attributes = self.resolution_rule_attributes.to_dict()
 
+        alert_source_fields_attributes: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.alert_source_fields_attributes, Unset):
+            alert_source_fields_attributes = []
+            for alert_source_fields_attributes_item_data in self.alert_source_fields_attributes:
+                alert_source_fields_attributes_item = alert_source_fields_attributes_item_data.to_dict()
+                alert_source_fields_attributes.append(alert_source_fields_attributes_item)
+
         field_dict: dict[str, Any] = {}
         field_dict.update(
             {
@@ -104,11 +120,16 @@ class NewAlertsSourceDataAttributes:
             field_dict["sourceable_attributes"] = sourceable_attributes
         if resolution_rule_attributes is not UNSET:
             field_dict["resolution_rule_attributes"] = resolution_rule_attributes
+        if alert_source_fields_attributes is not UNSET:
+            field_dict["alert_source_fields_attributes"] = alert_source_fields_attributes
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+        from ..models.new_alerts_source_data_attributes_alert_source_fields_attributes_item import (
+            NewAlertsSourceDataAttributesAlertSourceFieldsAttributesItem,
+        )
         from ..models.new_alerts_source_data_attributes_alert_source_urgency_rules_attributes_item import (
             NewAlertsSourceDataAttributesAlertSourceUrgencyRulesAttributesItem,
         )
@@ -172,6 +193,17 @@ class NewAlertsSourceDataAttributes:
                 _resolution_rule_attributes
             )
 
+        alert_source_fields_attributes = []
+        _alert_source_fields_attributes = d.pop("alert_source_fields_attributes", UNSET)
+        for alert_source_fields_attributes_item_data in _alert_source_fields_attributes or []:
+            alert_source_fields_attributes_item = (
+                NewAlertsSourceDataAttributesAlertSourceFieldsAttributesItem.from_dict(
+                    alert_source_fields_attributes_item_data
+                )
+            )
+
+            alert_source_fields_attributes.append(alert_source_fields_attributes_item)
+
         new_alerts_source_data_attributes = cls(
             name=name,
             source_type=source_type,
@@ -181,6 +213,7 @@ class NewAlertsSourceDataAttributes:
             alert_source_urgency_rules_attributes=alert_source_urgency_rules_attributes,
             sourceable_attributes=sourceable_attributes,
             resolution_rule_attributes=resolution_rule_attributes,
+            alert_source_fields_attributes=alert_source_fields_attributes,
         )
 
         return new_alerts_source_data_attributes

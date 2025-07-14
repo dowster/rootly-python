@@ -16,7 +16,7 @@ T = TypeVar("T", bound="OnCallShadowsListDataItem")
 class OnCallShadowsListDataItem:
     """
     Attributes:
-        id (str): Unique id of the on call shadow shift
+        id (str): Unique id of the on-call shadow shift
         type_ (OnCallShadowsListDataItemType):
         attributes (OnCallShadow):
     """

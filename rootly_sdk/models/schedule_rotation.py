@@ -1,7 +1,9 @@
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+import datetime
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
+from dateutil.parser import isoparse
 
 from ..models.schedule_rotation_active_days_item import ScheduleRotationActiveDaysItem
 from ..models.schedule_rotation_schedule_rotationable_type import ScheduleRotationScheduleRotationableType
@@ -43,6 +45,10 @@ class ScheduleRotation:
         active_time_attributes (Union[Unset, list['ScheduleRotationActiveTimeAttributesItem']]): Schedule rotation's
             active times
         time_zone (Union[Unset, str]): A valid IANA time zone name. Default: 'Etc/UTC'.
+        start_time (Union[None, Unset, datetime.date]): ISO8601 date and time when rotation starts. Shifts will only be
+            created after this time.
+        end_time (Union[None, Unset, datetime.date]): ISO8601 date and time when rotation ends. Shifts will only be
+            created before this time.
     """
 
     schedule_id: str
@@ -60,6 +66,8 @@ class ScheduleRotation:
     active_time_type: Union[Unset, str] = UNSET
     active_time_attributes: Union[Unset, list["ScheduleRotationActiveTimeAttributesItem"]] = UNSET
     time_zone: Union[Unset, str] = "Etc/UTC"
+    start_time: Union[None, Unset, datetime.date] = UNSET
+    end_time: Union[None, Unset, datetime.date] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -111,6 +119,22 @@ class ScheduleRotation:
 
         time_zone = self.time_zone
 
+        start_time: Union[None, Unset, str]
+        if isinstance(self.start_time, Unset):
+            start_time = UNSET
+        elif isinstance(self.start_time, datetime.date):
+            start_time = self.start_time.isoformat()
+        else:
+            start_time = self.start_time
+
+        end_time: Union[None, Unset, str]
+        if isinstance(self.end_time, Unset):
+            end_time = UNSET
+        elif isinstance(self.end_time, datetime.date):
+            end_time = self.end_time.isoformat()
+        else:
+            end_time = self.end_time
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -133,6 +157,10 @@ class ScheduleRotation:
             field_dict["active_time_attributes"] = active_time_attributes
         if time_zone is not UNSET:
             field_dict["time_zone"] = time_zone
+        if start_time is not UNSET:
+            field_dict["start_time"] = start_time
+        if end_time is not UNSET:
+            field_dict["end_time"] = end_time
 
         return field_dict
 
@@ -233,6 +261,40 @@ class ScheduleRotation:
 
         time_zone = d.pop("time_zone", UNSET)
 
+        def _parse_start_time(data: object) -> Union[None, Unset, datetime.date]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                start_time_type_0 = isoparse(data).date()
+
+                return start_time_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, datetime.date], data)
+
+        start_time = _parse_start_time(d.pop("start_time", UNSET))
+
+        def _parse_end_time(data: object) -> Union[None, Unset, datetime.date]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                end_time_type_0 = isoparse(data).date()
+
+                return end_time_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, datetime.date], data)
+
+        end_time = _parse_end_time(d.pop("end_time", UNSET))
+
         schedule_rotation = cls(
             schedule_id=schedule_id,
             name=name,
@@ -244,6 +306,8 @@ class ScheduleRotation:
             active_time_type=active_time_type,
             active_time_attributes=active_time_attributes,
             time_zone=time_zone,
+            start_time=start_time,
+            end_time=end_time,
         )
 
         schedule_rotation.additional_properties = d

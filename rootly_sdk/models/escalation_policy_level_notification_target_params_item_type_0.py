@@ -21,7 +21,7 @@ class EscalationPolicyLevelNotificationTargetParamsItemType0:
         id (str): The ID of notification target
         type_ (EscalationPolicyLevelNotificationTargetParamsItemType0Type): The type of the notification target
         team_members (Union[Unset, EscalationPolicyLevelNotificationTargetParamsItemType0TeamMembers]): For targets with
-            type=team, controls whether to notify admins or all team members.
+            type=team, controls whether to notify admins, all team members, or escalate to team EP.
     """
 
     id: str

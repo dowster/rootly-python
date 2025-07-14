@@ -6,6 +6,12 @@ from attrs import field as _attrs_field
 from ..models.new_alerts_source_data_attributes_resolution_rule_attributes_condition_type import (
     NewAlertsSourceDataAttributesResolutionRuleAttributesConditionType,
 )
+from ..models.new_alerts_source_data_attributes_resolution_rule_attributes_identifier_matchable_type import (
+    NewAlertsSourceDataAttributesResolutionRuleAttributesIdentifierMatchableType,
+)
+from ..models.new_alerts_source_data_attributes_resolution_rule_attributes_identifier_reference_kind import (
+    NewAlertsSourceDataAttributesResolutionRuleAttributesIdentifierReferenceKind,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -25,6 +31,14 @@ class NewAlertsSourceDataAttributesResolutionRuleAttributes:
         enabled (Union[Unset, bool]): Set this to true to enable the auto resolution rule
         condition_type (Union[Unset, NewAlertsSourceDataAttributesResolutionRuleAttributesConditionType]): The type of
             condition to evaluate to apply auto resolution rule
+        identifier_matchable_type (Union[Unset,
+            NewAlertsSourceDataAttributesResolutionRuleAttributesIdentifierMatchableType]): The type of the identifier
+            matchable
+        identifier_matchable_id (Union[Unset, str]): The ID of the identifier matchable. If identifier_matchable_type is
+            AlertField, this is the ID of the alert field.
+        identifier_reference_kind (Union[Unset,
+            NewAlertsSourceDataAttributesResolutionRuleAttributesIdentifierReferenceKind]): The kind of the identifier
+            reference
         identifier_json_path (Union[Unset, str]): JSON path expression to extract unique alert identifier used to match
             triggered alerts with resolving alerts
         identifier_value_regex (Union[Unset, str]): Regex group to further specify the part of the string used as a
@@ -36,6 +50,13 @@ class NewAlertsSourceDataAttributesResolutionRuleAttributes:
 
     enabled: Union[Unset, bool] = UNSET
     condition_type: Union[Unset, NewAlertsSourceDataAttributesResolutionRuleAttributesConditionType] = UNSET
+    identifier_matchable_type: Union[
+        Unset, NewAlertsSourceDataAttributesResolutionRuleAttributesIdentifierMatchableType
+    ] = UNSET
+    identifier_matchable_id: Union[Unset, str] = UNSET
+    identifier_reference_kind: Union[
+        Unset, NewAlertsSourceDataAttributesResolutionRuleAttributesIdentifierReferenceKind
+    ] = UNSET
     identifier_json_path: Union[Unset, str] = UNSET
     identifier_value_regex: Union[Unset, str] = UNSET
     conditions_attributes: Union[
@@ -49,6 +70,16 @@ class NewAlertsSourceDataAttributesResolutionRuleAttributes:
         condition_type: Union[Unset, str] = UNSET
         if not isinstance(self.condition_type, Unset):
             condition_type = self.condition_type.value
+
+        identifier_matchable_type: Union[Unset, str] = UNSET
+        if not isinstance(self.identifier_matchable_type, Unset):
+            identifier_matchable_type = self.identifier_matchable_type.value
+
+        identifier_matchable_id = self.identifier_matchable_id
+
+        identifier_reference_kind: Union[Unset, str] = UNSET
+        if not isinstance(self.identifier_reference_kind, Unset):
+            identifier_reference_kind = self.identifier_reference_kind.value
 
         identifier_json_path = self.identifier_json_path
 
@@ -68,6 +99,12 @@ class NewAlertsSourceDataAttributesResolutionRuleAttributes:
             field_dict["enabled"] = enabled
         if condition_type is not UNSET:
             field_dict["condition_type"] = condition_type
+        if identifier_matchable_type is not UNSET:
+            field_dict["identifier_matchable_type"] = identifier_matchable_type
+        if identifier_matchable_id is not UNSET:
+            field_dict["identifier_matchable_id"] = identifier_matchable_id
+        if identifier_reference_kind is not UNSET:
+            field_dict["identifier_reference_kind"] = identifier_reference_kind
         if identifier_json_path is not UNSET:
             field_dict["identifier_json_path"] = identifier_json_path
         if identifier_value_regex is not UNSET:
@@ -93,6 +130,30 @@ class NewAlertsSourceDataAttributesResolutionRuleAttributes:
         else:
             condition_type = NewAlertsSourceDataAttributesResolutionRuleAttributesConditionType(_condition_type)
 
+        _identifier_matchable_type = d.pop("identifier_matchable_type", UNSET)
+        identifier_matchable_type: Union[
+            Unset, NewAlertsSourceDataAttributesResolutionRuleAttributesIdentifierMatchableType
+        ]
+        if isinstance(_identifier_matchable_type, Unset):
+            identifier_matchable_type = UNSET
+        else:
+            identifier_matchable_type = NewAlertsSourceDataAttributesResolutionRuleAttributesIdentifierMatchableType(
+                _identifier_matchable_type
+            )
+
+        identifier_matchable_id = d.pop("identifier_matchable_id", UNSET)
+
+        _identifier_reference_kind = d.pop("identifier_reference_kind", UNSET)
+        identifier_reference_kind: Union[
+            Unset, NewAlertsSourceDataAttributesResolutionRuleAttributesIdentifierReferenceKind
+        ]
+        if isinstance(_identifier_reference_kind, Unset):
+            identifier_reference_kind = UNSET
+        else:
+            identifier_reference_kind = NewAlertsSourceDataAttributesResolutionRuleAttributesIdentifierReferenceKind(
+                _identifier_reference_kind
+            )
+
         identifier_json_path = d.pop("identifier_json_path", UNSET)
 
         identifier_value_regex = d.pop("identifier_value_regex", UNSET)
@@ -111,6 +172,9 @@ class NewAlertsSourceDataAttributesResolutionRuleAttributes:
         new_alerts_source_data_attributes_resolution_rule_attributes = cls(
             enabled=enabled,
             condition_type=condition_type,
+            identifier_matchable_type=identifier_matchable_type,
+            identifier_matchable_id=identifier_matchable_id,
+            identifier_reference_kind=identifier_reference_kind,
             identifier_json_path=identifier_json_path,
             identifier_value_regex=identifier_value_regex,
             conditions_attributes=conditions_attributes,

@@ -25,12 +25,14 @@ class GeniusCreateWatsonxChatCompletionTaskParams:
         prompt (str): The prompt to send to WatsonX
         project_id (str):
         task_type (Union[Unset, GeniusCreateWatsonxChatCompletionTaskParamsTaskType]):
+        system_prompt (Union[Unset, str]): The system prompt to send to WatsonX (optional)
     """
 
     model: "GeniusCreateWatsonxChatCompletionTaskParamsModel"
     prompt: str
     project_id: str
     task_type: Union[Unset, GeniusCreateWatsonxChatCompletionTaskParamsTaskType] = UNSET
+    system_prompt: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -44,6 +46,8 @@ class GeniusCreateWatsonxChatCompletionTaskParams:
         if not isinstance(self.task_type, Unset):
             task_type = self.task_type.value
 
+        system_prompt = self.system_prompt
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -55,6 +59,8 @@ class GeniusCreateWatsonxChatCompletionTaskParams:
         )
         if task_type is not UNSET:
             field_dict["task_type"] = task_type
+        if system_prompt is not UNSET:
+            field_dict["system_prompt"] = system_prompt
 
         return field_dict
 
@@ -78,11 +84,14 @@ class GeniusCreateWatsonxChatCompletionTaskParams:
         else:
             task_type = GeniusCreateWatsonxChatCompletionTaskParamsTaskType(_task_type)
 
+        system_prompt = d.pop("system_prompt", UNSET)
+
         genius_create_watsonx_chat_completion_task_params = cls(
             model=model,
             prompt=prompt,
             project_id=project_id,
             task_type=task_type,
+            system_prompt=system_prompt,
         )
 
         genius_create_watsonx_chat_completion_task_params.additional_properties = d

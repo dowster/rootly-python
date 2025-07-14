@@ -27,6 +27,7 @@ class UpdateAlertRoutingRuleDataAttributes:
         name (Union[Unset, str]): The name of the alert routing rule
         enabled (Union[Unset, bool]): Whether the alert routing rule is enabled
         alerts_source_id (Union[Unset, UUID]): The ID of the alerts source
+        position (Union[Unset, int]): The position of the alert routing rule for ordering evaluation
         owning_team_ids (Union[Unset, list[UUID]]): The IDs of the teams that own the alert routing rule
         condition_type (Union[Unset, UpdateAlertRoutingRuleDataAttributesConditionType]): The type of condition for the
             alert routing rule
@@ -37,6 +38,7 @@ class UpdateAlertRoutingRuleDataAttributes:
     name: Union[Unset, str] = UNSET
     enabled: Union[Unset, bool] = UNSET
     alerts_source_id: Union[Unset, UUID] = UNSET
+    position: Union[Unset, int] = UNSET
     owning_team_ids: Union[Unset, list[UUID]] = UNSET
     condition_type: Union[Unset, UpdateAlertRoutingRuleDataAttributesConditionType] = UNSET
     conditions: Union[Unset, list["UpdateAlertRoutingRuleDataAttributesConditionsItem"]] = UNSET
@@ -50,6 +52,8 @@ class UpdateAlertRoutingRuleDataAttributes:
         alerts_source_id: Union[Unset, str] = UNSET
         if not isinstance(self.alerts_source_id, Unset):
             alerts_source_id = str(self.alerts_source_id)
+
+        position = self.position
 
         owning_team_ids: Union[Unset, list[str]] = UNSET
         if not isinstance(self.owning_team_ids, Unset):
@@ -81,6 +85,8 @@ class UpdateAlertRoutingRuleDataAttributes:
             field_dict["enabled"] = enabled
         if alerts_source_id is not UNSET:
             field_dict["alerts_source_id"] = alerts_source_id
+        if position is not UNSET:
+            field_dict["position"] = position
         if owning_team_ids is not UNSET:
             field_dict["owning_team_ids"] = owning_team_ids
         if condition_type is not UNSET:
@@ -112,6 +118,8 @@ class UpdateAlertRoutingRuleDataAttributes:
             alerts_source_id = UNSET
         else:
             alerts_source_id = UUID(_alerts_source_id)
+
+        position = d.pop("position", UNSET)
 
         owning_team_ids = []
         _owning_team_ids = d.pop("owning_team_ids", UNSET)
@@ -145,6 +153,7 @@ class UpdateAlertRoutingRuleDataAttributes:
             name=name,
             enabled=enabled,
             alerts_source_id=alerts_source_id,
+            position=position,
             owning_team_ids=owning_team_ids,
             condition_type=condition_type,
             conditions=conditions,

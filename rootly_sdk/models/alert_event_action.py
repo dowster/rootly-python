@@ -10,6 +10,7 @@ class AlertEventAction(str, Enum):
     CREATED = "created"
     EMAILED = "emailed"
     ESCALATED = "escalated"
+    ESCALATION_POLICY_PAGED = "escalation_policy_paged"
     MARKED = "marked"
     MUTED = "muted"
     NOTIFIED = "notified"

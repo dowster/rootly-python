@@ -22,7 +22,7 @@ class NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0:
         type_ (NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type): The type of the
             notification target
         team_members (Union[Unset, NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers]):
-            For targets with type=team, controls whether to notify admins or all team members.
+            For targets with type=team, controls whether to notify admins, all team members, or escalate to team EP.
     """
 
     id: str

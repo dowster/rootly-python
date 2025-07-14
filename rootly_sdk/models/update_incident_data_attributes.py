@@ -27,6 +27,8 @@ class UpdateIncidentDataAttributes:
         private (Union[None, Unset, bool]): Convert the incident as private. Once an incident is updated as private it
             cannot be undone Default: False.
         severity_id (Union[None, Unset, str]): The Severity ID to attach to the incident
+        public_title (Union[None, Unset, str]): The public title of the incident
+        alert_ids (Union[None, Unset, list[str]]): The Alert ID's to attach to the incident
         environment_ids (Union[None, Unset, list[str]]): The Environment ID's to attach to the incident
         incident_type_ids (Union[None, Unset, list[str]]): The Incident Type ID's to attach to the incident
         service_ids (Union[None, Unset, list[str]]): The Service ID's to attach to the incident
@@ -38,6 +40,9 @@ class UpdateIncidentDataAttributes:
         slack_channel_id (Union[None, Unset, str]): Slack channel id
         slack_channel_name (Union[None, Unset, str]): Slack channel name
         slack_channel_url (Union[None, Unset, str]): Slack channel url
+        slack_channel_archived (Union[None, Unset, bool]): Whether the Slack channel is archived
+        google_drive_parent_id (Union[None, Unset, str]): Google Drive parent folder ID
+        google_drive_url (Union[None, Unset, str]): Google Drive URL
         scheduled_for (Union[None, Unset, str]): Date of when the maintenance begins
         scheduled_until (Union[None, Unset, str]): Date of when the maintenance ends
         in_triage_at (Union[None, Unset, str]): Date of triage
@@ -46,6 +51,7 @@ class UpdateIncidentDataAttributes:
         acknowledged_at (Union[None, Unset, str]): Date of acknowledgment
         mitigated_at (Union[None, Unset, str]): Date of mitigation
         resolved_at (Union[None, Unset, str]): Date of resolution
+        closed_at (Union[None, Unset, str]): Date of closure
         cancelled_at (Union[None, Unset, str]): Date of cancellation
     """
 
@@ -57,6 +63,8 @@ class UpdateIncidentDataAttributes:
     status: Union[Unset, UpdateIncidentDataAttributesStatus] = UNSET
     private: Union[None, Unset, bool] = False
     severity_id: Union[None, Unset, str] = UNSET
+    public_title: Union[None, Unset, str] = UNSET
+    alert_ids: Union[None, Unset, list[str]] = UNSET
     environment_ids: Union[None, Unset, list[str]] = UNSET
     incident_type_ids: Union[None, Unset, list[str]] = UNSET
     service_ids: Union[None, Unset, list[str]] = UNSET
@@ -67,6 +75,9 @@ class UpdateIncidentDataAttributes:
     slack_channel_id: Union[None, Unset, str] = UNSET
     slack_channel_name: Union[None, Unset, str] = UNSET
     slack_channel_url: Union[None, Unset, str] = UNSET
+    slack_channel_archived: Union[None, Unset, bool] = UNSET
+    google_drive_parent_id: Union[None, Unset, str] = UNSET
+    google_drive_url: Union[None, Unset, str] = UNSET
     scheduled_for: Union[None, Unset, str] = UNSET
     scheduled_until: Union[None, Unset, str] = UNSET
     in_triage_at: Union[None, Unset, str] = UNSET
@@ -75,6 +86,7 @@ class UpdateIncidentDataAttributes:
     acknowledged_at: Union[None, Unset, str] = UNSET
     mitigated_at: Union[None, Unset, str] = UNSET
     resolved_at: Union[None, Unset, str] = UNSET
+    closed_at: Union[None, Unset, str] = UNSET
     cancelled_at: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
@@ -123,6 +135,21 @@ class UpdateIncidentDataAttributes:
             severity_id = UNSET
         else:
             severity_id = self.severity_id
+
+        public_title: Union[None, Unset, str]
+        if isinstance(self.public_title, Unset):
+            public_title = UNSET
+        else:
+            public_title = self.public_title
+
+        alert_ids: Union[None, Unset, list[str]]
+        if isinstance(self.alert_ids, Unset):
+            alert_ids = UNSET
+        elif isinstance(self.alert_ids, list):
+            alert_ids = self.alert_ids
+
+        else:
+            alert_ids = self.alert_ids
 
         environment_ids: Union[None, Unset, list[str]]
         if isinstance(self.environment_ids, Unset):
@@ -204,6 +231,24 @@ class UpdateIncidentDataAttributes:
         else:
             slack_channel_url = self.slack_channel_url
 
+        slack_channel_archived: Union[None, Unset, bool]
+        if isinstance(self.slack_channel_archived, Unset):
+            slack_channel_archived = UNSET
+        else:
+            slack_channel_archived = self.slack_channel_archived
+
+        google_drive_parent_id: Union[None, Unset, str]
+        if isinstance(self.google_drive_parent_id, Unset):
+            google_drive_parent_id = UNSET
+        else:
+            google_drive_parent_id = self.google_drive_parent_id
+
+        google_drive_url: Union[None, Unset, str]
+        if isinstance(self.google_drive_url, Unset):
+            google_drive_url = UNSET
+        else:
+            google_drive_url = self.google_drive_url
+
         scheduled_for: Union[None, Unset, str]
         if isinstance(self.scheduled_for, Unset):
             scheduled_for = UNSET
@@ -252,6 +297,12 @@ class UpdateIncidentDataAttributes:
         else:
             resolved_at = self.resolved_at
 
+        closed_at: Union[None, Unset, str]
+        if isinstance(self.closed_at, Unset):
+            closed_at = UNSET
+        else:
+            closed_at = self.closed_at
+
         cancelled_at: Union[None, Unset, str]
         if isinstance(self.cancelled_at, Unset):
             cancelled_at = UNSET
@@ -276,6 +327,10 @@ class UpdateIncidentDataAttributes:
             field_dict["private"] = private
         if severity_id is not UNSET:
             field_dict["severity_id"] = severity_id
+        if public_title is not UNSET:
+            field_dict["public_title"] = public_title
+        if alert_ids is not UNSET:
+            field_dict["alert_ids"] = alert_ids
         if environment_ids is not UNSET:
             field_dict["environment_ids"] = environment_ids
         if incident_type_ids is not UNSET:
@@ -296,6 +351,12 @@ class UpdateIncidentDataAttributes:
             field_dict["slack_channel_name"] = slack_channel_name
         if slack_channel_url is not UNSET:
             field_dict["slack_channel_url"] = slack_channel_url
+        if slack_channel_archived is not UNSET:
+            field_dict["slack_channel_archived"] = slack_channel_archived
+        if google_drive_parent_id is not UNSET:
+            field_dict["google_drive_parent_id"] = google_drive_parent_id
+        if google_drive_url is not UNSET:
+            field_dict["google_drive_url"] = google_drive_url
         if scheduled_for is not UNSET:
             field_dict["scheduled_for"] = scheduled_for
         if scheduled_until is not UNSET:
@@ -312,6 +373,8 @@ class UpdateIncidentDataAttributes:
             field_dict["mitigated_at"] = mitigated_at
         if resolved_at is not UNSET:
             field_dict["resolved_at"] = resolved_at
+        if closed_at is not UNSET:
+            field_dict["closed_at"] = closed_at
         if cancelled_at is not UNSET:
             field_dict["cancelled_at"] = cancelled_at
 
@@ -390,6 +453,32 @@ class UpdateIncidentDataAttributes:
             return cast(Union[None, Unset, str], data)
 
         severity_id = _parse_severity_id(d.pop("severity_id", UNSET))
+
+        def _parse_public_title(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        public_title = _parse_public_title(d.pop("public_title", UNSET))
+
+        def _parse_alert_ids(data: object) -> Union[None, Unset, list[str]]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                alert_ids_type_0 = cast(list[str], data)
+
+                return alert_ids_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, list[str]], data)
+
+        alert_ids = _parse_alert_ids(d.pop("alert_ids", UNSET))
 
         def _parse_environment_ids(data: object) -> Union[None, Unset, list[str]]:
             if data is None:
@@ -537,6 +626,33 @@ class UpdateIncidentDataAttributes:
 
         slack_channel_url = _parse_slack_channel_url(d.pop("slack_channel_url", UNSET))
 
+        def _parse_slack_channel_archived(data: object) -> Union[None, Unset, bool]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, bool], data)
+
+        slack_channel_archived = _parse_slack_channel_archived(d.pop("slack_channel_archived", UNSET))
+
+        def _parse_google_drive_parent_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        google_drive_parent_id = _parse_google_drive_parent_id(d.pop("google_drive_parent_id", UNSET))
+
+        def _parse_google_drive_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        google_drive_url = _parse_google_drive_url(d.pop("google_drive_url", UNSET))
+
         def _parse_scheduled_for(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
@@ -609,6 +725,15 @@ class UpdateIncidentDataAttributes:
 
         resolved_at = _parse_resolved_at(d.pop("resolved_at", UNSET))
 
+        def _parse_closed_at(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        closed_at = _parse_closed_at(d.pop("closed_at", UNSET))
+
         def _parse_cancelled_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
@@ -627,6 +752,8 @@ class UpdateIncidentDataAttributes:
             status=status,
             private=private,
             severity_id=severity_id,
+            public_title=public_title,
+            alert_ids=alert_ids,
             environment_ids=environment_ids,
             incident_type_ids=incident_type_ids,
             service_ids=service_ids,
@@ -637,6 +764,9 @@ class UpdateIncidentDataAttributes:
             slack_channel_id=slack_channel_id,
             slack_channel_name=slack_channel_name,
             slack_channel_url=slack_channel_url,
+            slack_channel_archived=slack_channel_archived,
+            google_drive_parent_id=google_drive_parent_id,
+            google_drive_url=google_drive_url,
             scheduled_for=scheduled_for,
             scheduled_until=scheduled_until,
             in_triage_at=in_triage_at,
@@ -645,6 +775,7 @@ class UpdateIncidentDataAttributes:
             acknowledged_at=acknowledged_at,
             mitigated_at=mitigated_at,
             resolved_at=resolved_at,
+            closed_at=closed_at,
             cancelled_at=cancelled_at,
         )
 

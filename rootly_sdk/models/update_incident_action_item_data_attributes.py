@@ -23,6 +23,7 @@ class UpdateIncidentActionItemDataAttributes:
         status (Union[Unset, UpdateIncidentActionItemDataAttributesStatus]): The status of the action item
         due_date (Union[None, Unset, str]): The due date of the action item
         jira_issue_id (Union[None, Unset, str]): The Jira issue ID.
+        jira_issue_key (Union[None, Unset, str]): The Jira issue key.
         jira_issue_url (Union[None, Unset, str]): The Jira issue URL.
     """
 
@@ -35,6 +36,7 @@ class UpdateIncidentActionItemDataAttributes:
     status: Union[Unset, UpdateIncidentActionItemDataAttributesStatus] = UNSET
     due_date: Union[None, Unset, str] = UNSET
     jira_issue_id: Union[None, Unset, str] = UNSET
+    jira_issue_key: Union[None, Unset, str] = UNSET
     jira_issue_url: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
@@ -85,6 +87,12 @@ class UpdateIncidentActionItemDataAttributes:
         else:
             jira_issue_id = self.jira_issue_id
 
+        jira_issue_key: Union[None, Unset, str]
+        if isinstance(self.jira_issue_key, Unset):
+            jira_issue_key = UNSET
+        else:
+            jira_issue_key = self.jira_issue_key
+
         jira_issue_url: Union[None, Unset, str]
         if isinstance(self.jira_issue_url, Unset):
             jira_issue_url = UNSET
@@ -111,6 +119,8 @@ class UpdateIncidentActionItemDataAttributes:
             field_dict["due_date"] = due_date
         if jira_issue_id is not UNSET:
             field_dict["jira_issue_id"] = jira_issue_id
+        if jira_issue_key is not UNSET:
+            field_dict["jira_issue_key"] = jira_issue_key
         if jira_issue_url is not UNSET:
             field_dict["jira_issue_url"] = jira_issue_url
 
@@ -195,6 +205,15 @@ class UpdateIncidentActionItemDataAttributes:
 
         jira_issue_id = _parse_jira_issue_id(d.pop("jira_issue_id", UNSET))
 
+        def _parse_jira_issue_key(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        jira_issue_key = _parse_jira_issue_key(d.pop("jira_issue_key", UNSET))
+
         def _parse_jira_issue_url(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
@@ -214,6 +233,7 @@ class UpdateIncidentActionItemDataAttributes:
             status=status,
             due_date=due_date,
             jira_issue_id=jira_issue_id,
+            jira_issue_key=jira_issue_key,
             jira_issue_url=jira_issue_url,
         )
 

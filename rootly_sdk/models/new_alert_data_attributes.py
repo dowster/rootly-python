@@ -26,7 +26,7 @@ class NewAlertDataAttributes:
         summary (str): The summary of the alert
         noise (Union[Unset, NewAlertDataAttributesNoise]): Whether the alert is marked as noise
         status (Union[Unset, NewAlertDataAttributesStatus]): Only available for organizations with Rootly On-Call
-            enabled. Can be one of open, triggered, acknowledged or resolved.
+            enabled. Can be one of open, triggered.
         description (Union[None, Unset, str]): The description of the alert
         service_ids (Union[None, Unset, list[str]]): The Service ID's to attach to the alert. If your organization has
             On-Call enabled and your notification target is a Service. This field will be automatically set for you.

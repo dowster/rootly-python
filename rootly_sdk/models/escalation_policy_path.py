@@ -4,6 +4,7 @@ from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..models.escalation_policy_path_match_mode import EscalationPolicyPathMatchMode
+from ..models.escalation_policy_path_time_restriction_time_zone import EscalationPolicyPathTimeRestrictionTimeZone
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -16,6 +17,7 @@ if TYPE_CHECKING:
     from ..models.escalation_policy_path_rules_item_type_4_type_0 import EscalationPolicyPathRulesItemType4Type0
     from ..models.escalation_policy_path_rules_item_type_4_type_1 import EscalationPolicyPathRulesItemType4Type1
     from ..models.escalation_policy_path_rules_item_type_4_type_2 import EscalationPolicyPathRulesItemType4Type2
+    from ..models.escalation_policy_path_time_restrictions_item import EscalationPolicyPathTimeRestrictionsItem
 
 
 T = TypeVar("T", bound="EscalationPolicyPath")
@@ -34,6 +36,7 @@ class EscalationPolicyPath:
             alert
         match_mode (Union[Unset, EscalationPolicyPathMatchMode]): How path rules are matched.
         position (Union[Unset, int]): The position of this path in the paths for this EP.
+        initial_delay (Union[Unset, int]): Initial delay for escalation path in minutes. Maximum 1 week (10080).
         created_at (Union[Unset, str]): Date of creation
         updated_at (Union[Unset, str]): Date of last update
         rules (Union[Unset, list[Union['EscalationPolicyPathRulesItemType0', 'EscalationPolicyPathRulesItemType1',
@@ -41,6 +44,10 @@ class EscalationPolicyPath:
             'EscalationPolicyPathRulesItemType3Type1', 'EscalationPolicyPathRulesItemType3Type2',
             'EscalationPolicyPathRulesItemType4Type0', 'EscalationPolicyPathRulesItemType4Type1',
             'EscalationPolicyPathRulesItemType4Type2']]]): Escalation path rules
+        time_restriction_time_zone (Union[Unset, EscalationPolicyPathTimeRestrictionTimeZone]): Time zone used for time
+            restrictions.
+        time_restrictions (Union[Unset, list['EscalationPolicyPathTimeRestrictionsItem']]): If time restrictions are
+            set, alerts will follow this path when they arrive within the specified time ranges and meet the rules.
     """
 
     name: str
@@ -51,6 +58,7 @@ class EscalationPolicyPath:
     repeat_count: Union[None, int]
     match_mode: Union[Unset, EscalationPolicyPathMatchMode] = UNSET
     position: Union[Unset, int] = UNSET
+    initial_delay: Union[Unset, int] = UNSET
     created_at: Union[Unset, str] = UNSET
     updated_at: Union[Unset, str] = UNSET
     rules: Union[
@@ -69,6 +77,8 @@ class EscalationPolicyPath:
             ]
         ],
     ] = UNSET
+    time_restriction_time_zone: Union[Unset, EscalationPolicyPathTimeRestrictionTimeZone] = UNSET
+    time_restrictions: Union[Unset, list["EscalationPolicyPathTimeRestrictionsItem"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -101,6 +111,8 @@ class EscalationPolicyPath:
 
         position = self.position
 
+        initial_delay = self.initial_delay
+
         created_at = self.created_at
 
         updated_at = self.updated_at
@@ -131,6 +143,17 @@ class EscalationPolicyPath:
 
                 rules.append(rules_item)
 
+        time_restriction_time_zone: Union[Unset, str] = UNSET
+        if not isinstance(self.time_restriction_time_zone, Unset):
+            time_restriction_time_zone = self.time_restriction_time_zone.value
+
+        time_restrictions: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.time_restrictions, Unset):
+            time_restrictions = []
+            for time_restrictions_item_data in self.time_restrictions:
+                time_restrictions_item = time_restrictions_item_data.to_dict()
+                time_restrictions.append(time_restrictions_item)
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -147,12 +170,18 @@ class EscalationPolicyPath:
             field_dict["match_mode"] = match_mode
         if position is not UNSET:
             field_dict["position"] = position
+        if initial_delay is not UNSET:
+            field_dict["initial_delay"] = initial_delay
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if updated_at is not UNSET:
             field_dict["updated_at"] = updated_at
         if rules is not UNSET:
             field_dict["rules"] = rules
+        if time_restriction_time_zone is not UNSET:
+            field_dict["time_restriction_time_zone"] = time_restriction_time_zone
+        if time_restrictions is not UNSET:
+            field_dict["time_restrictions"] = time_restrictions
 
         return field_dict
 
@@ -167,6 +196,7 @@ class EscalationPolicyPath:
         from ..models.escalation_policy_path_rules_item_type_4_type_0 import EscalationPolicyPathRulesItemType4Type0
         from ..models.escalation_policy_path_rules_item_type_4_type_1 import EscalationPolicyPathRulesItemType4Type1
         from ..models.escalation_policy_path_rules_item_type_4_type_2 import EscalationPolicyPathRulesItemType4Type2
+        from ..models.escalation_policy_path_time_restrictions_item import EscalationPolicyPathTimeRestrictionsItem
 
         d = src_dict.copy()
         name = d.pop("name")
@@ -199,6 +229,8 @@ class EscalationPolicyPath:
             match_mode = EscalationPolicyPathMatchMode(_match_mode)
 
         position = d.pop("position", UNSET)
+
+        initial_delay = d.pop("initial_delay", UNSET)
 
         created_at = d.pop("created_at", UNSET)
 
@@ -295,6 +327,20 @@ class EscalationPolicyPath:
 
             rules.append(rules_item)
 
+        _time_restriction_time_zone = d.pop("time_restriction_time_zone", UNSET)
+        time_restriction_time_zone: Union[Unset, EscalationPolicyPathTimeRestrictionTimeZone]
+        if isinstance(_time_restriction_time_zone, Unset):
+            time_restriction_time_zone = UNSET
+        else:
+            time_restriction_time_zone = EscalationPolicyPathTimeRestrictionTimeZone(_time_restriction_time_zone)
+
+        time_restrictions = []
+        _time_restrictions = d.pop("time_restrictions", UNSET)
+        for time_restrictions_item_data in _time_restrictions or []:
+            time_restrictions_item = EscalationPolicyPathTimeRestrictionsItem.from_dict(time_restrictions_item_data)
+
+            time_restrictions.append(time_restrictions_item)
+
         escalation_policy_path = cls(
             name=name,
             default=default,
@@ -304,9 +350,12 @@ class EscalationPolicyPath:
             repeat_count=repeat_count,
             match_mode=match_mode,
             position=position,
+            initial_delay=initial_delay,
             created_at=created_at,
             updated_at=updated_at,
             rules=rules,
+            time_restriction_time_zone=time_restriction_time_zone,
+            time_restrictions=time_restrictions,
         )
 
         escalation_policy_path.additional_properties = d

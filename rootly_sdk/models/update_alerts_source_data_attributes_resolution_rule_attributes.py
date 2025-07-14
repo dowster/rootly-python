@@ -6,6 +6,12 @@ from attrs import field as _attrs_field
 from ..models.update_alerts_source_data_attributes_resolution_rule_attributes_condition_type import (
     UpdateAlertsSourceDataAttributesResolutionRuleAttributesConditionType,
 )
+from ..models.update_alerts_source_data_attributes_resolution_rule_attributes_identifier_matchable_type import (
+    UpdateAlertsSourceDataAttributesResolutionRuleAttributesIdentifierMatchableType,
+)
+from ..models.update_alerts_source_data_attributes_resolution_rule_attributes_identifier_reference_kind import (
+    UpdateAlertsSourceDataAttributesResolutionRuleAttributesIdentifierReferenceKind,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -29,6 +35,14 @@ class UpdateAlertsSourceDataAttributesResolutionRuleAttributes:
             triggered alerts with resolving alerts
         identifier_value_regex (Union[Unset, str]): Regex group to further specify the part of the string used as a
             unique identifier
+        identifier_matchable_type (Union[Unset,
+            UpdateAlertsSourceDataAttributesResolutionRuleAttributesIdentifierMatchableType]): The type of the identifier
+            matchable
+        identifier_matchable_id (Union[Unset, str]): The ID of the identifier matchable. If identifier_matchable_type is
+            AlertField, this is the ID of the alert field.
+        identifier_reference_kind (Union[Unset,
+            UpdateAlertsSourceDataAttributesResolutionRuleAttributesIdentifierReferenceKind]): The kind of the identifier
+            reference
         conditions_attributes (Union[Unset,
             list['UpdateAlertsSourceDataAttributesResolutionRuleAttributesConditionsAttributesItem']]): List of conditions
             to evaluate for auto resolution
@@ -38,6 +52,13 @@ class UpdateAlertsSourceDataAttributesResolutionRuleAttributes:
     condition_type: Union[Unset, UpdateAlertsSourceDataAttributesResolutionRuleAttributesConditionType] = UNSET
     identifier_json_path: Union[Unset, str] = UNSET
     identifier_value_regex: Union[Unset, str] = UNSET
+    identifier_matchable_type: Union[
+        Unset, UpdateAlertsSourceDataAttributesResolutionRuleAttributesIdentifierMatchableType
+    ] = UNSET
+    identifier_matchable_id: Union[Unset, str] = UNSET
+    identifier_reference_kind: Union[
+        Unset, UpdateAlertsSourceDataAttributesResolutionRuleAttributesIdentifierReferenceKind
+    ] = UNSET
     conditions_attributes: Union[
         Unset, list["UpdateAlertsSourceDataAttributesResolutionRuleAttributesConditionsAttributesItem"]
     ] = UNSET
@@ -53,6 +74,16 @@ class UpdateAlertsSourceDataAttributesResolutionRuleAttributes:
         identifier_json_path = self.identifier_json_path
 
         identifier_value_regex = self.identifier_value_regex
+
+        identifier_matchable_type: Union[Unset, str] = UNSET
+        if not isinstance(self.identifier_matchable_type, Unset):
+            identifier_matchable_type = self.identifier_matchable_type.value
+
+        identifier_matchable_id = self.identifier_matchable_id
+
+        identifier_reference_kind: Union[Unset, str] = UNSET
+        if not isinstance(self.identifier_reference_kind, Unset):
+            identifier_reference_kind = self.identifier_reference_kind.value
 
         conditions_attributes: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.conditions_attributes, Unset):
@@ -72,6 +103,12 @@ class UpdateAlertsSourceDataAttributesResolutionRuleAttributes:
             field_dict["identifier_json_path"] = identifier_json_path
         if identifier_value_regex is not UNSET:
             field_dict["identifier_value_regex"] = identifier_value_regex
+        if identifier_matchable_type is not UNSET:
+            field_dict["identifier_matchable_type"] = identifier_matchable_type
+        if identifier_matchable_id is not UNSET:
+            field_dict["identifier_matchable_id"] = identifier_matchable_id
+        if identifier_reference_kind is not UNSET:
+            field_dict["identifier_reference_kind"] = identifier_reference_kind
         if conditions_attributes is not UNSET:
             field_dict["conditions_attributes"] = conditions_attributes
 
@@ -97,6 +134,30 @@ class UpdateAlertsSourceDataAttributesResolutionRuleAttributes:
 
         identifier_value_regex = d.pop("identifier_value_regex", UNSET)
 
+        _identifier_matchable_type = d.pop("identifier_matchable_type", UNSET)
+        identifier_matchable_type: Union[
+            Unset, UpdateAlertsSourceDataAttributesResolutionRuleAttributesIdentifierMatchableType
+        ]
+        if isinstance(_identifier_matchable_type, Unset):
+            identifier_matchable_type = UNSET
+        else:
+            identifier_matchable_type = UpdateAlertsSourceDataAttributesResolutionRuleAttributesIdentifierMatchableType(
+                _identifier_matchable_type
+            )
+
+        identifier_matchable_id = d.pop("identifier_matchable_id", UNSET)
+
+        _identifier_reference_kind = d.pop("identifier_reference_kind", UNSET)
+        identifier_reference_kind: Union[
+            Unset, UpdateAlertsSourceDataAttributesResolutionRuleAttributesIdentifierReferenceKind
+        ]
+        if isinstance(_identifier_reference_kind, Unset):
+            identifier_reference_kind = UNSET
+        else:
+            identifier_reference_kind = UpdateAlertsSourceDataAttributesResolutionRuleAttributesIdentifierReferenceKind(
+                _identifier_reference_kind
+            )
+
         conditions_attributes = []
         _conditions_attributes = d.pop("conditions_attributes", UNSET)
         for conditions_attributes_item_data in _conditions_attributes or []:
@@ -113,6 +174,9 @@ class UpdateAlertsSourceDataAttributesResolutionRuleAttributes:
             condition_type=condition_type,
             identifier_json_path=identifier_json_path,
             identifier_value_regex=identifier_value_regex,
+            identifier_matchable_type=identifier_matchable_type,
+            identifier_matchable_id=identifier_matchable_id,
+            identifier_reference_kind=identifier_reference_kind,
             conditions_attributes=conditions_attributes,
         )
 

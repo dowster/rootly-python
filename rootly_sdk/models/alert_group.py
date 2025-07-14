@@ -7,6 +7,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.alert_group_attributes_item import AlertGroupAttributesItem
+    from ..models.alert_group_conditions_item import AlertGroupConditionsItem
     from ..models.alert_group_targets_item import AlertGroupTargetsItem
 
 
@@ -22,13 +23,14 @@ class AlertGroup:
         slug (str): The slug of the alert group
         condition_type (str): Grouping condition for the alert group
         time_window (int): Time window for the alert grouping
-        group_by_alert_title (bool): Whether the alerts are grouped by title or not
-        group_by_alert_urgency (bool): Whether the alerts are grouped by urgency or not
         created_at (str): Date of creation
         updated_at (str): Date of last update
         deleted_at (Union[None, str]): Date or deletion
+        group_by_alert_title (Union[Unset, bool]): Whether the alerts are grouped by title or not
+        group_by_alert_urgency (Union[Unset, bool]): Whether the alerts are grouped by urgency or not
         targets (Union[Unset, list['AlertGroupTargetsItem']]):
         attributes (Union[Unset, list['AlertGroupAttributesItem']]):
+        conditions (Union[Unset, list['AlertGroupConditionsItem']]): The conditions for the alert group
     """
 
     name: str
@@ -36,13 +38,14 @@ class AlertGroup:
     slug: str
     condition_type: str
     time_window: int
-    group_by_alert_title: bool
-    group_by_alert_urgency: bool
     created_at: str
     updated_at: str
     deleted_at: Union[None, str]
+    group_by_alert_title: Union[Unset, bool] = UNSET
+    group_by_alert_urgency: Union[Unset, bool] = UNSET
     targets: Union[Unset, list["AlertGroupTargetsItem"]] = UNSET
     attributes: Union[Unset, list["AlertGroupAttributesItem"]] = UNSET
+    conditions: Union[Unset, list["AlertGroupConditionsItem"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -57,16 +60,16 @@ class AlertGroup:
 
         time_window = self.time_window
 
-        group_by_alert_title = self.group_by_alert_title
-
-        group_by_alert_urgency = self.group_by_alert_urgency
-
         created_at = self.created_at
 
         updated_at = self.updated_at
 
         deleted_at: Union[None, str]
         deleted_at = self.deleted_at
+
+        group_by_alert_title = self.group_by_alert_title
+
+        group_by_alert_urgency = self.group_by_alert_urgency
 
         targets: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.targets, Unset):
@@ -82,6 +85,13 @@ class AlertGroup:
                 attributes_item = attributes_item_data.to_dict()
                 attributes.append(attributes_item)
 
+        conditions: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.conditions, Unset):
+            conditions = []
+            for conditions_item_data in self.conditions:
+                conditions_item = conditions_item_data.to_dict()
+                conditions.append(conditions_item)
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -91,23 +101,28 @@ class AlertGroup:
                 "slug": slug,
                 "condition_type": condition_type,
                 "time_window": time_window,
-                "group_by_alert_title": group_by_alert_title,
-                "group_by_alert_urgency": group_by_alert_urgency,
                 "created_at": created_at,
                 "updated_at": updated_at,
                 "deleted_at": deleted_at,
             }
         )
+        if group_by_alert_title is not UNSET:
+            field_dict["group_by_alert_title"] = group_by_alert_title
+        if group_by_alert_urgency is not UNSET:
+            field_dict["group_by_alert_urgency"] = group_by_alert_urgency
         if targets is not UNSET:
             field_dict["targets"] = targets
         if attributes is not UNSET:
             field_dict["attributes"] = attributes
+        if conditions is not UNSET:
+            field_dict["conditions"] = conditions
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.alert_group_attributes_item import AlertGroupAttributesItem
+        from ..models.alert_group_conditions_item import AlertGroupConditionsItem
         from ..models.alert_group_targets_item import AlertGroupTargetsItem
 
         d = src_dict.copy()
@@ -126,10 +141,6 @@ class AlertGroup:
 
         time_window = d.pop("time_window")
 
-        group_by_alert_title = d.pop("group_by_alert_title")
-
-        group_by_alert_urgency = d.pop("group_by_alert_urgency")
-
         created_at = d.pop("created_at")
 
         updated_at = d.pop("updated_at")
@@ -140,6 +151,10 @@ class AlertGroup:
             return cast(Union[None, str], data)
 
         deleted_at = _parse_deleted_at(d.pop("deleted_at"))
+
+        group_by_alert_title = d.pop("group_by_alert_title", UNSET)
+
+        group_by_alert_urgency = d.pop("group_by_alert_urgency", UNSET)
 
         targets = []
         _targets = d.pop("targets", UNSET)
@@ -155,19 +170,27 @@ class AlertGroup:
 
             attributes.append(attributes_item)
 
+        conditions = []
+        _conditions = d.pop("conditions", UNSET)
+        for conditions_item_data in _conditions or []:
+            conditions_item = AlertGroupConditionsItem.from_dict(conditions_item_data)
+
+            conditions.append(conditions_item)
+
         alert_group = cls(
             name=name,
             description=description,
             slug=slug,
             condition_type=condition_type,
             time_window=time_window,
-            group_by_alert_title=group_by_alert_title,
-            group_by_alert_urgency=group_by_alert_urgency,
             created_at=created_at,
             updated_at=updated_at,
             deleted_at=deleted_at,
+            group_by_alert_title=group_by_alert_title,
+            group_by_alert_urgency=group_by_alert_urgency,
             targets=targets,
             attributes=attributes,
+            conditions=conditions,
         )
 
         alert_group.additional_properties = d

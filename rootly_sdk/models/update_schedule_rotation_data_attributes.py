@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
@@ -50,6 +50,10 @@ class UpdateScheduleRotationDataAttributes:
             'UpdateScheduleRotationDataAttributesScheduleRotationableAttributesType1',
             'UpdateScheduleRotationDataAttributesScheduleRotationableAttributesType2',
             'UpdateScheduleRotationDataAttributesScheduleRotationableAttributesType3', Unset]):
+        start_time (Union[None, Unset, str]): ISO8601 date and time when rotation starts. Shifts will only be created
+            after this time.
+        end_time (Union[None, Unset, str]): ISO8601 date and time when rotation ends. Shifts will only be created before
+            this time.
     """
 
     schedule_rotationable_type: UpdateScheduleRotationDataAttributesScheduleRotationableType
@@ -67,6 +71,8 @@ class UpdateScheduleRotationDataAttributes:
         "UpdateScheduleRotationDataAttributesScheduleRotationableAttributesType3",
         Unset,
     ] = UNSET
+    start_time: Union[None, Unset, str] = UNSET
+    end_time: Union[None, Unset, str] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.update_schedule_rotation_data_attributes_schedule_rotationable_attributes_type_0 import (
@@ -126,6 +132,18 @@ class UpdateScheduleRotationDataAttributes:
         else:
             schedule_rotationable_attributes = self.schedule_rotationable_attributes.to_dict()
 
+        start_time: Union[None, Unset, str]
+        if isinstance(self.start_time, Unset):
+            start_time = UNSET
+        else:
+            start_time = self.start_time
+
+        end_time: Union[None, Unset, str]
+        if isinstance(self.end_time, Unset):
+            end_time = UNSET
+        else:
+            end_time = self.end_time
+
         field_dict: dict[str, Any] = {}
         field_dict.update(
             {
@@ -148,6 +166,10 @@ class UpdateScheduleRotationDataAttributes:
             field_dict["time_zone"] = time_zone
         if schedule_rotationable_attributes is not UNSET:
             field_dict["schedule_rotationable_attributes"] = schedule_rotationable_attributes
+        if start_time is not UNSET:
+            field_dict["start_time"] = start_time
+        if end_time is not UNSET:
+            field_dict["end_time"] = end_time
 
         return field_dict
 
@@ -253,6 +275,24 @@ class UpdateScheduleRotationDataAttributes:
             d.pop("schedule_rotationable_attributes", UNSET)
         )
 
+        def _parse_start_time(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        start_time = _parse_start_time(d.pop("start_time", UNSET))
+
+        def _parse_end_time(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        end_time = _parse_end_time(d.pop("end_time", UNSET))
+
         update_schedule_rotation_data_attributes = cls(
             schedule_rotationable_type=schedule_rotationable_type,
             name=name,
@@ -263,6 +303,8 @@ class UpdateScheduleRotationDataAttributes:
             active_time_attributes=active_time_attributes,
             time_zone=time_zone,
             schedule_rotationable_attributes=schedule_rotationable_attributes,
+            start_time=start_time,
+            end_time=end_time,
         )
 
         return update_schedule_rotation_data_attributes

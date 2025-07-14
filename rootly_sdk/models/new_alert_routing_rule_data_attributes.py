@@ -27,8 +27,9 @@ class NewAlertRoutingRuleDataAttributes:
         destination (NewAlertRoutingRuleDataAttributesDestination):
         enabled (Union[Unset, bool]): Whether the alert routing rule is enabled
         owning_team_ids (Union[Unset, list[UUID]]): The IDs of the teams which own the alert routing rule. If the user
-            don't have Alert Routing Create Permission in On Call Roles, then this field is required and can contain Team
+            doesn't have Alert Routing Create Permission in On-Call Roles, then this field is required and can contain Team
             IDs the user is an admin of.
+        position (Union[Unset, int]): The position of the alert routing rule for ordering evaluation
         condition_type (Union[Unset, NewAlertRoutingRuleDataAttributesConditionType]): The type of condition for the
             alert routing rule
         conditions (Union[Unset, list['NewAlertRoutingRuleDataAttributesConditionsItem']]):
@@ -39,6 +40,7 @@ class NewAlertRoutingRuleDataAttributes:
     destination: "NewAlertRoutingRuleDataAttributesDestination"
     enabled: Union[Unset, bool] = UNSET
     owning_team_ids: Union[Unset, list[UUID]] = UNSET
+    position: Union[Unset, int] = UNSET
     condition_type: Union[Unset, NewAlertRoutingRuleDataAttributesConditionType] = UNSET
     conditions: Union[Unset, list["NewAlertRoutingRuleDataAttributesConditionsItem"]] = UNSET
 
@@ -57,6 +59,8 @@ class NewAlertRoutingRuleDataAttributes:
             for owning_team_ids_item_data in self.owning_team_ids:
                 owning_team_ids_item = str(owning_team_ids_item_data)
                 owning_team_ids.append(owning_team_ids_item)
+
+        position = self.position
 
         condition_type: Union[Unset, str] = UNSET
         if not isinstance(self.condition_type, Unset):
@@ -81,6 +85,8 @@ class NewAlertRoutingRuleDataAttributes:
             field_dict["enabled"] = enabled
         if owning_team_ids is not UNSET:
             field_dict["owning_team_ids"] = owning_team_ids
+        if position is not UNSET:
+            field_dict["position"] = position
         if condition_type is not UNSET:
             field_dict["condition_type"] = condition_type
         if conditions is not UNSET:
@@ -113,6 +119,8 @@ class NewAlertRoutingRuleDataAttributes:
 
             owning_team_ids.append(owning_team_ids_item)
 
+        position = d.pop("position", UNSET)
+
         _condition_type = d.pop("condition_type", UNSET)
         condition_type: Union[Unset, NewAlertRoutingRuleDataAttributesConditionType]
         if isinstance(_condition_type, Unset):
@@ -133,6 +141,7 @@ class NewAlertRoutingRuleDataAttributes:
             destination=destination,
             enabled=enabled,
             owning_team_ids=owning_team_ids,
+            position=position,
             condition_type=condition_type,
             conditions=conditions,
         )

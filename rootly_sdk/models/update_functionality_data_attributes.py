@@ -36,8 +36,8 @@ class UpdateFunctionalityDataAttributes:
         service_now_ci_sys_id (Union[None, Unset, str]): The Service Now CI sys id associated to this functionality
         environment_ids (Union[None, Unset, list[str]]): Environments associated with this functionality
         service_ids (Union[None, Unset, list[str]]): Services associated with this functionality
-        owners_group_ids (Union[None, Unset, list[str]]): Owner Teams associated with this functionality
-        owners_user_ids (Union[None, Unset, list[int]]): Owner Users associated with this functionality
+        owner_group_ids (Union[None, Unset, list[str]]): Owner Teams associated with this functionality
+        owner_user_ids (Union[None, Unset, list[int]]): Owner Users associated with this functionality
         slack_channels (Union[None, Unset, list['UpdateFunctionalityDataAttributesSlackChannelsType0Item']]): Slack
             Channels associated with this functionality
         slack_aliases (Union[None, Unset, list['UpdateFunctionalityDataAttributesSlackAliasesType0Item']]): Slack
@@ -59,8 +59,8 @@ class UpdateFunctionalityDataAttributes:
     service_now_ci_sys_id: Union[None, Unset, str] = UNSET
     environment_ids: Union[None, Unset, list[str]] = UNSET
     service_ids: Union[None, Unset, list[str]] = UNSET
-    owners_group_ids: Union[None, Unset, list[str]] = UNSET
-    owners_user_ids: Union[None, Unset, list[int]] = UNSET
+    owner_group_ids: Union[None, Unset, list[str]] = UNSET
+    owner_user_ids: Union[None, Unset, list[int]] = UNSET
     slack_channels: Union[None, Unset, list["UpdateFunctionalityDataAttributesSlackChannelsType0Item"]] = UNSET
     slack_aliases: Union[None, Unset, list["UpdateFunctionalityDataAttributesSlackAliasesType0Item"]] = UNSET
 
@@ -160,23 +160,23 @@ class UpdateFunctionalityDataAttributes:
         else:
             service_ids = self.service_ids
 
-        owners_group_ids: Union[None, Unset, list[str]]
-        if isinstance(self.owners_group_ids, Unset):
-            owners_group_ids = UNSET
-        elif isinstance(self.owners_group_ids, list):
-            owners_group_ids = self.owners_group_ids
+        owner_group_ids: Union[None, Unset, list[str]]
+        if isinstance(self.owner_group_ids, Unset):
+            owner_group_ids = UNSET
+        elif isinstance(self.owner_group_ids, list):
+            owner_group_ids = self.owner_group_ids
 
         else:
-            owners_group_ids = self.owners_group_ids
+            owner_group_ids = self.owner_group_ids
 
-        owners_user_ids: Union[None, Unset, list[int]]
-        if isinstance(self.owners_user_ids, Unset):
-            owners_user_ids = UNSET
-        elif isinstance(self.owners_user_ids, list):
-            owners_user_ids = self.owners_user_ids
+        owner_user_ids: Union[None, Unset, list[int]]
+        if isinstance(self.owner_user_ids, Unset):
+            owner_user_ids = UNSET
+        elif isinstance(self.owner_user_ids, list):
+            owner_user_ids = self.owner_user_ids
 
         else:
-            owners_user_ids = self.owners_user_ids
+            owner_user_ids = self.owner_user_ids
 
         slack_channels: Union[None, Unset, list[dict[str, Any]]]
         if isinstance(self.slack_channels, Unset):
@@ -234,10 +234,10 @@ class UpdateFunctionalityDataAttributes:
             field_dict["environment_ids"] = environment_ids
         if service_ids is not UNSET:
             field_dict["service_ids"] = service_ids
-        if owners_group_ids is not UNSET:
-            field_dict["owners_group_ids"] = owners_group_ids
-        if owners_user_ids is not UNSET:
-            field_dict["owners_user_ids"] = owners_user_ids
+        if owner_group_ids is not UNSET:
+            field_dict["owner_group_ids"] = owner_group_ids
+        if owner_user_ids is not UNSET:
+            field_dict["owner_user_ids"] = owner_user_ids
         if slack_channels is not UNSET:
             field_dict["slack_channels"] = slack_channels
         if slack_aliases is not UNSET:
@@ -407,7 +407,7 @@ class UpdateFunctionalityDataAttributes:
 
         service_ids = _parse_service_ids(d.pop("service_ids", UNSET))
 
-        def _parse_owners_group_ids(data: object) -> Union[None, Unset, list[str]]:
+        def _parse_owner_group_ids(data: object) -> Union[None, Unset, list[str]]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -415,16 +415,16 @@ class UpdateFunctionalityDataAttributes:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                owners_group_ids_type_0 = cast(list[str], data)
+                owner_group_ids_type_0 = cast(list[str], data)
 
-                return owners_group_ids_type_0
+                return owner_group_ids_type_0
             except:  # noqa: E722
                 pass
             return cast(Union[None, Unset, list[str]], data)
 
-        owners_group_ids = _parse_owners_group_ids(d.pop("owners_group_ids", UNSET))
+        owner_group_ids = _parse_owner_group_ids(d.pop("owner_group_ids", UNSET))
 
-        def _parse_owners_user_ids(data: object) -> Union[None, Unset, list[int]]:
+        def _parse_owner_user_ids(data: object) -> Union[None, Unset, list[int]]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -432,14 +432,14 @@ class UpdateFunctionalityDataAttributes:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                owners_user_ids_type_0 = cast(list[int], data)
+                owner_user_ids_type_0 = cast(list[int], data)
 
-                return owners_user_ids_type_0
+                return owner_user_ids_type_0
             except:  # noqa: E722
                 pass
             return cast(Union[None, Unset, list[int]], data)
 
-        owners_user_ids = _parse_owners_user_ids(d.pop("owners_user_ids", UNSET))
+        owner_user_ids = _parse_owner_user_ids(d.pop("owner_user_ids", UNSET))
 
         def _parse_slack_channels(
             data: object,
@@ -509,8 +509,8 @@ class UpdateFunctionalityDataAttributes:
             service_now_ci_sys_id=service_now_ci_sys_id,
             environment_ids=environment_ids,
             service_ids=service_ids,
-            owners_group_ids=owners_group_ids,
-            owners_user_ids=owners_user_ids,
+            owner_group_ids=owner_group_ids,
+            owner_user_ids=owner_user_ids,
             slack_channels=slack_channels,
             slack_aliases=slack_aliases,
         )

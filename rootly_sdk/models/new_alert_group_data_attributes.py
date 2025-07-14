@@ -11,6 +11,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.new_alert_group_data_attributes_attributes_item import NewAlertGroupDataAttributesAttributesItem
+    from ..models.new_alert_group_data_attributes_conditions_item import NewAlertGroupDataAttributesConditionsItem
     from ..models.new_alert_group_data_attributes_targets_item import NewAlertGroupDataAttributesTargetsItem
 
 
@@ -32,6 +33,7 @@ class NewAlertGroupDataAttributes:
             be grouped by urgencies.
         condition_type (Union[Unset, NewAlertGroupDataAttributesConditionType]): Group alerts when ANY or ALL of the
             fields are matching.
+        conditions (Union[Unset, list['NewAlertGroupDataAttributesConditionsItem']]):
     """
 
     name: str
@@ -42,6 +44,7 @@ class NewAlertGroupDataAttributes:
     group_by_alert_title: Union[Unset, NewAlertGroupDataAttributesGroupByAlertTitle] = UNSET
     group_by_alert_urgency: Union[Unset, NewAlertGroupDataAttributesGroupByAlertUrgency] = UNSET
     condition_type: Union[Unset, NewAlertGroupDataAttributesConditionType] = UNSET
+    conditions: Union[Unset, list["NewAlertGroupDataAttributesConditionsItem"]] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
         name = self.name
@@ -78,6 +81,13 @@ class NewAlertGroupDataAttributes:
         if not isinstance(self.condition_type, Unset):
             condition_type = self.condition_type.value
 
+        conditions: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.conditions, Unset):
+            conditions = []
+            for conditions_item_data in self.conditions:
+                conditions_item = conditions_item_data.to_dict()
+                conditions.append(conditions_item)
+
         field_dict: dict[str, Any] = {}
         field_dict.update(
             {
@@ -97,12 +107,15 @@ class NewAlertGroupDataAttributes:
             field_dict["group_by_alert_urgency"] = group_by_alert_urgency
         if condition_type is not UNSET:
             field_dict["condition_type"] = condition_type
+        if conditions is not UNSET:
+            field_dict["conditions"] = conditions
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.new_alert_group_data_attributes_attributes_item import NewAlertGroupDataAttributesAttributesItem
+        from ..models.new_alert_group_data_attributes_conditions_item import NewAlertGroupDataAttributesConditionsItem
         from ..models.new_alert_group_data_attributes_targets_item import NewAlertGroupDataAttributesTargetsItem
 
         d = src_dict.copy()
@@ -154,6 +167,13 @@ class NewAlertGroupDataAttributes:
         else:
             condition_type = NewAlertGroupDataAttributesConditionType(_condition_type)
 
+        conditions = []
+        _conditions = d.pop("conditions", UNSET)
+        for conditions_item_data in _conditions or []:
+            conditions_item = NewAlertGroupDataAttributesConditionsItem.from_dict(conditions_item_data)
+
+            conditions.append(conditions_item)
+
         new_alert_group_data_attributes = cls(
             name=name,
             targets=targets,
@@ -163,6 +183,7 @@ class NewAlertGroupDataAttributes:
             group_by_alert_title=group_by_alert_title,
             group_by_alert_urgency=group_by_alert_urgency,
             condition_type=condition_type,
+            conditions=conditions,
         )
 
         return new_alert_group_data_attributes

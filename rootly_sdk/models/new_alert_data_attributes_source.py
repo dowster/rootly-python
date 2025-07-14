@@ -3,6 +3,7 @@ from enum import Enum
 
 class NewAlertDataAttributesSource(str, Enum):
     ALERTMANAGER = "alertmanager"
+    API = "api"
     APP_DYNAMICS = "app_dynamics"
     APP_OPTICS = "app_optics"
     ASANA = "asana"

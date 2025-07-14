@@ -27,6 +27,8 @@ class Heartbeat:
         updated_at (str): Date of last update
         description (Union[None, Unset, str]): The description of the heartbeat
         alert_urgency_id (Union[None, Unset, str]): Urgency of alerts triggered when heartbeat expires.
+        ping_url (Union[None, Unset, str]): URL to receive heartbeat pings.
+        secret (Union[None, Unset, str]): Secret used as bearer token when pinging heartbeat.
         last_pinged_at (Union[None, Unset, str]): When the heartbeat was last pinged.
         expires_at (Union[None, Unset, str]): When heartbeat expires
     """
@@ -43,6 +45,8 @@ class Heartbeat:
     updated_at: str
     description: Union[None, Unset, str] = UNSET
     alert_urgency_id: Union[None, Unset, str] = UNSET
+    ping_url: Union[None, Unset, str] = UNSET
+    secret: Union[None, Unset, str] = UNSET
     last_pinged_at: Union[None, Unset, str] = UNSET
     expires_at: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -80,6 +84,18 @@ class Heartbeat:
         else:
             alert_urgency_id = self.alert_urgency_id
 
+        ping_url: Union[None, Unset, str]
+        if isinstance(self.ping_url, Unset):
+            ping_url = UNSET
+        else:
+            ping_url = self.ping_url
+
+        secret: Union[None, Unset, str]
+        if isinstance(self.secret, Unset):
+            secret = UNSET
+        else:
+            secret = self.secret
+
         last_pinged_at: Union[None, Unset, str]
         if isinstance(self.last_pinged_at, Unset):
             last_pinged_at = UNSET
@@ -112,6 +128,10 @@ class Heartbeat:
             field_dict["description"] = description
         if alert_urgency_id is not UNSET:
             field_dict["alert_urgency_id"] = alert_urgency_id
+        if ping_url is not UNSET:
+            field_dict["ping_url"] = ping_url
+        if secret is not UNSET:
+            field_dict["secret"] = secret
         if last_pinged_at is not UNSET:
             field_dict["last_pinged_at"] = last_pinged_at
         if expires_at is not UNSET:
@@ -160,6 +180,24 @@ class Heartbeat:
 
         alert_urgency_id = _parse_alert_urgency_id(d.pop("alert_urgency_id", UNSET))
 
+        def _parse_ping_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        ping_url = _parse_ping_url(d.pop("ping_url", UNSET))
+
+        def _parse_secret(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        secret = _parse_secret(d.pop("secret", UNSET))
+
         def _parse_last_pinged_at(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
@@ -191,6 +229,8 @@ class Heartbeat:
             updated_at=updated_at,
             description=description,
             alert_urgency_id=alert_urgency_id,
+            ping_url=ping_url,
+            secret=secret,
             last_pinged_at=last_pinged_at,
             expires_at=expires_at,
         )

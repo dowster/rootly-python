@@ -17,6 +17,8 @@ class UpdateNotionPageTaskParams:
         task_type (Union[Unset, UpdateNotionPageTaskParamsTaskType]):
         title (Union[Unset, str]): The Notion page title
         post_mortem_template_id (Union[Unset, str]): Retrospective template to use when creating page task, if desired
+        content (Union[Unset, str]): Custom page content with liquid templating support. When provided, only this
+            content will be rendered (no default sections)
         show_timeline_as_table (Union[Unset, bool]):
         show_action_items_as_table (Union[Unset, bool]):
     """
@@ -25,6 +27,7 @@ class UpdateNotionPageTaskParams:
     task_type: Union[Unset, UpdateNotionPageTaskParamsTaskType] = UNSET
     title: Union[Unset, str] = UNSET
     post_mortem_template_id: Union[Unset, str] = UNSET
+    content: Union[Unset, str] = UNSET
     show_timeline_as_table: Union[Unset, bool] = UNSET
     show_action_items_as_table: Union[Unset, bool] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -39,6 +42,8 @@ class UpdateNotionPageTaskParams:
         title = self.title
 
         post_mortem_template_id = self.post_mortem_template_id
+
+        content = self.content
 
         show_timeline_as_table = self.show_timeline_as_table
 
@@ -57,6 +62,8 @@ class UpdateNotionPageTaskParams:
             field_dict["title"] = title
         if post_mortem_template_id is not UNSET:
             field_dict["post_mortem_template_id"] = post_mortem_template_id
+        if content is not UNSET:
+            field_dict["content"] = content
         if show_timeline_as_table is not UNSET:
             field_dict["show_timeline_as_table"] = show_timeline_as_table
         if show_action_items_as_table is not UNSET:
@@ -80,6 +87,8 @@ class UpdateNotionPageTaskParams:
 
         post_mortem_template_id = d.pop("post_mortem_template_id", UNSET)
 
+        content = d.pop("content", UNSET)
+
         show_timeline_as_table = d.pop("show_timeline_as_table", UNSET)
 
         show_action_items_as_table = d.pop("show_action_items_as_table", UNSET)
@@ -89,6 +98,7 @@ class UpdateNotionPageTaskParams:
             task_type=task_type,
             title=title,
             post_mortem_template_id=post_mortem_template_id,
+            content=content,
             show_timeline_as_table=show_timeline_as_table,
             show_action_items_as_table=show_action_items_as_table,
         )

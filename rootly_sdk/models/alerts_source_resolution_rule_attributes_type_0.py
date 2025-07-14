@@ -8,7 +8,7 @@ T = TypeVar("T", bound="AlertsSourceResolutionRuleAttributesType0")
 
 @_attrs_define
 class AlertsSourceResolutionRuleAttributesType0:
-    """Additional attributes for email alerts source"""
+    """Additional attributes for email or generic webhook alerts source"""
 
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 

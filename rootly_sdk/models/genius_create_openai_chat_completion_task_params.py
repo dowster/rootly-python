@@ -24,11 +24,13 @@ class GeniusCreateOpenaiChatCompletionTaskParams:
         model (GeniusCreateOpenaiChatCompletionTaskParamsModel): The OpenAI model. eg: gpt-4o-mini
         prompt (str): The prompt to send to OpenAI
         task_type (Union[Unset, GeniusCreateOpenaiChatCompletionTaskParamsTaskType]):
+        system_prompt (Union[Unset, str]): The system prompt to send to OpenAI (optional)
     """
 
     model: "GeniusCreateOpenaiChatCompletionTaskParamsModel"
     prompt: str
     task_type: Union[Unset, GeniusCreateOpenaiChatCompletionTaskParamsTaskType] = UNSET
+    system_prompt: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -40,6 +42,8 @@ class GeniusCreateOpenaiChatCompletionTaskParams:
         if not isinstance(self.task_type, Unset):
             task_type = self.task_type.value
 
+        system_prompt = self.system_prompt
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -50,6 +54,8 @@ class GeniusCreateOpenaiChatCompletionTaskParams:
         )
         if task_type is not UNSET:
             field_dict["task_type"] = task_type
+        if system_prompt is not UNSET:
+            field_dict["system_prompt"] = system_prompt
 
         return field_dict
 
@@ -71,10 +77,13 @@ class GeniusCreateOpenaiChatCompletionTaskParams:
         else:
             task_type = GeniusCreateOpenaiChatCompletionTaskParamsTaskType(_task_type)
 
+        system_prompt = d.pop("system_prompt", UNSET)
+
         genius_create_openai_chat_completion_task_params = cls(
             model=model,
             prompt=prompt,
             task_type=task_type,
+            system_prompt=system_prompt,
         )
 
         genius_create_openai_chat_completion_task_params.additional_properties = d

@@ -16,6 +16,7 @@ class StatusPage:
         title (str): The title of the status page
         created_at (str): Date of creation
         updated_at (str): Date of last update
+        slug (Union[Unset, str]): The slug of the status page
         public_title (Union[None, Unset, str]): The public title of the status page
         description (Union[None, Unset, str]): The description of the status page
         public_description (Union[None, Unset, str]): The public description of the status page
@@ -44,6 +45,7 @@ class StatusPage:
     title: str
     created_at: str
     updated_at: str
+    slug: Union[Unset, str] = UNSET
     public_title: Union[None, Unset, str] = UNSET
     description: Union[None, Unset, str] = UNSET
     public_description: Union[None, Unset, str] = UNSET
@@ -74,6 +76,8 @@ class StatusPage:
         created_at = self.created_at
 
         updated_at = self.updated_at
+
+        slug = self.slug
 
         public_title: Union[None, Unset, str]
         if isinstance(self.public_title, Unset):
@@ -208,6 +212,8 @@ class StatusPage:
                 "updated_at": updated_at,
             }
         )
+        if slug is not UNSET:
+            field_dict["slug"] = slug
         if public_title is not UNSET:
             field_dict["public_title"] = public_title
         if description is not UNSET:
@@ -263,6 +269,8 @@ class StatusPage:
         created_at = d.pop("created_at")
 
         updated_at = d.pop("updated_at")
+
+        slug = d.pop("slug", UNSET)
 
         def _parse_public_title(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -443,6 +451,7 @@ class StatusPage:
             title=title,
             created_at=created_at,
             updated_at=updated_at,
+            slug=slug,
             public_title=public_title,
             description=description,
             public_description=public_description,

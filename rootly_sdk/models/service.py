@@ -43,8 +43,8 @@ class Service:
             main
         environment_ids (Union[None, Unset, list[str]]): Environments associated with this service
         service_ids (Union[None, Unset, list[str]]): Services dependent on this service
-        owners_group_ids (Union[None, Unset, list[str]]): Owner Teams associated with this service
-        owners_user_ids (Union[None, Unset, list[int]]): Owner Users associated with this service
+        owner_group_ids (Union[None, Unset, list[str]]): Owner Teams associated with this service
+        owner_user_ids (Union[None, Unset, list[int]]): Owner Users associated with this service
         alert_urgency_id (Union[None, Unset, str]): The alert urgency id of the service
         alerts_email_enabled (Union[None, Unset, bool]): Enable alerts through email
         alerts_email_address (Union[None, Unset, str]): Email generated to send alerts to
@@ -75,8 +75,8 @@ class Service:
     gitlab_repository_branch: Union[None, Unset, str] = UNSET
     environment_ids: Union[None, Unset, list[str]] = UNSET
     service_ids: Union[None, Unset, list[str]] = UNSET
-    owners_group_ids: Union[None, Unset, list[str]] = UNSET
-    owners_user_ids: Union[None, Unset, list[int]] = UNSET
+    owner_group_ids: Union[None, Unset, list[str]] = UNSET
+    owner_user_ids: Union[None, Unset, list[int]] = UNSET
     alert_urgency_id: Union[None, Unset, str] = UNSET
     alerts_email_enabled: Union[None, Unset, bool] = UNSET
     alerts_email_address: Union[None, Unset, str] = UNSET
@@ -204,23 +204,23 @@ class Service:
         else:
             service_ids = self.service_ids
 
-        owners_group_ids: Union[None, Unset, list[str]]
-        if isinstance(self.owners_group_ids, Unset):
-            owners_group_ids = UNSET
-        elif isinstance(self.owners_group_ids, list):
-            owners_group_ids = self.owners_group_ids
+        owner_group_ids: Union[None, Unset, list[str]]
+        if isinstance(self.owner_group_ids, Unset):
+            owner_group_ids = UNSET
+        elif isinstance(self.owner_group_ids, list):
+            owner_group_ids = self.owner_group_ids
 
         else:
-            owners_group_ids = self.owners_group_ids
+            owner_group_ids = self.owner_group_ids
 
-        owners_user_ids: Union[None, Unset, list[int]]
-        if isinstance(self.owners_user_ids, Unset):
-            owners_user_ids = UNSET
-        elif isinstance(self.owners_user_ids, list):
-            owners_user_ids = self.owners_user_ids
+        owner_user_ids: Union[None, Unset, list[int]]
+        if isinstance(self.owner_user_ids, Unset):
+            owner_user_ids = UNSET
+        elif isinstance(self.owner_user_ids, list):
+            owner_user_ids = self.owner_user_ids
 
         else:
-            owners_user_ids = self.owners_user_ids
+            owner_user_ids = self.owner_user_ids
 
         alert_urgency_id: Union[None, Unset, str]
         if isinstance(self.alert_urgency_id, Unset):
@@ -309,10 +309,10 @@ class Service:
             field_dict["environment_ids"] = environment_ids
         if service_ids is not UNSET:
             field_dict["service_ids"] = service_ids
-        if owners_group_ids is not UNSET:
-            field_dict["owners_group_ids"] = owners_group_ids
-        if owners_user_ids is not UNSET:
-            field_dict["owners_user_ids"] = owners_user_ids
+        if owner_group_ids is not UNSET:
+            field_dict["owner_group_ids"] = owner_group_ids
+        if owner_user_ids is not UNSET:
+            field_dict["owner_user_ids"] = owner_user_ids
         if alert_urgency_id is not UNSET:
             field_dict["alert_urgency_id"] = alert_urgency_id
         if alerts_email_enabled is not UNSET:
@@ -517,7 +517,7 @@ class Service:
 
         service_ids = _parse_service_ids(d.pop("service_ids", UNSET))
 
-        def _parse_owners_group_ids(data: object) -> Union[None, Unset, list[str]]:
+        def _parse_owner_group_ids(data: object) -> Union[None, Unset, list[str]]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -525,16 +525,16 @@ class Service:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                owners_group_ids_type_0 = cast(list[str], data)
+                owner_group_ids_type_0 = cast(list[str], data)
 
-                return owners_group_ids_type_0
+                return owner_group_ids_type_0
             except:  # noqa: E722
                 pass
             return cast(Union[None, Unset, list[str]], data)
 
-        owners_group_ids = _parse_owners_group_ids(d.pop("owners_group_ids", UNSET))
+        owner_group_ids = _parse_owner_group_ids(d.pop("owner_group_ids", UNSET))
 
-        def _parse_owners_user_ids(data: object) -> Union[None, Unset, list[int]]:
+        def _parse_owner_user_ids(data: object) -> Union[None, Unset, list[int]]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -542,14 +542,14 @@ class Service:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                owners_user_ids_type_0 = cast(list[int], data)
+                owner_user_ids_type_0 = cast(list[int], data)
 
-                return owners_user_ids_type_0
+                return owner_user_ids_type_0
             except:  # noqa: E722
                 pass
             return cast(Union[None, Unset, list[int]], data)
 
-        owners_user_ids = _parse_owners_user_ids(d.pop("owners_user_ids", UNSET))
+        owner_user_ids = _parse_owner_user_ids(d.pop("owner_user_ids", UNSET))
 
         def _parse_alert_urgency_id(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -646,8 +646,8 @@ class Service:
             gitlab_repository_branch=gitlab_repository_branch,
             environment_ids=environment_ids,
             service_ids=service_ids,
-            owners_group_ids=owners_group_ids,
-            owners_user_ids=owners_user_ids,
+            owner_group_ids=owner_group_ids,
+            owner_user_ids=owner_user_ids,
             alert_urgency_id=alert_urgency_id,
             alerts_email_enabled=alerts_email_enabled,
             alerts_email_address=alerts_email_address,

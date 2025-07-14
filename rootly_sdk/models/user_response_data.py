@@ -1,12 +1,14 @@
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..models.user_response_data_type import UserResponseDataType
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.user import User
+    from ..models.user_relationships import UserRelationships
 
 
 T = TypeVar("T", bound="UserResponseData")
@@ -19,11 +21,13 @@ class UserResponseData:
         id (str): Unique ID of the user
         type_ (UserResponseDataType):
         attributes (User):
+        relationships (Union[Unset, UserRelationships]):
     """
 
     id: str
     type_: UserResponseDataType
     attributes: "User"
+    relationships: Union[Unset, "UserRelationships"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -32,6 +36,10 @@ class UserResponseData:
         type_ = self.type_.value
 
         attributes = self.attributes.to_dict()
+
+        relationships: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.relationships, Unset):
+            relationships = self.relationships.to_dict()
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -42,12 +50,15 @@ class UserResponseData:
                 "attributes": attributes,
             }
         )
+        if relationships is not UNSET:
+            field_dict["relationships"] = relationships
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.user import User
+        from ..models.user_relationships import UserRelationships
 
         d = src_dict.copy()
         id = d.pop("id")
@@ -56,10 +67,18 @@ class UserResponseData:
 
         attributes = User.from_dict(d.pop("attributes"))
 
+        _relationships = d.pop("relationships", UNSET)
+        relationships: Union[Unset, UserRelationships]
+        if isinstance(_relationships, Unset):
+            relationships = UNSET
+        else:
+            relationships = UserRelationships.from_dict(_relationships)
+
         user_response_data = cls(
             id=id,
             type_=type_,
             attributes=attributes,
+            relationships=relationships,
         )
 
         user_response_data.additional_properties = d

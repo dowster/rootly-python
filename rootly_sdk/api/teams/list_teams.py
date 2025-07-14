@@ -5,13 +5,14 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...models.list_teams_include import ListTeamsInclude
 from ...models.team_list import TeamList
 from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
-    include: Union[Unset, str] = UNSET,
+    include: Union[Unset, ListTeamsInclude] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     filtersearch: Union[Unset, str] = UNSET,
@@ -30,7 +31,11 @@ def _get_kwargs(
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
-    params["include"] = include
+    json_include: Union[Unset, str] = UNSET
+    if not isinstance(include, Unset):
+        json_include = include.value
+
+    params["include"] = json_include
 
     params["page[number]"] = pagenumber
 
@@ -96,7 +101,7 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    include: Union[Unset, str] = UNSET,
+    include: Union[Unset, ListTeamsInclude] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     filtersearch: Union[Unset, str] = UNSET,
@@ -118,7 +123,7 @@ def sync_detailed(
      List teams
 
     Args:
-        include (Union[Unset, str]):
+        include (Union[Unset, ListTeamsInclude]):
         pagenumber (Union[Unset, int]):
         pagesize (Union[Unset, int]):
         filtersearch (Union[Unset, str]):
@@ -172,7 +177,7 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    include: Union[Unset, str] = UNSET,
+    include: Union[Unset, ListTeamsInclude] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     filtersearch: Union[Unset, str] = UNSET,
@@ -194,7 +199,7 @@ def sync(
      List teams
 
     Args:
-        include (Union[Unset, str]):
+        include (Union[Unset, ListTeamsInclude]):
         pagenumber (Union[Unset, int]):
         pagesize (Union[Unset, int]):
         filtersearch (Union[Unset, str]):
@@ -243,7 +248,7 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    include: Union[Unset, str] = UNSET,
+    include: Union[Unset, ListTeamsInclude] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     filtersearch: Union[Unset, str] = UNSET,
@@ -265,7 +270,7 @@ async def asyncio_detailed(
      List teams
 
     Args:
-        include (Union[Unset, str]):
+        include (Union[Unset, ListTeamsInclude]):
         pagenumber (Union[Unset, int]):
         pagesize (Union[Unset, int]):
         filtersearch (Union[Unset, str]):
@@ -317,7 +322,7 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    include: Union[Unset, str] = UNSET,
+    include: Union[Unset, ListTeamsInclude] = UNSET,
     pagenumber: Union[Unset, int] = UNSET,
     pagesize: Union[Unset, int] = UNSET,
     filtersearch: Union[Unset, str] = UNSET,
@@ -339,7 +344,7 @@ async def asyncio(
      List teams
 
     Args:
-        include (Union[Unset, str]):
+        include (Union[Unset, ListTeamsInclude]):
         pagenumber (Union[Unset, int]):
         pagesize (Union[Unset, int]):
         filtersearch (Union[Unset, str]):

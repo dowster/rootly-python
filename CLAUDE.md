@@ -31,6 +31,13 @@ To test the SDK imports correctly:
 python -c "import rootly_sdk; print('SDK imports successfully')"
 ```
 
+## Regenerating the Client
+
+To regenerate the client from the OpenAPI specification:
+```bash
+openapi-python-client generate --url https://rootly-heroku.s3.amazonaws.com/swagger/v1/swagger.json --no-fail-on-warning --output-path . --overwrite --config tools/config.yaml
+```
+
 ## Building
 
 Uses Poetry build system with `poetry-core` backend.

@@ -5,6 +5,7 @@ class NewLiveCallRouterDataAttributesCountryCode(str, Enum):
     AU = "AU"
     CA = "CA"
     GB = "GB"
+    NL = "NL"
     NZ = "NZ"
     US = "US"
 

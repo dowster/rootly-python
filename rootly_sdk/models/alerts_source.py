@@ -3,9 +3,13 @@ from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.alerts_source_source_type import AlertsSourceSourceType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.alerts_source_alert_source_fields_attributes_type_0_item import (
+        AlertsSourceAlertSourceFieldsAttributesType0Item,
+    )
     from ..models.alerts_source_resolution_rule_attributes_type_0 import AlertsSourceResolutionRuleAttributesType0
     from ..models.alerts_source_sourceable_attributes_type_0 import AlertsSourceSourceableAttributesType0
 
@@ -23,7 +27,7 @@ class AlertsSource:
         created_at (str): Date of creation
         updated_at (str): Date of last update
         alert_urgency_id (Union[Unset, str]): ID for the default alert urgency assigned to this alert source
-        source_type (Union[Unset, str]): The alert source type
+        source_type (Union[Unset, AlertsSourceSourceType]): The alert source type
         webhook_endpoint (Union[None, Unset, str]): The URL endpoint of the alert source
         email (Union[None, Unset, str]): The email address of the alert source
         owner_group_ids (Union[Unset, list[str]]): List of team IDs that will own the alert source
@@ -31,7 +35,9 @@ class AlertsSource:
             specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or
             details
         resolution_rule_attributes (Union['AlertsSourceResolutionRuleAttributesType0', None, Unset]): Additional
-            attributes for email alerts source
+            attributes for email or generic webhook alerts source
+        alert_source_fields_attributes (Union[None, Unset, list['AlertsSourceAlertSourceFieldsAttributesType0Item']]):
+            List of alert fields to be added to alert source
     """
 
     name: str
@@ -40,12 +46,13 @@ class AlertsSource:
     created_at: str
     updated_at: str
     alert_urgency_id: Union[Unset, str] = UNSET
-    source_type: Union[Unset, str] = UNSET
+    source_type: Union[Unset, AlertsSourceSourceType] = UNSET
     webhook_endpoint: Union[None, Unset, str] = UNSET
     email: Union[None, Unset, str] = UNSET
     owner_group_ids: Union[Unset, list[str]] = UNSET
     sourceable_attributes: Union["AlertsSourceSourceableAttributesType0", None, Unset] = UNSET
     resolution_rule_attributes: Union["AlertsSourceResolutionRuleAttributesType0", None, Unset] = UNSET
+    alert_source_fields_attributes: Union[None, Unset, list["AlertsSourceAlertSourceFieldsAttributesType0Item"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -64,7 +71,9 @@ class AlertsSource:
 
         alert_urgency_id = self.alert_urgency_id
 
-        source_type = self.source_type
+        source_type: Union[Unset, str] = UNSET
+        if not isinstance(self.source_type, Unset):
+            source_type = self.source_type.value
 
         webhook_endpoint: Union[None, Unset, str]
         if isinstance(self.webhook_endpoint, Unset):
@@ -98,6 +107,18 @@ class AlertsSource:
         else:
             resolution_rule_attributes = self.resolution_rule_attributes
 
+        alert_source_fields_attributes: Union[None, Unset, list[dict[str, Any]]]
+        if isinstance(self.alert_source_fields_attributes, Unset):
+            alert_source_fields_attributes = UNSET
+        elif isinstance(self.alert_source_fields_attributes, list):
+            alert_source_fields_attributes = []
+            for alert_source_fields_attributes_type_0_item_data in self.alert_source_fields_attributes:
+                alert_source_fields_attributes_type_0_item = alert_source_fields_attributes_type_0_item_data.to_dict()
+                alert_source_fields_attributes.append(alert_source_fields_attributes_type_0_item)
+
+        else:
+            alert_source_fields_attributes = self.alert_source_fields_attributes
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -123,11 +144,16 @@ class AlertsSource:
             field_dict["sourceable_attributes"] = sourceable_attributes
         if resolution_rule_attributes is not UNSET:
             field_dict["resolution_rule_attributes"] = resolution_rule_attributes
+        if alert_source_fields_attributes is not UNSET:
+            field_dict["alert_source_fields_attributes"] = alert_source_fields_attributes
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+        from ..models.alerts_source_alert_source_fields_attributes_type_0_item import (
+            AlertsSourceAlertSourceFieldsAttributesType0Item,
+        )
         from ..models.alerts_source_resolution_rule_attributes_type_0 import AlertsSourceResolutionRuleAttributesType0
         from ..models.alerts_source_sourceable_attributes_type_0 import AlertsSourceSourceableAttributesType0
 
@@ -144,7 +170,12 @@ class AlertsSource:
 
         alert_urgency_id = d.pop("alert_urgency_id", UNSET)
 
-        source_type = d.pop("source_type", UNSET)
+        _source_type = d.pop("source_type", UNSET)
+        source_type: Union[Unset, AlertsSourceSourceType]
+        if isinstance(_source_type, Unset):
+            source_type = UNSET
+        else:
+            source_type = AlertsSourceSourceType(_source_type)
 
         def _parse_webhook_endpoint(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -202,6 +233,36 @@ class AlertsSource:
 
         resolution_rule_attributes = _parse_resolution_rule_attributes(d.pop("resolution_rule_attributes", UNSET))
 
+        def _parse_alert_source_fields_attributes(
+            data: object,
+        ) -> Union[None, Unset, list["AlertsSourceAlertSourceFieldsAttributesType0Item"]]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                alert_source_fields_attributes_type_0 = []
+                _alert_source_fields_attributes_type_0 = data
+                for alert_source_fields_attributes_type_0_item_data in _alert_source_fields_attributes_type_0:
+                    alert_source_fields_attributes_type_0_item = (
+                        AlertsSourceAlertSourceFieldsAttributesType0Item.from_dict(
+                            alert_source_fields_attributes_type_0_item_data
+                        )
+                    )
+
+                    alert_source_fields_attributes_type_0.append(alert_source_fields_attributes_type_0_item)
+
+                return alert_source_fields_attributes_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, list["AlertsSourceAlertSourceFieldsAttributesType0Item"]], data)
+
+        alert_source_fields_attributes = _parse_alert_source_fields_attributes(
+            d.pop("alert_source_fields_attributes", UNSET)
+        )
+
         alerts_source = cls(
             name=name,
             status=status,
@@ -215,6 +276,7 @@ class AlertsSource:
             owner_group_ids=owner_group_ids,
             sourceable_attributes=sourceable_attributes,
             resolution_rule_attributes=resolution_rule_attributes,
+            alert_source_fields_attributes=alert_source_fields_attributes,
         )
 
         alerts_source.additional_properties = d

@@ -122,13 +122,3 @@ If you want to install this client into another project without publishing it (e
 1. If that project is not using Poetry:
     1. Build a wheel with `poetry build -f wheel`
     1. Install that wheel from the other project `pip install <path-to-wheel>`
-
-## Development
-
-### Regenerating the client
-
-To regenerate the client from the OpenAPI specification:
-
-```bash
-openapi-python-client generate --url https://rootly-heroku.s3.amazonaws.com/swagger/v1/swagger.json --no-fail-on-warning --output-path rootly-python --overwrite --config config.yaml
-```

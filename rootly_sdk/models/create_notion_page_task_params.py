@@ -21,6 +21,8 @@ class CreateNotionPageTaskParams:
         parent_page (CreateNotionPageTaskParamsParentPage): The parent page id and display name
         task_type (Union[Unset, CreateNotionPageTaskParamsTaskType]):
         post_mortem_template_id (Union[Unset, str]): Retrospective template to use when creating page task, if desired
+        content (Union[Unset, str]): Custom page content with liquid templating support. When provided, only this
+            content will be rendered (no default sections)
         mark_post_mortem_as_published (Union[Unset, bool]):  Default: True.
         show_timeline_as_table (Union[Unset, bool]):
         show_action_items_as_table (Union[Unset, bool]):
@@ -30,6 +32,7 @@ class CreateNotionPageTaskParams:
     parent_page: "CreateNotionPageTaskParamsParentPage"
     task_type: Union[Unset, CreateNotionPageTaskParamsTaskType] = UNSET
     post_mortem_template_id: Union[Unset, str] = UNSET
+    content: Union[Unset, str] = UNSET
     mark_post_mortem_as_published: Union[Unset, bool] = True
     show_timeline_as_table: Union[Unset, bool] = UNSET
     show_action_items_as_table: Union[Unset, bool] = UNSET
@@ -45,6 +48,8 @@ class CreateNotionPageTaskParams:
             task_type = self.task_type.value
 
         post_mortem_template_id = self.post_mortem_template_id
+
+        content = self.content
 
         mark_post_mortem_as_published = self.mark_post_mortem_as_published
 
@@ -64,6 +69,8 @@ class CreateNotionPageTaskParams:
             field_dict["task_type"] = task_type
         if post_mortem_template_id is not UNSET:
             field_dict["post_mortem_template_id"] = post_mortem_template_id
+        if content is not UNSET:
+            field_dict["content"] = content
         if mark_post_mortem_as_published is not UNSET:
             field_dict["mark_post_mortem_as_published"] = mark_post_mortem_as_published
         if show_timeline_as_table is not UNSET:
@@ -91,6 +98,8 @@ class CreateNotionPageTaskParams:
 
         post_mortem_template_id = d.pop("post_mortem_template_id", UNSET)
 
+        content = d.pop("content", UNSET)
+
         mark_post_mortem_as_published = d.pop("mark_post_mortem_as_published", UNSET)
 
         show_timeline_as_table = d.pop("show_timeline_as_table", UNSET)
@@ -102,6 +111,7 @@ class CreateNotionPageTaskParams:
             parent_page=parent_page,
             task_type=task_type,
             post_mortem_template_id=post_mortem_template_id,
+            content=content,
             mark_post_mortem_as_published=mark_post_mortem_as_published,
             show_timeline_as_table=show_timeline_as_table,
             show_action_items_as_table=show_action_items_as_table,
