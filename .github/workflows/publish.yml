@@ -22,6 +22,10 @@ jobs:
           pip install uv
           uv pip install --system build twine
 
+      - name: Install package dependencies
+        run: |
+          uv pip install --system .
+
       - name: Test SDK imports
         run: |
           python -c "import rootly_sdk; print('SDK imports successfully')"
