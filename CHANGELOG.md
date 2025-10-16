@@ -7,10 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2025-10-16
+
 ### Added
+- GitHub Actions publishing workflow for automated PyPI releases on git tags
 - New API endpoints for alert sources (create, read, update, delete, list)
 - Communications API endpoints for groups, stages, templates, and types
-- User email addresses and phone numbers management endpoints  
+- User email addresses and phone numbers management endpoints
 - User update endpoint
 - Alert fields API endpoints
 - New task types: Coda page creation, Anthropic and Google Gemini chat completions
@@ -33,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated various model attributes for better type safety
 
 ### Fixed
+- GitHub Actions workflow: Added `--system` flag for uv pip install in CI environment
+- GitHub Actions workflow: Install package dependencies before testing imports
 - Updated httpx dependency constraint to `>=0.20.0,<0.29.0`
 - Improved error handling across multiple endpoints
 - Better type definitions for various model attributes
