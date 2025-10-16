@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
@@ -5,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..models.update_live_call_router_data_attributes_paging_targets_item_type import (
     UpdateLiveCallRouterDataAttributesPagingTargetsItemType,
+    check_update_live_call_router_data_attributes_paging_targets_item_type,
 )
 
 T = TypeVar("T", bound="UpdateLiveCallRouterDataAttributesPagingTargetsItem")
@@ -27,7 +29,7 @@ class UpdateLiveCallRouterDataAttributesPagingTargetsItem:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_ = self.type_.value
+        type_: str = self.type_
 
         alert_urgency_id = self.alert_urgency_id
 
@@ -44,11 +46,11 @@ class UpdateLiveCallRouterDataAttributesPagingTargetsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         id = d.pop("id")
 
-        type_ = UpdateLiveCallRouterDataAttributesPagingTargetsItemType(d.pop("type"))
+        type_ = check_update_live_call_router_data_attributes_paging_targets_item_type(d.pop("type"))
 
         alert_urgency_id = d.pop("alert_urgency_id")
 

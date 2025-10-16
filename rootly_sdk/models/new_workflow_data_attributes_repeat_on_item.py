@@ -1,14 +1,21 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewWorkflowDataAttributesRepeatOnItem = Literal["F", "M", "R", "S", "T", "U", "W"]
+
+NEW_WORKFLOW_DATA_ATTRIBUTES_REPEAT_ON_ITEM_VALUES: set[NewWorkflowDataAttributesRepeatOnItem] = {
+    "F",
+    "M",
+    "R",
+    "S",
+    "T",
+    "U",
+    "W",
+}
 
 
-class NewWorkflowDataAttributesRepeatOnItem(str, Enum):
-    F = "F"
-    M = "M"
-    R = "R"
-    S = "S"
-    T = "T"
-    U = "U"
-    W = "W"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_workflow_data_attributes_repeat_on_item(value: str) -> NewWorkflowDataAttributesRepeatOnItem:
+    if value in NEW_WORKFLOW_DATA_ATTRIBUTES_REPEAT_ON_ITEM_VALUES:
+        return cast(NewWorkflowDataAttributesRepeatOnItem, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_WORKFLOW_DATA_ATTRIBUTES_REPEAT_ON_ITEM_VALUES!r}"
+    )

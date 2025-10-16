@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
-from ..models.new_alert_event_data_attributes_kind import NewAlertEventDataAttributesKind
+from ..models.new_alert_event_data_attributes_kind import (
+    NewAlertEventDataAttributesKind,
+    check_new_alert_event_data_attributes_kind,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewAlertEventDataAttributes")
@@ -22,13 +26,14 @@ class NewAlertEventDataAttributes:
     user_id: Union[Unset, int] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
-        kind = self.kind.value
+        kind: str = self.kind
 
         details = self.details
 
         user_id = self.user_id
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "kind": kind,
@@ -41,9 +46,9 @@ class NewAlertEventDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        kind = NewAlertEventDataAttributesKind(d.pop("kind"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        kind = check_new_alert_event_data_attributes_kind(d.pop("kind"))
 
         details = d.pop("details")
 

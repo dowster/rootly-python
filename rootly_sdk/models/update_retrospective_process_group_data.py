@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_retrospective_process_group_data_type import UpdateRetrospectiveProcessGroupDataType
+from ..models.update_retrospective_process_group_data_type import (
+    UpdateRetrospectiveProcessGroupDataType,
+    check_update_retrospective_process_group_data_type,
+)
 
 if TYPE_CHECKING:
     from ..models.update_retrospective_process_group_data_attributes import (
@@ -27,7 +31,7 @@ class UpdateRetrospectiveProcessGroupData:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
@@ -43,13 +47,13 @@ class UpdateRetrospectiveProcessGroupData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_retrospective_process_group_data_attributes import (
             UpdateRetrospectiveProcessGroupDataAttributes,
         )
 
-        d = src_dict.copy()
-        type_ = UpdateRetrospectiveProcessGroupDataType(d.pop("type"))
+        d = dict(src_dict)
+        type_ = check_update_retrospective_process_group_data_type(d.pop("type"))
 
         attributes = UpdateRetrospectiveProcessGroupDataAttributes.from_dict(d.pop("attributes"))
 

@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_workflow_group_data_attributes_kind import UpdateWorkflowGroupDataAttributesKind
+from ..models.update_workflow_group_data_attributes_kind import (
+    UpdateWorkflowGroupDataAttributesKind,
+    check_update_workflow_group_data_attributes_kind,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateWorkflowGroupDataAttributes")
@@ -32,7 +36,7 @@ class UpdateWorkflowGroupDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         name = self.name
 
@@ -67,14 +71,14 @@ class UpdateWorkflowGroupDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         _kind = d.pop("kind", UNSET)
         kind: Union[Unset, UpdateWorkflowGroupDataAttributesKind]
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = UpdateWorkflowGroupDataAttributesKind(_kind)
+            kind = check_update_workflow_group_data_attributes_kind(_kind)
 
         name = d.pop("name", UNSET)
 

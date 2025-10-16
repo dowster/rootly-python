@@ -1,9 +1,20 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemOperation = Literal["and", "or"]
+
+NEW_DASHBOARD_PANEL_DATA_ATTRIBUTES_PARAMS_DATASETS_ITEM_FILTER_ITEM_OPERATION_VALUES: set[
+    NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemOperation
+] = {
+    "and",
+    "or",
+}
 
 
-class NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemOperation(str, Enum):
-    AND = "and"
-    OR = "or"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_dashboard_panel_data_attributes_params_datasets_item_filter_item_operation(
+    value: str,
+) -> NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemOperation:
+    if value in NEW_DASHBOARD_PANEL_DATA_ATTRIBUTES_PARAMS_DATASETS_ITEM_FILTER_ITEM_OPERATION_VALUES:
+        return cast(NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemOperation, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_DASHBOARD_PANEL_DATA_ATTRIBUTES_PARAMS_DATASETS_ITEM_FILTER_ITEM_OPERATION_VALUES!r}"
+    )

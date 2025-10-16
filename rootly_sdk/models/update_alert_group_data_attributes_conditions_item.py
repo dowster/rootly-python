@@ -1,17 +1,20 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
-from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..models.update_alert_group_data_attributes_conditions_item_conditionable_type import (
     UpdateAlertGroupDataAttributesConditionsItemConditionableType,
+    check_update_alert_group_data_attributes_conditions_item_conditionable_type,
 )
 from ..models.update_alert_group_data_attributes_conditions_item_property_field_condition_type import (
     UpdateAlertGroupDataAttributesConditionsItemPropertyFieldConditionType,
+    check_update_alert_group_data_attributes_conditions_item_property_field_condition_type,
 )
 from ..models.update_alert_group_data_attributes_conditions_item_property_field_type import (
     UpdateAlertGroupDataAttributesConditionsItemPropertyFieldType,
+    check_update_alert_group_data_attributes_conditions_item_property_field_type,
 )
 from ..types import UNSET, Unset
 
@@ -26,7 +29,6 @@ class UpdateAlertGroupDataAttributesConditionsItem:
             field
         property_field_condition_type (UpdateAlertGroupDataAttributesConditionsItemPropertyFieldConditionType): The
             condition type of the property field
-        id (Union[Unset, UUID]): The ID of the alert group condition
         property_field_name (Union[Unset, str]): The name of the property field. If the property field type is selected
             as 'attribute', then the allowed property field names are 'summary' (for Title), 'description', 'alert_urgency'
             and 'external_url' (for Alert Source URL). If the property field type is selected as 'payload', then the
@@ -47,7 +49,6 @@ class UpdateAlertGroupDataAttributesConditionsItem:
 
     property_field_type: UpdateAlertGroupDataAttributesConditionsItemPropertyFieldType
     property_field_condition_type: UpdateAlertGroupDataAttributesConditionsItemPropertyFieldConditionType
-    id: Union[Unset, UUID] = UNSET
     property_field_name: Union[Unset, str] = UNSET
     property_field_value: Union[Unset, str] = UNSET
     property_field_values: Union[Unset, list[str]] = UNSET
@@ -57,13 +58,9 @@ class UpdateAlertGroupDataAttributesConditionsItem:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        property_field_type = self.property_field_type.value
+        property_field_type: str = self.property_field_type
 
-        property_field_condition_type = self.property_field_condition_type.value
-
-        id: Union[Unset, str] = UNSET
-        if not isinstance(self.id, Unset):
-            id = str(self.id)
+        property_field_condition_type: str = self.property_field_condition_type
 
         property_field_name = self.property_field_name
 
@@ -84,7 +81,7 @@ class UpdateAlertGroupDataAttributesConditionsItem:
 
         conditionable_type: Union[Unset, str] = UNSET
         if not isinstance(self.conditionable_type, Unset):
-            conditionable_type = self.conditionable_type.value
+            conditionable_type = self.conditionable_type
 
         conditionable_id = self.conditionable_id
 
@@ -96,8 +93,6 @@ class UpdateAlertGroupDataAttributesConditionsItem:
                 "property_field_condition_type": property_field_condition_type,
             }
         )
-        if id is not UNSET:
-            field_dict["id"] = id
         if property_field_name is not UNSET:
             field_dict["property_field_name"] = property_field_name
         if property_field_value is not UNSET:
@@ -114,22 +109,17 @@ class UpdateAlertGroupDataAttributesConditionsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        property_field_type = UpdateAlertGroupDataAttributesConditionsItemPropertyFieldType(
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        property_field_type = check_update_alert_group_data_attributes_conditions_item_property_field_type(
             d.pop("property_field_type")
         )
 
-        property_field_condition_type = UpdateAlertGroupDataAttributesConditionsItemPropertyFieldConditionType(
-            d.pop("property_field_condition_type")
+        property_field_condition_type = (
+            check_update_alert_group_data_attributes_conditions_item_property_field_condition_type(
+                d.pop("property_field_condition_type")
+            )
         )
-
-        _id = d.pop("id", UNSET)
-        id: Union[Unset, UUID]
-        if isinstance(_id, Unset):
-            id = UNSET
-        else:
-            id = UUID(_id)
 
         property_field_name = d.pop("property_field_name", UNSET)
 
@@ -159,14 +149,15 @@ class UpdateAlertGroupDataAttributesConditionsItem:
         if isinstance(_conditionable_type, Unset):
             conditionable_type = UNSET
         else:
-            conditionable_type = UpdateAlertGroupDataAttributesConditionsItemConditionableType(_conditionable_type)
+            conditionable_type = check_update_alert_group_data_attributes_conditions_item_conditionable_type(
+                _conditionable_type
+            )
 
         conditionable_id = d.pop("conditionable_id", UNSET)
 
         update_alert_group_data_attributes_conditions_item = cls(
             property_field_type=property_field_type,
             property_field_condition_type=property_field_condition_type,
-            id=id,
             property_field_name=property_field_name,
             property_field_value=property_field_value,
             property_field_values=property_field_values,

@@ -1,4 +1,5 @@
 import datetime
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -6,6 +7,7 @@ from dateutil.parser import isoparse
 
 from ..models.update_on_call_shadow_data_attributes_shadowable_type import (
     UpdateOnCallShadowDataAttributesShadowableType,
+    check_update_on_call_shadow_data_attributes_shadowable_type,
 )
 from ..types import UNSET, Unset
 
@@ -36,7 +38,7 @@ class UpdateOnCallShadowDataAttributes:
 
         shadowable_type: Union[Unset, str] = UNSET
         if not isinstance(self.shadowable_type, Unset):
-            shadowable_type = self.shadowable_type.value
+            shadowable_type = self.shadowable_type
 
         shadowable_id = self.shadowable_id
 
@@ -51,6 +53,7 @@ class UpdateOnCallShadowDataAttributes:
             ends_at = self.ends_at.isoformat()
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if schedule_id is not UNSET:
             field_dict["schedule_id"] = schedule_id
@@ -68,8 +71,8 @@ class UpdateOnCallShadowDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         schedule_id = d.pop("schedule_id", UNSET)
 
         _shadowable_type = d.pop("shadowable_type", UNSET)
@@ -77,7 +80,7 @@ class UpdateOnCallShadowDataAttributes:
         if isinstance(_shadowable_type, Unset):
             shadowable_type = UNSET
         else:
-            shadowable_type = UpdateOnCallShadowDataAttributesShadowableType(_shadowable_type)
+            shadowable_type = check_update_on_call_shadow_data_attributes_shadowable_type(_shadowable_type)
 
         shadowable_id = d.pop("shadowable_id", UNSET)
 

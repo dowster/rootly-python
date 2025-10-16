@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+RunCommandHerokuTaskParamsSize = Literal["standard-1X", "standard-2X"]
+
+RUN_COMMAND_HEROKU_TASK_PARAMS_SIZE_VALUES: set[RunCommandHerokuTaskParamsSize] = {
+    "standard-1X",
+    "standard-2X",
+}
 
 
-class RunCommandHerokuTaskParamsSize(str, Enum):
-    STANDARD_1X = "standard-1X"
-    STANDARD_2X = "standard-2X"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_run_command_heroku_task_params_size(value: str) -> RunCommandHerokuTaskParamsSize:
+    if value in RUN_COMMAND_HEROKU_TASK_PARAMS_SIZE_VALUES:
+        return cast(RunCommandHerokuTaskParamsSize, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {RUN_COMMAND_HEROKU_TASK_PARAMS_SIZE_VALUES!r}")

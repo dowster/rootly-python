@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,6 +6,12 @@ from attrs import define as _attrs_define
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.new_team_data_attributes_alert_broadcast_channel_type_0 import (
+        NewTeamDataAttributesAlertBroadcastChannelType0,
+    )
+    from ..models.new_team_data_attributes_incident_broadcast_channel_type_0 import (
+        NewTeamDataAttributesIncidentBroadcastChannelType0,
+    )
     from ..models.new_team_data_attributes_slack_aliases_type_0_item import NewTeamDataAttributesSlackAliasesType0Item
     from ..models.new_team_data_attributes_slack_channels_type_0_item import NewTeamDataAttributesSlackChannelsType0Item
 
@@ -41,6 +48,14 @@ class NewTeamDataAttributes:
             associated with this team
         slack_aliases (Union[None, Unset, list['NewTeamDataAttributesSlackAliasesType0Item']]): Slack Aliases associated
             with this team
+        alert_broadcast_enabled (Union[None, Unset, bool]): Enable alerts to be broadcasted to a specific channel
+        alert_broadcast_channel (Union['NewTeamDataAttributesAlertBroadcastChannelType0', None, Unset]): Slack channel
+            to broadcast alerts to
+        incident_broadcast_enabled (Union[None, Unset, bool]): Enable incidents to be broadcasted to a specific channel
+        incident_broadcast_channel (Union['NewTeamDataAttributesIncidentBroadcastChannelType0', None, Unset]): Slack
+            channel to broadcast incidents to
+        auto_add_members_when_attached (Union[None, Unset, bool]): Auto add members to incident channel when team is
+            attached
     """
 
     name: str
@@ -64,8 +79,20 @@ class NewTeamDataAttributes:
     alert_urgency_id: Union[None, Unset, str] = UNSET
     slack_channels: Union[None, Unset, list["NewTeamDataAttributesSlackChannelsType0Item"]] = UNSET
     slack_aliases: Union[None, Unset, list["NewTeamDataAttributesSlackAliasesType0Item"]] = UNSET
+    alert_broadcast_enabled: Union[None, Unset, bool] = UNSET
+    alert_broadcast_channel: Union["NewTeamDataAttributesAlertBroadcastChannelType0", None, Unset] = UNSET
+    incident_broadcast_enabled: Union[None, Unset, bool] = UNSET
+    incident_broadcast_channel: Union["NewTeamDataAttributesIncidentBroadcastChannelType0", None, Unset] = UNSET
+    auto_add_members_when_attached: Union[None, Unset, bool] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.new_team_data_attributes_alert_broadcast_channel_type_0 import (
+            NewTeamDataAttributesAlertBroadcastChannelType0,
+        )
+        from ..models.new_team_data_attributes_incident_broadcast_channel_type_0 import (
+            NewTeamDataAttributesIncidentBroadcastChannelType0,
+        )
+
         name = self.name
 
         description: Union[None, Unset, str]
@@ -209,7 +236,42 @@ class NewTeamDataAttributes:
         else:
             slack_aliases = self.slack_aliases
 
+        alert_broadcast_enabled: Union[None, Unset, bool]
+        if isinstance(self.alert_broadcast_enabled, Unset):
+            alert_broadcast_enabled = UNSET
+        else:
+            alert_broadcast_enabled = self.alert_broadcast_enabled
+
+        alert_broadcast_channel: Union[None, Unset, dict[str, Any]]
+        if isinstance(self.alert_broadcast_channel, Unset):
+            alert_broadcast_channel = UNSET
+        elif isinstance(self.alert_broadcast_channel, NewTeamDataAttributesAlertBroadcastChannelType0):
+            alert_broadcast_channel = self.alert_broadcast_channel.to_dict()
+        else:
+            alert_broadcast_channel = self.alert_broadcast_channel
+
+        incident_broadcast_enabled: Union[None, Unset, bool]
+        if isinstance(self.incident_broadcast_enabled, Unset):
+            incident_broadcast_enabled = UNSET
+        else:
+            incident_broadcast_enabled = self.incident_broadcast_enabled
+
+        incident_broadcast_channel: Union[None, Unset, dict[str, Any]]
+        if isinstance(self.incident_broadcast_channel, Unset):
+            incident_broadcast_channel = UNSET
+        elif isinstance(self.incident_broadcast_channel, NewTeamDataAttributesIncidentBroadcastChannelType0):
+            incident_broadcast_channel = self.incident_broadcast_channel.to_dict()
+        else:
+            incident_broadcast_channel = self.incident_broadcast_channel
+
+        auto_add_members_when_attached: Union[None, Unset, bool]
+        if isinstance(self.auto_add_members_when_attached, Unset):
+            auto_add_members_when_attached = UNSET
+        else:
+            auto_add_members_when_attached = self.auto_add_members_when_attached
+
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -255,11 +317,27 @@ class NewTeamDataAttributes:
             field_dict["slack_channels"] = slack_channels
         if slack_aliases is not UNSET:
             field_dict["slack_aliases"] = slack_aliases
+        if alert_broadcast_enabled is not UNSET:
+            field_dict["alert_broadcast_enabled"] = alert_broadcast_enabled
+        if alert_broadcast_channel is not UNSET:
+            field_dict["alert_broadcast_channel"] = alert_broadcast_channel
+        if incident_broadcast_enabled is not UNSET:
+            field_dict["incident_broadcast_enabled"] = incident_broadcast_enabled
+        if incident_broadcast_channel is not UNSET:
+            field_dict["incident_broadcast_channel"] = incident_broadcast_channel
+        if auto_add_members_when_attached is not UNSET:
+            field_dict["auto_add_members_when_attached"] = auto_add_members_when_attached
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.new_team_data_attributes_alert_broadcast_channel_type_0 import (
+            NewTeamDataAttributesAlertBroadcastChannelType0,
+        )
+        from ..models.new_team_data_attributes_incident_broadcast_channel_type_0 import (
+            NewTeamDataAttributesIncidentBroadcastChannelType0,
+        )
         from ..models.new_team_data_attributes_slack_aliases_type_0_item import (
             NewTeamDataAttributesSlackAliasesType0Item,
         )
@@ -267,7 +345,7 @@ class NewTeamDataAttributes:
             NewTeamDataAttributesSlackChannelsType0Item,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
@@ -508,6 +586,73 @@ class NewTeamDataAttributes:
 
         slack_aliases = _parse_slack_aliases(d.pop("slack_aliases", UNSET))
 
+        def _parse_alert_broadcast_enabled(data: object) -> Union[None, Unset, bool]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, bool], data)
+
+        alert_broadcast_enabled = _parse_alert_broadcast_enabled(d.pop("alert_broadcast_enabled", UNSET))
+
+        def _parse_alert_broadcast_channel(
+            data: object,
+        ) -> Union["NewTeamDataAttributesAlertBroadcastChannelType0", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                alert_broadcast_channel_type_0 = NewTeamDataAttributesAlertBroadcastChannelType0.from_dict(data)
+
+                return alert_broadcast_channel_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union["NewTeamDataAttributesAlertBroadcastChannelType0", None, Unset], data)
+
+        alert_broadcast_channel = _parse_alert_broadcast_channel(d.pop("alert_broadcast_channel", UNSET))
+
+        def _parse_incident_broadcast_enabled(data: object) -> Union[None, Unset, bool]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, bool], data)
+
+        incident_broadcast_enabled = _parse_incident_broadcast_enabled(d.pop("incident_broadcast_enabled", UNSET))
+
+        def _parse_incident_broadcast_channel(
+            data: object,
+        ) -> Union["NewTeamDataAttributesIncidentBroadcastChannelType0", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                incident_broadcast_channel_type_0 = NewTeamDataAttributesIncidentBroadcastChannelType0.from_dict(data)
+
+                return incident_broadcast_channel_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union["NewTeamDataAttributesIncidentBroadcastChannelType0", None, Unset], data)
+
+        incident_broadcast_channel = _parse_incident_broadcast_channel(d.pop("incident_broadcast_channel", UNSET))
+
+        def _parse_auto_add_members_when_attached(data: object) -> Union[None, Unset, bool]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, bool], data)
+
+        auto_add_members_when_attached = _parse_auto_add_members_when_attached(
+            d.pop("auto_add_members_when_attached", UNSET)
+        )
+
         new_team_data_attributes = cls(
             name=name,
             description=description,
@@ -530,6 +675,11 @@ class NewTeamDataAttributes:
             alert_urgency_id=alert_urgency_id,
             slack_channels=slack_channels,
             slack_aliases=slack_aliases,
+            alert_broadcast_enabled=alert_broadcast_enabled,
+            alert_broadcast_channel=alert_broadcast_channel,
+            incident_broadcast_enabled=incident_broadcast_enabled,
+            incident_broadcast_channel=incident_broadcast_channel,
+            auto_add_members_when_attached=auto_add_members_when_attached,
         )
 
         return new_team_data_attributes

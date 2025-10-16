@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.schedule_rotation_active_day_day_name import ScheduleRotationActiveDayDayName
+from ..models.schedule_rotation_active_day_day_name import (
+    ScheduleRotationActiveDayDayName,
+    check_schedule_rotation_active_day_day_name,
+)
 
 if TYPE_CHECKING:
     from ..models.schedule_rotation_active_day_active_time_attributes_item import (
@@ -36,7 +40,7 @@ class ScheduleRotationActiveDay:
     def to_dict(self) -> dict[str, Any]:
         schedule_rotation_id = self.schedule_rotation_id
 
-        day_name = self.day_name.value
+        day_name: str = self.day_name
 
         active_time_attributes = []
         for active_time_attributes_item_data in self.active_time_attributes:
@@ -62,15 +66,15 @@ class ScheduleRotationActiveDay:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.schedule_rotation_active_day_active_time_attributes_item import (
             ScheduleRotationActiveDayActiveTimeAttributesItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         schedule_rotation_id = d.pop("schedule_rotation_id")
 
-        day_name = ScheduleRotationActiveDayDayName(d.pop("day_name"))
+        day_name = check_schedule_rotation_active_day_day_name(d.pop("day_name"))
 
         active_time_attributes = []
         _active_time_attributes = d.pop("active_time_attributes")

@@ -1,16 +1,29 @@
 import datetime
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from dateutil.parser import isoparse
 
-from ..models.new_alert_data_attributes_noise import NewAlertDataAttributesNoise
-from ..models.new_alert_data_attributes_notification_target_type import NewAlertDataAttributesNotificationTargetType
-from ..models.new_alert_data_attributes_source import NewAlertDataAttributesSource
-from ..models.new_alert_data_attributes_status import NewAlertDataAttributesStatus
+from ..models.new_alert_data_attributes_noise import NewAlertDataAttributesNoise, check_new_alert_data_attributes_noise
+from ..models.new_alert_data_attributes_notification_target_type import (
+    NewAlertDataAttributesNotificationTargetType,
+    check_new_alert_data_attributes_notification_target_type,
+)
+from ..models.new_alert_data_attributes_source import (
+    NewAlertDataAttributesSource,
+    check_new_alert_data_attributes_source,
+)
+from ..models.new_alert_data_attributes_status import (
+    NewAlertDataAttributesStatus,
+    check_new_alert_data_attributes_status,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.new_alert_data_attributes_alert_field_values_attributes_item_type_0 import (
+        NewAlertDataAttributesAlertFieldValuesAttributesItemType0,
+    )
     from ..models.new_alert_data_attributes_data_type_0 import NewAlertDataAttributesDataType0
     from ..models.new_alert_data_attributes_labels_item_type_0 import NewAlertDataAttributesLabelsItemType0
 
@@ -44,6 +57,11 @@ class NewAlertDataAttributes:
             The _identifier_ of the notification target object.
         labels (Union[Unset, list[Union['NewAlertDataAttributesLabelsItemType0', None]]]):
         data (Union['NewAlertDataAttributesDataType0', None, Unset]): Additional data
+        deduplication_key (Union[None, Unset, str]): Alerts sharing the same deduplication key are treated as a single
+            alert.
+        alert_field_values_attributes (Union[Unset,
+            list[Union['NewAlertDataAttributesAlertFieldValuesAttributesItemType0', None]]]): Custom alert field values to
+            create with the alert
     """
 
     source: NewAlertDataAttributesSource
@@ -63,22 +81,29 @@ class NewAlertDataAttributes:
     notification_target_id: Union[None, Unset, str] = UNSET
     labels: Union[Unset, list[Union["NewAlertDataAttributesLabelsItemType0", None]]] = UNSET
     data: Union["NewAlertDataAttributesDataType0", None, Unset] = UNSET
+    deduplication_key: Union[None, Unset, str] = UNSET
+    alert_field_values_attributes: Union[
+        Unset, list[Union["NewAlertDataAttributesAlertFieldValuesAttributesItemType0", None]]
+    ] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.new_alert_data_attributes_alert_field_values_attributes_item_type_0 import (
+            NewAlertDataAttributesAlertFieldValuesAttributesItemType0,
+        )
         from ..models.new_alert_data_attributes_data_type_0 import NewAlertDataAttributesDataType0
         from ..models.new_alert_data_attributes_labels_item_type_0 import NewAlertDataAttributesLabelsItemType0
 
-        source = self.source.value
+        source: str = self.source
 
         summary = self.summary
 
         noise: Union[Unset, str] = UNSET
         if not isinstance(self.noise, Unset):
-            noise = self.noise.value
+            noise = self.noise
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
-            status = self.status.value
+            status = self.status
 
         description: Union[None, Unset, str]
         if isinstance(self.description, Unset):
@@ -149,7 +174,7 @@ class NewAlertDataAttributes:
 
         notification_target_type: Union[Unset, str] = UNSET
         if not isinstance(self.notification_target_type, Unset):
-            notification_target_type = self.notification_target_type.value
+            notification_target_type = self.notification_target_type
 
         notification_target_id: Union[None, Unset, str]
         if isinstance(self.notification_target_id, Unset):
@@ -176,7 +201,27 @@ class NewAlertDataAttributes:
         else:
             data = self.data
 
+        deduplication_key: Union[None, Unset, str]
+        if isinstance(self.deduplication_key, Unset):
+            deduplication_key = UNSET
+        else:
+            deduplication_key = self.deduplication_key
+
+        alert_field_values_attributes: Union[Unset, list[Union[None, dict[str, Any]]]] = UNSET
+        if not isinstance(self.alert_field_values_attributes, Unset):
+            alert_field_values_attributes = []
+            for alert_field_values_attributes_item_data in self.alert_field_values_attributes:
+                alert_field_values_attributes_item: Union[None, dict[str, Any]]
+                if isinstance(
+                    alert_field_values_attributes_item_data, NewAlertDataAttributesAlertFieldValuesAttributesItemType0
+                ):
+                    alert_field_values_attributes_item = alert_field_values_attributes_item_data.to_dict()
+                else:
+                    alert_field_values_attributes_item = alert_field_values_attributes_item_data
+                alert_field_values_attributes.append(alert_field_values_attributes_item)
+
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "source": source,
@@ -213,16 +258,23 @@ class NewAlertDataAttributes:
             field_dict["labels"] = labels
         if data is not UNSET:
             field_dict["data"] = data
+        if deduplication_key is not UNSET:
+            field_dict["deduplication_key"] = deduplication_key
+        if alert_field_values_attributes is not UNSET:
+            field_dict["alert_field_values_attributes"] = alert_field_values_attributes
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.new_alert_data_attributes_alert_field_values_attributes_item_type_0 import (
+            NewAlertDataAttributesAlertFieldValuesAttributesItemType0,
+        )
         from ..models.new_alert_data_attributes_data_type_0 import NewAlertDataAttributesDataType0
         from ..models.new_alert_data_attributes_labels_item_type_0 import NewAlertDataAttributesLabelsItemType0
 
-        d = src_dict.copy()
-        source = NewAlertDataAttributesSource(d.pop("source"))
+        d = dict(src_dict)
+        source = check_new_alert_data_attributes_source(d.pop("source"))
 
         summary = d.pop("summary")
 
@@ -231,14 +283,14 @@ class NewAlertDataAttributes:
         if isinstance(_noise, Unset):
             noise = UNSET
         else:
-            noise = NewAlertDataAttributesNoise(_noise)
+            noise = check_new_alert_data_attributes_noise(_noise)
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, NewAlertDataAttributesStatus]
         if isinstance(_status, Unset):
             status = UNSET
         else:
-            status = NewAlertDataAttributesStatus(_status)
+            status = check_new_alert_data_attributes_status(_status)
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -366,7 +418,9 @@ class NewAlertDataAttributes:
         if isinstance(_notification_target_type, Unset):
             notification_target_type = UNSET
         else:
-            notification_target_type = NewAlertDataAttributesNotificationTargetType(_notification_target_type)
+            notification_target_type = check_new_alert_data_attributes_notification_target_type(
+                _notification_target_type
+            )
 
         def _parse_notification_target_id(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -415,6 +469,42 @@ class NewAlertDataAttributes:
 
         data = _parse_data(d.pop("data", UNSET))
 
+        def _parse_deduplication_key(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        deduplication_key = _parse_deduplication_key(d.pop("deduplication_key", UNSET))
+
+        alert_field_values_attributes = []
+        _alert_field_values_attributes = d.pop("alert_field_values_attributes", UNSET)
+        for alert_field_values_attributes_item_data in _alert_field_values_attributes or []:
+
+            def _parse_alert_field_values_attributes_item(
+                data: object,
+            ) -> Union["NewAlertDataAttributesAlertFieldValuesAttributesItemType0", None]:
+                if data is None:
+                    return data
+                try:
+                    if not isinstance(data, dict):
+                        raise TypeError()
+                    alert_field_values_attributes_item_type_0 = (
+                        NewAlertDataAttributesAlertFieldValuesAttributesItemType0.from_dict(data)
+                    )
+
+                    return alert_field_values_attributes_item_type_0
+                except:  # noqa: E722
+                    pass
+                return cast(Union["NewAlertDataAttributesAlertFieldValuesAttributesItemType0", None], data)
+
+            alert_field_values_attributes_item = _parse_alert_field_values_attributes_item(
+                alert_field_values_attributes_item_data
+            )
+
+            alert_field_values_attributes.append(alert_field_values_attributes_item)
+
         new_alert_data_attributes = cls(
             source=source,
             summary=summary,
@@ -433,6 +523,8 @@ class NewAlertDataAttributes:
             notification_target_id=notification_target_id,
             labels=labels,
             data=data,
+            deduplication_key=deduplication_key,
+            alert_field_values_attributes=alert_field_values_attributes,
         )
 
         return new_alert_data_attributes

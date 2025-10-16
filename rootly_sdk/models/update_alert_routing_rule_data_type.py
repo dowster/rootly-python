@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateAlertRoutingRuleDataType = Literal["alert_routing_rules"]
+
+UPDATE_ALERT_ROUTING_RULE_DATA_TYPE_VALUES: set[UpdateAlertRoutingRuleDataType] = {
+    "alert_routing_rules",
+}
 
 
-class UpdateAlertRoutingRuleDataType(str, Enum):
-    ALERT_ROUTING_RULES = "alert_routing_rules"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_alert_routing_rule_data_type(value: str) -> UpdateAlertRoutingRuleDataType:
+    if value in UPDATE_ALERT_ROUTING_RULE_DATA_TYPE_VALUES:
+        return cast(UpdateAlertRoutingRuleDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_ALERT_ROUTING_RULE_DATA_TYPE_VALUES!r}")

@@ -1,36 +1,73 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateFormFieldDataAttributesKind = Literal[
+    "acknowledged_at",
+    "attach_alerts",
+    "causes",
+    "closed_at",
+    "custom",
+    "custom_sub_status",
+    "detected_at",
+    "environments",
+    "functionalities",
+    "in_triage_at",
+    "labels",
+    "manual_starting_datetime_field",
+    "mark_as_backfilled",
+    "mark_as_in_triage",
+    "mark_as_test",
+    "mitigated_at",
+    "mitigation_message",
+    "notify_emails",
+    "resolution_message",
+    "resolved_at",
+    "services",
+    "severity",
+    "show_ongoing_incidents",
+    "started_at",
+    "summary",
+    "teams",
+    "title",
+    "trigger_manual_workflows",
+    "types",
+    "visibility",
+]
+
+UPDATE_FORM_FIELD_DATA_ATTRIBUTES_KIND_VALUES: set[UpdateFormFieldDataAttributesKind] = {
+    "acknowledged_at",
+    "attach_alerts",
+    "causes",
+    "closed_at",
+    "custom",
+    "custom_sub_status",
+    "detected_at",
+    "environments",
+    "functionalities",
+    "in_triage_at",
+    "labels",
+    "manual_starting_datetime_field",
+    "mark_as_backfilled",
+    "mark_as_in_triage",
+    "mark_as_test",
+    "mitigated_at",
+    "mitigation_message",
+    "notify_emails",
+    "resolution_message",
+    "resolved_at",
+    "services",
+    "severity",
+    "show_ongoing_incidents",
+    "started_at",
+    "summary",
+    "teams",
+    "title",
+    "trigger_manual_workflows",
+    "types",
+    "visibility",
+}
 
 
-class UpdateFormFieldDataAttributesKind(str, Enum):
-    ACKNOWLEDGED_AT = "acknowledged_at"
-    ATTACH_ALERTS = "attach_alerts"
-    CAUSES = "causes"
-    CLOSED_AT = "closed_at"
-    CUSTOM = "custom"
-    DETECTED_AT = "detected_at"
-    ENVIRONMENTS = "environments"
-    FUNCTIONALITIES = "functionalities"
-    IN_TRIAGE_AT = "in_triage_at"
-    LABELS = "labels"
-    MANUAL_STARTING_DATETIME_FIELD = "manual_starting_datetime_field"
-    MARK_AS_BACKFILLED = "mark_as_backfilled"
-    MARK_AS_IN_TRIAGE = "mark_as_in_triage"
-    MARK_AS_TEST = "mark_as_test"
-    MITIGATED_AT = "mitigated_at"
-    MITIGATION_MESSAGE = "mitigation_message"
-    NOTIFY_EMAILS = "notify_emails"
-    RESOLUTION_MESSAGE = "resolution_message"
-    RESOLVED_AT = "resolved_at"
-    SERVICES = "services"
-    SEVERITY = "severity"
-    SHOW_ONGOING_INCIDENTS = "show_ongoing_incidents"
-    STARTED_AT = "started_at"
-    SUMMARY = "summary"
-    TEAMS = "teams"
-    TITLE = "title"
-    TRIGGER_MANUAL_WORKFLOWS = "trigger_manual_workflows"
-    TYPES = "types"
-    VISIBILITY = "visibility"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_form_field_data_attributes_kind(value: str) -> UpdateFormFieldDataAttributesKind:
+    if value in UPDATE_FORM_FIELD_DATA_ATTRIBUTES_KIND_VALUES:
+        return cast(UpdateFormFieldDataAttributesKind, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_FORM_FIELD_DATA_ATTRIBUTES_KIND_VALUES!r}")

@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewAlertUrgencyDataType = Literal["alert_urgencies"]
+
+NEW_ALERT_URGENCY_DATA_TYPE_VALUES: set[NewAlertUrgencyDataType] = {
+    "alert_urgencies",
+}
 
 
-class NewAlertUrgencyDataType(str, Enum):
-    ALERT_URGENCIES = "alert_urgencies"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_alert_urgency_data_type(value: str) -> NewAlertUrgencyDataType:
+    if value in NEW_ALERT_URGENCY_DATA_TYPE_VALUES:
+        return cast(NewAlertUrgencyDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_ALERT_URGENCY_DATA_TYPE_VALUES!r}")

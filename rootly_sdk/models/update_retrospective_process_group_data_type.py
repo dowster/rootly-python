@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateRetrospectiveProcessGroupDataType = Literal["retrospective_process_groups"]
+
+UPDATE_RETROSPECTIVE_PROCESS_GROUP_DATA_TYPE_VALUES: set[UpdateRetrospectiveProcessGroupDataType] = {
+    "retrospective_process_groups",
+}
 
 
-class UpdateRetrospectiveProcessGroupDataType(str, Enum):
-    RETROSPECTIVE_PROCESS_GROUPS = "retrospective_process_groups"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_retrospective_process_group_data_type(value: str) -> UpdateRetrospectiveProcessGroupDataType:
+    if value in UPDATE_RETROSPECTIVE_PROCESS_GROUP_DATA_TYPE_VALUES:
+        return cast(UpdateRetrospectiveProcessGroupDataType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_RETROSPECTIVE_PROCESS_GROUP_DATA_TYPE_VALUES!r}"
+    )

@@ -7,15 +7,29 @@ from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.alert_response import AlertResponse
 from ...models.errors_list import ErrorsList
-from ...types import Response
+from ...models.get_alert_include import GetAlertInclude
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     id: str,
+    *,
+    include: Union[Unset, GetAlertInclude] = UNSET,
 ) -> dict[str, Any]:
+    params: dict[str, Any] = {}
+
+    json_include: Union[Unset, str] = UNSET
+    if not isinstance(include, Unset):
+        json_include = include
+
+    params["include"] = json_include
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
     _kwargs: dict[str, Any] = {
         "method": "get",
         "url": f"/v1/alerts/{id}",
+        "params": params,
     }
 
     return _kwargs
@@ -28,10 +42,12 @@ def _parse_response(
         response_200 = AlertResponse.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 404:
         response_404 = ErrorsList.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -53,6 +69,7 @@ def sync_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
+    include: Union[Unset, GetAlertInclude] = UNSET,
 ) -> Response[Union[AlertResponse, ErrorsList]]:
     """Retrieves an alert
 
@@ -60,6 +77,7 @@ def sync_detailed(
 
     Args:
         id (str):
+        include (Union[Unset, GetAlertInclude]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -71,6 +89,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         id=id,
+        include=include,
     )
 
     response = client.get_httpx_client().request(
@@ -84,6 +103,7 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
+    include: Union[Unset, GetAlertInclude] = UNSET,
 ) -> Optional[Union[AlertResponse, ErrorsList]]:
     """Retrieves an alert
 
@@ -91,6 +111,7 @@ def sync(
 
     Args:
         id (str):
+        include (Union[Unset, GetAlertInclude]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -103,6 +124,7 @@ def sync(
     return sync_detailed(
         id=id,
         client=client,
+        include=include,
     ).parsed
 
 
@@ -110,6 +132,7 @@ async def asyncio_detailed(
     id: str,
     *,
     client: AuthenticatedClient,
+    include: Union[Unset, GetAlertInclude] = UNSET,
 ) -> Response[Union[AlertResponse, ErrorsList]]:
     """Retrieves an alert
 
@@ -117,6 +140,7 @@ async def asyncio_detailed(
 
     Args:
         id (str):
+        include (Union[Unset, GetAlertInclude]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -128,6 +152,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         id=id,
+        include=include,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -139,6 +164,7 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
+    include: Union[Unset, GetAlertInclude] = UNSET,
 ) -> Optional[Union[AlertResponse, ErrorsList]]:
     """Retrieves an alert
 
@@ -146,6 +172,7 @@ async def asyncio(
 
     Args:
         id (str):
+        include (Union[Unset, GetAlertInclude]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -159,5 +186,6 @@ async def asyncio(
         await asyncio_detailed(
             id=id,
             client=client,
+            include=include,
         )
     ).parsed

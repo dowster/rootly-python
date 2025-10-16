@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+RedisClientTaskParamsTaskType = Literal["redis_client"]
+
+REDIS_CLIENT_TASK_PARAMS_TASK_TYPE_VALUES: set[RedisClientTaskParamsTaskType] = {
+    "redis_client",
+}
 
 
-class RedisClientTaskParamsTaskType(str, Enum):
-    REDIS_CLIENT = "redis_client"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_redis_client_task_params_task_type(value: str) -> RedisClientTaskParamsTaskType:
+    if value in REDIS_CLIENT_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(RedisClientTaskParamsTaskType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {REDIS_CLIENT_TASK_PARAMS_TASK_TYPE_VALUES!r}")

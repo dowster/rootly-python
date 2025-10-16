@@ -1,14 +1,33 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.pulse_trigger_params_pulse_condition import PulseTriggerParamsPulseCondition
-from ..models.pulse_trigger_params_pulse_condition_label import PulseTriggerParamsPulseConditionLabel
-from ..models.pulse_trigger_params_pulse_condition_payload import PulseTriggerParamsPulseConditionPayload
-from ..models.pulse_trigger_params_pulse_condition_source import PulseTriggerParamsPulseConditionSource
-from ..models.pulse_trigger_params_trigger_type import PulseTriggerParamsTriggerType
-from ..models.pulse_trigger_params_triggers_item import PulseTriggerParamsTriggersItem
+from ..models.pulse_trigger_params_pulse_condition import (
+    PulseTriggerParamsPulseCondition,
+    check_pulse_trigger_params_pulse_condition,
+)
+from ..models.pulse_trigger_params_pulse_condition_label import (
+    PulseTriggerParamsPulseConditionLabel,
+    check_pulse_trigger_params_pulse_condition_label,
+)
+from ..models.pulse_trigger_params_pulse_condition_payload import (
+    PulseTriggerParamsPulseConditionPayload,
+    check_pulse_trigger_params_pulse_condition_payload,
+)
+from ..models.pulse_trigger_params_pulse_condition_source import (
+    PulseTriggerParamsPulseConditionSource,
+    check_pulse_trigger_params_pulse_condition_source,
+)
+from ..models.pulse_trigger_params_trigger_type import (
+    PulseTriggerParamsTriggerType,
+    check_pulse_trigger_params_trigger_type,
+)
+from ..models.pulse_trigger_params_triggers_item import (
+    PulseTriggerParamsTriggersItem,
+    check_pulse_trigger_params_triggers_item,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PulseTriggerParams")
@@ -21,16 +40,13 @@ class PulseTriggerParams:
         trigger_type (PulseTriggerParamsTriggerType):
         triggers (Union[Unset, list[PulseTriggerParamsTriggersItem]]):
         pulse_condition (Union[Unset, PulseTriggerParamsPulseCondition]):
-        pulse_condition_source (Union[Unset, PulseTriggerParamsPulseConditionSource]):  Default:
-            PulseTriggerParamsPulseConditionSource.ANY.
+        pulse_condition_source (Union[Unset, PulseTriggerParamsPulseConditionSource]):  Default: 'ANY'.
         pulse_condition_source_use_regexp (Union[Unset, bool]):  Default: False.
         pulse_sources (Union[Unset, list[str]]):
-        pulse_condition_label (Union[Unset, PulseTriggerParamsPulseConditionLabel]):  Default:
-            PulseTriggerParamsPulseConditionLabel.ANY.
+        pulse_condition_label (Union[Unset, PulseTriggerParamsPulseConditionLabel]):  Default: 'ANY'.
         pulse_condition_label_use_regexp (Union[Unset, bool]):  Default: False.
         pulse_labels (Union[Unset, list[str]]):
-        pulse_condition_payload (Union[Unset, PulseTriggerParamsPulseConditionPayload]):  Default:
-            PulseTriggerParamsPulseConditionPayload.ANY.
+        pulse_condition_payload (Union[Unset, PulseTriggerParamsPulseConditionPayload]):  Default: 'ANY'.
         pulse_condition_payload_use_regexp (Union[Unset, bool]):  Default: False.
         pulse_payload (Union[Unset, list[str]]):
         pulse_query_payload (Union[None, Unset, str]): You can use jsonpath syntax. eg: $.incident.teams[*]
@@ -39,41 +55,35 @@ class PulseTriggerParams:
     trigger_type: PulseTriggerParamsTriggerType
     triggers: Union[Unset, list[PulseTriggerParamsTriggersItem]] = UNSET
     pulse_condition: Union[Unset, PulseTriggerParamsPulseCondition] = UNSET
-    pulse_condition_source: Union[Unset, PulseTriggerParamsPulseConditionSource] = (
-        PulseTriggerParamsPulseConditionSource.ANY
-    )
+    pulse_condition_source: Union[Unset, PulseTriggerParamsPulseConditionSource] = "ANY"
     pulse_condition_source_use_regexp: Union[Unset, bool] = False
     pulse_sources: Union[Unset, list[str]] = UNSET
-    pulse_condition_label: Union[Unset, PulseTriggerParamsPulseConditionLabel] = (
-        PulseTriggerParamsPulseConditionLabel.ANY
-    )
+    pulse_condition_label: Union[Unset, PulseTriggerParamsPulseConditionLabel] = "ANY"
     pulse_condition_label_use_regexp: Union[Unset, bool] = False
     pulse_labels: Union[Unset, list[str]] = UNSET
-    pulse_condition_payload: Union[Unset, PulseTriggerParamsPulseConditionPayload] = (
-        PulseTriggerParamsPulseConditionPayload.ANY
-    )
+    pulse_condition_payload: Union[Unset, PulseTriggerParamsPulseConditionPayload] = "ANY"
     pulse_condition_payload_use_regexp: Union[Unset, bool] = False
     pulse_payload: Union[Unset, list[str]] = UNSET
     pulse_query_payload: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        trigger_type = self.trigger_type.value
+        trigger_type: str = self.trigger_type
 
         triggers: Union[Unset, list[str]] = UNSET
         if not isinstance(self.triggers, Unset):
             triggers = []
             for triggers_item_data in self.triggers:
-                triggers_item = triggers_item_data.value
+                triggers_item: str = triggers_item_data
                 triggers.append(triggers_item)
 
         pulse_condition: Union[Unset, str] = UNSET
         if not isinstance(self.pulse_condition, Unset):
-            pulse_condition = self.pulse_condition.value
+            pulse_condition = self.pulse_condition
 
         pulse_condition_source: Union[Unset, str] = UNSET
         if not isinstance(self.pulse_condition_source, Unset):
-            pulse_condition_source = self.pulse_condition_source.value
+            pulse_condition_source = self.pulse_condition_source
 
         pulse_condition_source_use_regexp = self.pulse_condition_source_use_regexp
 
@@ -83,7 +93,7 @@ class PulseTriggerParams:
 
         pulse_condition_label: Union[Unset, str] = UNSET
         if not isinstance(self.pulse_condition_label, Unset):
-            pulse_condition_label = self.pulse_condition_label.value
+            pulse_condition_label = self.pulse_condition_label
 
         pulse_condition_label_use_regexp = self.pulse_condition_label_use_regexp
 
@@ -93,7 +103,7 @@ class PulseTriggerParams:
 
         pulse_condition_payload: Union[Unset, str] = UNSET
         if not isinstance(self.pulse_condition_payload, Unset):
-            pulse_condition_payload = self.pulse_condition_payload.value
+            pulse_condition_payload = self.pulse_condition_payload
 
         pulse_condition_payload_use_regexp = self.pulse_condition_payload_use_regexp
 
@@ -142,14 +152,14 @@ class PulseTriggerParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        trigger_type = PulseTriggerParamsTriggerType(d.pop("trigger_type"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        trigger_type = check_pulse_trigger_params_trigger_type(d.pop("trigger_type"))
 
         triggers = []
         _triggers = d.pop("triggers", UNSET)
         for triggers_item_data in _triggers or []:
-            triggers_item = PulseTriggerParamsTriggersItem(triggers_item_data)
+            triggers_item = check_pulse_trigger_params_triggers_item(triggers_item_data)
 
             triggers.append(triggers_item)
 
@@ -158,14 +168,14 @@ class PulseTriggerParams:
         if isinstance(_pulse_condition, Unset):
             pulse_condition = UNSET
         else:
-            pulse_condition = PulseTriggerParamsPulseCondition(_pulse_condition)
+            pulse_condition = check_pulse_trigger_params_pulse_condition(_pulse_condition)
 
         _pulse_condition_source = d.pop("pulse_condition_source", UNSET)
         pulse_condition_source: Union[Unset, PulseTriggerParamsPulseConditionSource]
         if isinstance(_pulse_condition_source, Unset):
             pulse_condition_source = UNSET
         else:
-            pulse_condition_source = PulseTriggerParamsPulseConditionSource(_pulse_condition_source)
+            pulse_condition_source = check_pulse_trigger_params_pulse_condition_source(_pulse_condition_source)
 
         pulse_condition_source_use_regexp = d.pop("pulse_condition_source_use_regexp", UNSET)
 
@@ -176,7 +186,7 @@ class PulseTriggerParams:
         if isinstance(_pulse_condition_label, Unset):
             pulse_condition_label = UNSET
         else:
-            pulse_condition_label = PulseTriggerParamsPulseConditionLabel(_pulse_condition_label)
+            pulse_condition_label = check_pulse_trigger_params_pulse_condition_label(_pulse_condition_label)
 
         pulse_condition_label_use_regexp = d.pop("pulse_condition_label_use_regexp", UNSET)
 
@@ -187,7 +197,7 @@ class PulseTriggerParams:
         if isinstance(_pulse_condition_payload, Unset):
             pulse_condition_payload = UNSET
         else:
-            pulse_condition_payload = PulseTriggerParamsPulseConditionPayload(_pulse_condition_payload)
+            pulse_condition_payload = check_pulse_trigger_params_pulse_condition_payload(_pulse_condition_payload)
 
         pulse_condition_payload_use_regexp = d.pop("pulse_condition_payload_use_regexp", UNSET)
 

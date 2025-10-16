@@ -1,10 +1,11 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.alert_response_data_source import AlertResponseDataSource
-from ..models.alert_response_data_type import AlertResponseDataType
+from ..models.alert_response_data_source import AlertResponseDataSource, check_alert_response_data_source
+from ..models.alert_response_data_type import AlertResponseDataType, check_alert_response_data_type
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -33,13 +34,13 @@ class AlertResponseData:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
         source: Union[Unset, str] = UNSET
         if not isinstance(self.source, Unset):
-            source = self.source.value
+            source = self.source
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -56,13 +57,13 @@ class AlertResponseData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.alert import Alert
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         id = d.pop("id")
 
-        type_ = AlertResponseDataType(d.pop("type"))
+        type_ = check_alert_response_data_type(d.pop("type"))
 
         attributes = Alert.from_dict(d.pop("attributes"))
 
@@ -71,7 +72,7 @@ class AlertResponseData:
         if isinstance(_source, Unset):
             source = UNSET
         else:
-            source = AlertResponseDataSource(_source)
+            source = check_alert_response_data_source(_source)
 
         alert_response_data = cls(
             id=id,

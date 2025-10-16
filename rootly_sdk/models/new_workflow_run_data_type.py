@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewWorkflowRunDataType = Literal["workflow_runs"]
+
+NEW_WORKFLOW_RUN_DATA_TYPE_VALUES: set[NewWorkflowRunDataType] = {
+    "workflow_runs",
+}
 
 
-class NewWorkflowRunDataType(str, Enum):
-    WORKFLOW_RUNS = "workflow_runs"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_workflow_run_data_type(value: str) -> NewWorkflowRunDataType:
+    if value in NEW_WORKFLOW_RUN_DATA_TYPE_VALUES:
+        return cast(NewWorkflowRunDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_WORKFLOW_RUN_DATA_TYPE_VALUES!r}")

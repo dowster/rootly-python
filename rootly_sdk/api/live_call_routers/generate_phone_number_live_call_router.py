@@ -6,8 +6,12 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.errors_list import ErrorsList
-from ...models.generate_phone_number_live_call_router_country_code import GeneratePhoneNumberLiveCallRouterCountryCode
-from ...models.generate_phone_number_live_call_router_phone_type import GeneratePhoneNumberLiveCallRouterPhoneType
+from ...models.generate_phone_number_live_call_router_country_code import (
+    GeneratePhoneNumberLiveCallRouterCountryCode,
+)
+from ...models.generate_phone_number_live_call_router_phone_type import (
+    GeneratePhoneNumberLiveCallRouterPhoneType,
+)
 from ...types import UNSET, Response
 
 
@@ -18,10 +22,10 @@ def _get_kwargs(
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
-    json_country_code = country_code.value
+    json_country_code: str = country_code
     params["country_code"] = json_country_code
 
-    json_phone_type = phone_type.value
+    json_phone_type: str = phone_type
     params["phone_type"] = json_phone_type
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
@@ -41,10 +45,12 @@ def _parse_response(
     if response.status_code == 200:
         response_200 = cast(Any, None)
         return response_200
+
     if response.status_code == 422:
         response_422 = ErrorsList.from_dict(response.json())
 
         return response_422
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:

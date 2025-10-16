@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.update_severity_data_attributes_severity import UpdateSeverityDataAttributesSeverity
+from ..models.update_severity_data_attributes_severity import (
+    UpdateSeverityDataAttributesSeverity,
+    check_update_severity_data_attributes_severity,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -53,7 +57,7 @@ class UpdateSeverityDataAttributes:
 
         severity: Union[Unset, str] = UNSET
         if not isinstance(self.severity, Unset):
-            severity = self.severity.value
+            severity = self.severity
 
         color: Union[None, Unset, str]
         if isinstance(self.color, Unset):
@@ -101,6 +105,7 @@ class UpdateSeverityDataAttributes:
             slack_aliases = self.slack_aliases
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if name is not UNSET:
             field_dict["name"] = name
@@ -122,7 +127,7 @@ class UpdateSeverityDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_severity_data_attributes_slack_aliases_type_0_item import (
             UpdateSeverityDataAttributesSlackAliasesType0Item,
         )
@@ -130,7 +135,7 @@ class UpdateSeverityDataAttributes:
             UpdateSeverityDataAttributesSlackChannelsType0Item,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name", UNSET)
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
@@ -147,7 +152,7 @@ class UpdateSeverityDataAttributes:
         if isinstance(_severity, Unset):
             severity = UNSET
         else:
-            severity = UpdateSeverityDataAttributesSeverity(_severity)
+            severity = check_update_severity_data_attributes_severity(_severity)
 
         def _parse_color(data: object) -> Union[None, Unset, str]:
             if data is None:

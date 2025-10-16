@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.resolve_alert_data_type import ResolveAlertDataType
+from ..models.resolve_alert_data_type import ResolveAlertDataType, check_resolve_alert_data_type
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -28,7 +29,7 @@ class ResolveAlertData:
     def to_dict(self) -> dict[str, Any]:
         type_: Union[Unset, str] = UNSET
         if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+            type_ = self.type_
 
         attributes: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
@@ -45,16 +46,16 @@ class ResolveAlertData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.resolve_alert_data_attributes import ResolveAlertDataAttributes
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _type_ = d.pop("type", UNSET)
         type_: Union[Unset, ResolveAlertDataType]
         if isinstance(_type_, Unset):
             type_ = UNSET
         else:
-            type_ = ResolveAlertDataType(_type_)
+            type_ = check_resolve_alert_data_type(_type_)
 
         _attributes = d.pop("attributes", UNSET)
         attributes: Union[Unset, ResolveAlertDataAttributes]

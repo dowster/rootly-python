@@ -1,9 +1,18 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdatePostMortemTemplateDataAttributesFormat = Literal["html", "markdown"]
+
+UPDATE_POST_MORTEM_TEMPLATE_DATA_ATTRIBUTES_FORMAT_VALUES: set[UpdatePostMortemTemplateDataAttributesFormat] = {
+    "html",
+    "markdown",
+}
 
 
-class UpdatePostMortemTemplateDataAttributesFormat(str, Enum):
-    HTML = "html"
-    MARKDOWN = "markdown"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_post_mortem_template_data_attributes_format(
+    value: str,
+) -> UpdatePostMortemTemplateDataAttributesFormat:
+    if value in UPDATE_POST_MORTEM_TEMPLATE_DATA_ATTRIBUTES_FORMAT_VALUES:
+        return cast(UpdatePostMortemTemplateDataAttributesFormat, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_POST_MORTEM_TEMPLATE_DATA_ATTRIBUTES_FORMAT_VALUES!r}"
+    )

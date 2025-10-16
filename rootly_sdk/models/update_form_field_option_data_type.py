@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateFormFieldOptionDataType = Literal["form_field_options"]
+
+UPDATE_FORM_FIELD_OPTION_DATA_TYPE_VALUES: set[UpdateFormFieldOptionDataType] = {
+    "form_field_options",
+}
 
 
-class UpdateFormFieldOptionDataType(str, Enum):
-    FORM_FIELD_OPTIONS = "form_field_options"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_form_field_option_data_type(value: str) -> UpdateFormFieldOptionDataType:
+    if value in UPDATE_FORM_FIELD_OPTION_DATA_TYPE_VALUES:
+        return cast(UpdateFormFieldOptionDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_FORM_FIELD_OPTION_DATA_TYPE_VALUES!r}")

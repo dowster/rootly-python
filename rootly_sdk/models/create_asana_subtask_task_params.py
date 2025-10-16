@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,8 +6,12 @@ from attrs import field as _attrs_field
 
 from ..models.create_asana_subtask_task_params_dependency_direction import (
     CreateAsanaSubtaskTaskParamsDependencyDirection,
+    check_create_asana_subtask_task_params_dependency_direction,
 )
-from ..models.create_asana_subtask_task_params_task_type import CreateAsanaSubtaskTaskParamsTaskType
+from ..models.create_asana_subtask_task_params_task_type import (
+    CreateAsanaSubtaskTaskParamsTaskType,
+    check_create_asana_subtask_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -29,8 +34,7 @@ class CreateAsanaSubtaskTaskParams:
         due_date (Union[Unset, str]): The due date
         custom_fields_mapping (Union[None, Unset, str]): Custom field mappings. Can contain liquid markup and need to be
             valid JSON
-        dependency_direction (Union[Unset, CreateAsanaSubtaskTaskParamsDependencyDirection]):  Default:
-            CreateAsanaSubtaskTaskParamsDependencyDirection.BLOCKING.
+        dependency_direction (Union[Unset, CreateAsanaSubtaskTaskParamsDependencyDirection]):  Default: 'blocking'.
         dependent_task_ids (Union[None, Unset, list[str]]): Dependent task ids. Supports liquid syntax
     """
 
@@ -42,9 +46,7 @@ class CreateAsanaSubtaskTaskParams:
     assign_user_email: Union[Unset, str] = UNSET
     due_date: Union[Unset, str] = UNSET
     custom_fields_mapping: Union[None, Unset, str] = UNSET
-    dependency_direction: Union[Unset, CreateAsanaSubtaskTaskParamsDependencyDirection] = (
-        CreateAsanaSubtaskTaskParamsDependencyDirection.BLOCKING
-    )
+    dependency_direction: Union[Unset, CreateAsanaSubtaskTaskParamsDependencyDirection] = "blocking"
     dependent_task_ids: Union[None, Unset, list[str]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -57,7 +59,7 @@ class CreateAsanaSubtaskTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         notes = self.notes
 
@@ -73,7 +75,7 @@ class CreateAsanaSubtaskTaskParams:
 
         dependency_direction: Union[Unset, str] = UNSET
         if not isinstance(self.dependency_direction, Unset):
-            dependency_direction = self.dependency_direction.value
+            dependency_direction = self.dependency_direction
 
         dependent_task_ids: Union[None, Unset, list[str]]
         if isinstance(self.dependent_task_ids, Unset):
@@ -111,10 +113,10 @@ class CreateAsanaSubtaskTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_asana_subtask_task_params_completion import CreateAsanaSubtaskTaskParamsCompletion
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         parent_task_id = d.pop("parent_task_id")
 
         title = d.pop("title")
@@ -126,7 +128,7 @@ class CreateAsanaSubtaskTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateAsanaSubtaskTaskParamsTaskType(_task_type)
+            task_type = check_create_asana_subtask_task_params_task_type(_task_type)
 
         notes = d.pop("notes", UNSET)
 
@@ -148,7 +150,7 @@ class CreateAsanaSubtaskTaskParams:
         if isinstance(_dependency_direction, Unset):
             dependency_direction = UNSET
         else:
-            dependency_direction = CreateAsanaSubtaskTaskParamsDependencyDirection(_dependency_direction)
+            dependency_direction = check_create_asana_subtask_task_params_dependency_direction(_dependency_direction)
 
         def _parse_dependent_task_ids(data: object) -> Union[None, Unset, list[str]]:
             if data is None:

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -30,6 +31,7 @@ class UpdateIncidentCustomFieldSelectionDataAttributes:
             selected_option_ids = self.selected_option_ids
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if value is not UNSET:
             field_dict["value"] = value
@@ -39,8 +41,8 @@ class UpdateIncidentCustomFieldSelectionDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
 
         def _parse_value(data: object) -> Union[None, Unset, str]:
             if data is None:

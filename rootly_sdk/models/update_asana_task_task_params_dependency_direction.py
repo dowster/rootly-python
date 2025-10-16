@@ -1,9 +1,18 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateAsanaTaskTaskParamsDependencyDirection = Literal["blocked_by", "blocking"]
+
+UPDATE_ASANA_TASK_TASK_PARAMS_DEPENDENCY_DIRECTION_VALUES: set[UpdateAsanaTaskTaskParamsDependencyDirection] = {
+    "blocked_by",
+    "blocking",
+}
 
 
-class UpdateAsanaTaskTaskParamsDependencyDirection(str, Enum):
-    BLOCKED_BY = "blocked_by"
-    BLOCKING = "blocking"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_asana_task_task_params_dependency_direction(
+    value: str,
+) -> UpdateAsanaTaskTaskParamsDependencyDirection:
+    if value in UPDATE_ASANA_TASK_TASK_PARAMS_DEPENDENCY_DIRECTION_VALUES:
+        return cast(UpdateAsanaTaskTaskParamsDependencyDirection, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_ASANA_TASK_TASK_PARAMS_DEPENDENCY_DIRECTION_VALUES!r}"
+    )

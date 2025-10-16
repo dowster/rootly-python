@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,9 +6,11 @@ from attrs import field as _attrs_field
 
 from ..models.new_form_field_placement_condition_data_attributes_comparison import (
     NewFormFieldPlacementConditionDataAttributesComparison,
+    check_new_form_field_placement_condition_data_attributes_comparison,
 )
 from ..models.new_form_field_placement_condition_data_attributes_conditioned import (
     NewFormFieldPlacementConditionDataAttributesConditioned,
+    check_new_form_field_placement_condition_data_attributes_conditioned,
 )
 from ..types import UNSET, Unset
 
@@ -34,11 +37,11 @@ class NewFormFieldPlacementConditionDataAttributes:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        conditioned = self.conditioned.value
+        conditioned: str = self.conditioned
 
         form_field_id = self.form_field_id
 
-        comparison = self.comparison.value
+        comparison: str = self.comparison
 
         values = self.values
 
@@ -60,13 +63,13 @@ class NewFormFieldPlacementConditionDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        conditioned = NewFormFieldPlacementConditionDataAttributesConditioned(d.pop("conditioned"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        conditioned = check_new_form_field_placement_condition_data_attributes_conditioned(d.pop("conditioned"))
 
         form_field_id = d.pop("form_field_id")
 
-        comparison = NewFormFieldPlacementConditionDataAttributesComparison(d.pop("comparison"))
+        comparison = check_new_form_field_placement_condition_data_attributes_comparison(d.pop("comparison"))
 
         values = cast(list[str], d.pop("values"))
 

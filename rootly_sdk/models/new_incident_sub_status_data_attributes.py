@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -34,6 +35,7 @@ class NewIncidentSubStatusDataAttributes:
             assigned_by_user_id = self.assigned_by_user_id
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "sub_status_id": sub_status_id,
@@ -46,8 +48,8 @@ class NewIncidentSubStatusDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         sub_status_id = d.pop("sub_status_id")
 
         assigned_at = d.pop("assigned_at")

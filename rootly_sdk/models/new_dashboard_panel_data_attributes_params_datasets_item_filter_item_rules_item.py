@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -5,9 +6,11 @@ from attrs import field as _attrs_field
 
 from ..models.new_dashboard_panel_data_attributes_params_datasets_item_filter_item_rules_item_condition import (
     NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItemCondition,
+    check_new_dashboard_panel_data_attributes_params_datasets_item_filter_item_rules_item_condition,
 )
 from ..models.new_dashboard_panel_data_attributes_params_datasets_item_filter_item_rules_item_operation import (
     NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItemOperation,
+    check_new_dashboard_panel_data_attributes_params_datasets_item_filter_item_rules_item_operation,
 )
 from ..types import UNSET, Unset
 
@@ -33,11 +36,11 @@ class NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItem:
     def to_dict(self) -> dict[str, Any]:
         operation: Union[Unset, str] = UNSET
         if not isinstance(self.operation, Unset):
-            operation = self.operation.value
+            operation = self.operation
 
         condition: Union[Unset, str] = UNSET
         if not isinstance(self.condition, Unset):
-            condition = self.condition.value
+            condition = self.condition
 
         key = self.key
 
@@ -58,21 +61,25 @@ class NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         _operation = d.pop("operation", UNSET)
         operation: Union[Unset, NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItemOperation]
         if isinstance(_operation, Unset):
             operation = UNSET
         else:
-            operation = NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItemOperation(_operation)
+            operation = check_new_dashboard_panel_data_attributes_params_datasets_item_filter_item_rules_item_operation(
+                _operation
+            )
 
         _condition = d.pop("condition", UNSET)
         condition: Union[Unset, NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItemCondition]
         if isinstance(_condition, Unset):
             condition = UNSET
         else:
-            condition = NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItemCondition(_condition)
+            condition = check_new_dashboard_panel_data_attributes_params_datasets_item_filter_item_rules_item_condition(
+                _condition
+            )
 
         key = d.pop("key", UNSET)
 

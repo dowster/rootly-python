@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.catalog_entity_property_key import CatalogEntityPropertyKey
+from ..models.catalog_entity_property_key import CatalogEntityPropertyKey, check_catalog_entity_property_key
 
 T = TypeVar("T", bound="CatalogEntityProperty")
 
@@ -33,7 +34,7 @@ class CatalogEntityProperty:
 
         catalog_field_id = self.catalog_field_id
 
-        key = self.key.value
+        key: str = self.key
 
         value = self.value
 
@@ -57,13 +58,13 @@ class CatalogEntityProperty:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         catalog_entity_id = d.pop("catalog_entity_id")
 
         catalog_field_id = d.pop("catalog_field_id")
 
-        key = CatalogEntityPropertyKey(d.pop("key"))
+        key = check_catalog_entity_property_key(d.pop("key"))
 
         value = d.pop("value")
 

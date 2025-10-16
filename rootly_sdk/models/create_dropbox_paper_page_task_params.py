@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_dropbox_paper_page_task_params_task_type import CreateDropboxPaperPageTaskParamsTaskType
+from ..models.create_dropbox_paper_page_task_params_task_type import (
+    CreateDropboxPaperPageTaskParamsTaskType,
+    check_create_dropbox_paper_page_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -43,7 +47,7 @@ class CreateDropboxPaperPageTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         post_mortem_template_id = self.post_mortem_template_id
 
@@ -82,13 +86,13 @@ class CreateDropboxPaperPageTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_dropbox_paper_page_task_params_namespace import CreateDropboxPaperPageTaskParamsNamespace
         from ..models.create_dropbox_paper_page_task_params_parent_folder import (
             CreateDropboxPaperPageTaskParamsParentFolder,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         title = d.pop("title")
 
         _task_type = d.pop("task_type", UNSET)
@@ -96,7 +100,7 @@ class CreateDropboxPaperPageTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateDropboxPaperPageTaskParamsTaskType(_task_type)
+            task_type = check_create_dropbox_paper_page_task_params_task_type(_task_type)
 
         post_mortem_template_id = d.pop("post_mortem_template_id", UNSET)
 

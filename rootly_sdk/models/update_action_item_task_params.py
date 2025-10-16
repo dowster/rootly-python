@@ -1,12 +1,25 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_action_item_task_params_attribute_to_query_by import UpdateActionItemTaskParamsAttributeToQueryBy
-from ..models.update_action_item_task_params_priority import UpdateActionItemTaskParamsPriority
-from ..models.update_action_item_task_params_status import UpdateActionItemTaskParamsStatus
-from ..models.update_action_item_task_params_task_type import UpdateActionItemTaskParamsTaskType
+from ..models.update_action_item_task_params_attribute_to_query_by import (
+    UpdateActionItemTaskParamsAttributeToQueryBy,
+    check_update_action_item_task_params_attribute_to_query_by,
+)
+from ..models.update_action_item_task_params_priority import (
+    UpdateActionItemTaskParamsPriority,
+    check_update_action_item_task_params_priority,
+)
+from ..models.update_action_item_task_params_status import (
+    UpdateActionItemTaskParamsStatus,
+    check_update_action_item_task_params_status,
+)
+from ..models.update_action_item_task_params_task_type import (
+    UpdateActionItemTaskParamsTaskType,
+    check_update_action_item_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -22,7 +35,7 @@ class UpdateActionItemTaskParams:
     Attributes:
         query_value (str): Value that attribute_to_query_by to uses to match against
         attribute_to_query_by (UpdateActionItemTaskParamsAttributeToQueryBy): Attribute of the action item to match
-            against Default: UpdateActionItemTaskParamsAttributeToQueryBy.ID.
+            against Default: 'id'.
         task_type (Union[Unset, UpdateActionItemTaskParamsTaskType]):
         summary (Union[Unset, str]): Brief description of the action item
         assigned_to_user_id (Union[Unset, str]): [DEPRECATED] Use assigned_to_user attribute instead. The user id this
@@ -39,9 +52,7 @@ class UpdateActionItemTaskParams:
     """
 
     query_value: str
-    attribute_to_query_by: UpdateActionItemTaskParamsAttributeToQueryBy = (
-        UpdateActionItemTaskParamsAttributeToQueryBy.ID
-    )
+    attribute_to_query_by: UpdateActionItemTaskParamsAttributeToQueryBy = "id"
     task_type: Union[Unset, UpdateActionItemTaskParamsTaskType] = UNSET
     summary: Union[Unset, str] = UNSET
     assigned_to_user_id: Union[Unset, str] = UNSET
@@ -57,11 +68,11 @@ class UpdateActionItemTaskParams:
     def to_dict(self) -> dict[str, Any]:
         query_value = self.query_value
 
-        attribute_to_query_by = self.attribute_to_query_by.value
+        attribute_to_query_by: str = self.attribute_to_query_by
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         summary = self.summary
 
@@ -84,11 +95,11 @@ class UpdateActionItemTaskParams:
 
         priority: Union[Unset, str] = UNSET
         if not isinstance(self.priority, Unset):
-            priority = self.priority.value
+            priority = self.priority
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
-            status = self.status.value
+            status = self.status
 
         custom_fields_mapping: Union[None, Unset, str]
         if isinstance(self.custom_fields_mapping, Unset):
@@ -130,20 +141,22 @@ class UpdateActionItemTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_action_item_task_params_assigned_to_user import UpdateActionItemTaskParamsAssignedToUser
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         query_value = d.pop("query_value")
 
-        attribute_to_query_by = UpdateActionItemTaskParamsAttributeToQueryBy(d.pop("attribute_to_query_by"))
+        attribute_to_query_by = check_update_action_item_task_params_attribute_to_query_by(
+            d.pop("attribute_to_query_by")
+        )
 
         _task_type = d.pop("task_type", UNSET)
         task_type: Union[Unset, UpdateActionItemTaskParamsTaskType]
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateActionItemTaskParamsTaskType(_task_type)
+            task_type = check_update_action_item_task_params_task_type(_task_type)
 
         summary = d.pop("summary", UNSET)
 
@@ -180,14 +193,14 @@ class UpdateActionItemTaskParams:
         if isinstance(_priority, Unset):
             priority = UNSET
         else:
-            priority = UpdateActionItemTaskParamsPriority(_priority)
+            priority = check_update_action_item_task_params_priority(_priority)
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, UpdateActionItemTaskParamsStatus]
         if isinstance(_status, Unset):
             status = UNSET
         else:
-            status = UpdateActionItemTaskParamsStatus(_status)
+            status = check_update_action_item_task_params_status(_status)
 
         def _parse_custom_fields_mapping(data: object) -> Union[None, Unset, str]:
             if data is None:

@@ -1,9 +1,11 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
 from ..models.update_schedule_rotation_active_day_data_attributes_day_name import (
     UpdateScheduleRotationActiveDayDataAttributesDayName,
+    check_update_schedule_rotation_active_day_data_attributes_day_name,
 )
 from ..types import UNSET, Unset
 
@@ -35,7 +37,7 @@ class UpdateScheduleRotationActiveDayDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         day_name: Union[Unset, str] = UNSET
         if not isinstance(self.day_name, Unset):
-            day_name = self.day_name.value
+            day_name = self.day_name
 
         active_time_attributes: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.active_time_attributes, Unset):
@@ -45,6 +47,7 @@ class UpdateScheduleRotationActiveDayDataAttributes:
                 active_time_attributes.append(active_time_attributes_item)
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if day_name is not UNSET:
             field_dict["day_name"] = day_name
@@ -54,18 +57,18 @@ class UpdateScheduleRotationActiveDayDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_schedule_rotation_active_day_data_attributes_active_time_attributes_item import (
             UpdateScheduleRotationActiveDayDataAttributesActiveTimeAttributesItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _day_name = d.pop("day_name", UNSET)
         day_name: Union[Unset, UpdateScheduleRotationActiveDayDataAttributesDayName]
         if isinstance(_day_name, Unset):
             day_name = UNSET
         else:
-            day_name = UpdateScheduleRotationActiveDayDataAttributesDayName(_day_name)
+            day_name = check_update_schedule_rotation_active_day_data_attributes_day_name(_day_name)
 
         active_time_attributes = []
         _active_time_attributes = d.pop("active_time_attributes", UNSET)

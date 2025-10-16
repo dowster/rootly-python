@@ -1,10 +1,17 @@
-from enum import Enum
+from typing import Literal, cast
+
+AlertGroupConditionsItemPropertyFieldType = Literal["alert_field", "attribute", "payload"]
+
+ALERT_GROUP_CONDITIONS_ITEM_PROPERTY_FIELD_TYPE_VALUES: set[AlertGroupConditionsItemPropertyFieldType] = {
+    "alert_field",
+    "attribute",
+    "payload",
+}
 
 
-class AlertGroupConditionsItemPropertyFieldType(str, Enum):
-    ALERT_FIELD = "alert_field"
-    ATTRIBUTE = "attribute"
-    PAYLOAD = "payload"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_alert_group_conditions_item_property_field_type(value: str) -> AlertGroupConditionsItemPropertyFieldType:
+    if value in ALERT_GROUP_CONDITIONS_ITEM_PROPERTY_FIELD_TYPE_VALUES:
+        return cast(AlertGroupConditionsItemPropertyFieldType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {ALERT_GROUP_CONDITIONS_ITEM_PROPERTY_FIELD_TYPE_VALUES!r}"
+    )

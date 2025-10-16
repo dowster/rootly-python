@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.catalog_icon import CatalogIcon
+from ..models.catalog_icon import CatalogIcon, check_catalog_icon
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Catalog")
@@ -32,7 +33,7 @@ class Catalog:
     def to_dict(self) -> dict[str, Any]:
         name = self.name
 
-        icon = self.icon.value
+        icon: str = self.icon
 
         position: Union[None, int]
         position = self.position
@@ -64,11 +65,11 @@ class Catalog:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
-        icon = CatalogIcon(d.pop("icon"))
+        icon = check_catalog_icon(d.pop("icon"))
 
         def _parse_position(data: object) -> Union[None, int]:
             if data is None:

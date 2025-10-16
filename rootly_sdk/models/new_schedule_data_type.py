@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewScheduleDataType = Literal["schedules"]
+
+NEW_SCHEDULE_DATA_TYPE_VALUES: set[NewScheduleDataType] = {
+    "schedules",
+}
 
 
-class NewScheduleDataType(str, Enum):
-    SCHEDULES = "schedules"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_schedule_data_type(value: str) -> NewScheduleDataType:
+    if value in NEW_SCHEDULE_DATA_TYPE_VALUES:
+        return cast(NewScheduleDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_SCHEDULE_DATA_TYPE_VALUES!r}")

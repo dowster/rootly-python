@@ -1,12 +1,25 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewDashboardPanelDataAttributesParamsDatasetsItemCollection = Literal[
+    "alerts", "incident_action_items", "incident_post_mortems", "incidents", "users"
+]
+
+NEW_DASHBOARD_PANEL_DATA_ATTRIBUTES_PARAMS_DATASETS_ITEM_COLLECTION_VALUES: set[
+    NewDashboardPanelDataAttributesParamsDatasetsItemCollection
+] = {
+    "alerts",
+    "incident_action_items",
+    "incident_post_mortems",
+    "incidents",
+    "users",
+}
 
 
-class NewDashboardPanelDataAttributesParamsDatasetsItemCollection(str, Enum):
-    ALERTS = "alerts"
-    INCIDENTS = "incidents"
-    INCIDENT_ACTION_ITEMS = "incident_action_items"
-    INCIDENT_POST_MORTEMS = "incident_post_mortems"
-    USERS = "users"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_dashboard_panel_data_attributes_params_datasets_item_collection(
+    value: str,
+) -> NewDashboardPanelDataAttributesParamsDatasetsItemCollection:
+    if value in NEW_DASHBOARD_PANEL_DATA_ATTRIBUTES_PARAMS_DATASETS_ITEM_COLLECTION_VALUES:
+        return cast(NewDashboardPanelDataAttributesParamsDatasetsItemCollection, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_DASHBOARD_PANEL_DATA_ATTRIBUTES_PARAMS_DATASETS_ITEM_COLLECTION_VALUES!r}"
+    )

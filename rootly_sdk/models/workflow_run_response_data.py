@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.workflow_run_response_data_type import WorkflowRunResponseDataType
+from ..models.workflow_run_response_data_type import WorkflowRunResponseDataType, check_workflow_run_response_data_type
 
 if TYPE_CHECKING:
     from ..models.workflow_run import WorkflowRun
@@ -29,7 +30,7 @@ class WorkflowRunResponseData:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
@@ -46,13 +47,13 @@ class WorkflowRunResponseData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.workflow_run import WorkflowRun
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         id = d.pop("id")
 
-        type_ = WorkflowRunResponseDataType(d.pop("type"))
+        type_ = check_workflow_run_response_data_type(d.pop("type"))
 
         attributes = WorkflowRun.from_dict(d.pop("attributes"))
 

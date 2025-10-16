@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateCatalogEntityDataType = Literal["catalog_entities"]
+
+UPDATE_CATALOG_ENTITY_DATA_TYPE_VALUES: set[UpdateCatalogEntityDataType] = {
+    "catalog_entities",
+}
 
 
-class UpdateCatalogEntityDataType(str, Enum):
-    CATALOG_ENTITIES = "catalog_entities"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_catalog_entity_data_type(value: str) -> UpdateCatalogEntityDataType:
+    if value in UPDATE_CATALOG_ENTITY_DATA_TYPE_VALUES:
+        return cast(UpdateCatalogEntityDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_CATALOG_ENTITY_DATA_TYPE_VALUES!r}")

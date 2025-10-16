@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_linear_issue_task_params_task_type import UpdateLinearIssueTaskParamsTaskType
+from ..models.update_linear_issue_task_params_task_type import (
+    UpdateLinearIssueTaskParamsTaskType,
+    check_update_linear_issue_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -47,7 +51,7 @@ class UpdateLinearIssueTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         title = self.title
 
@@ -101,13 +105,13 @@ class UpdateLinearIssueTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_linear_issue_task_params_labels_item import UpdateLinearIssueTaskParamsLabelsItem
         from ..models.update_linear_issue_task_params_priority import UpdateLinearIssueTaskParamsPriority
         from ..models.update_linear_issue_task_params_project import UpdateLinearIssueTaskParamsProject
         from ..models.update_linear_issue_task_params_state import UpdateLinearIssueTaskParamsState
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         issue_id = d.pop("issue_id")
 
         _task_type = d.pop("task_type", UNSET)
@@ -115,7 +119,7 @@ class UpdateLinearIssueTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateLinearIssueTaskParamsTaskType(_task_type)
+            task_type = check_update_linear_issue_task_params_task_type(_task_type)
 
         title = d.pop("title", UNSET)
 

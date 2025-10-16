@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.status_page_template_kind import StatusPageTemplateKind
+from ..models.status_page_template_kind import StatusPageTemplateKind, check_status_page_template_kind
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="StatusPageTemplate")
@@ -56,7 +57,7 @@ class StatusPageTemplate:
 
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         should_notify_subscribers: Union[None, Unset, bool]
         if isinstance(self.should_notify_subscribers, Unset):
@@ -97,8 +98,8 @@ class StatusPageTemplate:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         status_page_id = d.pop("status_page_id")
 
         title = d.pop("title")
@@ -123,7 +124,7 @@ class StatusPageTemplate:
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = StatusPageTemplateKind(_kind)
+            kind = check_status_page_template_kind(_kind)
 
         def _parse_should_notify_subscribers(data: object) -> Union[None, Unset, bool]:
             if data is None:

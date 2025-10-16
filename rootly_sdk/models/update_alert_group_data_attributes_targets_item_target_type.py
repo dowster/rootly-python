@@ -1,10 +1,21 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateAlertGroupDataAttributesTargetsItemTargetType = Literal["EscalationPolicy", "Group", "Service"]
+
+UPDATE_ALERT_GROUP_DATA_ATTRIBUTES_TARGETS_ITEM_TARGET_TYPE_VALUES: set[
+    UpdateAlertGroupDataAttributesTargetsItemTargetType
+] = {
+    "EscalationPolicy",
+    "Group",
+    "Service",
+}
 
 
-class UpdateAlertGroupDataAttributesTargetsItemTargetType(str, Enum):
-    ESCALATIONPOLICY = "EscalationPolicy"
-    GROUP = "Group"
-    SERVICE = "Service"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_alert_group_data_attributes_targets_item_target_type(
+    value: str,
+) -> UpdateAlertGroupDataAttributesTargetsItemTargetType:
+    if value in UPDATE_ALERT_GROUP_DATA_ATTRIBUTES_TARGETS_ITEM_TARGET_TYPE_VALUES:
+        return cast(UpdateAlertGroupDataAttributesTargetsItemTargetType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_ALERT_GROUP_DATA_ATTRIBUTES_TARGETS_ITEM_TARGET_TYPE_VALUES!r}"
+    )

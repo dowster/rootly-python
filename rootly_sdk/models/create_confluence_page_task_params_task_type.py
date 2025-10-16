@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+CreateConfluencePageTaskParamsTaskType = Literal["create_confluence_page"]
+
+CREATE_CONFLUENCE_PAGE_TASK_PARAMS_TASK_TYPE_VALUES: set[CreateConfluencePageTaskParamsTaskType] = {
+    "create_confluence_page",
+}
 
 
-class CreateConfluencePageTaskParamsTaskType(str, Enum):
-    CREATE_CONFLUENCE_PAGE = "create_confluence_page"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_create_confluence_page_task_params_task_type(value: str) -> CreateConfluencePageTaskParamsTaskType:
+    if value in CREATE_CONFLUENCE_PAGE_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(CreateConfluencePageTaskParamsTaskType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {CREATE_CONFLUENCE_PAGE_TASK_PARAMS_TASK_TYPE_VALUES!r}"
+    )

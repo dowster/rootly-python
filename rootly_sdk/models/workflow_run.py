@@ -1,10 +1,11 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.workflow_run_status import WorkflowRunStatus
-from ..models.workflow_run_triggered_by import WorkflowRunTriggeredBy
+from ..models.workflow_run_status import WorkflowRunStatus, check_workflow_run_status
+from ..models.workflow_run_triggered_by import WorkflowRunTriggeredBy, check_workflow_run_triggered_by
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -53,9 +54,9 @@ class WorkflowRun:
     def to_dict(self) -> dict[str, Any]:
         workflow_id = self.workflow_id
 
-        status = self.status.value
+        status: str = self.status
 
-        triggered_by = self.triggered_by.value
+        triggered_by: str = self.triggered_by
 
         status_message: Union[None, Unset, str]
         if isinstance(self.status_message, Unset):
@@ -156,15 +157,15 @@ class WorkflowRun:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.workflow_run_context import WorkflowRunContext
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         workflow_id = d.pop("workflow_id")
 
-        status = WorkflowRunStatus(d.pop("status"))
+        status = check_workflow_run_status(d.pop("status"))
 
-        triggered_by = WorkflowRunTriggeredBy(d.pop("triggered_by"))
+        triggered_by = check_workflow_run_triggered_by(d.pop("triggered_by"))
 
         def _parse_status_message(data: object) -> Union[None, Unset, str]:
             if data is None:

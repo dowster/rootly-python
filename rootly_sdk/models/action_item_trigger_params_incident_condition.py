@@ -1,10 +1,17 @@
-from enum import Enum
+from typing import Literal, cast
+
+ActionItemTriggerParamsIncidentCondition = Literal["ALL", "ANY", "NONE"]
+
+ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_CONDITION_VALUES: set[ActionItemTriggerParamsIncidentCondition] = {
+    "ALL",
+    "ANY",
+    "NONE",
+}
 
 
-class ActionItemTriggerParamsIncidentCondition(str, Enum):
-    ALL = "ALL"
-    ANY = "ANY"
-    NONE = "NONE"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_action_item_trigger_params_incident_condition(value: str) -> ActionItemTriggerParamsIncidentCondition:
+    if value in ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_CONDITION_VALUES:
+        return cast(ActionItemTriggerParamsIncidentCondition, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_CONDITION_VALUES!r}"
+    )

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -138,14 +139,14 @@ class Pulse:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.environment import Environment
         from ..models.pulse_data_type_0 import PulseDataType0
         from ..models.pulse_labels_item_type_0 import PulseLabelsItemType0
         from ..models.pulse_refs_item_type_0 import PulseRefsItemType0
         from ..models.service import Service
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         summary = d.pop("summary")
 
         created_at = d.pop("created_at")

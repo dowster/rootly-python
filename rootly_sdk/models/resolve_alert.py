@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -36,10 +37,10 @@ class ResolveAlert:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.resolve_alert_data import ResolveAlertData
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _data = d.pop("data", UNSET)
         data: Union[Unset, ResolveAlertData]
         if isinstance(_data, Unset):

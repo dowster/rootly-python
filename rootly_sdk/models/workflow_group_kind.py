@@ -1,13 +1,18 @@
-from enum import Enum
+from typing import Literal, cast
+
+WorkflowGroupKind = Literal["action_item", "alert", "incident", "post_mortem", "pulse", "simple"]
+
+WORKFLOW_GROUP_KIND_VALUES: set[WorkflowGroupKind] = {
+    "action_item",
+    "alert",
+    "incident",
+    "post_mortem",
+    "pulse",
+    "simple",
+}
 
 
-class WorkflowGroupKind(str, Enum):
-    ACTION_ITEM = "action_item"
-    ALERT = "alert"
-    INCIDENT = "incident"
-    POST_MORTEM = "post_mortem"
-    PULSE = "pulse"
-    SIMPLE = "simple"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_workflow_group_kind(value: str) -> WorkflowGroupKind:
+    if value in WORKFLOW_GROUP_KIND_VALUES:
+        return cast(WorkflowGroupKind, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {WORKFLOW_GROUP_KIND_VALUES!r}")

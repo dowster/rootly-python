@@ -1,11 +1,21 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_opsgenie_incident_task_params_priority import UpdateOpsgenieIncidentTaskParamsPriority
-from ..models.update_opsgenie_incident_task_params_status import UpdateOpsgenieIncidentTaskParamsStatus
-from ..models.update_opsgenie_incident_task_params_task_type import UpdateOpsgenieIncidentTaskParamsTaskType
+from ..models.update_opsgenie_incident_task_params_priority import (
+    UpdateOpsgenieIncidentTaskParamsPriority,
+    check_update_opsgenie_incident_task_params_priority,
+)
+from ..models.update_opsgenie_incident_task_params_status import (
+    UpdateOpsgenieIncidentTaskParamsStatus,
+    check_update_opsgenie_incident_task_params_status,
+)
+from ..models.update_opsgenie_incident_task_params_task_type import (
+    UpdateOpsgenieIncidentTaskParamsTaskType,
+    check_update_opsgenie_incident_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateOpsgenieIncidentTaskParams")
@@ -38,7 +48,7 @@ class UpdateOpsgenieIncidentTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         message = self.message
 
@@ -46,11 +56,11 @@ class UpdateOpsgenieIncidentTaskParams:
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
-            status = self.status.value
+            status = self.status
 
         priority: Union[Unset, str] = UNSET
         if not isinstance(self.priority, Unset):
-            priority = self.priority.value
+            priority = self.priority
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -73,8 +83,8 @@ class UpdateOpsgenieIncidentTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         opsgenie_incident_id = d.pop("opsgenie_incident_id")
 
         _task_type = d.pop("task_type", UNSET)
@@ -82,7 +92,7 @@ class UpdateOpsgenieIncidentTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateOpsgenieIncidentTaskParamsTaskType(_task_type)
+            task_type = check_update_opsgenie_incident_task_params_task_type(_task_type)
 
         message = d.pop("message", UNSET)
 
@@ -93,14 +103,14 @@ class UpdateOpsgenieIncidentTaskParams:
         if isinstance(_status, Unset):
             status = UNSET
         else:
-            status = UpdateOpsgenieIncidentTaskParamsStatus(_status)
+            status = check_update_opsgenie_incident_task_params_status(_status)
 
         _priority = d.pop("priority", UNSET)
         priority: Union[Unset, UpdateOpsgenieIncidentTaskParamsPriority]
         if isinstance(_priority, Unset):
             priority = UNSET
         else:
-            priority = UpdateOpsgenieIncidentTaskParamsPriority(_priority)
+            priority = check_update_opsgenie_incident_task_params_priority(_priority)
 
         update_opsgenie_incident_task_params = cls(
             opsgenie_incident_id=opsgenie_incident_id,

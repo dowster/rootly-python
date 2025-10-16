@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewFormFieldPositionDataType = Literal["form_field_positions"]
+
+NEW_FORM_FIELD_POSITION_DATA_TYPE_VALUES: set[NewFormFieldPositionDataType] = {
+    "form_field_positions",
+}
 
 
-class NewFormFieldPositionDataType(str, Enum):
-    FORM_FIELD_POSITIONS = "form_field_positions"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_form_field_position_data_type(value: str) -> NewFormFieldPositionDataType:
+    if value in NEW_FORM_FIELD_POSITION_DATA_TYPE_VALUES:
+        return cast(NewFormFieldPositionDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_FORM_FIELD_POSITION_DATA_TYPE_VALUES!r}")

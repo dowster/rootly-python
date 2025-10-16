@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -5,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..models.dashboard_panel_params_datasets_item_filter_item_operation import (
     DashboardPanelParamsDatasetsItemFilterItemOperation,
+    check_dashboard_panel_params_datasets_item_filter_item_operation,
 )
 from ..types import UNSET, Unset
 
@@ -32,7 +34,7 @@ class DashboardPanelParamsDatasetsItemFilterItem:
     def to_dict(self) -> dict[str, Any]:
         operation: Union[Unset, str] = UNSET
         if not isinstance(self.operation, Unset):
-            operation = self.operation.value
+            operation = self.operation
 
         rules: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.rules, Unset):
@@ -52,18 +54,18 @@ class DashboardPanelParamsDatasetsItemFilterItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.dashboard_panel_params_datasets_item_filter_item_rules_item import (
             DashboardPanelParamsDatasetsItemFilterItemRulesItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _operation = d.pop("operation", UNSET)
         operation: Union[Unset, DashboardPanelParamsDatasetsItemFilterItemOperation]
         if isinstance(_operation, Unset):
             operation = UNSET
         else:
-            operation = DashboardPanelParamsDatasetsItemFilterItemOperation(_operation)
+            operation = check_dashboard_panel_params_datasets_item_filter_item_operation(_operation)
 
         rules = []
         _rules = d.pop("rules", UNSET)

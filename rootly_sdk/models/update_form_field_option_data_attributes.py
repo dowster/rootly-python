@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -11,10 +12,10 @@ T = TypeVar("T", bound="UpdateFormFieldOptionDataAttributes")
 class UpdateFormFieldOptionDataAttributes:
     """
     Attributes:
-        value (Union[Unset, str]): The value of the form_field_option
-        color (Union[Unset, str]): The hex color of the form_field_option
+        value (Union[Unset, str]): The value of the form field option
+        color (Union[Unset, str]): The hex color of the form field option
         default (Union[Unset, bool]):
-        position (Union[Unset, int]): The position of the form_field_option
+        position (Union[Unset, int]): The position of the form field option
     """
 
     value: Union[Unset, str] = UNSET
@@ -32,6 +33,7 @@ class UpdateFormFieldOptionDataAttributes:
         position = self.position
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if value is not UNSET:
             field_dict["value"] = value
@@ -45,8 +47,8 @@ class UpdateFormFieldOptionDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         value = d.pop("value", UNSET)
 
         color = d.pop("color", UNSET)

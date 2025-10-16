@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_linear_issue_comment_task_params_task_type import CreateLinearIssueCommentTaskParamsTaskType
+from ..models.create_linear_issue_comment_task_params_task_type import (
+    CreateLinearIssueCommentTaskParamsTaskType,
+    check_create_linear_issue_comment_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CreateLinearIssueCommentTaskParams")
@@ -30,7 +34,7 @@ class CreateLinearIssueCommentTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -46,8 +50,8 @@ class CreateLinearIssueCommentTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         issue_id = d.pop("issue_id")
 
         body = d.pop("body")
@@ -57,7 +61,7 @@ class CreateLinearIssueCommentTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateLinearIssueCommentTaskParamsTaskType(_task_type)
+            task_type = check_create_linear_issue_comment_task_params_task_type(_task_type)
 
         create_linear_issue_comment_task_params = cls(
             issue_id=issue_id,

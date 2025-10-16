@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -42,10 +43,10 @@ class OnCallRoleRelationship:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.on_call_role_relationship_data_type_0 import OnCallRoleRelationshipDataType0
 
-        d = src_dict.copy()
+        d = dict(src_dict)
 
         def _parse_data(data: object) -> Union["OnCallRoleRelationshipDataType0", None, Unset]:
             if data is None:

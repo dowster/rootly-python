@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+CatalogEntityPropertyResponseDataType = Literal["catalog_entity_properties"]
+
+CATALOG_ENTITY_PROPERTY_RESPONSE_DATA_TYPE_VALUES: set[CatalogEntityPropertyResponseDataType] = {
+    "catalog_entity_properties",
+}
 
 
-class CatalogEntityPropertyResponseDataType(str, Enum):
-    CATALOG_ENTITY_PROPERTIES = "catalog_entity_properties"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_catalog_entity_property_response_data_type(value: str) -> CatalogEntityPropertyResponseDataType:
+    if value in CATALOG_ENTITY_PROPERTY_RESPONSE_DATA_TYPE_VALUES:
+        return cast(CatalogEntityPropertyResponseDataType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {CATALOG_ENTITY_PROPERTY_RESPONSE_DATA_TYPE_VALUES!r}"
+    )

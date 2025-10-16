@@ -1,11 +1,20 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewAlertDataAttributesNotificationTargetType = Literal["EscalationPolicy", "Group", "Service", "User"]
+
+NEW_ALERT_DATA_ATTRIBUTES_NOTIFICATION_TARGET_TYPE_VALUES: set[NewAlertDataAttributesNotificationTargetType] = {
+    "EscalationPolicy",
+    "Group",
+    "Service",
+    "User",
+}
 
 
-class NewAlertDataAttributesNotificationTargetType(str, Enum):
-    ESCALATIONPOLICY = "EscalationPolicy"
-    GROUP = "Group"
-    SERVICE = "Service"
-    USER = "User"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_alert_data_attributes_notification_target_type(
+    value: str,
+) -> NewAlertDataAttributesNotificationTargetType:
+    if value in NEW_ALERT_DATA_ATTRIBUTES_NOTIFICATION_TARGET_TYPE_VALUES:
+        return cast(NewAlertDataAttributesNotificationTargetType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_ALERT_DATA_ATTRIBUTES_NOTIFICATION_TARGET_TYPE_VALUES!r}"
+    )

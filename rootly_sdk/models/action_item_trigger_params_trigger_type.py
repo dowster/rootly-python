@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+ActionItemTriggerParamsTriggerType = Literal["action_item"]
+
+ACTION_ITEM_TRIGGER_PARAMS_TRIGGER_TYPE_VALUES: set[ActionItemTriggerParamsTriggerType] = {
+    "action_item",
+}
 
 
-class ActionItemTriggerParamsTriggerType(str, Enum):
-    ACTION_ITEM = "action_item"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_action_item_trigger_params_trigger_type(value: str) -> ActionItemTriggerParamsTriggerType:
+    if value in ACTION_ITEM_TRIGGER_PARAMS_TRIGGER_TYPE_VALUES:
+        return cast(ActionItemTriggerParamsTriggerType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {ACTION_ITEM_TRIGGER_PARAMS_TRIGGER_TYPE_VALUES!r}")

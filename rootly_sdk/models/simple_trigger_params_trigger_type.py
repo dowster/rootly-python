@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+SimpleTriggerParamsTriggerType = Literal["simple"]
+
+SIMPLE_TRIGGER_PARAMS_TRIGGER_TYPE_VALUES: set[SimpleTriggerParamsTriggerType] = {
+    "simple",
+}
 
 
-class SimpleTriggerParamsTriggerType(str, Enum):
-    SIMPLE = "simple"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_simple_trigger_params_trigger_type(value: str) -> SimpleTriggerParamsTriggerType:
+    if value in SIMPLE_TRIGGER_PARAMS_TRIGGER_TYPE_VALUES:
+        return cast(SimpleTriggerParamsTriggerType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {SIMPLE_TRIGGER_PARAMS_TRIGGER_TYPE_VALUES!r}")

@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.incident_feedback_rating import IncidentFeedbackRating
+from ..models.incident_feedback_rating import IncidentFeedbackRating, check_incident_feedback_rating
 
 T = TypeVar("T", bound="IncidentFeedback")
 
@@ -29,7 +30,7 @@ class IncidentFeedback:
     def to_dict(self) -> dict[str, Any]:
         feedback = self.feedback
 
-        rating = self.rating.value
+        rating: int = self.rating
 
         anonymous = self.anonymous
 
@@ -52,11 +53,11 @@ class IncidentFeedback:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         feedback = d.pop("feedback")
 
-        rating = IncidentFeedbackRating(d.pop("rating"))
+        rating = check_incident_feedback_rating(d.pop("rating"))
 
         anonymous = d.pop("anonymous")
 

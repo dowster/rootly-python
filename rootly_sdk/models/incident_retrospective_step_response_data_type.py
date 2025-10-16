@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentRetrospectiveStepResponseDataType = Literal["incident_retrospective_steps"]
+
+INCIDENT_RETROSPECTIVE_STEP_RESPONSE_DATA_TYPE_VALUES: set[IncidentRetrospectiveStepResponseDataType] = {
+    "incident_retrospective_steps",
+}
 
 
-class IncidentRetrospectiveStepResponseDataType(str, Enum):
-    INCIDENT_RETROSPECTIVE_STEPS = "incident_retrospective_steps"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_retrospective_step_response_data_type(value: str) -> IncidentRetrospectiveStepResponseDataType:
+    if value in INCIDENT_RETROSPECTIVE_STEP_RESPONSE_DATA_TYPE_VALUES:
+        return cast(IncidentRetrospectiveStepResponseDataType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {INCIDENT_RETROSPECTIVE_STEP_RESPONSE_DATA_TYPE_VALUES!r}"
+    )

@@ -1,15 +1,25 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewStatusPageTemplateDataAttributesUpdateStatus = Literal[
+    "completed", "identified", "in_progress", "investigating", "monitoring", "resolved", "scheduled"
+]
+
+NEW_STATUS_PAGE_TEMPLATE_DATA_ATTRIBUTES_UPDATE_STATUS_VALUES: set[NewStatusPageTemplateDataAttributesUpdateStatus] = {
+    "completed",
+    "identified",
+    "in_progress",
+    "investigating",
+    "monitoring",
+    "resolved",
+    "scheduled",
+}
 
 
-class NewStatusPageTemplateDataAttributesUpdateStatus(str, Enum):
-    COMPLETED = "completed"
-    IDENTIFIED = "identified"
-    INVESTIGATING = "investigating"
-    IN_PROGRESS = "in_progress"
-    MONITORING = "monitoring"
-    RESOLVED = "resolved"
-    SCHEDULED = "scheduled"
-    VERIFYING = "verifying"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_status_page_template_data_attributes_update_status(
+    value: str,
+) -> NewStatusPageTemplateDataAttributesUpdateStatus:
+    if value in NEW_STATUS_PAGE_TEMPLATE_DATA_ATTRIBUTES_UPDATE_STATUS_VALUES:
+        return cast(NewStatusPageTemplateDataAttributesUpdateStatus, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_STATUS_PAGE_TEMPLATE_DATA_ATTRIBUTES_UPDATE_STATUS_VALUES!r}"
+    )

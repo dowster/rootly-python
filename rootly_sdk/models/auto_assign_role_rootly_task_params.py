@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.auto_assign_role_rootly_task_params_task_type import AutoAssignRoleRootlyTaskParamsTaskType
+from ..models.auto_assign_role_rootly_task_params_task_type import (
+    AutoAssignRoleRootlyTaskParamsTaskType,
+    check_auto_assign_role_rootly_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -48,7 +52,7 @@ class AutoAssignRoleRootlyTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         escalation_policy_target: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.escalation_policy_target, Unset):
@@ -93,7 +97,7 @@ class AutoAssignRoleRootlyTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.auto_assign_role_rootly_task_params_escalation_policy_target import (
             AutoAssignRoleRootlyTaskParamsEscalationPolicyTarget,
         )
@@ -106,7 +110,7 @@ class AutoAssignRoleRootlyTaskParams:
         )
         from ..models.auto_assign_role_rootly_task_params_user_target import AutoAssignRoleRootlyTaskParamsUserTarget
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         incident_role_id = d.pop("incident_role_id")
 
         _task_type = d.pop("task_type", UNSET)
@@ -114,7 +118,7 @@ class AutoAssignRoleRootlyTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = AutoAssignRoleRootlyTaskParamsTaskType(_task_type)
+            task_type = check_auto_assign_role_rootly_task_params_task_type(_task_type)
 
         _escalation_policy_target = d.pop("escalation_policy_target", UNSET)
         escalation_policy_target: Union[Unset, AutoAssignRoleRootlyTaskParamsEscalationPolicyTarget]

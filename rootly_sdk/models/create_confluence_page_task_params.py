@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_confluence_page_task_params_task_type import CreateConfluencePageTaskParamsTaskType
+from ..models.create_confluence_page_task_params_task_type import (
+    CreateConfluencePageTaskParamsTaskType,
+    check_create_confluence_page_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -50,7 +54,7 @@ class CreateConfluencePageTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         integration: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.integration, Unset):
@@ -96,13 +100,13 @@ class CreateConfluencePageTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_confluence_page_task_params_ancestor import CreateConfluencePageTaskParamsAncestor
         from ..models.create_confluence_page_task_params_integration import CreateConfluencePageTaskParamsIntegration
         from ..models.create_confluence_page_task_params_space import CreateConfluencePageTaskParamsSpace
         from ..models.create_confluence_page_task_params_template import CreateConfluencePageTaskParamsTemplate
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         space = CreateConfluencePageTaskParamsSpace.from_dict(d.pop("space"))
 
         title = d.pop("title")
@@ -112,7 +116,7 @@ class CreateConfluencePageTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateConfluencePageTaskParamsTaskType(_task_type)
+            task_type = check_create_confluence_page_task_params_task_type(_task_type)
 
         _integration = d.pop("integration", UNSET)
         integration: Union[Unset, CreateConfluencePageTaskParamsIntegration]

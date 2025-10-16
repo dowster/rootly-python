@@ -1,294 +1,589 @@
-from enum import Enum
+from typing import Literal, cast
+
+EscalationPolicyPathTimeRestrictionTimeZone = Literal[
+    "Abu Dhabi",
+    "Adelaide",
+    "Africa/Algiers",
+    "Africa/Cairo",
+    "Africa/Casablanca",
+    "Africa/Harare",
+    "Africa/Johannesburg",
+    "Africa/Monrovia",
+    "Africa/Nairobi",
+    "Alaska",
+    "Almaty",
+    "America/Argentina/Buenos_Aires",
+    "America/Bogota",
+    "America/Caracas",
+    "America/Chicago",
+    "America/Chihuahua",
+    "America/Denver",
+    "America/Godthab",
+    "America/Guatemala",
+    "America/Guyana",
+    "America/Halifax",
+    "America/Indiana/Indianapolis",
+    "America/Juneau",
+    "America/La_Paz",
+    "America/Lima",
+    "America/Los_Angeles",
+    "America/Mazatlan",
+    "America/Mexico_City",
+    "America/Monterrey",
+    "America/Montevideo",
+    "America/New_York",
+    "America/Phoenix",
+    "America/Puerto_Rico",
+    "America/Regina",
+    "America/Santiago",
+    "America/Sao_Paulo",
+    "America/St_Johns",
+    "America/Tijuana",
+    "American Samoa",
+    "Amsterdam",
+    "Arizona",
+    "Asia/Almaty",
+    "Asia/Baghdad",
+    "Asia/Baku",
+    "Asia/Bangkok",
+    "Asia/Chongqing",
+    "Asia/Colombo",
+    "Asia/Dhaka",
+    "Asia/Hong_Kong",
+    "Asia/Irkutsk",
+    "Asia/Jakarta",
+    "Asia/Jerusalem",
+    "Asia/Kabul",
+    "Asia/Kamchatka",
+    "Asia/Karachi",
+    "Asia/Kathmandu",
+    "Asia/Kolkata",
+    "Asia/Krasnoyarsk",
+    "Asia/Kuala_Lumpur",
+    "Asia/Kuwait",
+    "Asia/Magadan",
+    "Asia/Muscat",
+    "Asia/Novosibirsk",
+    "Asia/Rangoon",
+    "Asia/Riyadh",
+    "Asia/Seoul",
+    "Asia/Shanghai",
+    "Asia/Singapore",
+    "Asia/Srednekolymsk",
+    "Asia/Taipei",
+    "Asia/Tashkent",
+    "Asia/Tbilisi",
+    "Asia/Tehran",
+    "Asia/Tokyo",
+    "Asia/Ulaanbaatar",
+    "Asia/Urumqi",
+    "Asia/Vladivostok",
+    "Asia/Yakutsk",
+    "Asia/Yekaterinburg",
+    "Asia/Yerevan",
+    "Astana",
+    "Athens",
+    "Atlantic Time (Canada)",
+    "Atlantic/Azores",
+    "Atlantic/Cape_Verde",
+    "Atlantic/South_Georgia",
+    "Auckland",
+    "Australia/Adelaide",
+    "Australia/Brisbane",
+    "Australia/Canberra",
+    "Australia/Darwin",
+    "Australia/Hobart",
+    "Australia/Melbourne",
+    "Australia/Perth",
+    "Australia/Sydney",
+    "Azores",
+    "Baghdad",
+    "Baku",
+    "Bangkok",
+    "Beijing",
+    "Belgrade",
+    "Berlin",
+    "Bern",
+    "Bogota",
+    "Brasilia",
+    "Bratislava",
+    "Brisbane",
+    "Brussels",
+    "Bucharest",
+    "Budapest",
+    "Buenos Aires",
+    "Cairo",
+    "Canberra",
+    "Cape Verde Is.",
+    "Caracas",
+    "Casablanca",
+    "Central America",
+    "Central Time (US & Canada)",
+    "Chatham Is.",
+    "Chennai",
+    "Chihuahua",
+    "Chongqing",
+    "Copenhagen",
+    "Darwin",
+    "Dhaka",
+    "Dublin",
+    "Eastern Time (US & Canada)",
+    "Edinburgh",
+    "Ekaterinburg",
+    "Etc/GMT+12",
+    "Etc/UTC",
+    "Europe/Amsterdam",
+    "Europe/Athens",
+    "Europe/Belgrade",
+    "Europe/Berlin",
+    "Europe/Bratislava",
+    "Europe/Brussels",
+    "Europe/Bucharest",
+    "Europe/Budapest",
+    "Europe/Copenhagen",
+    "Europe/Dublin",
+    "Europe/Helsinki",
+    "Europe/Istanbul",
+    "Europe/Kaliningrad",
+    "Europe/Kiev",
+    "Europe/Lisbon",
+    "Europe/Ljubljana",
+    "Europe/London",
+    "Europe/Madrid",
+    "Europe/Minsk",
+    "Europe/Moscow",
+    "Europe/Paris",
+    "Europe/Prague",
+    "Europe/Riga",
+    "Europe/Rome",
+    "Europe/Samara",
+    "Europe/Sarajevo",
+    "Europe/Skopje",
+    "Europe/Sofia",
+    "Europe/Stockholm",
+    "Europe/Tallinn",
+    "Europe/Vienna",
+    "Europe/Vilnius",
+    "Europe/Volgograd",
+    "Europe/Warsaw",
+    "Europe/Zagreb",
+    "Europe/Zurich",
+    "Fiji",
+    "Georgetown",
+    "Greenland",
+    "Guadalajara",
+    "Guam",
+    "Hanoi",
+    "Harare",
+    "Hawaii",
+    "Helsinki",
+    "Hobart",
+    "Hong Kong",
+    "Indiana (East)",
+    "International Date Line West",
+    "Irkutsk",
+    "Islamabad",
+    "Istanbul",
+    "Jakarta",
+    "Jerusalem",
+    "Kabul",
+    "Kaliningrad",
+    "Kamchatka",
+    "Karachi",
+    "Kathmandu",
+    "Kolkata",
+    "Krasnoyarsk",
+    "Kuala Lumpur",
+    "Kuwait",
+    "Kyiv",
+    "La Paz",
+    "Lima",
+    "Lisbon",
+    "Ljubljana",
+    "London",
+    "Madrid",
+    "Magadan",
+    "Marshall Is.",
+    "Mazatlan",
+    "Melbourne",
+    "Mexico City",
+    "Mid-Atlantic",
+    "Midway Island",
+    "Minsk",
+    "Monrovia",
+    "Monterrey",
+    "Montevideo",
+    "Moscow",
+    "Mountain Time (US & Canada)",
+    "Mumbai",
+    "Muscat",
+    "Nairobi",
+    "New Caledonia",
+    "New Delhi",
+    "Newfoundland",
+    "Novosibirsk",
+    "Nuku'alofa",
+    "Osaka",
+    "Pacific Time (US & Canada)",
+    "Pacific/Apia",
+    "Pacific/Auckland",
+    "Pacific/Chatham",
+    "Pacific/Fakaofo",
+    "Pacific/Fiji",
+    "Pacific/Guadalcanal",
+    "Pacific/Guam",
+    "Pacific/Honolulu",
+    "Pacific/Majuro",
+    "Pacific/Midway",
+    "Pacific/Noumea",
+    "Pacific/Pago_Pago",
+    "Pacific/Port_Moresby",
+    "Pacific/Tongatapu",
+    "Paris",
+    "Perth",
+    "Port Moresby",
+    "Prague",
+    "Pretoria",
+    "Puerto Rico",
+    "Quito",
+    "Rangoon",
+    "Riga",
+    "Riyadh",
+    "Rome",
+    "Samara",
+    "Samoa",
+    "Santiago",
+    "Sapporo",
+    "Sarajevo",
+    "Saskatchewan",
+    "Seoul",
+    "Singapore",
+    "Skopje",
+    "Sofia",
+    "Solomon Is.",
+    "Srednekolymsk",
+    "Sri Jayawardenepura",
+    "St. Petersburg",
+    "Stockholm",
+    "Sydney",
+    "Taipei",
+    "Tallinn",
+    "Tashkent",
+    "Tbilisi",
+    "Tehran",
+    "Tijuana",
+    "Tokelau Is.",
+    "Tokyo",
+    "Ulaanbaatar",
+    "Urumqi",
+    "UTC",
+    "Vienna",
+    "Vilnius",
+    "Vladivostok",
+    "Volgograd",
+    "Warsaw",
+    "Wellington",
+    "West Central Africa",
+    "Yakutsk",
+    "Yerevan",
+    "Zagreb",
+    "Zurich",
+]
+
+ESCALATION_POLICY_PATH_TIME_RESTRICTION_TIME_ZONE_VALUES: set[EscalationPolicyPathTimeRestrictionTimeZone] = {
+    "Abu Dhabi",
+    "Adelaide",
+    "Africa/Algiers",
+    "Africa/Cairo",
+    "Africa/Casablanca",
+    "Africa/Harare",
+    "Africa/Johannesburg",
+    "Africa/Monrovia",
+    "Africa/Nairobi",
+    "Alaska",
+    "Almaty",
+    "America/Argentina/Buenos_Aires",
+    "America/Bogota",
+    "America/Caracas",
+    "America/Chicago",
+    "America/Chihuahua",
+    "America/Denver",
+    "America/Godthab",
+    "America/Guatemala",
+    "America/Guyana",
+    "America/Halifax",
+    "America/Indiana/Indianapolis",
+    "America/Juneau",
+    "America/La_Paz",
+    "America/Lima",
+    "America/Los_Angeles",
+    "America/Mazatlan",
+    "America/Mexico_City",
+    "America/Monterrey",
+    "America/Montevideo",
+    "America/New_York",
+    "America/Phoenix",
+    "America/Puerto_Rico",
+    "America/Regina",
+    "America/Santiago",
+    "America/Sao_Paulo",
+    "America/St_Johns",
+    "America/Tijuana",
+    "American Samoa",
+    "Amsterdam",
+    "Arizona",
+    "Asia/Almaty",
+    "Asia/Baghdad",
+    "Asia/Baku",
+    "Asia/Bangkok",
+    "Asia/Chongqing",
+    "Asia/Colombo",
+    "Asia/Dhaka",
+    "Asia/Hong_Kong",
+    "Asia/Irkutsk",
+    "Asia/Jakarta",
+    "Asia/Jerusalem",
+    "Asia/Kabul",
+    "Asia/Kamchatka",
+    "Asia/Karachi",
+    "Asia/Kathmandu",
+    "Asia/Kolkata",
+    "Asia/Krasnoyarsk",
+    "Asia/Kuala_Lumpur",
+    "Asia/Kuwait",
+    "Asia/Magadan",
+    "Asia/Muscat",
+    "Asia/Novosibirsk",
+    "Asia/Rangoon",
+    "Asia/Riyadh",
+    "Asia/Seoul",
+    "Asia/Shanghai",
+    "Asia/Singapore",
+    "Asia/Srednekolymsk",
+    "Asia/Taipei",
+    "Asia/Tashkent",
+    "Asia/Tbilisi",
+    "Asia/Tehran",
+    "Asia/Tokyo",
+    "Asia/Ulaanbaatar",
+    "Asia/Urumqi",
+    "Asia/Vladivostok",
+    "Asia/Yakutsk",
+    "Asia/Yekaterinburg",
+    "Asia/Yerevan",
+    "Astana",
+    "Athens",
+    "Atlantic Time (Canada)",
+    "Atlantic/Azores",
+    "Atlantic/Cape_Verde",
+    "Atlantic/South_Georgia",
+    "Auckland",
+    "Australia/Adelaide",
+    "Australia/Brisbane",
+    "Australia/Canberra",
+    "Australia/Darwin",
+    "Australia/Hobart",
+    "Australia/Melbourne",
+    "Australia/Perth",
+    "Australia/Sydney",
+    "Azores",
+    "Baghdad",
+    "Baku",
+    "Bangkok",
+    "Beijing",
+    "Belgrade",
+    "Berlin",
+    "Bern",
+    "Bogota",
+    "Brasilia",
+    "Bratislava",
+    "Brisbane",
+    "Brussels",
+    "Bucharest",
+    "Budapest",
+    "Buenos Aires",
+    "Cairo",
+    "Canberra",
+    "Cape Verde Is.",
+    "Caracas",
+    "Casablanca",
+    "Central America",
+    "Central Time (US & Canada)",
+    "Chatham Is.",
+    "Chennai",
+    "Chihuahua",
+    "Chongqing",
+    "Copenhagen",
+    "Darwin",
+    "Dhaka",
+    "Dublin",
+    "Eastern Time (US & Canada)",
+    "Edinburgh",
+    "Ekaterinburg",
+    "Etc/GMT+12",
+    "Etc/UTC",
+    "Europe/Amsterdam",
+    "Europe/Athens",
+    "Europe/Belgrade",
+    "Europe/Berlin",
+    "Europe/Bratislava",
+    "Europe/Brussels",
+    "Europe/Bucharest",
+    "Europe/Budapest",
+    "Europe/Copenhagen",
+    "Europe/Dublin",
+    "Europe/Helsinki",
+    "Europe/Istanbul",
+    "Europe/Kaliningrad",
+    "Europe/Kiev",
+    "Europe/Lisbon",
+    "Europe/Ljubljana",
+    "Europe/London",
+    "Europe/Madrid",
+    "Europe/Minsk",
+    "Europe/Moscow",
+    "Europe/Paris",
+    "Europe/Prague",
+    "Europe/Riga",
+    "Europe/Rome",
+    "Europe/Samara",
+    "Europe/Sarajevo",
+    "Europe/Skopje",
+    "Europe/Sofia",
+    "Europe/Stockholm",
+    "Europe/Tallinn",
+    "Europe/Vienna",
+    "Europe/Vilnius",
+    "Europe/Volgograd",
+    "Europe/Warsaw",
+    "Europe/Zagreb",
+    "Europe/Zurich",
+    "Fiji",
+    "Georgetown",
+    "Greenland",
+    "Guadalajara",
+    "Guam",
+    "Hanoi",
+    "Harare",
+    "Hawaii",
+    "Helsinki",
+    "Hobart",
+    "Hong Kong",
+    "Indiana (East)",
+    "International Date Line West",
+    "Irkutsk",
+    "Islamabad",
+    "Istanbul",
+    "Jakarta",
+    "Jerusalem",
+    "Kabul",
+    "Kaliningrad",
+    "Kamchatka",
+    "Karachi",
+    "Kathmandu",
+    "Kolkata",
+    "Krasnoyarsk",
+    "Kuala Lumpur",
+    "Kuwait",
+    "Kyiv",
+    "La Paz",
+    "Lima",
+    "Lisbon",
+    "Ljubljana",
+    "London",
+    "Madrid",
+    "Magadan",
+    "Marshall Is.",
+    "Mazatlan",
+    "Melbourne",
+    "Mexico City",
+    "Mid-Atlantic",
+    "Midway Island",
+    "Minsk",
+    "Monrovia",
+    "Monterrey",
+    "Montevideo",
+    "Moscow",
+    "Mountain Time (US & Canada)",
+    "Mumbai",
+    "Muscat",
+    "Nairobi",
+    "New Caledonia",
+    "New Delhi",
+    "Newfoundland",
+    "Novosibirsk",
+    "Nuku'alofa",
+    "Osaka",
+    "Pacific Time (US & Canada)",
+    "Pacific/Apia",
+    "Pacific/Auckland",
+    "Pacific/Chatham",
+    "Pacific/Fakaofo",
+    "Pacific/Fiji",
+    "Pacific/Guadalcanal",
+    "Pacific/Guam",
+    "Pacific/Honolulu",
+    "Pacific/Majuro",
+    "Pacific/Midway",
+    "Pacific/Noumea",
+    "Pacific/Pago_Pago",
+    "Pacific/Port_Moresby",
+    "Pacific/Tongatapu",
+    "Paris",
+    "Perth",
+    "Port Moresby",
+    "Prague",
+    "Pretoria",
+    "Puerto Rico",
+    "Quito",
+    "Rangoon",
+    "Riga",
+    "Riyadh",
+    "Rome",
+    "Samara",
+    "Samoa",
+    "Santiago",
+    "Sapporo",
+    "Sarajevo",
+    "Saskatchewan",
+    "Seoul",
+    "Singapore",
+    "Skopje",
+    "Sofia",
+    "Solomon Is.",
+    "Srednekolymsk",
+    "Sri Jayawardenepura",
+    "St. Petersburg",
+    "Stockholm",
+    "Sydney",
+    "Taipei",
+    "Tallinn",
+    "Tashkent",
+    "Tbilisi",
+    "Tehran",
+    "Tijuana",
+    "Tokelau Is.",
+    "Tokyo",
+    "Ulaanbaatar",
+    "Urumqi",
+    "UTC",
+    "Vienna",
+    "Vilnius",
+    "Vladivostok",
+    "Volgograd",
+    "Warsaw",
+    "Wellington",
+    "West Central Africa",
+    "Yakutsk",
+    "Yerevan",
+    "Zagreb",
+    "Zurich",
+}
 
 
-class EscalationPolicyPathTimeRestrictionTimeZone(str, Enum):
-    ABU_DHABI = "Abu Dhabi"
-    ADELAIDE = "Adelaide"
-    AFRICAALGIERS = "Africa/Algiers"
-    AFRICACAIRO = "Africa/Cairo"
-    AFRICACASABLANCA = "Africa/Casablanca"
-    AFRICAHARARE = "Africa/Harare"
-    AFRICAJOHANNESBURG = "Africa/Johannesburg"
-    AFRICAMONROVIA = "Africa/Monrovia"
-    AFRICANAIROBI = "Africa/Nairobi"
-    ALASKA = "Alaska"
-    ALMATY = "Almaty"
-    AMERICAARGENTINABUENOS_AIRES = "America/Argentina/Buenos_Aires"
-    AMERICABOGOTA = "America/Bogota"
-    AMERICACARACAS = "America/Caracas"
-    AMERICACHICAGO = "America/Chicago"
-    AMERICACHIHUAHUA = "America/Chihuahua"
-    AMERICADENVER = "America/Denver"
-    AMERICAGODTHAB = "America/Godthab"
-    AMERICAGUATEMALA = "America/Guatemala"
-    AMERICAGUYANA = "America/Guyana"
-    AMERICAHALIFAX = "America/Halifax"
-    AMERICAINDIANAINDIANAPOLIS = "America/Indiana/Indianapolis"
-    AMERICAJUNEAU = "America/Juneau"
-    AMERICALA_PAZ = "America/La_Paz"
-    AMERICALIMA = "America/Lima"
-    AMERICALOS_ANGELES = "America/Los_Angeles"
-    AMERICAMAZATLAN = "America/Mazatlan"
-    AMERICAMEXICO_CITY = "America/Mexico_City"
-    AMERICAMONTERREY = "America/Monterrey"
-    AMERICAMONTEVIDEO = "America/Montevideo"
-    AMERICANEW_YORK = "America/New_York"
-    AMERICAN_SAMOA = "American Samoa"
-    AMERICAPHOENIX = "America/Phoenix"
-    AMERICAPUERTO_RICO = "America/Puerto_Rico"
-    AMERICAREGINA = "America/Regina"
-    AMERICASANTIAGO = "America/Santiago"
-    AMERICASAO_PAULO = "America/Sao_Paulo"
-    AMERICAST_JOHNS = "America/St_Johns"
-    AMERICATIJUANA = "America/Tijuana"
-    AMSTERDAM = "Amsterdam"
-    ARIZONA = "Arizona"
-    ASIAALMATY = "Asia/Almaty"
-    ASIABAGHDAD = "Asia/Baghdad"
-    ASIABAKU = "Asia/Baku"
-    ASIABANGKOK = "Asia/Bangkok"
-    ASIACHONGQING = "Asia/Chongqing"
-    ASIACOLOMBO = "Asia/Colombo"
-    ASIADHAKA = "Asia/Dhaka"
-    ASIAHONG_KONG = "Asia/Hong_Kong"
-    ASIAIRKUTSK = "Asia/Irkutsk"
-    ASIAJAKARTA = "Asia/Jakarta"
-    ASIAJERUSALEM = "Asia/Jerusalem"
-    ASIAKABUL = "Asia/Kabul"
-    ASIAKAMCHATKA = "Asia/Kamchatka"
-    ASIAKARACHI = "Asia/Karachi"
-    ASIAKATHMANDU = "Asia/Kathmandu"
-    ASIAKOLKATA = "Asia/Kolkata"
-    ASIAKRASNOYARSK = "Asia/Krasnoyarsk"
-    ASIAKUALA_LUMPUR = "Asia/Kuala_Lumpur"
-    ASIAKUWAIT = "Asia/Kuwait"
-    ASIAMAGADAN = "Asia/Magadan"
-    ASIAMUSCAT = "Asia/Muscat"
-    ASIANOVOSIBIRSK = "Asia/Novosibirsk"
-    ASIARANGOON = "Asia/Rangoon"
-    ASIARIYADH = "Asia/Riyadh"
-    ASIASEOUL = "Asia/Seoul"
-    ASIASHANGHAI = "Asia/Shanghai"
-    ASIASINGAPORE = "Asia/Singapore"
-    ASIASREDNEKOLYMSK = "Asia/Srednekolymsk"
-    ASIATAIPEI = "Asia/Taipei"
-    ASIATASHKENT = "Asia/Tashkent"
-    ASIATBILISI = "Asia/Tbilisi"
-    ASIATEHRAN = "Asia/Tehran"
-    ASIATOKYO = "Asia/Tokyo"
-    ASIAULAANBAATAR = "Asia/Ulaanbaatar"
-    ASIAURUMQI = "Asia/Urumqi"
-    ASIAVLADIVOSTOK = "Asia/Vladivostok"
-    ASIAYAKUTSK = "Asia/Yakutsk"
-    ASIAYEKATERINBURG = "Asia/Yekaterinburg"
-    ASIAYEREVAN = "Asia/Yerevan"
-    ASTANA = "Astana"
-    ATHENS = "Athens"
-    ATLANTICAZORES = "Atlantic/Azores"
-    ATLANTICCAPE_VERDE = "Atlantic/Cape_Verde"
-    ATLANTICSOUTH_GEORGIA = "Atlantic/South_Georgia"
-    ATLANTIC_TIME_CANADA = "Atlantic Time (Canada)"
-    AUCKLAND = "Auckland"
-    AUSTRALIAADELAIDE = "Australia/Adelaide"
-    AUSTRALIABRISBANE = "Australia/Brisbane"
-    AUSTRALIACANBERRA = "Australia/Canberra"
-    AUSTRALIADARWIN = "Australia/Darwin"
-    AUSTRALIAHOBART = "Australia/Hobart"
-    AUSTRALIAMELBOURNE = "Australia/Melbourne"
-    AUSTRALIAPERTH = "Australia/Perth"
-    AUSTRALIASYDNEY = "Australia/Sydney"
-    AZORES = "Azores"
-    BAGHDAD = "Baghdad"
-    BAKU = "Baku"
-    BANGKOK = "Bangkok"
-    BEIJING = "Beijing"
-    BELGRADE = "Belgrade"
-    BERLIN = "Berlin"
-    BERN = "Bern"
-    BOGOTA = "Bogota"
-    BRASILIA = "Brasilia"
-    BRATISLAVA = "Bratislava"
-    BRISBANE = "Brisbane"
-    BRUSSELS = "Brussels"
-    BUCHAREST = "Bucharest"
-    BUDAPEST = "Budapest"
-    BUENOS_AIRES = "Buenos Aires"
-    CAIRO = "Cairo"
-    CANBERRA = "Canberra"
-    CAPE_VERDE_IS = "Cape Verde Is."
-    CARACAS = "Caracas"
-    CASABLANCA = "Casablanca"
-    CENTRAL_AMERICA = "Central America"
-    CENTRAL_TIME_US_CANADA = "Central Time (US & Canada)"
-    CHATHAM_IS = "Chatham Is."
-    CHENNAI = "Chennai"
-    CHIHUAHUA = "Chihuahua"
-    CHONGQING = "Chongqing"
-    COPENHAGEN = "Copenhagen"
-    DARWIN = "Darwin"
-    DHAKA = "Dhaka"
-    DUBLIN = "Dublin"
-    EASTERN_TIME_US_CANADA = "Eastern Time (US & Canada)"
-    EDINBURGH = "Edinburgh"
-    EKATERINBURG = "Ekaterinburg"
-    ETCGMT12 = "Etc/GMT+12"
-    ETCUTC = "Etc/UTC"
-    EUROPEAMSTERDAM = "Europe/Amsterdam"
-    EUROPEATHENS = "Europe/Athens"
-    EUROPEBELGRADE = "Europe/Belgrade"
-    EUROPEBERLIN = "Europe/Berlin"
-    EUROPEBRATISLAVA = "Europe/Bratislava"
-    EUROPEBRUSSELS = "Europe/Brussels"
-    EUROPEBUCHAREST = "Europe/Bucharest"
-    EUROPEBUDAPEST = "Europe/Budapest"
-    EUROPECOPENHAGEN = "Europe/Copenhagen"
-    EUROPEDUBLIN = "Europe/Dublin"
-    EUROPEHELSINKI = "Europe/Helsinki"
-    EUROPEISTANBUL = "Europe/Istanbul"
-    EUROPEKALININGRAD = "Europe/Kaliningrad"
-    EUROPEKIEV = "Europe/Kiev"
-    EUROPELISBON = "Europe/Lisbon"
-    EUROPELJUBLJANA = "Europe/Ljubljana"
-    EUROPELONDON = "Europe/London"
-    EUROPEMADRID = "Europe/Madrid"
-    EUROPEMINSK = "Europe/Minsk"
-    EUROPEMOSCOW = "Europe/Moscow"
-    EUROPEPARIS = "Europe/Paris"
-    EUROPEPRAGUE = "Europe/Prague"
-    EUROPERIGA = "Europe/Riga"
-    EUROPEROME = "Europe/Rome"
-    EUROPESAMARA = "Europe/Samara"
-    EUROPESARAJEVO = "Europe/Sarajevo"
-    EUROPESKOPJE = "Europe/Skopje"
-    EUROPESOFIA = "Europe/Sofia"
-    EUROPESTOCKHOLM = "Europe/Stockholm"
-    EUROPETALLINN = "Europe/Tallinn"
-    EUROPEVIENNA = "Europe/Vienna"
-    EUROPEVILNIUS = "Europe/Vilnius"
-    EUROPEVOLGOGRAD = "Europe/Volgograd"
-    EUROPEWARSAW = "Europe/Warsaw"
-    EUROPEZAGREB = "Europe/Zagreb"
-    EUROPEZURICH = "Europe/Zurich"
-    FIJI = "Fiji"
-    GEORGETOWN = "Georgetown"
-    GREENLAND = "Greenland"
-    GUADALAJARA = "Guadalajara"
-    GUAM = "Guam"
-    HANOI = "Hanoi"
-    HARARE = "Harare"
-    HAWAII = "Hawaii"
-    HELSINKI = "Helsinki"
-    HOBART = "Hobart"
-    HONG_KONG = "Hong Kong"
-    INDIANA_EAST = "Indiana (East)"
-    INTERNATIONAL_DATE_LINE_WEST = "International Date Line West"
-    IRKUTSK = "Irkutsk"
-    ISLAMABAD = "Islamabad"
-    ISTANBUL = "Istanbul"
-    JAKARTA = "Jakarta"
-    JERUSALEM = "Jerusalem"
-    KABUL = "Kabul"
-    KALININGRAD = "Kaliningrad"
-    KAMCHATKA = "Kamchatka"
-    KARACHI = "Karachi"
-    KATHMANDU = "Kathmandu"
-    KOLKATA = "Kolkata"
-    KRASNOYARSK = "Krasnoyarsk"
-    KUALA_LUMPUR = "Kuala Lumpur"
-    KUWAIT = "Kuwait"
-    KYIV = "Kyiv"
-    LA_PAZ = "La Paz"
-    LIMA = "Lima"
-    LISBON = "Lisbon"
-    LJUBLJANA = "Ljubljana"
-    LONDON = "London"
-    MADRID = "Madrid"
-    MAGADAN = "Magadan"
-    MARSHALL_IS = "Marshall Is."
-    MAZATLAN = "Mazatlan"
-    MELBOURNE = "Melbourne"
-    MEXICO_CITY = "Mexico City"
-    MIDWAY_ISLAND = "Midway Island"
-    MID_ATLANTIC = "Mid-Atlantic"
-    MINSK = "Minsk"
-    MONROVIA = "Monrovia"
-    MONTERREY = "Monterrey"
-    MONTEVIDEO = "Montevideo"
-    MOSCOW = "Moscow"
-    MOUNTAIN_TIME_US_CANADA = "Mountain Time (US & Canada)"
-    MUMBAI = "Mumbai"
-    MUSCAT = "Muscat"
-    NAIROBI = "Nairobi"
-    NEWFOUNDLAND = "Newfoundland"
-    NEW_CALEDONIA = "New Caledonia"
-    NEW_DELHI = "New Delhi"
-    NOVOSIBIRSK = "Novosibirsk"
-    NUKUALOFA = "Nuku'alofa"
-    OSAKA = "Osaka"
-    PACIFICAPIA = "Pacific/Apia"
-    PACIFICAUCKLAND = "Pacific/Auckland"
-    PACIFICCHATHAM = "Pacific/Chatham"
-    PACIFICFAKAOFO = "Pacific/Fakaofo"
-    PACIFICFIJI = "Pacific/Fiji"
-    PACIFICGUADALCANAL = "Pacific/Guadalcanal"
-    PACIFICGUAM = "Pacific/Guam"
-    PACIFICHONOLULU = "Pacific/Honolulu"
-    PACIFICMAJURO = "Pacific/Majuro"
-    PACIFICMIDWAY = "Pacific/Midway"
-    PACIFICNOUMEA = "Pacific/Noumea"
-    PACIFICPAGO_PAGO = "Pacific/Pago_Pago"
-    PACIFICPORT_MORESBY = "Pacific/Port_Moresby"
-    PACIFICTONGATAPU = "Pacific/Tongatapu"
-    PACIFIC_TIME_US_CANADA = "Pacific Time (US & Canada)"
-    PARIS = "Paris"
-    PERTH = "Perth"
-    PORT_MORESBY = "Port Moresby"
-    PRAGUE = "Prague"
-    PRETORIA = "Pretoria"
-    PUERTO_RICO = "Puerto Rico"
-    QUITO = "Quito"
-    RANGOON = "Rangoon"
-    RIGA = "Riga"
-    RIYADH = "Riyadh"
-    ROME = "Rome"
-    SAMARA = "Samara"
-    SAMOA = "Samoa"
-    SANTIAGO = "Santiago"
-    SAPPORO = "Sapporo"
-    SARAJEVO = "Sarajevo"
-    SASKATCHEWAN = "Saskatchewan"
-    SEOUL = "Seoul"
-    SINGAPORE = "Singapore"
-    SKOPJE = "Skopje"
-    SOFIA = "Sofia"
-    SOLOMON_IS = "Solomon Is."
-    SREDNEKOLYMSK = "Srednekolymsk"
-    SRI_JAYAWARDENEPURA = "Sri Jayawardenepura"
-    STOCKHOLM = "Stockholm"
-    ST_PETERSBURG = "St. Petersburg"
-    SYDNEY = "Sydney"
-    TAIPEI = "Taipei"
-    TALLINN = "Tallinn"
-    TASHKENT = "Tashkent"
-    TBILISI = "Tbilisi"
-    TEHRAN = "Tehran"
-    TIJUANA = "Tijuana"
-    TOKELAU_IS = "Tokelau Is."
-    TOKYO = "Tokyo"
-    ULAANBAATAR = "Ulaanbaatar"
-    URUMQI = "Urumqi"
-    UTC = "UTC"
-    VIENNA = "Vienna"
-    VILNIUS = "Vilnius"
-    VLADIVOSTOK = "Vladivostok"
-    VOLGOGRAD = "Volgograd"
-    WARSAW = "Warsaw"
-    WELLINGTON = "Wellington"
-    WEST_CENTRAL_AFRICA = "West Central Africa"
-    YAKUTSK = "Yakutsk"
-    YEREVAN = "Yerevan"
-    ZAGREB = "Zagreb"
-    ZURICH = "Zurich"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_escalation_policy_path_time_restriction_time_zone(value: str) -> EscalationPolicyPathTimeRestrictionTimeZone:
+    if value in ESCALATION_POLICY_PATH_TIME_RESTRICTION_TIME_ZONE_VALUES:
+        return cast(EscalationPolicyPathTimeRestrictionTimeZone, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {ESCALATION_POLICY_PATH_TIME_RESTRICTION_TIME_ZONE_VALUES!r}"
+    )

@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.schedule_rotation_active_day_response_data_type import ScheduleRotationActiveDayResponseDataType
+from ..models.schedule_rotation_active_day_response_data_type import (
+    ScheduleRotationActiveDayResponseDataType,
+    check_schedule_rotation_active_day_response_data_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -32,7 +36,7 @@ class ScheduleRotationActiveDayResponseData:
 
         type_: Union[Unset, str] = UNSET
         if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+            type_ = self.type_
 
         attributes: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
@@ -51,10 +55,10 @@ class ScheduleRotationActiveDayResponseData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.schedule_rotation_active_day import ScheduleRotationActiveDay
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         id = d.pop("id", UNSET)
 
         _type_ = d.pop("type", UNSET)
@@ -62,7 +66,7 @@ class ScheduleRotationActiveDayResponseData:
         if isinstance(_type_, Unset):
             type_ = UNSET
         else:
-            type_ = ScheduleRotationActiveDayResponseDataType(_type_)
+            type_ = check_schedule_rotation_active_day_response_data_type(_type_)
 
         _attributes = d.pop("attributes", UNSET)
         attributes: Union[Unset, ScheduleRotationActiveDay]

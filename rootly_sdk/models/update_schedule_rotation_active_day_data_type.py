@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateScheduleRotationActiveDayDataType = Literal["schedule_rotation_active_days"]
+
+UPDATE_SCHEDULE_ROTATION_ACTIVE_DAY_DATA_TYPE_VALUES: set[UpdateScheduleRotationActiveDayDataType] = {
+    "schedule_rotation_active_days",
+}
 
 
-class UpdateScheduleRotationActiveDayDataType(str, Enum):
-    SCHEDULE_ROTATION_ACTIVE_DAYS = "schedule_rotation_active_days"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_schedule_rotation_active_day_data_type(value: str) -> UpdateScheduleRotationActiveDayDataType:
+    if value in UPDATE_SCHEDULE_ROTATION_ACTIVE_DAY_DATA_TYPE_VALUES:
+        return cast(UpdateScheduleRotationActiveDayDataType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_SCHEDULE_ROTATION_ACTIVE_DAY_DATA_TYPE_VALUES!r}"
+    )

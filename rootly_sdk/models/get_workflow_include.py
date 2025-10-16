@@ -1,10 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+GetWorkflowInclude = Literal["form_field_conditions", "genius_tasks", "genius_workflow_runs"]
+
+GET_WORKFLOW_INCLUDE_VALUES: set[GetWorkflowInclude] = {
+    "form_field_conditions",
+    "genius_tasks",
+    "genius_workflow_runs",
+}
 
 
-class GetWorkflowInclude(str, Enum):
-    FORM_FIELD_CONDITIONS = "form_field_conditions"
-    GENIUS_TASKS = "genius_tasks"
-    GENIUS_WORKFLOW_RUNS = "genius_workflow_runs"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_get_workflow_include(value: str) -> GetWorkflowInclude:
+    if value in GET_WORKFLOW_INCLUDE_VALUES:
+        return cast(GetWorkflowInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {GET_WORKFLOW_INCLUDE_VALUES!r}")

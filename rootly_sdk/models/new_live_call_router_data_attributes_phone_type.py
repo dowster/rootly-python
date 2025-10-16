@@ -1,10 +1,17 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewLiveCallRouterDataAttributesPhoneType = Literal["local", "mobile", "toll_free"]
+
+NEW_LIVE_CALL_ROUTER_DATA_ATTRIBUTES_PHONE_TYPE_VALUES: set[NewLiveCallRouterDataAttributesPhoneType] = {
+    "local",
+    "mobile",
+    "toll_free",
+}
 
 
-class NewLiveCallRouterDataAttributesPhoneType(str, Enum):
-    LOCAL = "local"
-    MOBILE = "mobile"
-    TOLL_FREE = "toll_free"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_live_call_router_data_attributes_phone_type(value: str) -> NewLiveCallRouterDataAttributesPhoneType:
+    if value in NEW_LIVE_CALL_ROUTER_DATA_ATTRIBUTES_PHONE_TYPE_VALUES:
+        return cast(NewLiveCallRouterDataAttributesPhoneType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_LIVE_CALL_ROUTER_DATA_ATTRIBUTES_PHONE_TYPE_VALUES!r}"
+    )

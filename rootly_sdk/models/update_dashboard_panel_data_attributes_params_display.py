@@ -1,15 +1,33 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateDashboardPanelDataAttributesParamsDisplay = Literal[
+    "aggregate_value",
+    "column_chart",
+    "line_chart",
+    "line_stepped_chart",
+    "monitoring_chart",
+    "pie_chart",
+    "stacked_column_chart",
+    "table",
+]
+
+UPDATE_DASHBOARD_PANEL_DATA_ATTRIBUTES_PARAMS_DISPLAY_VALUES: set[UpdateDashboardPanelDataAttributesParamsDisplay] = {
+    "aggregate_value",
+    "column_chart",
+    "line_chart",
+    "line_stepped_chart",
+    "monitoring_chart",
+    "pie_chart",
+    "stacked_column_chart",
+    "table",
+}
 
 
-class UpdateDashboardPanelDataAttributesParamsDisplay(str, Enum):
-    AGGREGATE_VALUE = "aggregate_value"
-    COLUMN_CHART = "column_chart"
-    LINE_CHART = "line_chart"
-    LINE_STEPPED_CHART = "line_stepped_chart"
-    MONITORING_CHART = "monitoring_chart"
-    PIE_CHART = "pie_chart"
-    STACKED_COLUMN_CHART = "stacked_column_chart"
-    TABLE = "table"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_dashboard_panel_data_attributes_params_display(
+    value: str,
+) -> UpdateDashboardPanelDataAttributesParamsDisplay:
+    if value in UPDATE_DASHBOARD_PANEL_DATA_ATTRIBUTES_PARAMS_DISPLAY_VALUES:
+        return cast(UpdateDashboardPanelDataAttributesParamsDisplay, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_DASHBOARD_PANEL_DATA_ATTRIBUTES_PARAMS_DISPLAY_VALUES!r}"
+    )

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
@@ -5,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..models.escalation_policy_path_rules_item_type_3_type_1_rule_type import (
     EscalationPolicyPathRulesItemType3Type1RuleType,
+    check_escalation_policy_path_rules_item_type_3_type_1_rule_type,
 )
 
 T = TypeVar("T", bound="EscalationPolicyPathRulesItemType3Type1")
@@ -23,7 +25,7 @@ class EscalationPolicyPathRulesItemType3Type1:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        rule_type = self.rule_type.value
+        rule_type: str = self.rule_type
 
         within_working_hour = self.within_working_hour
 
@@ -39,9 +41,9 @@ class EscalationPolicyPathRulesItemType3Type1:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        rule_type = EscalationPolicyPathRulesItemType3Type1RuleType(d.pop("rule_type"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        rule_type = check_escalation_policy_path_rules_item_type_3_type_1_rule_type(d.pop("rule_type"))
 
         within_working_hour = d.pop("within_working_hour")
 

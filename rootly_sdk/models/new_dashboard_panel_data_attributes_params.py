@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.new_dashboard_panel_data_attributes_params_display import NewDashboardPanelDataAttributesParamsDisplay
+from ..models.new_dashboard_panel_data_attributes_params_display import (
+    NewDashboardPanelDataAttributesParamsDisplay,
+    check_new_dashboard_panel_data_attributes_params_display,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -42,7 +46,7 @@ class NewDashboardPanelDataAttributesParams:
     def to_dict(self) -> dict[str, Any]:
         display: Union[Unset, str] = UNSET
         if not isinstance(self.display, Unset):
-            display = self.display.value
+            display = self.display
 
         description = self.description
 
@@ -84,7 +88,7 @@ class NewDashboardPanelDataAttributesParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_dashboard_panel_data_attributes_params_datalabels import (
             NewDashboardPanelDataAttributesParamsDatalabels,
         )
@@ -95,13 +99,13 @@ class NewDashboardPanelDataAttributesParams:
             NewDashboardPanelDataAttributesParamsLegend,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _display = d.pop("display", UNSET)
         display: Union[Unset, NewDashboardPanelDataAttributesParamsDisplay]
         if isinstance(_display, Unset):
             display = UNSET
         else:
-            display = NewDashboardPanelDataAttributesParamsDisplay(_display)
+            display = check_new_dashboard_panel_data_attributes_params_display(_display)
 
         description = d.pop("description", UNSET)
 

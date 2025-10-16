@@ -1,12 +1,17 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_coda_page_task_params_task_type import CreateCodaPageTaskParamsTaskType
+from ..models.create_coda_page_task_params_task_type import (
+    CreateCodaPageTaskParamsTaskType,
+    check_create_coda_page_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.create_coda_page_task_params_doc import CreateCodaPageTaskParamsDoc
     from ..models.create_coda_page_task_params_template import CreateCodaPageTaskParamsTemplate
 
 
@@ -25,6 +30,7 @@ class CreateCodaPageTaskParams:
         content (Union[Unset, str]): The Coda page content
         template (Union[Unset, CreateCodaPageTaskParamsTemplate]):
         folder_id (Union[Unset, str]): The Coda folder id
+        doc (Union[Unset, CreateCodaPageTaskParamsDoc]): The Coda doc object with id and name
     """
 
     title: str
@@ -35,6 +41,7 @@ class CreateCodaPageTaskParams:
     content: Union[Unset, str] = UNSET
     template: Union[Unset, "CreateCodaPageTaskParamsTemplate"] = UNSET
     folder_id: Union[Unset, str] = UNSET
+    doc: Union[Unset, "CreateCodaPageTaskParamsDoc"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -42,7 +49,7 @@ class CreateCodaPageTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         post_mortem_template_id = self.post_mortem_template_id
 
@@ -57,6 +64,10 @@ class CreateCodaPageTaskParams:
             template = self.template.to_dict()
 
         folder_id = self.folder_id
+
+        doc: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.doc, Unset):
+            doc = self.doc.to_dict()
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -79,14 +90,17 @@ class CreateCodaPageTaskParams:
             field_dict["template"] = template
         if folder_id is not UNSET:
             field_dict["folder_id"] = folder_id
+        if doc is not UNSET:
+            field_dict["doc"] = doc
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.create_coda_page_task_params_doc import CreateCodaPageTaskParamsDoc
         from ..models.create_coda_page_task_params_template import CreateCodaPageTaskParamsTemplate
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         title = d.pop("title")
 
         _task_type = d.pop("task_type", UNSET)
@@ -94,7 +108,7 @@ class CreateCodaPageTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateCodaPageTaskParamsTaskType(_task_type)
+            task_type = check_create_coda_page_task_params_task_type(_task_type)
 
         post_mortem_template_id = d.pop("post_mortem_template_id", UNSET)
 
@@ -113,6 +127,13 @@ class CreateCodaPageTaskParams:
 
         folder_id = d.pop("folder_id", UNSET)
 
+        _doc = d.pop("doc", UNSET)
+        doc: Union[Unset, CreateCodaPageTaskParamsDoc]
+        if isinstance(_doc, Unset):
+            doc = UNSET
+        else:
+            doc = CreateCodaPageTaskParamsDoc.from_dict(_doc)
+
         create_coda_page_task_params = cls(
             title=title,
             task_type=task_type,
@@ -122,6 +143,7 @@ class CreateCodaPageTaskParams:
             content=content,
             template=template,
             folder_id=folder_id,
+            doc=doc,
         )
 
         create_coda_page_task_params.additional_properties = d

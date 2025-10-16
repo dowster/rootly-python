@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.call_people_task_params_task_type import CallPeopleTaskParamsTaskType
+from ..models.call_people_task_params_task_type import (
+    CallPeopleTaskParamsTaskType,
+    check_call_people_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CallPeopleTaskParams")
@@ -34,7 +38,7 @@ class CallPeopleTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,8 +55,8 @@ class CallPeopleTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         phone_numbers = cast(list[str], d.pop("phone_numbers"))
 
         name = d.pop("name")
@@ -64,7 +68,7 @@ class CallPeopleTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CallPeopleTaskParamsTaskType(_task_type)
+            task_type = check_call_people_task_params_task_type(_task_type)
 
         call_people_task_params = cls(
             phone_numbers=phone_numbers,

@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.workflow_custom_field_selection_list_data_item_type import WorkflowCustomFieldSelectionListDataItemType
+from ..models.workflow_custom_field_selection_list_data_item_type import (
+    WorkflowCustomFieldSelectionListDataItemType,
+    check_workflow_custom_field_selection_list_data_item_type,
+)
 
 if TYPE_CHECKING:
     from ..models.workflow_custom_field_selection import WorkflowCustomFieldSelection
@@ -29,7 +33,7 @@ class WorkflowCustomFieldSelectionListDataItem:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
@@ -46,13 +50,13 @@ class WorkflowCustomFieldSelectionListDataItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.workflow_custom_field_selection import WorkflowCustomFieldSelection
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         id = d.pop("id")
 
-        type_ = WorkflowCustomFieldSelectionListDataItemType(d.pop("type"))
+        type_ = check_workflow_custom_field_selection_list_data_item_type(d.pop("type"))
 
         attributes = WorkflowCustomFieldSelection.from_dict(d.pop("attributes"))
 

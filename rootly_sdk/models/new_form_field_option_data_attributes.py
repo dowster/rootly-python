@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -12,10 +13,10 @@ class NewFormFieldOptionDataAttributes:
     """
     Attributes:
         form_field_id (str): The ID of the form field
-        value (str): The value of the form_field_option
-        color (Union[Unset, str]): The hex color of the form_field_option
+        value (str): The value of the form field option
+        color (Union[Unset, str]): The hex color of the form field option
         default (Union[Unset, bool]):
-        position (Union[Unset, int]): The position of the form_field_option
+        position (Union[Unset, int]): The position of the form field option
     """
 
     form_field_id: str
@@ -36,6 +37,7 @@ class NewFormFieldOptionDataAttributes:
         position = self.position
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "form_field_id": form_field_id,
@@ -52,8 +54,8 @@ class NewFormFieldOptionDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         form_field_id = d.pop("form_field_id")
 
         value = d.pop("value")

@@ -1,10 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+WorkflowRunTriggeredBy = Literal["system", "user", "workflow"]
+
+WORKFLOW_RUN_TRIGGERED_BY_VALUES: set[WorkflowRunTriggeredBy] = {
+    "system",
+    "user",
+    "workflow",
+}
 
 
-class WorkflowRunTriggeredBy(str, Enum):
-    SYSTEM = "system"
-    USER = "user"
-    WORKFLOW = "workflow"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_workflow_run_triggered_by(value: str) -> WorkflowRunTriggeredBy:
+    if value in WORKFLOW_RUN_TRIGGERED_BY_VALUES:
+        return cast(WorkflowRunTriggeredBy, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {WORKFLOW_RUN_TRIGGERED_BY_VALUES!r}")

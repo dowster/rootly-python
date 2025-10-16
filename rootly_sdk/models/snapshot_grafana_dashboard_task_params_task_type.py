@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+SnapshotGrafanaDashboardTaskParamsTaskType = Literal["snapshot_grafana_dashboard"]
+
+SNAPSHOT_GRAFANA_DASHBOARD_TASK_PARAMS_TASK_TYPE_VALUES: set[SnapshotGrafanaDashboardTaskParamsTaskType] = {
+    "snapshot_grafana_dashboard",
+}
 
 
-class SnapshotGrafanaDashboardTaskParamsTaskType(str, Enum):
-    SNAPSHOT_GRAFANA_DASHBOARD = "snapshot_grafana_dashboard"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_snapshot_grafana_dashboard_task_params_task_type(value: str) -> SnapshotGrafanaDashboardTaskParamsTaskType:
+    if value in SNAPSHOT_GRAFANA_DASHBOARD_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(SnapshotGrafanaDashboardTaskParamsTaskType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {SNAPSHOT_GRAFANA_DASHBOARD_TASK_PARAMS_TASK_TYPE_VALUES!r}"
+    )

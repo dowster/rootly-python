@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+OverrideShiftResponseDataType = Literal["shifts"]
+
+OVERRIDE_SHIFT_RESPONSE_DATA_TYPE_VALUES: set[OverrideShiftResponseDataType] = {
+    "shifts",
+}
 
 
-class OverrideShiftResponseDataType(str, Enum):
-    SHIFTS = "shifts"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_override_shift_response_data_type(value: str) -> OverrideShiftResponseDataType:
+    if value in OVERRIDE_SHIFT_RESPONSE_DATA_TYPE_VALUES:
+        return cast(OverrideShiftResponseDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {OVERRIDE_SHIFT_RESPONSE_DATA_TYPE_VALUES!r}")

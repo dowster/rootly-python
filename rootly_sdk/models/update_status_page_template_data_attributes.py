@@ -1,10 +1,15 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.update_status_page_template_data_attributes_kind import UpdateStatusPageTemplateDataAttributesKind
+from ..models.update_status_page_template_data_attributes_kind import (
+    UpdateStatusPageTemplateDataAttributesKind,
+    check_update_status_page_template_data_attributes_kind,
+)
 from ..models.update_status_page_template_data_attributes_update_status import (
     UpdateStatusPageTemplateDataAttributesUpdateStatus,
+    check_update_status_page_template_data_attributes_update_status,
 )
 from ..types import UNSET, Unset
 
@@ -40,11 +45,11 @@ class UpdateStatusPageTemplateDataAttributes:
 
         update_status: Union[Unset, str] = UNSET
         if not isinstance(self.update_status, Unset):
-            update_status = self.update_status.value
+            update_status = self.update_status
 
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         should_notify_subscribers: Union[None, Unset, bool]
         if isinstance(self.should_notify_subscribers, Unset):
@@ -61,6 +66,7 @@ class UpdateStatusPageTemplateDataAttributes:
             enabled = self.enabled
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "title": title,
@@ -81,8 +87,8 @@ class UpdateStatusPageTemplateDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         title = d.pop("title")
 
         body = d.pop("body")
@@ -92,14 +98,14 @@ class UpdateStatusPageTemplateDataAttributes:
         if isinstance(_update_status, Unset):
             update_status = UNSET
         else:
-            update_status = UpdateStatusPageTemplateDataAttributesUpdateStatus(_update_status)
+            update_status = check_update_status_page_template_data_attributes_update_status(_update_status)
 
         _kind = d.pop("kind", UNSET)
         kind: Union[Unset, UpdateStatusPageTemplateDataAttributesKind]
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = UpdateStatusPageTemplateDataAttributesKind(_kind)
+            kind = check_update_status_page_template_data_attributes_kind(_kind)
 
         def _parse_should_notify_subscribers(data: object) -> Union[None, Unset, bool]:
             if data is None:

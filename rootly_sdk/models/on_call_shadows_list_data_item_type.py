@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+OnCallShadowsListDataItemType = Literal["on_call_shadows"]
+
+ON_CALL_SHADOWS_LIST_DATA_ITEM_TYPE_VALUES: set[OnCallShadowsListDataItemType] = {
+    "on_call_shadows",
+}
 
 
-class OnCallShadowsListDataItemType(str, Enum):
-    ON_CALL_SHADOWS = "on_call_shadows"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_on_call_shadows_list_data_item_type(value: str) -> OnCallShadowsListDataItemType:
+    if value in ON_CALL_SHADOWS_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(OnCallShadowsListDataItemType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {ON_CALL_SHADOWS_LIST_DATA_ITEM_TYPE_VALUES!r}")

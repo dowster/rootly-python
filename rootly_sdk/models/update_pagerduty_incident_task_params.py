@@ -1,11 +1,21 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_pagerduty_incident_task_params_status import UpdatePagerdutyIncidentTaskParamsStatus
-from ..models.update_pagerduty_incident_task_params_task_type import UpdatePagerdutyIncidentTaskParamsTaskType
-from ..models.update_pagerduty_incident_task_params_urgency import UpdatePagerdutyIncidentTaskParamsUrgency
+from ..models.update_pagerduty_incident_task_params_status import (
+    UpdatePagerdutyIncidentTaskParamsStatus,
+    check_update_pagerduty_incident_task_params_status,
+)
+from ..models.update_pagerduty_incident_task_params_task_type import (
+    UpdatePagerdutyIncidentTaskParamsTaskType,
+    check_update_pagerduty_incident_task_params_task_type,
+)
+from ..models.update_pagerduty_incident_task_params_urgency import (
+    UpdatePagerdutyIncidentTaskParamsUrgency,
+    check_update_pagerduty_incident_task_params_urgency,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdatePagerdutyIncidentTaskParams")
@@ -42,13 +52,13 @@ class UpdatePagerdutyIncidentTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         title = self.title
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
-            status = self.status.value
+            status = self.status
 
         resolution = self.resolution
 
@@ -56,7 +66,7 @@ class UpdatePagerdutyIncidentTaskParams:
 
         urgency: Union[Unset, str] = UNSET
         if not isinstance(self.urgency, Unset):
-            urgency = self.urgency.value
+            urgency = self.urgency
 
         priority = self.priority
 
@@ -85,8 +95,8 @@ class UpdatePagerdutyIncidentTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         pagerduty_incident_id = d.pop("pagerduty_incident_id")
 
         _task_type = d.pop("task_type", UNSET)
@@ -94,7 +104,7 @@ class UpdatePagerdutyIncidentTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdatePagerdutyIncidentTaskParamsTaskType(_task_type)
+            task_type = check_update_pagerduty_incident_task_params_task_type(_task_type)
 
         title = d.pop("title", UNSET)
 
@@ -103,7 +113,7 @@ class UpdatePagerdutyIncidentTaskParams:
         if isinstance(_status, Unset):
             status = UNSET
         else:
-            status = UpdatePagerdutyIncidentTaskParamsStatus(_status)
+            status = check_update_pagerduty_incident_task_params_status(_status)
 
         resolution = d.pop("resolution", UNSET)
 
@@ -114,7 +124,7 @@ class UpdatePagerdutyIncidentTaskParams:
         if isinstance(_urgency, Unset):
             urgency = UNSET
         else:
-            urgency = UpdatePagerdutyIncidentTaskParamsUrgency(_urgency)
+            urgency = check_update_pagerduty_incident_task_params_urgency(_urgency)
 
         priority = d.pop("priority", UNSET)
 

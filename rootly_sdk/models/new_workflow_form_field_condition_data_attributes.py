@@ -1,9 +1,11 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
 from ..models.new_workflow_form_field_condition_data_attributes_incident_condition import (
     NewWorkflowFormFieldConditionDataAttributesIncidentCondition,
+    check_new_workflow_form_field_condition_data_attributes_incident_condition,
 )
 from ..types import UNSET, Unset
 
@@ -16,7 +18,7 @@ class NewWorkflowFormFieldConditionDataAttributes:
     Attributes:
         form_field_id (str): The custom field for this condition
         incident_condition (NewWorkflowFormFieldConditionDataAttributesIncidentCondition): The trigger condition
-            Default: NewWorkflowFormFieldConditionDataAttributesIncidentCondition.ANY.
+            Default: 'ANY'.
         workflow_id (Union[Unset, str]): The workflow for this condition
         values (Union[Unset, list[str]]):
         selected_catalog_entity_ids (Union[Unset, list[str]]):
@@ -28,9 +30,7 @@ class NewWorkflowFormFieldConditionDataAttributes:
     """
 
     form_field_id: str
-    incident_condition: NewWorkflowFormFieldConditionDataAttributesIncidentCondition = (
-        NewWorkflowFormFieldConditionDataAttributesIncidentCondition.ANY
-    )
+    incident_condition: NewWorkflowFormFieldConditionDataAttributesIncidentCondition = "ANY"
     workflow_id: Union[Unset, str] = UNSET
     values: Union[Unset, list[str]] = UNSET
     selected_catalog_entity_ids: Union[Unset, list[str]] = UNSET
@@ -43,7 +43,7 @@ class NewWorkflowFormFieldConditionDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         form_field_id = self.form_field_id
 
-        incident_condition = self.incident_condition.value
+        incident_condition: str = self.incident_condition
 
         workflow_id = self.workflow_id
 
@@ -76,6 +76,7 @@ class NewWorkflowFormFieldConditionDataAttributes:
             selected_user_ids = self.selected_user_ids
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "form_field_id": form_field_id,
@@ -102,11 +103,13 @@ class NewWorkflowFormFieldConditionDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         form_field_id = d.pop("form_field_id")
 
-        incident_condition = NewWorkflowFormFieldConditionDataAttributesIncidentCondition(d.pop("incident_condition"))
+        incident_condition = check_new_workflow_form_field_condition_data_attributes_incident_condition(
+            d.pop("incident_condition")
+        )
 
         workflow_id = d.pop("workflow_id", UNSET)
 

@@ -1,15 +1,28 @@
-from enum import Enum
+from typing import Literal, cast
+
+ActionItemTriggerParamsIncidentConditionEnvironment = Literal[
+    "ANY", "CONTAINS", "CONTAINS_ALL", "CONTAINS_NONE", "IS", "NONE", "SET", "UNSET"
+]
+
+ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_CONDITION_ENVIRONMENT_VALUES: set[
+    ActionItemTriggerParamsIncidentConditionEnvironment
+] = {
+    "ANY",
+    "CONTAINS",
+    "CONTAINS_ALL",
+    "CONTAINS_NONE",
+    "IS",
+    "NONE",
+    "SET",
+    "UNSET",
+}
 
 
-class ActionItemTriggerParamsIncidentConditionEnvironment(str, Enum):
-    ANY = "ANY"
-    CONTAINS = "CONTAINS"
-    CONTAINS_ALL = "CONTAINS_ALL"
-    CONTAINS_NONE = "CONTAINS_NONE"
-    IS = "IS"
-    NONE = "NONE"
-    SET = "SET"
-    UNSET = "UNSET"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_action_item_trigger_params_incident_condition_environment(
+    value: str,
+) -> ActionItemTriggerParamsIncidentConditionEnvironment:
+    if value in ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_CONDITION_ENVIRONMENT_VALUES:
+        return cast(ActionItemTriggerParamsIncidentConditionEnvironment, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_CONDITION_ENVIRONMENT_VALUES!r}"
+    )

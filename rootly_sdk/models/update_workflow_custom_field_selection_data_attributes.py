@@ -1,9 +1,11 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
 from ..models.update_workflow_custom_field_selection_data_attributes_incident_condition import (
     UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition,
+    check_update_workflow_custom_field_selection_data_attributes_incident_condition,
 )
 from ..types import UNSET, Unset
 
@@ -15,21 +17,19 @@ class UpdateWorkflowCustomFieldSelectionDataAttributes:
     """
     Attributes:
         incident_condition (Union[Unset, UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition]): The
-            trigger condition Default: UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition.ANY.
+            trigger condition Default: 'ANY'.
         values (Union[Unset, list[str]]):
         selected_option_ids (Union[Unset, list[int]]):
     """
 
-    incident_condition: Union[Unset, UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition] = (
-        UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition.ANY
-    )
+    incident_condition: Union[Unset, UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition] = "ANY"
     values: Union[Unset, list[str]] = UNSET
     selected_option_ids: Union[Unset, list[int]] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
         incident_condition: Union[Unset, str] = UNSET
         if not isinstance(self.incident_condition, Unset):
-            incident_condition = self.incident_condition.value
+            incident_condition = self.incident_condition
 
         values: Union[Unset, list[str]] = UNSET
         if not isinstance(self.values, Unset):
@@ -40,6 +40,7 @@ class UpdateWorkflowCustomFieldSelectionDataAttributes:
             selected_option_ids = self.selected_option_ids
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if incident_condition is not UNSET:
             field_dict["incident_condition"] = incident_condition
@@ -51,14 +52,16 @@ class UpdateWorkflowCustomFieldSelectionDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         _incident_condition = d.pop("incident_condition", UNSET)
         incident_condition: Union[Unset, UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition]
         if isinstance(_incident_condition, Unset):
             incident_condition = UNSET
         else:
-            incident_condition = UpdateWorkflowCustomFieldSelectionDataAttributesIncidentCondition(_incident_condition)
+            incident_condition = check_update_workflow_custom_field_selection_data_attributes_incident_condition(
+                _incident_condition
+            )
 
         values = cast(list[str], d.pop("values", UNSET))
 

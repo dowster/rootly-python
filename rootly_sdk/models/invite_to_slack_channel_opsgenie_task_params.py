@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -5,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..models.invite_to_slack_channel_opsgenie_task_params_task_type import (
     InviteToSlackChannelOpsgenieTaskParamsTaskType,
+    check_invite_to_slack_channel_opsgenie_task_params_task_type,
 )
 from ..types import UNSET, Unset
 
@@ -44,7 +46,7 @@ class InviteToSlackChannelOpsgenieTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -60,7 +62,7 @@ class InviteToSlackChannelOpsgenieTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.invite_to_slack_channel_opsgenie_task_params_channels_item import (
             InviteToSlackChannelOpsgenieTaskParamsChannelsItem,
         )
@@ -68,7 +70,7 @@ class InviteToSlackChannelOpsgenieTaskParams:
             InviteToSlackChannelOpsgenieTaskParamsSchedule,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         channels = []
         _channels = d.pop("channels")
         for channels_item_data in _channels:
@@ -83,7 +85,7 @@ class InviteToSlackChannelOpsgenieTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = InviteToSlackChannelOpsgenieTaskParamsTaskType(_task_type)
+            task_type = check_invite_to_slack_channel_opsgenie_task_params_task_type(_task_type)
 
         invite_to_slack_channel_opsgenie_task_params = cls(
             channels=channels,

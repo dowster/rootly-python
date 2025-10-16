@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.update_incident_post_mortem_data_attributes_status import UpdateIncidentPostMortemDataAttributesStatus
+from ..models.update_incident_post_mortem_data_attributes_status import (
+    UpdateIncidentPostMortemDataAttributesStatus,
+    check_update_incident_post_mortem_data_attributes_status,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateIncidentPostMortemDataAttributes")
@@ -52,7 +56,7 @@ class UpdateIncidentPostMortemDataAttributes:
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
-            status = self.status.value
+            status = self.status
 
         started_at: Union[None, Unset, str]
         if isinstance(self.started_at, Unset):
@@ -102,6 +106,7 @@ class UpdateIncidentPostMortemDataAttributes:
             cause_ids = self.cause_ids
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if title is not UNSET:
             field_dict["title"] = title
@@ -139,8 +144,8 @@ class UpdateIncidentPostMortemDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         title = d.pop("title", UNSET)
 
         _status = d.pop("status", UNSET)
@@ -148,7 +153,7 @@ class UpdateIncidentPostMortemDataAttributes:
         if isinstance(_status, Unset):
             status = UNSET
         else:
-            status = UpdateIncidentPostMortemDataAttributesStatus(_status)
+            status = check_update_incident_post_mortem_data_attributes_status(_status)
 
         def _parse_started_at(data: object) -> Union[None, Unset, str]:
             if data is None:

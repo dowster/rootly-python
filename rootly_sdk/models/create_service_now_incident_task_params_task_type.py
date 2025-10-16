@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+CreateServiceNowIncidentTaskParamsTaskType = Literal["create_service_now_incident"]
+
+CREATE_SERVICE_NOW_INCIDENT_TASK_PARAMS_TASK_TYPE_VALUES: set[CreateServiceNowIncidentTaskParamsTaskType] = {
+    "create_service_now_incident",
+}
 
 
-class CreateServiceNowIncidentTaskParamsTaskType(str, Enum):
-    CREATE_SERVICE_NOW_INCIDENT = "create_service_now_incident"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_create_service_now_incident_task_params_task_type(value: str) -> CreateServiceNowIncidentTaskParamsTaskType:
+    if value in CREATE_SERVICE_NOW_INCIDENT_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(CreateServiceNowIncidentTaskParamsTaskType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {CREATE_SERVICE_NOW_INCIDENT_TASK_PARAMS_TASK_TYPE_VALUES!r}"
+    )

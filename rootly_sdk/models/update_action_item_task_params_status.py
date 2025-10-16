@@ -1,11 +1,16 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateActionItemTaskParamsStatus = Literal["cancelled", "done", "in_progress", "open"]
+
+UPDATE_ACTION_ITEM_TASK_PARAMS_STATUS_VALUES: set[UpdateActionItemTaskParamsStatus] = {
+    "cancelled",
+    "done",
+    "in_progress",
+    "open",
+}
 
 
-class UpdateActionItemTaskParamsStatus(str, Enum):
-    CANCELLED = "cancelled"
-    DONE = "done"
-    IN_PROGRESS = "in_progress"
-    OPEN = "open"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_action_item_task_params_status(value: str) -> UpdateActionItemTaskParamsStatus:
+    if value in UPDATE_ACTION_ITEM_TASK_PARAMS_STATUS_VALUES:
+        return cast(UpdateActionItemTaskParamsStatus, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_ACTION_ITEM_TASK_PARAMS_STATUS_VALUES!r}")

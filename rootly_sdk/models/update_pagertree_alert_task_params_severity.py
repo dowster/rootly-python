@@ -1,12 +1,19 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdatePagertreeAlertTaskParamsSeverity = Literal["auto", "SEV-1", "SEV-2", "SEV-3", "SEV-4"]
+
+UPDATE_PAGERTREE_ALERT_TASK_PARAMS_SEVERITY_VALUES: set[UpdatePagertreeAlertTaskParamsSeverity] = {
+    "auto",
+    "SEV-1",
+    "SEV-2",
+    "SEV-3",
+    "SEV-4",
+}
 
 
-class UpdatePagertreeAlertTaskParamsSeverity(str, Enum):
-    AUTO = "auto"
-    SEV_1 = "SEV-1"
-    SEV_2 = "SEV-2"
-    SEV_3 = "SEV-3"
-    SEV_4 = "SEV-4"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_pagertree_alert_task_params_severity(value: str) -> UpdatePagertreeAlertTaskParamsSeverity:
+    if value in UPDATE_PAGERTREE_ALERT_TASK_PARAMS_SEVERITY_VALUES:
+        return cast(UpdatePagertreeAlertTaskParamsSeverity, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_PAGERTREE_ALERT_TASK_PARAMS_SEVERITY_VALUES!r}"
+    )

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -66,10 +67,10 @@ class NewWorkflowRunDataAttributesType1:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_workflow_run_data_attributes_type_1_context import NewWorkflowRunDataAttributesType1Context
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         incident_id = d.pop("incident_id")
 
         def _parse_immediate(data: object) -> Union[None, Unset, bool]:

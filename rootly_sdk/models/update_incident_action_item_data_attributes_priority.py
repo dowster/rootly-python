@@ -1,10 +1,19 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateIncidentActionItemDataAttributesPriority = Literal["high", "low", "medium"]
+
+UPDATE_INCIDENT_ACTION_ITEM_DATA_ATTRIBUTES_PRIORITY_VALUES: set[UpdateIncidentActionItemDataAttributesPriority] = {
+    "high",
+    "low",
+    "medium",
+}
 
 
-class UpdateIncidentActionItemDataAttributesPriority(str, Enum):
-    HIGH = "high"
-    LOW = "low"
-    MEDIUM = "medium"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_incident_action_item_data_attributes_priority(
+    value: str,
+) -> UpdateIncidentActionItemDataAttributesPriority:
+    if value in UPDATE_INCIDENT_ACTION_ITEM_DATA_ATTRIBUTES_PRIORITY_VALUES:
+        return cast(UpdateIncidentActionItemDataAttributesPriority, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_INCIDENT_ACTION_ITEM_DATA_ATTRIBUTES_PRIORITY_VALUES!r}"
+    )

@@ -1,15 +1,24 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentTriggerParamsIncidentKindsItem = Literal[
+    "backfilled", "example", "example_sub", "normal", "normal_sub", "scheduled", "test", "test_sub"
+]
+
+INCIDENT_TRIGGER_PARAMS_INCIDENT_KINDS_ITEM_VALUES: set[IncidentTriggerParamsIncidentKindsItem] = {
+    "backfilled",
+    "example",
+    "example_sub",
+    "normal",
+    "normal_sub",
+    "scheduled",
+    "test",
+    "test_sub",
+}
 
 
-class IncidentTriggerParamsIncidentKindsItem(str, Enum):
-    BACKFILLED = "backfilled"
-    EXAMPLE = "example"
-    EXAMPLE_SUB = "example_sub"
-    NORMAL = "normal"
-    NORMAL_SUB = "normal_sub"
-    SCHEDULED = "scheduled"
-    TEST = "test"
-    TEST_SUB = "test_sub"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_trigger_params_incident_kinds_item(value: str) -> IncidentTriggerParamsIncidentKindsItem:
+    if value in INCIDENT_TRIGGER_PARAMS_INCIDENT_KINDS_ITEM_VALUES:
+        return cast(IncidentTriggerParamsIncidentKindsItem, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {INCIDENT_TRIGGER_PARAMS_INCIDENT_KINDS_ITEM_VALUES!r}"
+    )

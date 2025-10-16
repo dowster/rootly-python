@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+SubStatusListDataItemType = Literal["sub_statuses"]
+
+SUB_STATUS_LIST_DATA_ITEM_TYPE_VALUES: set[SubStatusListDataItemType] = {
+    "sub_statuses",
+}
 
 
-class SubStatusListDataItemType(str, Enum):
-    SUB_STATUSES = "sub_statuses"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_sub_status_list_data_item_type(value: str) -> SubStatusListDataItemType:
+    if value in SUB_STATUS_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(SubStatusListDataItemType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {SUB_STATUS_LIST_DATA_ITEM_TYPE_VALUES!r}")

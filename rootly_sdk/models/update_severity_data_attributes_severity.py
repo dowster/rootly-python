@@ -1,11 +1,16 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateSeverityDataAttributesSeverity = Literal["critical", "high", "low", "medium"]
+
+UPDATE_SEVERITY_DATA_ATTRIBUTES_SEVERITY_VALUES: set[UpdateSeverityDataAttributesSeverity] = {
+    "critical",
+    "high",
+    "low",
+    "medium",
+}
 
 
-class UpdateSeverityDataAttributesSeverity(str, Enum):
-    CRITICAL = "critical"
-    HIGH = "high"
-    LOW = "low"
-    MEDIUM = "medium"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_severity_data_attributes_severity(value: str) -> UpdateSeverityDataAttributesSeverity:
+    if value in UPDATE_SEVERITY_DATA_ATTRIBUTES_SEVERITY_VALUES:
+        return cast(UpdateSeverityDataAttributesSeverity, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_SEVERITY_DATA_ATTRIBUTES_SEVERITY_VALUES!r}")

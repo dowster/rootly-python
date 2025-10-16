@@ -1,15 +1,29 @@
-from enum import Enum
+from typing import Literal, cast
+
+CustomFieldShownItem = Literal[
+    "incident_form",
+    "incident_mitigation_form",
+    "incident_mitigation_slack_form",
+    "incident_post_mortem",
+    "incident_post_mortem_form",
+    "incident_resolution_form",
+    "incident_resolution_slack_form",
+    "incident_slack_form",
+]
+
+CUSTOM_FIELD_SHOWN_ITEM_VALUES: set[CustomFieldShownItem] = {
+    "incident_form",
+    "incident_mitigation_form",
+    "incident_mitigation_slack_form",
+    "incident_post_mortem",
+    "incident_post_mortem_form",
+    "incident_resolution_form",
+    "incident_resolution_slack_form",
+    "incident_slack_form",
+}
 
 
-class CustomFieldShownItem(str, Enum):
-    INCIDENT_FORM = "incident_form"
-    INCIDENT_MITIGATION_FORM = "incident_mitigation_form"
-    INCIDENT_MITIGATION_SLACK_FORM = "incident_mitigation_slack_form"
-    INCIDENT_POST_MORTEM = "incident_post_mortem"
-    INCIDENT_POST_MORTEM_FORM = "incident_post_mortem_form"
-    INCIDENT_RESOLUTION_FORM = "incident_resolution_form"
-    INCIDENT_RESOLUTION_SLACK_FORM = "incident_resolution_slack_form"
-    INCIDENT_SLACK_FORM = "incident_slack_form"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_custom_field_shown_item(value: str) -> CustomFieldShownItem:
+    if value in CUSTOM_FIELD_SHOWN_ITEM_VALUES:
+        return cast(CustomFieldShownItem, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {CUSTOM_FIELD_SHOWN_ITEM_VALUES!r}")

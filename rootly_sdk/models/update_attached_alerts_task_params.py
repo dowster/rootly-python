@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_attached_alerts_task_params_status import UpdateAttachedAlertsTaskParamsStatus
-from ..models.update_attached_alerts_task_params_task_type import UpdateAttachedAlertsTaskParamsTaskType
+from ..models.update_attached_alerts_task_params_status import (
+    UpdateAttachedAlertsTaskParamsStatus,
+    check_update_attached_alerts_task_params_status,
+)
+from ..models.update_attached_alerts_task_params_task_type import (
+    UpdateAttachedAlertsTaskParamsTaskType,
+    check_update_attached_alerts_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateAttachedAlertsTaskParams")
@@ -23,11 +30,11 @@ class UpdateAttachedAlertsTaskParams:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        status = self.status.value
+        status: str = self.status
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -42,16 +49,16 @@ class UpdateAttachedAlertsTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        status = UpdateAttachedAlertsTaskParamsStatus(d.pop("status"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        status = check_update_attached_alerts_task_params_status(d.pop("status"))
 
         _task_type = d.pop("task_type", UNSET)
         task_type: Union[Unset, UpdateAttachedAlertsTaskParamsTaskType]
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateAttachedAlertsTaskParamsTaskType(_task_type)
+            task_type = check_update_attached_alerts_task_params_task_type(_task_type)
 
         update_attached_alerts_task_params = cls(
             status=status,

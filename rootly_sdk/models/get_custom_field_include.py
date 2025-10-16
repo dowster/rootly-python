@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+GetCustomFieldInclude = Literal["options"]
+
+GET_CUSTOM_FIELD_INCLUDE_VALUES: set[GetCustomFieldInclude] = {
+    "options",
+}
 
 
-class GetCustomFieldInclude(str, Enum):
-    OPTIONS = "options"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_get_custom_field_include(value: str) -> GetCustomFieldInclude:
+    if value in GET_CUSTOM_FIELD_INCLUDE_VALUES:
+        return cast(GetCustomFieldInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {GET_CUSTOM_FIELD_INCLUDE_VALUES!r}")

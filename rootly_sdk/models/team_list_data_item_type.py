@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+TeamListDataItemType = Literal["groups"]
+
+TEAM_LIST_DATA_ITEM_TYPE_VALUES: set[TeamListDataItemType] = {
+    "groups",
+}
 
 
-class TeamListDataItemType(str, Enum):
-    GROUPS = "groups"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_team_list_data_item_type(value: str) -> TeamListDataItemType:
+    if value in TEAM_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(TeamListDataItemType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {TEAM_LIST_DATA_ITEM_TYPE_VALUES!r}")

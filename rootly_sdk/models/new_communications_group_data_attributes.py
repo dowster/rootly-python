@@ -1,9 +1,11 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
 from ..models.new_communications_group_data_attributes_condition_type import (
     NewCommunicationsGroupDataAttributesConditionType,
+    check_new_communications_group_data_attributes_condition_type,
 )
 from ..types import UNSET, Unset
 
@@ -82,7 +84,7 @@ class NewCommunicationsGroupDataAttributes:
 
         condition_type: Union[Unset, str] = UNSET
         if not isinstance(self.condition_type, Unset):
-            condition_type = self.condition_type.value
+            condition_type = self.condition_type
 
         sms_channel: Union[None, Unset, bool]
         if isinstance(self.sms_channel, Unset):
@@ -154,6 +156,7 @@ class NewCommunicationsGroupDataAttributes:
             communication_external_group_members_attributes = self.communication_external_group_members_attributes
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -184,7 +187,7 @@ class NewCommunicationsGroupDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_communications_group_data_attributes_communication_external_group_members_attributes_type_0_item import (
             NewCommunicationsGroupDataAttributesCommunicationExternalGroupMembersAttributesType0Item,
         )
@@ -195,7 +198,7 @@ class NewCommunicationsGroupDataAttributes:
             NewCommunicationsGroupDataAttributesCommunicationGroupMembersAttributesType0Item,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         communication_type_id = d.pop("communication_type_id")
@@ -223,7 +226,7 @@ class NewCommunicationsGroupDataAttributes:
         if isinstance(_condition_type, Unset):
             condition_type = UNSET
         else:
-            condition_type = NewCommunicationsGroupDataAttributesConditionType(_condition_type)
+            condition_type = check_new_communications_group_data_attributes_condition_type(_condition_type)
 
         def _parse_sms_channel(data: object) -> Union[None, Unset, bool]:
             if data is None:

@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_github_issue_task_params_task_type import CreateGithubIssueTaskParamsTaskType
+from ..models.create_github_issue_task_params_task_type import (
+    CreateGithubIssueTaskParamsTaskType,
+    check_create_github_issue_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -36,7 +40,7 @@ class CreateGithubIssueTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         body = self.body
 
@@ -56,10 +60,10 @@ class CreateGithubIssueTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_github_issue_task_params_repository import CreateGithubIssueTaskParamsRepository
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         title = d.pop("title")
 
         repository = CreateGithubIssueTaskParamsRepository.from_dict(d.pop("repository"))
@@ -69,7 +73,7 @@ class CreateGithubIssueTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateGithubIssueTaskParamsTaskType(_task_type)
+            task_type = check_create_github_issue_task_params_task_type(_task_type)
 
         body = d.pop("body", UNSET)
 

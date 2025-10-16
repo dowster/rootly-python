@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.retrospective_configuration_kind import RetrospectiveConfigurationKind
+from ..models.retrospective_configuration_kind import (
+    RetrospectiveConfigurationKind,
+    check_retrospective_configuration_kind,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RetrospectiveConfiguration")
@@ -33,7 +37,7 @@ class RetrospectiveConfiguration:
     def to_dict(self) -> dict[str, Any]:
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         severity_ids: Union[None, Unset, list[str]]
         if isinstance(self.severity_ids, Unset):
@@ -85,14 +89,14 @@ class RetrospectiveConfiguration:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         _kind = d.pop("kind", UNSET)
         kind: Union[Unset, RetrospectiveConfigurationKind]
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = RetrospectiveConfigurationKind(_kind)
+            kind = check_retrospective_configuration_kind(_kind)
 
         def _parse_severity_ids(data: object) -> Union[None, Unset, list[str]]:
             if data is None:

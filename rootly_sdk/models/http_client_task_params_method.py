@@ -1,13 +1,18 @@
-from enum import Enum
+from typing import Literal, cast
+
+HttpClientTaskParamsMethod = Literal["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
+
+HTTP_CLIENT_TASK_PARAMS_METHOD_VALUES: set[HttpClientTaskParamsMethod] = {
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+}
 
 
-class HttpClientTaskParamsMethod(str, Enum):
-    DELETE = "DELETE"
-    GET = "GET"
-    OPTIONS = "OPTIONS"
-    PATCH = "PATCH"
-    POST = "POST"
-    PUT = "PUT"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_http_client_task_params_method(value: str) -> HttpClientTaskParamsMethod:
+    if value in HTTP_CLIENT_TASK_PARAMS_METHOD_VALUES:
+        return cast(HttpClientTaskParamsMethod, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {HTTP_CLIENT_TASK_PARAMS_METHOD_VALUES!r}")

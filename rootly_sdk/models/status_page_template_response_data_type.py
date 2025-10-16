@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+StatusPageTemplateResponseDataType = Literal["status_page_templates"]
+
+STATUS_PAGE_TEMPLATE_RESPONSE_DATA_TYPE_VALUES: set[StatusPageTemplateResponseDataType] = {
+    "status_page_templates",
+}
 
 
-class StatusPageTemplateResponseDataType(str, Enum):
-    STATUS_PAGE_TEMPLATES = "status_page_templates"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_status_page_template_response_data_type(value: str) -> StatusPageTemplateResponseDataType:
+    if value in STATUS_PAGE_TEMPLATE_RESPONSE_DATA_TYPE_VALUES:
+        return cast(StatusPageTemplateResponseDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {STATUS_PAGE_TEMPLATE_RESPONSE_DATA_TYPE_VALUES!r}")

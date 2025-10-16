@@ -1,15 +1,28 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition = Literal[
+    "ANY", "CONTAINS", "CONTAINS_ALL", "CONTAINS_NONE", "IS", "NONE", "SET", "UNSET"
+]
+
+NEW_WORKFLOW_CUSTOM_FIELD_SELECTION_DATA_ATTRIBUTES_INCIDENT_CONDITION_VALUES: set[
+    NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition
+] = {
+    "ANY",
+    "CONTAINS",
+    "CONTAINS_ALL",
+    "CONTAINS_NONE",
+    "IS",
+    "NONE",
+    "SET",
+    "UNSET",
+}
 
 
-class NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition(str, Enum):
-    ANY = "ANY"
-    CONTAINS = "CONTAINS"
-    CONTAINS_ALL = "CONTAINS_ALL"
-    CONTAINS_NONE = "CONTAINS_NONE"
-    IS = "IS"
-    NONE = "NONE"
-    SET = "SET"
-    UNSET = "UNSET"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_workflow_custom_field_selection_data_attributes_incident_condition(
+    value: str,
+) -> NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition:
+    if value in NEW_WORKFLOW_CUSTOM_FIELD_SELECTION_DATA_ATTRIBUTES_INCIDENT_CONDITION_VALUES:
+        return cast(NewWorkflowCustomFieldSelectionDataAttributesIncidentCondition, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_WORKFLOW_CUSTOM_FIELD_SELECTION_DATA_ATTRIBUTES_INCIDENT_CONDITION_VALUES!r}"
+    )

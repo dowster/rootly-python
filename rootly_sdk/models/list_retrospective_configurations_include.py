@@ -1,10 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+ListRetrospectiveConfigurationsInclude = Literal["groups", "incident_types", "severities"]
+
+LIST_RETROSPECTIVE_CONFIGURATIONS_INCLUDE_VALUES: set[ListRetrospectiveConfigurationsInclude] = {
+    "groups",
+    "incident_types",
+    "severities",
+}
 
 
-class ListRetrospectiveConfigurationsInclude(str, Enum):
-    GROUPS = "groups"
-    INCIDENT_TYPES = "incident_types"
-    SEVERITIES = "severities"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_list_retrospective_configurations_include(value: str) -> ListRetrospectiveConfigurationsInclude:
+    if value in LIST_RETROSPECTIVE_CONFIGURATIONS_INCLUDE_VALUES:
+        return cast(ListRetrospectiveConfigurationsInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {LIST_RETROSPECTIVE_CONFIGURATIONS_INCLUDE_VALUES!r}")

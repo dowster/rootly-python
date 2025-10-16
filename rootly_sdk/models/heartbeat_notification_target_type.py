@@ -1,11 +1,16 @@
-from enum import Enum
+from typing import Literal, cast
+
+HeartbeatNotificationTargetType = Literal["EscalationPolicy", "Group", "Service", "User"]
+
+HEARTBEAT_NOTIFICATION_TARGET_TYPE_VALUES: set[HeartbeatNotificationTargetType] = {
+    "EscalationPolicy",
+    "Group",
+    "Service",
+    "User",
+}
 
 
-class HeartbeatNotificationTargetType(str, Enum):
-    ESCALATIONPOLICY = "EscalationPolicy"
-    GROUP = "Group"
-    SERVICE = "Service"
-    USER = "User"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_heartbeat_notification_target_type(value: str) -> HeartbeatNotificationTargetType:
+    if value in HEARTBEAT_NOTIFICATION_TARGET_TYPE_VALUES:
+        return cast(HeartbeatNotificationTargetType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {HEARTBEAT_NOTIFICATION_TARGET_TYPE_VALUES!r}")

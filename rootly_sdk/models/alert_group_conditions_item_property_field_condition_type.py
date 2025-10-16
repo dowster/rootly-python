@@ -1,16 +1,37 @@
-from enum import Enum
+from typing import Literal, cast
+
+AlertGroupConditionsItemPropertyFieldConditionType = Literal[
+    "contains",
+    "does_not_contain",
+    "ends_with",
+    "is_empty",
+    "is_not_one_of",
+    "is_one_of",
+    "matches_existing_alert",
+    "matches_regex",
+    "starts_with",
+]
+
+ALERT_GROUP_CONDITIONS_ITEM_PROPERTY_FIELD_CONDITION_TYPE_VALUES: set[
+    AlertGroupConditionsItemPropertyFieldConditionType
+] = {
+    "contains",
+    "does_not_contain",
+    "ends_with",
+    "is_empty",
+    "is_not_one_of",
+    "is_one_of",
+    "matches_existing_alert",
+    "matches_regex",
+    "starts_with",
+}
 
 
-class AlertGroupConditionsItemPropertyFieldConditionType(str, Enum):
-    CONTAINS = "contains"
-    DOES_NOT_CONTAIN = "does_not_contain"
-    ENDS_WITH = "ends_with"
-    IS_EMPTY = "is_empty"
-    IS_NOT_ONE_OF = "is_not_one_of"
-    IS_ONE_OF = "is_one_of"
-    MATCHES_EXISTING_ALERT = "matches_existing_alert"
-    MATCHES_REGEX = "matches_regex"
-    STARTS_WITH = "starts_with"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_alert_group_conditions_item_property_field_condition_type(
+    value: str,
+) -> AlertGroupConditionsItemPropertyFieldConditionType:
+    if value in ALERT_GROUP_CONDITIONS_ITEM_PROPERTY_FIELD_CONDITION_TYPE_VALUES:
+        return cast(AlertGroupConditionsItemPropertyFieldConditionType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {ALERT_GROUP_CONDITIONS_ITEM_PROPERTY_FIELD_CONDITION_TYPE_VALUES!r}"
+    )

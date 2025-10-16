@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -36,6 +37,7 @@ class NewPlaybookTaskDataAttributes:
             position = self.position
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "task": task,
@@ -49,8 +51,8 @@ class NewPlaybookTaskDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         task = d.pop("task")
 
         def _parse_description(data: object) -> Union[None, Unset, str]:

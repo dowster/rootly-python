@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+AutoAssignRoleRootlyTaskParamsTaskType = Literal["auto_assign_role_rootly"]
+
+AUTO_ASSIGN_ROLE_ROOTLY_TASK_PARAMS_TASK_TYPE_VALUES: set[AutoAssignRoleRootlyTaskParamsTaskType] = {
+    "auto_assign_role_rootly",
+}
 
 
-class AutoAssignRoleRootlyTaskParamsTaskType(str, Enum):
-    AUTO_ASSIGN_ROLE_ROOTLY = "auto_assign_role_rootly"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_auto_assign_role_rootly_task_params_task_type(value: str) -> AutoAssignRoleRootlyTaskParamsTaskType:
+    if value in AUTO_ASSIGN_ROLE_ROOTLY_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(AutoAssignRoleRootlyTaskParamsTaskType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {AUTO_ASSIGN_ROLE_ROOTLY_TASK_PARAMS_TASK_TYPE_VALUES!r}"
+    )

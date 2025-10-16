@@ -1,22 +1,43 @@
-from enum import Enum
+from typing import Literal, cast
+
+GetIncidentInclude = Literal[
+    "action_items",
+    "causes",
+    "custom_field_selections",
+    "environments",
+    "events",
+    "feedbacks",
+    "functionalities",
+    "groups",
+    "incident_post_mortem",
+    "incident_types",
+    "roles",
+    "services",
+    "slack_messages",
+    "sub_statuses",
+    "subscribers",
+]
+
+GET_INCIDENT_INCLUDE_VALUES: set[GetIncidentInclude] = {
+    "action_items",
+    "causes",
+    "custom_field_selections",
+    "environments",
+    "events",
+    "feedbacks",
+    "functionalities",
+    "groups",
+    "incident_post_mortem",
+    "incident_types",
+    "roles",
+    "services",
+    "slack_messages",
+    "sub_statuses",
+    "subscribers",
+}
 
 
-class GetIncidentInclude(str, Enum):
-    ACTION_ITEMS = "action_items"
-    CAUSES = "causes"
-    CUSTOM_FIELD_SELECTIONS = "custom_field_selections"
-    ENVIRONMENTS = "environments"
-    EVENTS = "events"
-    FEEDBACKS = "feedbacks"
-    FUNCTIONALITIES = "functionalities"
-    GROUPS = "groups"
-    INCIDENT_POST_MORTEM = "incident_post_mortem"
-    INCIDENT_TYPES = "incident_types"
-    ROLES = "roles"
-    SERVICES = "services"
-    SLACK_MESSAGES = "slack_messages"
-    SUBSCRIBERS = "subscribers"
-    SUB_STATUSES = "sub_statuses"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_get_incident_include(value: str) -> GetIncidentInclude:
+    if value in GET_INCIDENT_INCLUDE_VALUES:
+        return cast(GetIncidentInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {GET_INCIDENT_INCLUDE_VALUES!r}")

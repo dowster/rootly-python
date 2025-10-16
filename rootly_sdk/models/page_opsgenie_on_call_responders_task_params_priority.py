@@ -1,13 +1,22 @@
-from enum import Enum
+from typing import Literal, cast
+
+PageOpsgenieOnCallRespondersTaskParamsPriority = Literal["auto", "P1", "P2", "P3", "P4", "P5"]
+
+PAGE_OPSGENIE_ON_CALL_RESPONDERS_TASK_PARAMS_PRIORITY_VALUES: set[PageOpsgenieOnCallRespondersTaskParamsPriority] = {
+    "auto",
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+}
 
 
-class PageOpsgenieOnCallRespondersTaskParamsPriority(str, Enum):
-    AUTO = "auto"
-    P1 = "P1"
-    P2 = "P2"
-    P3 = "P3"
-    P4 = "P4"
-    P5 = "P5"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_page_opsgenie_on_call_responders_task_params_priority(
+    value: str,
+) -> PageOpsgenieOnCallRespondersTaskParamsPriority:
+    if value in PAGE_OPSGENIE_ON_CALL_RESPONDERS_TASK_PARAMS_PRIORITY_VALUES:
+        return cast(PageOpsgenieOnCallRespondersTaskParamsPriority, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {PAGE_OPSGENIE_ON_CALL_RESPONDERS_TASK_PARAMS_PRIORITY_VALUES!r}"
+    )

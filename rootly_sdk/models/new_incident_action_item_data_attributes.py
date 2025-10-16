@@ -1,10 +1,20 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.new_incident_action_item_data_attributes_kind import NewIncidentActionItemDataAttributesKind
-from ..models.new_incident_action_item_data_attributes_priority import NewIncidentActionItemDataAttributesPriority
-from ..models.new_incident_action_item_data_attributes_status import NewIncidentActionItemDataAttributesStatus
+from ..models.new_incident_action_item_data_attributes_kind import (
+    NewIncidentActionItemDataAttributesKind,
+    check_new_incident_action_item_data_attributes_kind,
+)
+from ..models.new_incident_action_item_data_attributes_priority import (
+    NewIncidentActionItemDataAttributesPriority,
+    check_new_incident_action_item_data_attributes_priority,
+)
+from ..models.new_incident_action_item_data_attributes_status import (
+    NewIncidentActionItemDataAttributesStatus,
+    check_new_incident_action_item_data_attributes_status,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewIncidentActionItemDataAttributes")
@@ -50,7 +60,7 @@ class NewIncidentActionItemDataAttributes:
 
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         assigned_to_user_id: Union[None, Unset, int]
         if isinstance(self.assigned_to_user_id, Unset):
@@ -64,11 +74,11 @@ class NewIncidentActionItemDataAttributes:
 
         priority: Union[Unset, str] = UNSET
         if not isinstance(self.priority, Unset):
-            priority = self.priority.value
+            priority = self.priority
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
-            status = self.status.value
+            status = self.status
 
         due_date: Union[None, Unset, str]
         if isinstance(self.due_date, Unset):
@@ -95,6 +105,7 @@ class NewIncidentActionItemDataAttributes:
             jira_issue_url = self.jira_issue_url
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "summary": summary,
@@ -124,8 +135,8 @@ class NewIncidentActionItemDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         summary = d.pop("summary")
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
@@ -142,7 +153,7 @@ class NewIncidentActionItemDataAttributes:
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = NewIncidentActionItemDataAttributesKind(_kind)
+            kind = check_new_incident_action_item_data_attributes_kind(_kind)
 
         def _parse_assigned_to_user_id(data: object) -> Union[None, Unset, int]:
             if data is None:
@@ -160,14 +171,14 @@ class NewIncidentActionItemDataAttributes:
         if isinstance(_priority, Unset):
             priority = UNSET
         else:
-            priority = NewIncidentActionItemDataAttributesPriority(_priority)
+            priority = check_new_incident_action_item_data_attributes_priority(_priority)
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, NewIncidentActionItemDataAttributesStatus]
         if isinstance(_status, Unset):
             status = UNSET
         else:
-            status = NewIncidentActionItemDataAttributesStatus(_status)
+            status = check_new_incident_action_item_data_attributes_status(_status)
 
         def _parse_due_date(data: object) -> Union[None, Unset, str]:
             if data is None:

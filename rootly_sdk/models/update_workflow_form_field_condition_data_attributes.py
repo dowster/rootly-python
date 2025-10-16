@@ -1,9 +1,11 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
 from ..models.update_workflow_form_field_condition_data_attributes_incident_condition import (
     UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition,
+    check_update_workflow_form_field_condition_data_attributes_incident_condition,
 )
 from ..types import UNSET, Unset
 
@@ -15,7 +17,7 @@ class UpdateWorkflowFormFieldConditionDataAttributes:
     """
     Attributes:
         incident_condition (Union[Unset, UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition]): The trigger
-            condition Default: UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition.ANY.
+            condition Default: 'ANY'.
         values (Union[Unset, list[str]]):
         selected_catalog_entity_ids (Union[Unset, list[str]]):
         selected_functionality_ids (Union[Unset, list[str]]):
@@ -25,9 +27,7 @@ class UpdateWorkflowFormFieldConditionDataAttributes:
         selected_user_ids (Union[Unset, list[int]]):
     """
 
-    incident_condition: Union[Unset, UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition] = (
-        UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition.ANY
-    )
+    incident_condition: Union[Unset, UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition] = "ANY"
     values: Union[Unset, list[str]] = UNSET
     selected_catalog_entity_ids: Union[Unset, list[str]] = UNSET
     selected_functionality_ids: Union[Unset, list[str]] = UNSET
@@ -39,7 +39,7 @@ class UpdateWorkflowFormFieldConditionDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         incident_condition: Union[Unset, str] = UNSET
         if not isinstance(self.incident_condition, Unset):
-            incident_condition = self.incident_condition.value
+            incident_condition = self.incident_condition
 
         values: Union[Unset, list[str]] = UNSET
         if not isinstance(self.values, Unset):
@@ -70,6 +70,7 @@ class UpdateWorkflowFormFieldConditionDataAttributes:
             selected_user_ids = self.selected_user_ids
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if incident_condition is not UNSET:
             field_dict["incident_condition"] = incident_condition
@@ -91,14 +92,16 @@ class UpdateWorkflowFormFieldConditionDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         _incident_condition = d.pop("incident_condition", UNSET)
         incident_condition: Union[Unset, UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition]
         if isinstance(_incident_condition, Unset):
             incident_condition = UNSET
         else:
-            incident_condition = UpdateWorkflowFormFieldConditionDataAttributesIncidentCondition(_incident_condition)
+            incident_condition = check_update_workflow_form_field_condition_data_attributes_incident_condition(
+                _incident_condition
+            )
 
         values = cast(list[str], d.pop("values", UNSET))
 

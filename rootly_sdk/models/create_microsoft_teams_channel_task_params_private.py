@@ -1,10 +1,19 @@
-from enum import Enum
+from typing import Literal, cast
+
+CreateMicrosoftTeamsChannelTaskParamsPrivate = Literal["auto", "false", "true"]
+
+CREATE_MICROSOFT_TEAMS_CHANNEL_TASK_PARAMS_PRIVATE_VALUES: set[CreateMicrosoftTeamsChannelTaskParamsPrivate] = {
+    "auto",
+    "false",
+    "true",
+}
 
 
-class CreateMicrosoftTeamsChannelTaskParamsPrivate(str, Enum):
-    AUTO = "auto"
-    FALSE = "false"
-    TRUE = "true"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_create_microsoft_teams_channel_task_params_private(
+    value: str,
+) -> CreateMicrosoftTeamsChannelTaskParamsPrivate:
+    if value in CREATE_MICROSOFT_TEAMS_CHANNEL_TASK_PARAMS_PRIVATE_VALUES:
+        return cast(CreateMicrosoftTeamsChannelTaskParamsPrivate, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {CREATE_MICROSOFT_TEAMS_CHANNEL_TASK_PARAMS_PRIVATE_VALUES!r}"
+    )

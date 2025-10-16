@@ -1,11 +1,18 @@
-from enum import Enum
+from typing import Literal, cast
+
+CreateGitlabIssueTaskParamsIssueType = Literal["incident", "issue", "task", "test_case"]
+
+CREATE_GITLAB_ISSUE_TASK_PARAMS_ISSUE_TYPE_VALUES: set[CreateGitlabIssueTaskParamsIssueType] = {
+    "incident",
+    "issue",
+    "task",
+    "test_case",
+}
 
 
-class CreateGitlabIssueTaskParamsIssueType(str, Enum):
-    INCIDENT = "incident"
-    ISSUE = "issue"
-    TASK = "task"
-    TEST_CASE = "test_case"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_create_gitlab_issue_task_params_issue_type(value: str) -> CreateGitlabIssueTaskParamsIssueType:
+    if value in CREATE_GITLAB_ISSUE_TASK_PARAMS_ISSUE_TYPE_VALUES:
+        return cast(CreateGitlabIssueTaskParamsIssueType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {CREATE_GITLAB_ISSUE_TASK_PARAMS_ISSUE_TYPE_VALUES!r}"
+    )

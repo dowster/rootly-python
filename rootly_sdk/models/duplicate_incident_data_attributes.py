@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -36,6 +37,7 @@ class DuplicateIncidentDataAttributes:
             reason_for_cancellation = self.reason_for_cancellation
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if duplicate_incident_id is not UNSET:
             field_dict["duplicate_incident_id"] = duplicate_incident_id
@@ -47,8 +49,8 @@ class DuplicateIncidentDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         duplicate_incident_id = d.pop("duplicate_incident_id", UNSET)
 
         def _parse_auto_cancel_incident(data: object) -> Union[None, Unset, bool]:

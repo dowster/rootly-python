@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+CancelIncidentDataType = Literal["incidents"]
+
+CANCEL_INCIDENT_DATA_TYPE_VALUES: set[CancelIncidentDataType] = {
+    "incidents",
+}
 
 
-class CancelIncidentDataType(str, Enum):
-    INCIDENTS = "incidents"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_cancel_incident_data_type(value: str) -> CancelIncidentDataType:
+    if value in CANCEL_INCIDENT_DATA_TYPE_VALUES:
+        return cast(CancelIncidentDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {CANCEL_INCIDENT_DATA_TYPE_VALUES!r}")

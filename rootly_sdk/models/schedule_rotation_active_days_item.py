@@ -1,14 +1,19 @@
-from enum import Enum
+from typing import Literal, cast
+
+ScheduleRotationActiveDaysItem = Literal["F", "M", "R", "S", "T", "U", "W"]
+
+SCHEDULE_ROTATION_ACTIVE_DAYS_ITEM_VALUES: set[ScheduleRotationActiveDaysItem] = {
+    "F",
+    "M",
+    "R",
+    "S",
+    "T",
+    "U",
+    "W",
+}
 
 
-class ScheduleRotationActiveDaysItem(str, Enum):
-    F = "F"
-    M = "M"
-    R = "R"
-    S = "S"
-    T = "T"
-    U = "U"
-    W = "W"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_schedule_rotation_active_days_item(value: str) -> ScheduleRotationActiveDaysItem:
+    if value in SCHEDULE_ROTATION_ACTIVE_DAYS_ITEM_VALUES:
+        return cast(ScheduleRotationActiveDaysItem, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {SCHEDULE_ROTATION_ACTIVE_DAYS_ITEM_VALUES!r}")

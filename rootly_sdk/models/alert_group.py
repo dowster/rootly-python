@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -29,7 +30,8 @@ class AlertGroup:
         group_by_alert_title (Union[Unset, bool]): Whether the alerts are grouped by title or not
         group_by_alert_urgency (Union[Unset, bool]): Whether the alerts are grouped by urgency or not
         targets (Union[Unset, list['AlertGroupTargetsItem']]):
-        attributes (Union[Unset, list['AlertGroupAttributesItem']]):
+        attributes (Union[Unset, list['AlertGroupAttributesItem']]): This field is deprecated. Please use the
+            `conditions` field instead, `attributes` will be removed in the future.
         conditions (Union[Unset, list['AlertGroupConditionsItem']]): The conditions for the alert group
     """
 
@@ -120,12 +122,12 @@ class AlertGroup:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.alert_group_attributes_item import AlertGroupAttributesItem
         from ..models.alert_group_conditions_item import AlertGroupConditionsItem
         from ..models.alert_group_targets_item import AlertGroupTargetsItem
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         def _parse_description(data: object) -> Union[None, str]:

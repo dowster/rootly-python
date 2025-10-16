@@ -1,10 +1,26 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateScheduleRotationDataAttributesScheduleRotationableAttributesType3ShiftLengthUnit = Literal[
+    "days", "hours", "weeks"
+]
+
+UPDATE_SCHEDULE_ROTATION_DATA_ATTRIBUTES_SCHEDULE_ROTATIONABLE_ATTRIBUTES_TYPE_3_SHIFT_LENGTH_UNIT_VALUES: set[
+    UpdateScheduleRotationDataAttributesScheduleRotationableAttributesType3ShiftLengthUnit
+] = {
+    "days",
+    "hours",
+    "weeks",
+}
 
 
-class UpdateScheduleRotationDataAttributesScheduleRotationableAttributesType3ShiftLengthUnit(str, Enum):
-    DAYS = "days"
-    HOURS = "hours"
-    WEEKS = "weeks"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_schedule_rotation_data_attributes_schedule_rotationable_attributes_type_3_shift_length_unit(
+    value: str,
+) -> UpdateScheduleRotationDataAttributesScheduleRotationableAttributesType3ShiftLengthUnit:
+    if (
+        value
+        in UPDATE_SCHEDULE_ROTATION_DATA_ATTRIBUTES_SCHEDULE_ROTATIONABLE_ATTRIBUTES_TYPE_3_SHIFT_LENGTH_UNIT_VALUES
+    ):
+        return cast(UpdateScheduleRotationDataAttributesScheduleRotationableAttributesType3ShiftLengthUnit, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_SCHEDULE_ROTATION_DATA_ATTRIBUTES_SCHEDULE_ROTATIONABLE_ATTRIBUTES_TYPE_3_SHIFT_LENGTH_UNIT_VALUES!r}"
+    )

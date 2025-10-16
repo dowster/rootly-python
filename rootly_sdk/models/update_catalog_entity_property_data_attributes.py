@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
-from ..models.update_catalog_entity_property_data_attributes_key import UpdateCatalogEntityPropertyDataAttributesKey
+from ..models.update_catalog_entity_property_data_attributes_key import (
+    UpdateCatalogEntityPropertyDataAttributesKey,
+    check_update_catalog_entity_property_data_attributes_key,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateCatalogEntityPropertyDataAttributes")
@@ -22,11 +26,12 @@ class UpdateCatalogEntityPropertyDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         key: Union[Unset, str] = UNSET
         if not isinstance(self.key, Unset):
-            key = self.key.value
+            key = self.key
 
         value = self.value
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if key is not UNSET:
             field_dict["key"] = key
@@ -36,14 +41,14 @@ class UpdateCatalogEntityPropertyDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         _key = d.pop("key", UNSET)
         key: Union[Unset, UpdateCatalogEntityPropertyDataAttributesKey]
         if isinstance(_key, Unset):
             key = UNSET
         else:
-            key = UpdateCatalogEntityPropertyDataAttributesKey(_key)
+            key = check_update_catalog_entity_property_data_attributes_key(_key)
 
         value = d.pop("value", UNSET)
 

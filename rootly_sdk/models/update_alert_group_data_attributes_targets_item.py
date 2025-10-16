@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar
 from uuid import UUID
 
@@ -6,6 +7,7 @@ from attrs import field as _attrs_field
 
 from ..models.update_alert_group_data_attributes_targets_item_target_type import (
     UpdateAlertGroupDataAttributesTargetsItemTargetType,
+    check_update_alert_group_data_attributes_targets_item_target_type,
 )
 
 T = TypeVar("T", bound="UpdateAlertGroupDataAttributesTargetsItem")
@@ -24,7 +26,7 @@ class UpdateAlertGroupDataAttributesTargetsItem:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        target_type = self.target_type.value
+        target_type: str = self.target_type
 
         target_id = str(self.target_id)
 
@@ -40,9 +42,9 @@ class UpdateAlertGroupDataAttributesTargetsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        target_type = UpdateAlertGroupDataAttributesTargetsItemTargetType(d.pop("target_type"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        target_type = check_update_alert_group_data_attributes_targets_item_target_type(d.pop("target_type"))
 
         target_id = UUID(d.pop("target_id"))
 

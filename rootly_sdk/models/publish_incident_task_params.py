@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.publish_incident_task_params_status import PublishIncidentTaskParamsStatus
-from ..models.publish_incident_task_params_task_type import PublishIncidentTaskParamsTaskType
+from ..models.publish_incident_task_params_status import (
+    PublishIncidentTaskParamsStatus,
+    check_publish_incident_task_params_status,
+)
+from ..models.publish_incident_task_params_task_type import (
+    PublishIncidentTaskParamsTaskType,
+    check_publish_incident_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -21,7 +28,7 @@ class PublishIncidentTaskParams:
     Attributes:
         incident (PublishIncidentTaskParamsIncident):
         public_title (str):
-        status (PublishIncidentTaskParamsStatus):  Default: PublishIncidentTaskParamsStatus.RESOLVED.
+        status (PublishIncidentTaskParamsStatus):  Default: 'resolved'.
         status_page_id (str):
         task_type (Union[Unset, PublishIncidentTaskParamsTaskType]):
         event (Union[Unset, str]): Incident event description
@@ -37,7 +44,7 @@ class PublishIncidentTaskParams:
     incident: "PublishIncidentTaskParamsIncident"
     public_title: str
     status_page_id: str
-    status: PublishIncidentTaskParamsStatus = PublishIncidentTaskParamsStatus.RESOLVED
+    status: PublishIncidentTaskParamsStatus = "resolved"
     task_type: Union[Unset, PublishIncidentTaskParamsTaskType] = UNSET
     event: Union[Unset, str] = UNSET
     notify_subscribers: Union[Unset, bool] = False
@@ -51,13 +58,13 @@ class PublishIncidentTaskParams:
 
         public_title = self.public_title
 
-        status = self.status.value
+        status: str = self.status
 
         status_page_id = self.status_page_id
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         event = self.event
 
@@ -101,18 +108,18 @@ class PublishIncidentTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.publish_incident_task_params_incident import PublishIncidentTaskParamsIncident
         from ..models.publish_incident_task_params_status_page_template import (
             PublishIncidentTaskParamsStatusPageTemplate,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         incident = PublishIncidentTaskParamsIncident.from_dict(d.pop("incident"))
 
         public_title = d.pop("public_title")
 
-        status = PublishIncidentTaskParamsStatus(d.pop("status"))
+        status = check_publish_incident_task_params_status(d.pop("status"))
 
         status_page_id = d.pop("status_page_id")
 
@@ -121,7 +128,7 @@ class PublishIncidentTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = PublishIncidentTaskParamsTaskType(_task_type)
+            task_type = check_publish_incident_task_params_task_type(_task_type)
 
         event = d.pop("event", UNSET)
 

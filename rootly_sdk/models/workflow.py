@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.workflow_repeat_on_type_0_item import WorkflowRepeatOnType0Item
+from ..models.workflow_repeat_on_type_0_item import WorkflowRepeatOnType0Item, check_workflow_repeat_on_type_0_item
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -151,7 +152,7 @@ class Workflow:
         elif isinstance(self.repeat_on, list):
             repeat_on = []
             for repeat_on_type_0_item_data in self.repeat_on:
-                repeat_on_type_0_item = repeat_on_type_0_item_data.value
+                repeat_on_type_0_item: str = repeat_on_type_0_item_data
                 repeat_on.append(repeat_on_type_0_item)
 
         else:
@@ -280,14 +281,14 @@ class Workflow:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.action_item_trigger_params import ActionItemTriggerParams
         from ..models.alert_trigger_params import AlertTriggerParams
         from ..models.incident_trigger_params import IncidentTriggerParams
         from ..models.pulse_trigger_params import PulseTriggerParams
         from ..models.simple_trigger_params import SimpleTriggerParams
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         created_at = d.pop("created_at")
@@ -367,7 +368,7 @@ class Workflow:
                 repeat_on_type_0 = []
                 _repeat_on_type_0 = data
                 for repeat_on_type_0_item_data in _repeat_on_type_0:
-                    repeat_on_type_0_item = WorkflowRepeatOnType0Item(repeat_on_type_0_item_data)
+                    repeat_on_type_0_item = check_workflow_repeat_on_type_0_item(repeat_on_type_0_item_data)
 
                     repeat_on_type_0.append(repeat_on_type_0_item)
 

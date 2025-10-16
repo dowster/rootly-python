@@ -1,15 +1,37 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.alert_trigger_params_alert_condition import AlertTriggerParamsAlertCondition
-from ..models.alert_trigger_params_alert_condition_label import AlertTriggerParamsAlertConditionLabel
-from ..models.alert_trigger_params_alert_condition_payload import AlertTriggerParamsAlertConditionPayload
-from ..models.alert_trigger_params_alert_condition_source import AlertTriggerParamsAlertConditionSource
-from ..models.alert_trigger_params_alert_condition_status import AlertTriggerParamsAlertConditionStatus
-from ..models.alert_trigger_params_trigger_type import AlertTriggerParamsTriggerType
-from ..models.alert_trigger_params_triggers_item import AlertTriggerParamsTriggersItem
+from ..models.alert_trigger_params_alert_condition import (
+    AlertTriggerParamsAlertCondition,
+    check_alert_trigger_params_alert_condition,
+)
+from ..models.alert_trigger_params_alert_condition_label import (
+    AlertTriggerParamsAlertConditionLabel,
+    check_alert_trigger_params_alert_condition_label,
+)
+from ..models.alert_trigger_params_alert_condition_payload import (
+    AlertTriggerParamsAlertConditionPayload,
+    check_alert_trigger_params_alert_condition_payload,
+)
+from ..models.alert_trigger_params_alert_condition_source import (
+    AlertTriggerParamsAlertConditionSource,
+    check_alert_trigger_params_alert_condition_source,
+)
+from ..models.alert_trigger_params_alert_condition_status import (
+    AlertTriggerParamsAlertConditionStatus,
+    check_alert_trigger_params_alert_condition_status,
+)
+from ..models.alert_trigger_params_trigger_type import (
+    AlertTriggerParamsTriggerType,
+    check_alert_trigger_params_trigger_type,
+)
+from ..models.alert_trigger_params_triggers_item import (
+    AlertTriggerParamsTriggersItem,
+    check_alert_trigger_params_triggers_item,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AlertTriggerParams")
@@ -22,20 +44,16 @@ class AlertTriggerParams:
         trigger_type (AlertTriggerParamsTriggerType):
         triggers (Union[Unset, list[AlertTriggerParamsTriggersItem]]):
         alert_condition (Union[Unset, AlertTriggerParamsAlertCondition]):
-        alert_condition_source (Union[Unset, AlertTriggerParamsAlertConditionSource]):  Default:
-            AlertTriggerParamsAlertConditionSource.ANY.
+        alert_condition_source (Union[Unset, AlertTriggerParamsAlertConditionSource]):  Default: 'ANY'.
         alert_condition_source_use_regexp (Union[Unset, bool]):  Default: False.
         alert_sources (Union[Unset, list[str]]):
-        alert_condition_label (Union[Unset, AlertTriggerParamsAlertConditionLabel]):  Default:
-            AlertTriggerParamsAlertConditionLabel.ANY.
+        alert_condition_label (Union[Unset, AlertTriggerParamsAlertConditionLabel]):  Default: 'ANY'.
         alert_condition_label_use_regexp (Union[Unset, bool]):  Default: False.
-        alert_condition_status (Union[Unset, AlertTriggerParamsAlertConditionStatus]):  Default:
-            AlertTriggerParamsAlertConditionStatus.ANY.
+        alert_condition_status (Union[Unset, AlertTriggerParamsAlertConditionStatus]):  Default: 'ANY'.
         alert_condition_status_use_regexp (Union[Unset, bool]):  Default: False.
         alert_statuses (Union[Unset, list[str]]):
         alert_labels (Union[Unset, list[str]]):
-        alert_condition_payload (Union[Unset, AlertTriggerParamsAlertConditionPayload]):  Default:
-            AlertTriggerParamsAlertConditionPayload.ANY.
+        alert_condition_payload (Union[Unset, AlertTriggerParamsAlertConditionPayload]):  Default: 'ANY'.
         alert_condition_payload_use_regexp (Union[Unset, bool]):  Default: False.
         alert_payload (Union[Unset, list[str]]):
         alert_query_payload (Union[None, Unset, str]): You can use jsonpath syntax. eg: $.incident.teams[*]
@@ -44,46 +62,38 @@ class AlertTriggerParams:
     trigger_type: AlertTriggerParamsTriggerType
     triggers: Union[Unset, list[AlertTriggerParamsTriggersItem]] = UNSET
     alert_condition: Union[Unset, AlertTriggerParamsAlertCondition] = UNSET
-    alert_condition_source: Union[Unset, AlertTriggerParamsAlertConditionSource] = (
-        AlertTriggerParamsAlertConditionSource.ANY
-    )
+    alert_condition_source: Union[Unset, AlertTriggerParamsAlertConditionSource] = "ANY"
     alert_condition_source_use_regexp: Union[Unset, bool] = False
     alert_sources: Union[Unset, list[str]] = UNSET
-    alert_condition_label: Union[Unset, AlertTriggerParamsAlertConditionLabel] = (
-        AlertTriggerParamsAlertConditionLabel.ANY
-    )
+    alert_condition_label: Union[Unset, AlertTriggerParamsAlertConditionLabel] = "ANY"
     alert_condition_label_use_regexp: Union[Unset, bool] = False
-    alert_condition_status: Union[Unset, AlertTriggerParamsAlertConditionStatus] = (
-        AlertTriggerParamsAlertConditionStatus.ANY
-    )
+    alert_condition_status: Union[Unset, AlertTriggerParamsAlertConditionStatus] = "ANY"
     alert_condition_status_use_regexp: Union[Unset, bool] = False
     alert_statuses: Union[Unset, list[str]] = UNSET
     alert_labels: Union[Unset, list[str]] = UNSET
-    alert_condition_payload: Union[Unset, AlertTriggerParamsAlertConditionPayload] = (
-        AlertTriggerParamsAlertConditionPayload.ANY
-    )
+    alert_condition_payload: Union[Unset, AlertTriggerParamsAlertConditionPayload] = "ANY"
     alert_condition_payload_use_regexp: Union[Unset, bool] = False
     alert_payload: Union[Unset, list[str]] = UNSET
     alert_query_payload: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        trigger_type = self.trigger_type.value
+        trigger_type: str = self.trigger_type
 
         triggers: Union[Unset, list[str]] = UNSET
         if not isinstance(self.triggers, Unset):
             triggers = []
             for triggers_item_data in self.triggers:
-                triggers_item = triggers_item_data.value
+                triggers_item: str = triggers_item_data
                 triggers.append(triggers_item)
 
         alert_condition: Union[Unset, str] = UNSET
         if not isinstance(self.alert_condition, Unset):
-            alert_condition = self.alert_condition.value
+            alert_condition = self.alert_condition
 
         alert_condition_source: Union[Unset, str] = UNSET
         if not isinstance(self.alert_condition_source, Unset):
-            alert_condition_source = self.alert_condition_source.value
+            alert_condition_source = self.alert_condition_source
 
         alert_condition_source_use_regexp = self.alert_condition_source_use_regexp
 
@@ -93,13 +103,13 @@ class AlertTriggerParams:
 
         alert_condition_label: Union[Unset, str] = UNSET
         if not isinstance(self.alert_condition_label, Unset):
-            alert_condition_label = self.alert_condition_label.value
+            alert_condition_label = self.alert_condition_label
 
         alert_condition_label_use_regexp = self.alert_condition_label_use_regexp
 
         alert_condition_status: Union[Unset, str] = UNSET
         if not isinstance(self.alert_condition_status, Unset):
-            alert_condition_status = self.alert_condition_status.value
+            alert_condition_status = self.alert_condition_status
 
         alert_condition_status_use_regexp = self.alert_condition_status_use_regexp
 
@@ -113,7 +123,7 @@ class AlertTriggerParams:
 
         alert_condition_payload: Union[Unset, str] = UNSET
         if not isinstance(self.alert_condition_payload, Unset):
-            alert_condition_payload = self.alert_condition_payload.value
+            alert_condition_payload = self.alert_condition_payload
 
         alert_condition_payload_use_regexp = self.alert_condition_payload_use_regexp
 
@@ -168,14 +178,14 @@ class AlertTriggerParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        trigger_type = AlertTriggerParamsTriggerType(d.pop("trigger_type"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        trigger_type = check_alert_trigger_params_trigger_type(d.pop("trigger_type"))
 
         triggers = []
         _triggers = d.pop("triggers", UNSET)
         for triggers_item_data in _triggers or []:
-            triggers_item = AlertTriggerParamsTriggersItem(triggers_item_data)
+            triggers_item = check_alert_trigger_params_triggers_item(triggers_item_data)
 
             triggers.append(triggers_item)
 
@@ -184,14 +194,14 @@ class AlertTriggerParams:
         if isinstance(_alert_condition, Unset):
             alert_condition = UNSET
         else:
-            alert_condition = AlertTriggerParamsAlertCondition(_alert_condition)
+            alert_condition = check_alert_trigger_params_alert_condition(_alert_condition)
 
         _alert_condition_source = d.pop("alert_condition_source", UNSET)
         alert_condition_source: Union[Unset, AlertTriggerParamsAlertConditionSource]
         if isinstance(_alert_condition_source, Unset):
             alert_condition_source = UNSET
         else:
-            alert_condition_source = AlertTriggerParamsAlertConditionSource(_alert_condition_source)
+            alert_condition_source = check_alert_trigger_params_alert_condition_source(_alert_condition_source)
 
         alert_condition_source_use_regexp = d.pop("alert_condition_source_use_regexp", UNSET)
 
@@ -202,7 +212,7 @@ class AlertTriggerParams:
         if isinstance(_alert_condition_label, Unset):
             alert_condition_label = UNSET
         else:
-            alert_condition_label = AlertTriggerParamsAlertConditionLabel(_alert_condition_label)
+            alert_condition_label = check_alert_trigger_params_alert_condition_label(_alert_condition_label)
 
         alert_condition_label_use_regexp = d.pop("alert_condition_label_use_regexp", UNSET)
 
@@ -211,7 +221,7 @@ class AlertTriggerParams:
         if isinstance(_alert_condition_status, Unset):
             alert_condition_status = UNSET
         else:
-            alert_condition_status = AlertTriggerParamsAlertConditionStatus(_alert_condition_status)
+            alert_condition_status = check_alert_trigger_params_alert_condition_status(_alert_condition_status)
 
         alert_condition_status_use_regexp = d.pop("alert_condition_status_use_regexp", UNSET)
 
@@ -224,7 +234,7 @@ class AlertTriggerParams:
         if isinstance(_alert_condition_payload, Unset):
             alert_condition_payload = UNSET
         else:
-            alert_condition_payload = AlertTriggerParamsAlertConditionPayload(_alert_condition_payload)
+            alert_condition_payload = check_alert_trigger_params_alert_condition_payload(_alert_condition_payload)
 
         alert_condition_payload_use_regexp = d.pop("alert_condition_payload_use_regexp", UNSET)
 

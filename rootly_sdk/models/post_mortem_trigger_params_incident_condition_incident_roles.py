@@ -1,15 +1,28 @@
-from enum import Enum
+from typing import Literal, cast
+
+PostMortemTriggerParamsIncidentConditionIncidentRoles = Literal[
+    "ANY", "CONTAINS", "CONTAINS_ALL", "CONTAINS_NONE", "IS", "NONE", "SET", "UNSET"
+]
+
+POST_MORTEM_TRIGGER_PARAMS_INCIDENT_CONDITION_INCIDENT_ROLES_VALUES: set[
+    PostMortemTriggerParamsIncidentConditionIncidentRoles
+] = {
+    "ANY",
+    "CONTAINS",
+    "CONTAINS_ALL",
+    "CONTAINS_NONE",
+    "IS",
+    "NONE",
+    "SET",
+    "UNSET",
+}
 
 
-class PostMortemTriggerParamsIncidentConditionIncidentRoles(str, Enum):
-    ANY = "ANY"
-    CONTAINS = "CONTAINS"
-    CONTAINS_ALL = "CONTAINS_ALL"
-    CONTAINS_NONE = "CONTAINS_NONE"
-    IS = "IS"
-    NONE = "NONE"
-    SET = "SET"
-    UNSET = "UNSET"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_post_mortem_trigger_params_incident_condition_incident_roles(
+    value: str,
+) -> PostMortemTriggerParamsIncidentConditionIncidentRoles:
+    if value in POST_MORTEM_TRIGGER_PARAMS_INCIDENT_CONDITION_INCIDENT_ROLES_VALUES:
+        return cast(PostMortemTriggerParamsIncidentConditionIncidentRoles, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {POST_MORTEM_TRIGGER_PARAMS_INCIDENT_CONDITION_INCIDENT_ROLES_VALUES!r}"
+    )

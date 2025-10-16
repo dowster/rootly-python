@@ -1,9 +1,16 @@
-from enum import Enum
+from typing import Literal, cast
+
+ChangeSlackChannelPrivacyTaskParamsPrivacy = Literal["private", "public"]
+
+CHANGE_SLACK_CHANNEL_PRIVACY_TASK_PARAMS_PRIVACY_VALUES: set[ChangeSlackChannelPrivacyTaskParamsPrivacy] = {
+    "private",
+    "public",
+}
 
 
-class ChangeSlackChannelPrivacyTaskParamsPrivacy(str, Enum):
-    PRIVATE = "private"
-    PUBLIC = "public"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_change_slack_channel_privacy_task_params_privacy(value: str) -> ChangeSlackChannelPrivacyTaskParamsPrivacy:
+    if value in CHANGE_SLACK_CHANNEL_PRIVACY_TASK_PARAMS_PRIVACY_VALUES:
+        return cast(ChangeSlackChannelPrivacyTaskParamsPrivacy, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {CHANGE_SLACK_CHANNEL_PRIVACY_TASK_PARAMS_PRIVACY_VALUES!r}"
+    )

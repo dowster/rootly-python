@@ -1,11 +1,21 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.trigger_workflow_task_params_attribute_to_query_by import TriggerWorkflowTaskParamsAttributeToQueryBy
-from ..models.trigger_workflow_task_params_kind import TriggerWorkflowTaskParamsKind
-from ..models.trigger_workflow_task_params_task_type import TriggerWorkflowTaskParamsTaskType
+from ..models.trigger_workflow_task_params_attribute_to_query_by import (
+    TriggerWorkflowTaskParamsAttributeToQueryBy,
+    check_trigger_workflow_task_params_attribute_to_query_by,
+)
+from ..models.trigger_workflow_task_params_kind import (
+    TriggerWorkflowTaskParamsKind,
+    check_trigger_workflow_task_params_kind,
+)
+from ..models.trigger_workflow_task_params_task_type import (
+    TriggerWorkflowTaskParamsTaskType,
+    check_trigger_workflow_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -20,7 +30,7 @@ T = TypeVar("T", bound="TriggerWorkflowTaskParams")
 class TriggerWorkflowTaskParams:
     """
     Attributes:
-        kind (TriggerWorkflowTaskParamsKind):  Default: TriggerWorkflowTaskParamsKind.INCIDENT.
+        kind (TriggerWorkflowTaskParamsKind):  Default: 'incident'.
         attribute_to_query_by (TriggerWorkflowTaskParamsAttributeToQueryBy): ["(incident) kind can only match [:id,
             :slug, :sequential_id, :pagerduty_incident_id, :opsgenie_incident_id, :victor_ops_incident_id, :jira_issue_id,
             :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id, :trello_card_id,
@@ -29,7 +39,7 @@ class TriggerWorkflowTaskParams:
             :jira_issue_id, :asana_task_id, :shortcut_task_id, :linear_issue_id, :zendesk_ticket_id, :motion_task_id,
             :trello_card_id, :airtable_record_id, :shortcut_story_id, :github_issue_id, :freshservice_ticket_id,
             :freshservice_task_id, :clickup_task_id]", "(pulse) kind can only match [:id]", "(alert) kind can only match
-            [:id]"] Default: TriggerWorkflowTaskParamsAttributeToQueryBy.ID.
+            [:id]"] Default: 'id'.
         resource (TriggerWorkflowTaskParamsResource):
         workflow (TriggerWorkflowTaskParamsWorkflow):
         task_type (Union[Unset, TriggerWorkflowTaskParamsTaskType]):
@@ -38,16 +48,16 @@ class TriggerWorkflowTaskParams:
 
     resource: "TriggerWorkflowTaskParamsResource"
     workflow: "TriggerWorkflowTaskParamsWorkflow"
-    kind: TriggerWorkflowTaskParamsKind = TriggerWorkflowTaskParamsKind.INCIDENT
-    attribute_to_query_by: TriggerWorkflowTaskParamsAttributeToQueryBy = TriggerWorkflowTaskParamsAttributeToQueryBy.ID
+    kind: TriggerWorkflowTaskParamsKind = "incident"
+    attribute_to_query_by: TriggerWorkflowTaskParamsAttributeToQueryBy = "id"
     task_type: Union[Unset, TriggerWorkflowTaskParamsTaskType] = UNSET
     check_workflow_conditions: Union[Unset, bool] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        kind = self.kind.value
+        kind: str = self.kind
 
-        attribute_to_query_by = self.attribute_to_query_by.value
+        attribute_to_query_by: str = self.attribute_to_query_by
 
         resource = self.resource.to_dict()
 
@@ -55,7 +65,7 @@ class TriggerWorkflowTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         check_workflow_conditions = self.check_workflow_conditions
 
@@ -77,14 +87,14 @@ class TriggerWorkflowTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.trigger_workflow_task_params_resource import TriggerWorkflowTaskParamsResource
         from ..models.trigger_workflow_task_params_workflow import TriggerWorkflowTaskParamsWorkflow
 
-        d = src_dict.copy()
-        kind = TriggerWorkflowTaskParamsKind(d.pop("kind"))
+        d = dict(src_dict)
+        kind = check_trigger_workflow_task_params_kind(d.pop("kind"))
 
-        attribute_to_query_by = TriggerWorkflowTaskParamsAttributeToQueryBy(d.pop("attribute_to_query_by"))
+        attribute_to_query_by = check_trigger_workflow_task_params_attribute_to_query_by(d.pop("attribute_to_query_by"))
 
         resource = TriggerWorkflowTaskParamsResource.from_dict(d.pop("resource"))
 
@@ -95,7 +105,7 @@ class TriggerWorkflowTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = TriggerWorkflowTaskParamsTaskType(_task_type)
+            task_type = check_trigger_workflow_task_params_task_type(_task_type)
 
         check_workflow_conditions = d.pop("check_workflow_conditions", UNSET)
 

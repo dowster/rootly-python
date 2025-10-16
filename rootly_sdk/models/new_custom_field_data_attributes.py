@@ -1,9 +1,16 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.new_custom_field_data_attributes_required_type_0_item import NewCustomFieldDataAttributesRequiredType0Item
-from ..models.new_custom_field_data_attributes_shown_item import NewCustomFieldDataAttributesShownItem
+from ..models.new_custom_field_data_attributes_required_type_0_item import (
+    NewCustomFieldDataAttributesRequiredType0Item,
+    check_new_custom_field_data_attributes_required_type_0_item,
+)
+from ..models.new_custom_field_data_attributes_shown_item import (
+    NewCustomFieldDataAttributesShownItem,
+    check_new_custom_field_data_attributes_shown_item,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewCustomFieldDataAttributes")
@@ -41,7 +48,7 @@ class NewCustomFieldDataAttributes:
         if not isinstance(self.shown, Unset):
             shown = []
             for shown_item_data in self.shown:
-                shown_item = shown_item_data.value
+                shown_item: str = shown_item_data
                 shown.append(shown_item)
 
         required: Union[None, Unset, list[str]]
@@ -50,7 +57,7 @@ class NewCustomFieldDataAttributes:
         elif isinstance(self.required, list):
             required = []
             for required_type_0_item_data in self.required:
-                required_type_0_item = required_type_0_item_data.value
+                required_type_0_item: str = required_type_0_item_data
                 required.append(required_type_0_item)
 
         else:
@@ -65,6 +72,7 @@ class NewCustomFieldDataAttributes:
         position = self.position
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "label": label,
@@ -84,8 +92,8 @@ class NewCustomFieldDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         label = d.pop("label")
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
@@ -100,7 +108,7 @@ class NewCustomFieldDataAttributes:
         shown = []
         _shown = d.pop("shown", UNSET)
         for shown_item_data in _shown or []:
-            shown_item = NewCustomFieldDataAttributesShownItem(shown_item_data)
+            shown_item = check_new_custom_field_data_attributes_shown_item(shown_item_data)
 
             shown.append(shown_item)
 
@@ -115,7 +123,9 @@ class NewCustomFieldDataAttributes:
                 required_type_0 = []
                 _required_type_0 = data
                 for required_type_0_item_data in _required_type_0:
-                    required_type_0_item = NewCustomFieldDataAttributesRequiredType0Item(required_type_0_item_data)
+                    required_type_0_item = check_new_custom_field_data_attributes_required_type_0_item(
+                        required_type_0_item_data
+                    )
 
                     required_type_0.append(required_type_0_item)
 

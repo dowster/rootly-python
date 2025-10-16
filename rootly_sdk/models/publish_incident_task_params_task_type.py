@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+PublishIncidentTaskParamsTaskType = Literal["publish_incident"]
+
+PUBLISH_INCIDENT_TASK_PARAMS_TASK_TYPE_VALUES: set[PublishIncidentTaskParamsTaskType] = {
+    "publish_incident",
+}
 
 
-class PublishIncidentTaskParamsTaskType(str, Enum):
-    PUBLISH_INCIDENT = "publish_incident"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_publish_incident_task_params_task_type(value: str) -> PublishIncidentTaskParamsTaskType:
+    if value in PUBLISH_INCIDENT_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(PublishIncidentTaskParamsTaskType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {PUBLISH_INCIDENT_TASK_PARAMS_TASK_TYPE_VALUES!r}")

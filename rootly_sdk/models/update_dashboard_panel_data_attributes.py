@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -51,6 +52,7 @@ class UpdateDashboardPanelDataAttributes:
             position = self.position
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if name is not UNSET:
             field_dict["name"] = name
@@ -62,13 +64,13 @@ class UpdateDashboardPanelDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_dashboard_panel_data_attributes_params import UpdateDashboardPanelDataAttributesParams
         from ..models.update_dashboard_panel_data_attributes_position_type_0 import (
             UpdateDashboardPanelDataAttributesPositionType0,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
 
         def _parse_name(data: object) -> Union[None, Unset, str]:
             if data is None:

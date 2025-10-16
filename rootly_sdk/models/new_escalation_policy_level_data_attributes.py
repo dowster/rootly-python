@@ -1,12 +1,15 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
 from ..models.new_escalation_policy_level_data_attributes_paging_strategy_configuration_schedule_strategy import (
     NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy,
+    check_new_escalation_policy_level_data_attributes_paging_strategy_configuration_schedule_strategy,
 )
 from ..models.new_escalation_policy_level_data_attributes_paging_strategy_configuration_strategy import (
     NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy,
+    check_new_escalation_policy_level_data_attributes_paging_strategy_configuration_strategy,
 )
 from ..types import UNSET, Unset
 
@@ -72,11 +75,11 @@ class NewEscalationPolicyLevelDataAttributes:
 
         paging_strategy_configuration_strategy: Union[Unset, str] = UNSET
         if not isinstance(self.paging_strategy_configuration_strategy, Unset):
-            paging_strategy_configuration_strategy = self.paging_strategy_configuration_strategy.value
+            paging_strategy_configuration_strategy = self.paging_strategy_configuration_strategy
 
         paging_strategy_configuration_schedule_strategy: Union[Unset, str] = UNSET
         if not isinstance(self.paging_strategy_configuration_schedule_strategy, Unset):
-            paging_strategy_configuration_schedule_strategy = self.paging_strategy_configuration_schedule_strategy.value
+            paging_strategy_configuration_schedule_strategy = self.paging_strategy_configuration_schedule_strategy
 
         escalation_policy_path_id: Union[None, Unset, str]
         if isinstance(self.escalation_policy_path_id, Unset):
@@ -85,6 +88,7 @@ class NewEscalationPolicyLevelDataAttributes:
             escalation_policy_path_id = self.escalation_policy_path_id
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "position": position,
@@ -105,12 +109,12 @@ class NewEscalationPolicyLevelDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_escalation_policy_level_data_attributes_notification_target_params_item_type_0 import (
             NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         position = d.pop("position")
 
         notification_target_params = []
@@ -152,7 +156,7 @@ class NewEscalationPolicyLevelDataAttributes:
             paging_strategy_configuration_strategy = UNSET
         else:
             paging_strategy_configuration_strategy = (
-                NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy(
+                check_new_escalation_policy_level_data_attributes_paging_strategy_configuration_strategy(
                     _paging_strategy_configuration_strategy
                 )
             )
@@ -167,7 +171,7 @@ class NewEscalationPolicyLevelDataAttributes:
             paging_strategy_configuration_schedule_strategy = UNSET
         else:
             paging_strategy_configuration_schedule_strategy = (
-                NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy(
+                check_new_escalation_policy_level_data_attributes_paging_strategy_configuration_schedule_strategy(
                     _paging_strategy_configuration_schedule_strategy
                 )
             )

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
@@ -5,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..models.update_live_call_router_data_attributes_escalation_policy_trigger_params_type import (
     UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType,
+    check_update_live_call_router_data_attributes_escalation_policy_trigger_params_type,
 )
 
 T = TypeVar("T", bound="UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParams")
@@ -25,7 +27,7 @@ class UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParams:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_ = self.type_.value
+        type_: str = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -39,11 +41,11 @@ class UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         id = d.pop("id")
 
-        type_ = UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParamsType(d.pop("type"))
+        type_ = check_update_live_call_router_data_attributes_escalation_policy_trigger_params_type(d.pop("type"))
 
         update_live_call_router_data_attributes_escalation_policy_trigger_params = cls(
             id=id,

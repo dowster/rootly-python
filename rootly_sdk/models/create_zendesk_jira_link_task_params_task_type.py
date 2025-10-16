@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+CreateZendeskJiraLinkTaskParamsTaskType = Literal["create_zendesk_jira_link"]
+
+CREATE_ZENDESK_JIRA_LINK_TASK_PARAMS_TASK_TYPE_VALUES: set[CreateZendeskJiraLinkTaskParamsTaskType] = {
+    "create_zendesk_jira_link",
+}
 
 
-class CreateZendeskJiraLinkTaskParamsTaskType(str, Enum):
-    CREATE_ZENDESK_JIRA_LINK = "create_zendesk_jira_link"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_create_zendesk_jira_link_task_params_task_type(value: str) -> CreateZendeskJiraLinkTaskParamsTaskType:
+    if value in CREATE_ZENDESK_JIRA_LINK_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(CreateZendeskJiraLinkTaskParamsTaskType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {CREATE_ZENDESK_JIRA_LINK_TASK_PARAMS_TASK_TYPE_VALUES!r}"
+    )

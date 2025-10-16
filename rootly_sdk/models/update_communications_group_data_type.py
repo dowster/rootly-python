@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateCommunicationsGroupDataType = Literal["communications-groups"]
+
+UPDATE_COMMUNICATIONS_GROUP_DATA_TYPE_VALUES: set[UpdateCommunicationsGroupDataType] = {
+    "communications-groups",
+}
 
 
-class UpdateCommunicationsGroupDataType(str, Enum):
-    COMMUNICATIONS_GROUPS = "communications-groups"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_communications_group_data_type(value: str) -> UpdateCommunicationsGroupDataType:
+    if value in UPDATE_COMMUNICATIONS_GROUP_DATA_TYPE_VALUES:
+        return cast(UpdateCommunicationsGroupDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_COMMUNICATIONS_GROUP_DATA_TYPE_VALUES!r}")

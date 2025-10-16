@@ -1,10 +1,21 @@
-from enum import Enum
+from typing import Literal, cast
+
+ActionItemTriggerParamsIncidentActionItemPrioritiesItem = Literal["high", "low", "medium"]
+
+ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_ACTION_ITEM_PRIORITIES_ITEM_VALUES: set[
+    ActionItemTriggerParamsIncidentActionItemPrioritiesItem
+] = {
+    "high",
+    "low",
+    "medium",
+}
 
 
-class ActionItemTriggerParamsIncidentActionItemPrioritiesItem(str, Enum):
-    HIGH = "high"
-    LOW = "low"
-    MEDIUM = "medium"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_action_item_trigger_params_incident_action_item_priorities_item(
+    value: str,
+) -> ActionItemTriggerParamsIncidentActionItemPrioritiesItem:
+    if value in ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_ACTION_ITEM_PRIORITIES_ITEM_VALUES:
+        return cast(ActionItemTriggerParamsIncidentActionItemPrioritiesItem, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_ACTION_ITEM_PRIORITIES_ITEM_VALUES!r}"
+    )

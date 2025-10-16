@@ -1,11 +1,12 @@
 import datetime
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 from dateutil.parser import isoparse
 
-from ..models.on_call_shadow_shadowable_type import OnCallShadowShadowableType
+from ..models.on_call_shadow_shadowable_type import OnCallShadowShadowableType, check_on_call_shadow_shadowable_type
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="OnCallShadow")
@@ -38,7 +39,7 @@ class OnCallShadow:
     def to_dict(self) -> dict[str, Any]:
         schedule_id = self.schedule_id
 
-        shadowable_type = self.shadowable_type.value
+        shadowable_type: str = self.shadowable_type
 
         shadowable_id = self.shadowable_id
 
@@ -72,11 +73,11 @@ class OnCallShadow:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         schedule_id = d.pop("schedule_id")
 
-        shadowable_type = OnCallShadowShadowableType(d.pop("shadowable_type"))
+        shadowable_type = check_on_call_shadow_shadowable_type(d.pop("shadowable_type"))
 
         shadowable_id = d.pop("shadowable_id")
 

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -65,6 +66,7 @@ class UpdateEscalationPolicyDataAttributes:
             business_hours = self.business_hours
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if name is not UNSET:
             field_dict["name"] = name
@@ -82,12 +84,12 @@ class UpdateEscalationPolicyDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_escalation_policy_data_attributes_business_hours_type_0 import (
             UpdateEscalationPolicyDataAttributesBusinessHoursType0,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name", UNSET)
 
         def _parse_description(data: object) -> Union[None, Unset, str]:

@@ -45,13 +45,13 @@ def _get_kwargs(
 
     json_sort: Union[Unset, str] = UNSET
     if not isinstance(sort, Unset):
-        json_sort = sort.value
+        json_sort = sort
 
     params["sort"] = json_sort
 
     json_include: Union[Unset, str] = UNSET
     if not isinstance(include, Unset):
-        json_include = include.value
+        json_include = include
 
     params["include"] = json_include
 
@@ -73,10 +73,12 @@ def _parse_response(
         response_200 = UserList.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 401:
         response_401 = ErrorsList.from_dict(response.json())
 
         return response_401
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:

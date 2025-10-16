@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_gitlab_issue_task_params_issue_type import UpdateGitlabIssueTaskParamsIssueType
-from ..models.update_gitlab_issue_task_params_task_type import UpdateGitlabIssueTaskParamsTaskType
+from ..models.update_gitlab_issue_task_params_issue_type import (
+    UpdateGitlabIssueTaskParamsIssueType,
+    check_update_gitlab_issue_task_params_issue_type,
+)
+from ..models.update_gitlab_issue_task_params_task_type import (
+    UpdateGitlabIssueTaskParamsTaskType,
+    check_update_gitlab_issue_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -45,11 +52,11 @@ class UpdateGitlabIssueTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         issue_type: Union[Unset, str] = UNSET
         if not isinstance(self.issue_type, Unset):
-            issue_type = self.issue_type.value
+            issue_type = self.issue_type
 
         title = self.title
 
@@ -83,10 +90,10 @@ class UpdateGitlabIssueTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_gitlab_issue_task_params_completion import UpdateGitlabIssueTaskParamsCompletion
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         issue_id = d.pop("issue_id")
 
         completion = UpdateGitlabIssueTaskParamsCompletion.from_dict(d.pop("completion"))
@@ -96,14 +103,14 @@ class UpdateGitlabIssueTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateGitlabIssueTaskParamsTaskType(_task_type)
+            task_type = check_update_gitlab_issue_task_params_task_type(_task_type)
 
         _issue_type = d.pop("issue_type", UNSET)
         issue_type: Union[Unset, UpdateGitlabIssueTaskParamsIssueType]
         if isinstance(_issue_type, Unset):
             issue_type = UNSET
         else:
-            issue_type = UpdateGitlabIssueTaskParamsIssueType(_issue_type)
+            issue_type = check_update_gitlab_issue_task_params_issue_type(_issue_type)
 
         title = d.pop("title", UNSET)
 

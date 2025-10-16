@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -48,6 +49,7 @@ class UpdateUserDataAttributes:
             on_call_role_id = self.on_call_role_id
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if first_name is not UNSET:
             field_dict["first_name"] = first_name
@@ -61,8 +63,8 @@ class UpdateUserDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
 
         def _parse_first_name(data: object) -> Union[None, Unset, str]:
             if data is None:

@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_jira_subtask_task_params_task_type import CreateJiraSubtaskTaskParamsTaskType
+from ..models.create_jira_subtask_task_params_task_type import (
+    CreateJiraSubtaskTaskParamsTaskType,
+    check_create_jira_subtask_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -67,7 +71,7 @@ class CreateJiraSubtaskTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         integration: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.integration, Unset):
@@ -139,7 +143,7 @@ class CreateJiraSubtaskTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_jira_subtask_task_params_integration import CreateJiraSubtaskTaskParamsIntegration
         from ..models.create_jira_subtask_task_params_priority import CreateJiraSubtaskTaskParamsPriority
         from ..models.create_jira_subtask_task_params_status import CreateJiraSubtaskTaskParamsStatus
@@ -147,7 +151,7 @@ class CreateJiraSubtaskTaskParams:
             CreateJiraSubtaskTaskParamsSubtaskIssueType,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         project_key = d.pop("project_key")
 
         parent_issue_id = d.pop("parent_issue_id")
@@ -161,7 +165,7 @@ class CreateJiraSubtaskTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateJiraSubtaskTaskParamsTaskType(_task_type)
+            task_type = check_create_jira_subtask_task_params_task_type(_task_type)
 
         _integration = d.pop("integration", UNSET)
         integration: Union[Unset, CreateJiraSubtaskTaskParamsIntegration]

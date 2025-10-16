@@ -1,9 +1,11 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
 from ..models.new_incident_permission_set_boolean_data_attributes_kind import (
     NewIncidentPermissionSetBooleanDataAttributesKind,
+    check_new_incident_permission_set_boolean_data_attributes_kind,
 )
 from ..types import UNSET, Unset
 
@@ -36,7 +38,7 @@ class NewIncidentPermissionSetBooleanDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         incident_permission_set_id = self.incident_permission_set_id
 
-        kind = self.kind.value
+        kind: str = self.kind
 
         private = self.private
 
@@ -47,6 +49,7 @@ class NewIncidentPermissionSetBooleanDataAttributes:
             severity_params = self.severity_params.to_dict()
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "incident_permission_set_id": incident_permission_set_id,
@@ -63,15 +66,15 @@ class NewIncidentPermissionSetBooleanDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_incident_permission_set_boolean_data_attributes_severity_params import (
             NewIncidentPermissionSetBooleanDataAttributesSeverityParams,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         incident_permission_set_id = d.pop("incident_permission_set_id")
 
-        kind = NewIncidentPermissionSetBooleanDataAttributesKind(d.pop("kind"))
+        kind = check_new_incident_permission_set_boolean_data_attributes_kind(d.pop("kind"))
 
         private = d.pop("private", UNSET)
 

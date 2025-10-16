@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.add_role_task_params_task_type import AddRoleTaskParamsTaskType
+from ..models.add_role_task_params_task_type import AddRoleTaskParamsTaskType, check_add_role_task_params_task_type
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -35,7 +36,7 @@ class AddRoleTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         assigned_to_user_id = self.assigned_to_user_id
 
@@ -60,10 +61,10 @@ class AddRoleTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.add_role_task_params_assigned_to_user import AddRoleTaskParamsAssignedToUser
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         incident_role_id = d.pop("incident_role_id")
 
         _task_type = d.pop("task_type", UNSET)
@@ -71,7 +72,7 @@ class AddRoleTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = AddRoleTaskParamsTaskType(_task_type)
+            task_type = check_add_role_task_params_task_type(_task_type)
 
         assigned_to_user_id = d.pop("assigned_to_user_id", UNSET)
 

@@ -1,10 +1,11 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.alert_event_action import AlertEventAction
-from ..models.alert_event_kind import AlertEventKind
+from ..models.alert_event_action import AlertEventAction, check_alert_event_action
+from ..models.alert_event_kind import AlertEventKind, check_alert_event_kind
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AlertEvent")
@@ -33,9 +34,9 @@ class AlertEvent:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        kind = self.kind.value
+        kind: str = self.kind
 
-        action = self.action.value
+        action: str = self.action
 
         source = self.source
 
@@ -74,11 +75,11 @@ class AlertEvent:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        kind = AlertEventKind(d.pop("kind"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        kind = check_alert_event_kind(d.pop("kind"))
 
-        action = AlertEventAction(d.pop("action"))
+        action = check_alert_event_action(d.pop("action"))
 
         source = d.pop("source")
 

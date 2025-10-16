@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewScheduleRotationUserDataType = Literal["schedule_rotation_users"]
+
+NEW_SCHEDULE_ROTATION_USER_DATA_TYPE_VALUES: set[NewScheduleRotationUserDataType] = {
+    "schedule_rotation_users",
+}
 
 
-class NewScheduleRotationUserDataType(str, Enum):
-    SCHEDULE_ROTATION_USERS = "schedule_rotation_users"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_schedule_rotation_user_data_type(value: str) -> NewScheduleRotationUserDataType:
+    if value in NEW_SCHEDULE_ROTATION_USER_DATA_TYPE_VALUES:
+        return cast(NewScheduleRotationUserDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_SCHEDULE_ROTATION_USER_DATA_TYPE_VALUES!r}")

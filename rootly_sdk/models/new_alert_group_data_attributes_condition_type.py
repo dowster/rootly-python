@@ -1,9 +1,16 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewAlertGroupDataAttributesConditionType = Literal["all", "any"]
+
+NEW_ALERT_GROUP_DATA_ATTRIBUTES_CONDITION_TYPE_VALUES: set[NewAlertGroupDataAttributesConditionType] = {
+    "all",
+    "any",
+}
 
 
-class NewAlertGroupDataAttributesConditionType(str, Enum):
-    ALL = "all"
-    ANY = "any"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_alert_group_data_attributes_condition_type(value: str) -> NewAlertGroupDataAttributesConditionType:
+    if value in NEW_ALERT_GROUP_DATA_ATTRIBUTES_CONDITION_TYPE_VALUES:
+        return cast(NewAlertGroupDataAttributesConditionType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_ALERT_GROUP_DATA_ATTRIBUTES_CONDITION_TYPE_VALUES!r}"
+    )

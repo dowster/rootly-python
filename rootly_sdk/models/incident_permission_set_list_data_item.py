@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.incident_permission_set_list_data_item_type import IncidentPermissionSetListDataItemType
+from ..models.incident_permission_set_list_data_item_type import (
+    IncidentPermissionSetListDataItemType,
+    check_incident_permission_set_list_data_item_type,
+)
 
 if TYPE_CHECKING:
     from ..models.incident_permission_set import IncidentPermissionSet
@@ -29,7 +33,7 @@ class IncidentPermissionSetListDataItem:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
@@ -46,13 +50,13 @@ class IncidentPermissionSetListDataItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.incident_permission_set import IncidentPermissionSet
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         id = d.pop("id")
 
-        type_ = IncidentPermissionSetListDataItemType(d.pop("type"))
+        type_ = check_incident_permission_set_list_data_item_type(d.pop("type"))
 
         attributes = IncidentPermissionSet.from_dict(d.pop("attributes"))
 

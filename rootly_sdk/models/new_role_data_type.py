@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewRoleDataType = Literal["roles"]
+
+NEW_ROLE_DATA_TYPE_VALUES: set[NewRoleDataType] = {
+    "roles",
+}
 
 
-class NewRoleDataType(str, Enum):
-    ROLES = "roles"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_role_data_type(value: str) -> NewRoleDataType:
+    if value in NEW_ROLE_DATA_TYPE_VALUES:
+        return cast(NewRoleDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_ROLE_DATA_TYPE_VALUES!r}")

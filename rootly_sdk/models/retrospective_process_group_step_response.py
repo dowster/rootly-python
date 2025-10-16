@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
@@ -34,10 +35,10 @@ class RetrospectiveProcessGroupStepResponse:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.retrospective_process_group_step_response_data import RetrospectiveProcessGroupStepResponseData
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         data = RetrospectiveProcessGroupStepResponseData.from_dict(d.pop("data"))
 
         retrospective_process_group_step_response = cls(

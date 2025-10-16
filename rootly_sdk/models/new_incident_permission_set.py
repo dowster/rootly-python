@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
@@ -34,10 +35,10 @@ class NewIncidentPermissionSet:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_incident_permission_set_data import NewIncidentPermissionSetData
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         data = NewIncidentPermissionSetData.from_dict(d.pop("data"))
 
         new_incident_permission_set = cls(

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,9 +6,11 @@ from attrs import field as _attrs_field
 
 from ..models.escalation_policy_level_paging_strategy_configuration_schedule_strategy import (
     EscalationPolicyLevelPagingStrategyConfigurationScheduleStrategy,
+    check_escalation_policy_level_paging_strategy_configuration_schedule_strategy,
 )
 from ..models.escalation_policy_level_paging_strategy_configuration_strategy import (
     EscalationPolicyLevelPagingStrategyConfigurationStrategy,
+    check_escalation_policy_level_paging_strategy_configuration_strategy,
 )
 from ..types import UNSET, Unset
 
@@ -81,11 +84,11 @@ class EscalationPolicyLevel:
 
         paging_strategy_configuration_strategy: Union[Unset, str] = UNSET
         if not isinstance(self.paging_strategy_configuration_strategy, Unset):
-            paging_strategy_configuration_strategy = self.paging_strategy_configuration_strategy.value
+            paging_strategy_configuration_strategy = self.paging_strategy_configuration_strategy
 
         paging_strategy_configuration_schedule_strategy: Union[Unset, str] = UNSET
         if not isinstance(self.paging_strategy_configuration_schedule_strategy, Unset):
-            paging_strategy_configuration_schedule_strategy = self.paging_strategy_configuration_schedule_strategy.value
+            paging_strategy_configuration_schedule_strategy = self.paging_strategy_configuration_schedule_strategy
 
         created_at = self.created_at
 
@@ -117,12 +120,12 @@ class EscalationPolicyLevel:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.escalation_policy_level_notification_target_params_item_type_0 import (
             EscalationPolicyLevelNotificationTargetParamsItemType0,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         escalation_policy_id = d.pop("escalation_policy_id")
 
         delay = d.pop("delay")
@@ -170,8 +173,10 @@ class EscalationPolicyLevel:
         if isinstance(_paging_strategy_configuration_strategy, Unset):
             paging_strategy_configuration_strategy = UNSET
         else:
-            paging_strategy_configuration_strategy = EscalationPolicyLevelPagingStrategyConfigurationStrategy(
-                _paging_strategy_configuration_strategy
+            paging_strategy_configuration_strategy = (
+                check_escalation_policy_level_paging_strategy_configuration_strategy(
+                    _paging_strategy_configuration_strategy
+                )
             )
 
         _paging_strategy_configuration_schedule_strategy = d.pop(
@@ -184,7 +189,7 @@ class EscalationPolicyLevel:
             paging_strategy_configuration_schedule_strategy = UNSET
         else:
             paging_strategy_configuration_schedule_strategy = (
-                EscalationPolicyLevelPagingStrategyConfigurationScheduleStrategy(
+                check_escalation_policy_level_paging_strategy_configuration_schedule_strategy(
                     _paging_strategy_configuration_schedule_strategy
                 )
             )

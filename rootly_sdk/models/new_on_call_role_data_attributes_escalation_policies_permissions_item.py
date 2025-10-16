@@ -1,11 +1,22 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewOnCallRoleDataAttributesEscalationPoliciesPermissionsItem = Literal["create", "delete", "read", "update"]
+
+NEW_ON_CALL_ROLE_DATA_ATTRIBUTES_ESCALATION_POLICIES_PERMISSIONS_ITEM_VALUES: set[
+    NewOnCallRoleDataAttributesEscalationPoliciesPermissionsItem
+] = {
+    "create",
+    "delete",
+    "read",
+    "update",
+}
 
 
-class NewOnCallRoleDataAttributesEscalationPoliciesPermissionsItem(str, Enum):
-    CREATE = "create"
-    DELETE = "delete"
-    READ = "read"
-    UPDATE = "update"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_on_call_role_data_attributes_escalation_policies_permissions_item(
+    value: str,
+) -> NewOnCallRoleDataAttributesEscalationPoliciesPermissionsItem:
+    if value in NEW_ON_CALL_ROLE_DATA_ATTRIBUTES_ESCALATION_POLICIES_PERMISSIONS_ITEM_VALUES:
+        return cast(NewOnCallRoleDataAttributesEscalationPoliciesPermissionsItem, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_ON_CALL_ROLE_DATA_ATTRIBUTES_ESCALATION_POLICIES_PERMISSIONS_ITEM_VALUES!r}"
+    )

@@ -21,7 +21,7 @@ def _get_kwargs(
 
     json_include: Union[Unset, str] = UNSET
     if not isinstance(include, Unset):
-        json_include = include.value
+        json_include = include
 
     params["include"] = json_include
 
@@ -47,6 +47,7 @@ def _parse_response(
         response_200 = EscalationPolicyPathList.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:

@@ -1,4 +1,5 @@
 import datetime
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -126,6 +127,7 @@ class NewPulseDataAttributes:
             data = self.data
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "summary": summary,
@@ -153,12 +155,12 @@ class NewPulseDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_pulse_data_attributes_data_type_0 import NewPulseDataAttributesDataType0
         from ..models.new_pulse_data_attributes_labels_item_type_0 import NewPulseDataAttributesLabelsItemType0
         from ..models.new_pulse_data_attributes_refs_item_type_0 import NewPulseDataAttributesRefsItemType0
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         summary = d.pop("summary")
 
         def _parse_source(data: object) -> Union[None, Unset, str]:

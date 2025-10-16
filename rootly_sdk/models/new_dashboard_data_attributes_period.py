@@ -1,10 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewDashboardDataAttributesPeriod = Literal["day", "month", "week"]
+
+NEW_DASHBOARD_DATA_ATTRIBUTES_PERIOD_VALUES: set[NewDashboardDataAttributesPeriod] = {
+    "day",
+    "month",
+    "week",
+}
 
 
-class NewDashboardDataAttributesPeriod(str, Enum):
-    DAY = "day"
-    MONTH = "month"
-    WEEK = "week"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_dashboard_data_attributes_period(value: str) -> NewDashboardDataAttributesPeriod:
+    if value in NEW_DASHBOARD_DATA_ATTRIBUTES_PERIOD_VALUES:
+        return cast(NewDashboardDataAttributesPeriod, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_DASHBOARD_DATA_ATTRIBUTES_PERIOD_VALUES!r}")

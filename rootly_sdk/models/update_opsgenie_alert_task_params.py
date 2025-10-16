@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_opsgenie_alert_task_params_priority import UpdateOpsgenieAlertTaskParamsPriority
-from ..models.update_opsgenie_alert_task_params_task_type import UpdateOpsgenieAlertTaskParamsTaskType
+from ..models.update_opsgenie_alert_task_params_priority import (
+    UpdateOpsgenieAlertTaskParamsPriority,
+    check_update_opsgenie_alert_task_params_priority,
+)
+from ..models.update_opsgenie_alert_task_params_task_type import (
+    UpdateOpsgenieAlertTaskParamsTaskType,
+    check_update_opsgenie_alert_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -38,13 +45,13 @@ class UpdateOpsgenieAlertTaskParams:
     def to_dict(self) -> dict[str, Any]:
         alert_id = self.alert_id
 
-        priority = self.priority.value
+        priority: str = self.priority
 
         completion = self.completion.to_dict()
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         message = self.message
 
@@ -69,13 +76,13 @@ class UpdateOpsgenieAlertTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_opsgenie_alert_task_params_completion import UpdateOpsgenieAlertTaskParamsCompletion
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         alert_id = d.pop("alert_id")
 
-        priority = UpdateOpsgenieAlertTaskParamsPriority(d.pop("priority"))
+        priority = check_update_opsgenie_alert_task_params_priority(d.pop("priority"))
 
         completion = UpdateOpsgenieAlertTaskParamsCompletion.from_dict(d.pop("completion"))
 
@@ -84,7 +91,7 @@ class UpdateOpsgenieAlertTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateOpsgenieAlertTaskParamsTaskType(_task_type)
+            task_type = check_update_opsgenie_alert_task_params_task_type(_task_type)
 
         message = d.pop("message", UNSET)
 

@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+LiveCallRouterKind = Literal["live", "voicemail"]
+
+LIVE_CALL_ROUTER_KIND_VALUES: set[LiveCallRouterKind] = {
+    "live",
+    "voicemail",
+}
 
 
-class LiveCallRouterKind(str, Enum):
-    LIVE = "live"
-    VOICEMAIL = "voicemail"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_live_call_router_kind(value: str) -> LiveCallRouterKind:
+    if value in LIVE_CALL_ROUTER_KIND_VALUES:
+        return cast(LiveCallRouterKind, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {LIVE_CALL_ROUTER_KIND_VALUES!r}")

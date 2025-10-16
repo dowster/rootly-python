@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -49,6 +50,7 @@ class NewDashboardPanelDataAttributes:
             position = self.position
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "params": params,
@@ -62,13 +64,13 @@ class NewDashboardPanelDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_dashboard_panel_data_attributes_params import NewDashboardPanelDataAttributesParams
         from ..models.new_dashboard_panel_data_attributes_position_type_0 import (
             NewDashboardPanelDataAttributesPositionType0,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         params = NewDashboardPanelDataAttributesParams.from_dict(d.pop("params"))
 
         def _parse_name(data: object) -> Union[None, Unset, str]:

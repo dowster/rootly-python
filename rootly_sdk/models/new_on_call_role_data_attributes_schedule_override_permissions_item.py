@@ -1,9 +1,20 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewOnCallRoleDataAttributesScheduleOverridePermissionsItem = Literal["create", "update"]
+
+NEW_ON_CALL_ROLE_DATA_ATTRIBUTES_SCHEDULE_OVERRIDE_PERMISSIONS_ITEM_VALUES: set[
+    NewOnCallRoleDataAttributesScheduleOverridePermissionsItem
+] = {
+    "create",
+    "update",
+}
 
 
-class NewOnCallRoleDataAttributesScheduleOverridePermissionsItem(str, Enum):
-    CREATE = "create"
-    UPDATE = "update"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_on_call_role_data_attributes_schedule_override_permissions_item(
+    value: str,
+) -> NewOnCallRoleDataAttributesScheduleOverridePermissionsItem:
+    if value in NEW_ON_CALL_ROLE_DATA_ATTRIBUTES_SCHEDULE_OVERRIDE_PERMISSIONS_ITEM_VALUES:
+        return cast(NewOnCallRoleDataAttributesScheduleOverridePermissionsItem, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_ON_CALL_ROLE_DATA_ATTRIBUTES_SCHEDULE_OVERRIDE_PERMISSIONS_ITEM_VALUES!r}"
+    )

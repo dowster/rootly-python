@@ -1,10 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+CreateSlackChannelTaskParamsPrivate = Literal["auto", "false", "true"]
+
+CREATE_SLACK_CHANNEL_TASK_PARAMS_PRIVATE_VALUES: set[CreateSlackChannelTaskParamsPrivate] = {
+    "auto",
+    "false",
+    "true",
+}
 
 
-class CreateSlackChannelTaskParamsPrivate(str, Enum):
-    AUTO = "auto"
-    FALSE = "false"
-    TRUE = "true"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_create_slack_channel_task_params_private(value: str) -> CreateSlackChannelTaskParamsPrivate:
+    if value in CREATE_SLACK_CHANNEL_TASK_PARAMS_PRIVATE_VALUES:
+        return cast(CreateSlackChannelTaskParamsPrivate, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {CREATE_SLACK_CHANNEL_TASK_PARAMS_PRIVATE_VALUES!r}")

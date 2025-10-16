@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+CatalogEntityPropertyKey = Literal["catalog_entity", "text"]
+
+CATALOG_ENTITY_PROPERTY_KEY_VALUES: set[CatalogEntityPropertyKey] = {
+    "catalog_entity",
+    "text",
+}
 
 
-class CatalogEntityPropertyKey(str, Enum):
-    CATALOG_ENTITY = "catalog_entity"
-    TEXT = "text"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_catalog_entity_property_key(value: str) -> CatalogEntityPropertyKey:
+    if value in CATALOG_ENTITY_PROPERTY_KEY_VALUES:
+        return cast(CatalogEntityPropertyKey, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {CATALOG_ENTITY_PROPERTY_KEY_VALUES!r}")

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 from uuid import UUID
 
@@ -6,9 +7,11 @@ from attrs import field as _attrs_field
 
 from ..models.update_alert_routing_rule_data_attributes_conditions_item_property_field_condition_type import (
     UpdateAlertRoutingRuleDataAttributesConditionsItemPropertyFieldConditionType,
+    check_update_alert_routing_rule_data_attributes_conditions_item_property_field_condition_type,
 )
 from ..models.update_alert_routing_rule_data_attributes_conditions_item_property_field_type import (
     UpdateAlertRoutingRuleDataAttributesConditionsItemPropertyFieldType,
+    check_update_alert_routing_rule_data_attributes_conditions_item_property_field_type,
 )
 from ..types import UNSET, Unset
 
@@ -52,13 +55,13 @@ class UpdateAlertRoutingRuleDataAttributesConditionsItem:
 
         property_field_type: Union[Unset, str] = UNSET
         if not isinstance(self.property_field_type, Unset):
-            property_field_type = self.property_field_type.value
+            property_field_type = self.property_field_type
 
         property_field_name = self.property_field_name
 
         property_field_condition_type: Union[Unset, str] = UNSET
         if not isinstance(self.property_field_condition_type, Unset):
-            property_field_condition_type = self.property_field_condition_type.value
+            property_field_condition_type = self.property_field_condition_type
 
         property_field_value: Union[None, Unset, str]
         if isinstance(self.property_field_value, Unset):
@@ -89,8 +92,8 @@ class UpdateAlertRoutingRuleDataAttributesConditionsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         _id = d.pop("id", UNSET)
         id: Union[Unset, UUID]
         if isinstance(_id, Unset):
@@ -103,7 +106,7 @@ class UpdateAlertRoutingRuleDataAttributesConditionsItem:
         if isinstance(_property_field_type, Unset):
             property_field_type = UNSET
         else:
-            property_field_type = UpdateAlertRoutingRuleDataAttributesConditionsItemPropertyFieldType(
+            property_field_type = check_update_alert_routing_rule_data_attributes_conditions_item_property_field_type(
                 _property_field_type
             )
 
@@ -117,7 +120,7 @@ class UpdateAlertRoutingRuleDataAttributesConditionsItem:
             property_field_condition_type = UNSET
         else:
             property_field_condition_type = (
-                UpdateAlertRoutingRuleDataAttributesConditionsItemPropertyFieldConditionType(
+                check_update_alert_routing_rule_data_attributes_conditions_item_property_field_condition_type(
                     _property_field_condition_type
                 )
             )

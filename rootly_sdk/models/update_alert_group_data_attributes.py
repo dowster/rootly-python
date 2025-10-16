@@ -1,13 +1,19 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.update_alert_group_data_attributes_condition_type import UpdateAlertGroupDataAttributesConditionType
+from ..models.update_alert_group_data_attributes_condition_type import (
+    UpdateAlertGroupDataAttributesConditionType,
+    check_update_alert_group_data_attributes_condition_type,
+)
 from ..models.update_alert_group_data_attributes_group_by_alert_title import (
     UpdateAlertGroupDataAttributesGroupByAlertTitle,
+    check_update_alert_group_data_attributes_group_by_alert_title,
 )
 from ..models.update_alert_group_data_attributes_group_by_alert_urgency import (
     UpdateAlertGroupDataAttributesGroupByAlertUrgency,
+    check_update_alert_group_data_attributes_group_by_alert_urgency,
 )
 from ..types import UNSET, Unset
 
@@ -28,7 +34,8 @@ class UpdateAlertGroupDataAttributes:
         description (Union[None, Unset, str]): The description of the alert group
         time_window (Union[Unset, int]): The length of time an Alert Group should stay open and accept new alerts
         targets (Union[Unset, list['UpdateAlertGroupDataAttributesTargetsItem']]):
-        attributes (Union[Unset, list['UpdateAlertGroupDataAttributesAttributesItem']]):
+        attributes (Union[Unset, list['UpdateAlertGroupDataAttributesAttributesItem']]): This field is deprecated.
+            Please use the `conditions` field instead, `attributes` will be removed in the future.
         group_by_alert_title (Union[Unset, UpdateAlertGroupDataAttributesGroupByAlertTitle]): Whether the alerts should
             be grouped by titles.
         group_by_alert_urgency (Union[Unset, UpdateAlertGroupDataAttributesGroupByAlertUrgency]): Whether the alerts
@@ -75,15 +82,15 @@ class UpdateAlertGroupDataAttributes:
 
         group_by_alert_title: Union[Unset, int] = UNSET
         if not isinstance(self.group_by_alert_title, Unset):
-            group_by_alert_title = self.group_by_alert_title.value
+            group_by_alert_title = self.group_by_alert_title
 
         group_by_alert_urgency: Union[Unset, int] = UNSET
         if not isinstance(self.group_by_alert_urgency, Unset):
-            group_by_alert_urgency = self.group_by_alert_urgency.value
+            group_by_alert_urgency = self.group_by_alert_urgency
 
         condition_type: Union[Unset, str] = UNSET
         if not isinstance(self.condition_type, Unset):
-            condition_type = self.condition_type.value
+            condition_type = self.condition_type
 
         conditions: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.conditions, Unset):
@@ -93,6 +100,7 @@ class UpdateAlertGroupDataAttributes:
                 conditions.append(conditions_item)
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if name is not UNSET:
             field_dict["name"] = name
@@ -116,7 +124,7 @@ class UpdateAlertGroupDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_alert_group_data_attributes_attributes_item import (
             UpdateAlertGroupDataAttributesAttributesItem,
         )
@@ -125,7 +133,7 @@ class UpdateAlertGroupDataAttributes:
         )
         from ..models.update_alert_group_data_attributes_targets_item import UpdateAlertGroupDataAttributesTargetsItem
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name", UNSET)
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
@@ -158,21 +166,23 @@ class UpdateAlertGroupDataAttributes:
         if isinstance(_group_by_alert_title, Unset):
             group_by_alert_title = UNSET
         else:
-            group_by_alert_title = UpdateAlertGroupDataAttributesGroupByAlertTitle(_group_by_alert_title)
+            group_by_alert_title = check_update_alert_group_data_attributes_group_by_alert_title(_group_by_alert_title)
 
         _group_by_alert_urgency = d.pop("group_by_alert_urgency", UNSET)
         group_by_alert_urgency: Union[Unset, UpdateAlertGroupDataAttributesGroupByAlertUrgency]
         if isinstance(_group_by_alert_urgency, Unset):
             group_by_alert_urgency = UNSET
         else:
-            group_by_alert_urgency = UpdateAlertGroupDataAttributesGroupByAlertUrgency(_group_by_alert_urgency)
+            group_by_alert_urgency = check_update_alert_group_data_attributes_group_by_alert_urgency(
+                _group_by_alert_urgency
+            )
 
         _condition_type = d.pop("condition_type", UNSET)
         condition_type: Union[Unset, UpdateAlertGroupDataAttributesConditionType]
         if isinstance(_condition_type, Unset):
             condition_type = UNSET
         else:
-            condition_type = UpdateAlertGroupDataAttributesConditionType(_condition_type)
+            condition_type = check_update_alert_group_data_attributes_condition_type(_condition_type)
 
         conditions = []
         _conditions = d.pop("conditions", UNSET)

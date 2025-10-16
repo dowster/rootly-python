@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_outlook_event_task_params_task_type import CreateOutlookEventTaskParamsTaskType
+from ..models.create_outlook_event_task_params_task_type import (
+    CreateOutlookEventTaskParamsTaskType,
+    check_create_outlook_event_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -30,6 +34,7 @@ class CreateOutlookEventTaskParams:
         attendees (Union[Unset, list[str]]): Emails of attendees
         time_zone (Union[None, Unset, str]): A valid IANA time zone name.
         exclude_weekends (Union[Unset, bool]):
+        enable_online_meeting (Union[Unset, bool]): Enable Microsoft Teams online meeting
         post_to_incident_timeline (Union[Unset, bool]):
         post_to_slack_channels (Union[Unset, list['CreateOutlookEventTaskParamsPostToSlackChannelsItem']]):
     """
@@ -44,6 +49,7 @@ class CreateOutlookEventTaskParams:
     attendees: Union[Unset, list[str]] = UNSET
     time_zone: Union[None, Unset, str] = UNSET
     exclude_weekends: Union[Unset, bool] = UNSET
+    enable_online_meeting: Union[Unset, bool] = UNSET
     post_to_incident_timeline: Union[Unset, bool] = UNSET
     post_to_slack_channels: Union[Unset, list["CreateOutlookEventTaskParamsPostToSlackChannelsItem"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -63,7 +69,7 @@ class CreateOutlookEventTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         attendees: Union[Unset, list[str]] = UNSET
         if not isinstance(self.attendees, Unset):
@@ -76,6 +82,8 @@ class CreateOutlookEventTaskParams:
             time_zone = self.time_zone
 
         exclude_weekends = self.exclude_weekends
+
+        enable_online_meeting = self.enable_online_meeting
 
         post_to_incident_timeline = self.post_to_incident_timeline
 
@@ -106,6 +114,8 @@ class CreateOutlookEventTaskParams:
             field_dict["time_zone"] = time_zone
         if exclude_weekends is not UNSET:
             field_dict["exclude_weekends"] = exclude_weekends
+        if enable_online_meeting is not UNSET:
+            field_dict["enable_online_meeting"] = enable_online_meeting
         if post_to_incident_timeline is not UNSET:
             field_dict["post_to_incident_timeline"] = post_to_incident_timeline
         if post_to_slack_channels is not UNSET:
@@ -114,13 +124,13 @@ class CreateOutlookEventTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_outlook_event_task_params_calendar import CreateOutlookEventTaskParamsCalendar
         from ..models.create_outlook_event_task_params_post_to_slack_channels_item import (
             CreateOutlookEventTaskParamsPostToSlackChannelsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         calendar = CreateOutlookEventTaskParamsCalendar.from_dict(d.pop("calendar"))
 
         days_until_meeting = d.pop("days_until_meeting")
@@ -138,7 +148,7 @@ class CreateOutlookEventTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateOutlookEventTaskParamsTaskType(_task_type)
+            task_type = check_create_outlook_event_task_params_task_type(_task_type)
 
         attendees = cast(list[str], d.pop("attendees", UNSET))
 
@@ -152,6 +162,8 @@ class CreateOutlookEventTaskParams:
         time_zone = _parse_time_zone(d.pop("time_zone", UNSET))
 
         exclude_weekends = d.pop("exclude_weekends", UNSET)
+
+        enable_online_meeting = d.pop("enable_online_meeting", UNSET)
 
         post_to_incident_timeline = d.pop("post_to_incident_timeline", UNSET)
 
@@ -175,6 +187,7 @@ class CreateOutlookEventTaskParams:
             attendees=attendees,
             time_zone=time_zone,
             exclude_weekends=exclude_weekends,
+            enable_online_meeting=enable_online_meeting,
             post_to_incident_timeline=post_to_incident_timeline,
             post_to_slack_channels=post_to_slack_channels,
         )

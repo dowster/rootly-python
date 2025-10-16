@@ -1,11 +1,16 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
 from ..models.update_custom_field_data_attributes_required_type_0_item import (
     UpdateCustomFieldDataAttributesRequiredType0Item,
+    check_update_custom_field_data_attributes_required_type_0_item,
 )
-from ..models.update_custom_field_data_attributes_shown_item import UpdateCustomFieldDataAttributesShownItem
+from ..models.update_custom_field_data_attributes_shown_item import (
+    UpdateCustomFieldDataAttributesShownItem,
+    check_update_custom_field_data_attributes_shown_item,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateCustomFieldDataAttributes")
@@ -47,7 +52,7 @@ class UpdateCustomFieldDataAttributes:
         if not isinstance(self.shown, Unset):
             shown = []
             for shown_item_data in self.shown:
-                shown_item = shown_item_data.value
+                shown_item: str = shown_item_data
                 shown.append(shown_item)
 
         required: Union[None, Unset, list[str]]
@@ -56,7 +61,7 @@ class UpdateCustomFieldDataAttributes:
         elif isinstance(self.required, list):
             required = []
             for required_type_0_item_data in self.required:
-                required_type_0_item = required_type_0_item_data.value
+                required_type_0_item: str = required_type_0_item_data
                 required.append(required_type_0_item)
 
         else:
@@ -71,6 +76,7 @@ class UpdateCustomFieldDataAttributes:
         position = self.position
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if label is not UNSET:
             field_dict["label"] = label
@@ -90,8 +96,8 @@ class UpdateCustomFieldDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         label = d.pop("label", UNSET)
 
         slug = d.pop("slug", UNSET)
@@ -108,7 +114,7 @@ class UpdateCustomFieldDataAttributes:
         shown = []
         _shown = d.pop("shown", UNSET)
         for shown_item_data in _shown or []:
-            shown_item = UpdateCustomFieldDataAttributesShownItem(shown_item_data)
+            shown_item = check_update_custom_field_data_attributes_shown_item(shown_item_data)
 
             shown.append(shown_item)
 
@@ -123,7 +129,9 @@ class UpdateCustomFieldDataAttributes:
                 required_type_0 = []
                 _required_type_0 = data
                 for required_type_0_item_data in _required_type_0:
-                    required_type_0_item = UpdateCustomFieldDataAttributesRequiredType0Item(required_type_0_item_data)
+                    required_type_0_item = check_update_custom_field_data_attributes_required_type_0_item(
+                        required_type_0_item_data
+                    )
 
                     required_type_0.append(required_type_0_item)
 

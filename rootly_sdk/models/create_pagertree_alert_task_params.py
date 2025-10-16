@@ -1,11 +1,21 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_pagertree_alert_task_params_severity import CreatePagertreeAlertTaskParamsSeverity
-from ..models.create_pagertree_alert_task_params_task_type import CreatePagertreeAlertTaskParamsTaskType
-from ..models.create_pagertree_alert_task_params_urgency import CreatePagertreeAlertTaskParamsUrgency
+from ..models.create_pagertree_alert_task_params_severity import (
+    CreatePagertreeAlertTaskParamsSeverity,
+    check_create_pagertree_alert_task_params_severity,
+)
+from ..models.create_pagertree_alert_task_params_task_type import (
+    CreatePagertreeAlertTaskParamsTaskType,
+    check_create_pagertree_alert_task_params_task_type,
+)
+from ..models.create_pagertree_alert_task_params_urgency import (
+    CreatePagertreeAlertTaskParamsUrgency,
+    check_create_pagertree_alert_task_params_urgency,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -43,7 +53,7 @@ class CreatePagertreeAlertTaskParams:
     def to_dict(self) -> dict[str, Any]:
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         title = self.title
 
@@ -51,11 +61,11 @@ class CreatePagertreeAlertTaskParams:
 
         urgency: Union[Unset, str] = UNSET
         if not isinstance(self.urgency, Unset):
-            urgency = self.urgency.value
+            urgency = self.urgency
 
         severity: Union[Unset, str] = UNSET
         if not isinstance(self.severity, Unset):
-            severity = self.severity.value
+            severity = self.severity
 
         teams: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.teams, Unset):
@@ -96,17 +106,17 @@ class CreatePagertreeAlertTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_pagertree_alert_task_params_teams_item import CreatePagertreeAlertTaskParamsTeamsItem
         from ..models.create_pagertree_alert_task_params_users_item import CreatePagertreeAlertTaskParamsUsersItem
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _task_type = d.pop("task_type", UNSET)
         task_type: Union[Unset, CreatePagertreeAlertTaskParamsTaskType]
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreatePagertreeAlertTaskParamsTaskType(_task_type)
+            task_type = check_create_pagertree_alert_task_params_task_type(_task_type)
 
         title = d.pop("title", UNSET)
 
@@ -117,14 +127,14 @@ class CreatePagertreeAlertTaskParams:
         if isinstance(_urgency, Unset):
             urgency = UNSET
         else:
-            urgency = CreatePagertreeAlertTaskParamsUrgency(_urgency)
+            urgency = check_create_pagertree_alert_task_params_urgency(_urgency)
 
         _severity = d.pop("severity", UNSET)
         severity: Union[Unset, CreatePagertreeAlertTaskParamsSeverity]
         if isinstance(_severity, Unset):
             severity = UNSET
         else:
-            severity = CreatePagertreeAlertTaskParamsSeverity(_severity)
+            severity = check_create_pagertree_alert_task_params_severity(_severity)
 
         teams = []
         _teams = d.pop("teams", UNSET)

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
@@ -40,8 +41,8 @@ class RetrospectiveProcessGroupStep:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         retrospective_process_group_id = d.pop("retrospective_process_group_id")
 
         retrospective_step_id = d.pop("retrospective_step_id")

@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.in_triage_incident_data_type import InTriageIncidentDataType
+from ..models.in_triage_incident_data_type import InTriageIncidentDataType, check_in_triage_incident_data_type
 
 T = TypeVar("T", bound="InTriageIncidentData")
 
@@ -19,7 +20,7 @@ class InTriageIncidentData:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_ = self.type_.value
+        type_: str = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -32,9 +33,9 @@ class InTriageIncidentData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        type_ = InTriageIncidentDataType(d.pop("type"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        type_ = check_in_triage_incident_data_type(d.pop("type"))
 
         in_triage_incident_data = cls(
             type_=type_,

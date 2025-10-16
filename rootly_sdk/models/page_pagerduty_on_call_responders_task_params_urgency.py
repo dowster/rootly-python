@@ -1,10 +1,19 @@
-from enum import Enum
+from typing import Literal, cast
+
+PagePagerdutyOnCallRespondersTaskParamsUrgency = Literal["auto", "high", "low"]
+
+PAGE_PAGERDUTY_ON_CALL_RESPONDERS_TASK_PARAMS_URGENCY_VALUES: set[PagePagerdutyOnCallRespondersTaskParamsUrgency] = {
+    "auto",
+    "high",
+    "low",
+}
 
 
-class PagePagerdutyOnCallRespondersTaskParamsUrgency(str, Enum):
-    AUTO = "auto"
-    HIGH = "high"
-    LOW = "low"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_page_pagerduty_on_call_responders_task_params_urgency(
+    value: str,
+) -> PagePagerdutyOnCallRespondersTaskParamsUrgency:
+    if value in PAGE_PAGERDUTY_ON_CALL_RESPONDERS_TASK_PARAMS_URGENCY_VALUES:
+        return cast(PagePagerdutyOnCallRespondersTaskParamsUrgency, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {PAGE_PAGERDUTY_ON_CALL_RESPONDERS_TASK_PARAMS_URGENCY_VALUES!r}"
+    )

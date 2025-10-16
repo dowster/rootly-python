@@ -1,10 +1,19 @@
-from enum import Enum
+from typing import Literal, cast
+
+LiveCallRouterEscalationPolicyTriggerParamsType = Literal["EscalationPolicy", "Group", "Service"]
+
+LIVE_CALL_ROUTER_ESCALATION_POLICY_TRIGGER_PARAMS_TYPE_VALUES: set[LiveCallRouterEscalationPolicyTriggerParamsType] = {
+    "EscalationPolicy",
+    "Group",
+    "Service",
+}
 
 
-class LiveCallRouterEscalationPolicyTriggerParamsType(str, Enum):
-    ESCALATIONPOLICY = "EscalationPolicy"
-    GROUP = "Group"
-    SERVICE = "Service"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_live_call_router_escalation_policy_trigger_params_type(
+    value: str,
+) -> LiveCallRouterEscalationPolicyTriggerParamsType:
+    if value in LIVE_CALL_ROUTER_ESCALATION_POLICY_TRIGGER_PARAMS_TYPE_VALUES:
+        return cast(LiveCallRouterEscalationPolicyTriggerParamsType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {LIVE_CALL_ROUTER_ESCALATION_POLICY_TRIGGER_PARAMS_TYPE_VALUES!r}"
+    )

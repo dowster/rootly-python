@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+CustomFieldListDataItemType = Literal["custom_fields"]
+
+CUSTOM_FIELD_LIST_DATA_ITEM_TYPE_VALUES: set[CustomFieldListDataItemType] = {
+    "custom_fields",
+}
 
 
-class CustomFieldListDataItemType(str, Enum):
-    CUSTOM_FIELDS = "custom_fields"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_custom_field_list_data_item_type(value: str) -> CustomFieldListDataItemType:
+    if value in CUSTOM_FIELD_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(CustomFieldListDataItemType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {CUSTOM_FIELD_LIST_DATA_ITEM_TYPE_VALUES!r}")

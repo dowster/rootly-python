@@ -1,15 +1,30 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItemCondition = Literal[
+    "!=", "<=", "=", ">=", "assigned", "contains", "exists", "not_contains", "not_exists", "unassigned"
+]
+
+NEW_DASHBOARD_PANEL_DATA_ATTRIBUTES_PARAMS_DATASETS_ITEM_FILTER_ITEM_RULES_ITEM_CONDITION_VALUES: set[
+    NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItemCondition
+] = {
+    "!=",
+    "<=",
+    "=",
+    ">=",
+    "assigned",
+    "contains",
+    "exists",
+    "not_contains",
+    "not_exists",
+    "unassigned",
+}
 
 
-class NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItemCondition(str, Enum):
-    CONTAINS = "contains"
-    EXISTS = "exists"
-    NOT_CONTAINS = "not_contains"
-    NOT_EXISTS = "not_exists"
-    VALUE_0 = "="
-    VALUE_1 = "!="
-    VALUE_2 = ">="
-    VALUE_3 = "<="
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_dashboard_panel_data_attributes_params_datasets_item_filter_item_rules_item_condition(
+    value: str,
+) -> NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItemCondition:
+    if value in NEW_DASHBOARD_PANEL_DATA_ATTRIBUTES_PARAMS_DATASETS_ITEM_FILTER_ITEM_RULES_ITEM_CONDITION_VALUES:
+        return cast(NewDashboardPanelDataAttributesParamsDatasetsItemFilterItemRulesItemCondition, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_DASHBOARD_PANEL_DATA_ATTRIBUTES_PARAMS_DATASETS_ITEM_FILTER_ITEM_RULES_ITEM_CONDITION_VALUES!r}"
+    )

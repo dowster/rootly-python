@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.run_command_heroku_task_params_size import RunCommandHerokuTaskParamsSize
-from ..models.run_command_heroku_task_params_task_type import RunCommandHerokuTaskParamsTaskType
+from ..models.run_command_heroku_task_params_size import (
+    RunCommandHerokuTaskParamsSize,
+    check_run_command_heroku_task_params_size,
+)
+from ..models.run_command_heroku_task_params_task_type import (
+    RunCommandHerokuTaskParamsTaskType,
+    check_run_command_heroku_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -41,11 +48,11 @@ class RunCommandHerokuTaskParams:
 
         app_name = self.app_name
 
-        size = self.size.value
+        size: str = self.size
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         post_to_incident_timeline = self.post_to_incident_timeline
 
@@ -75,24 +82,24 @@ class RunCommandHerokuTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.run_command_heroku_task_params_post_to_slack_channels_item import (
             RunCommandHerokuTaskParamsPostToSlackChannelsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         command = d.pop("command")
 
         app_name = d.pop("app_name")
 
-        size = RunCommandHerokuTaskParamsSize(d.pop("size"))
+        size = check_run_command_heroku_task_params_size(d.pop("size"))
 
         _task_type = d.pop("task_type", UNSET)
         task_type: Union[Unset, RunCommandHerokuTaskParamsTaskType]
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = RunCommandHerokuTaskParamsTaskType(_task_type)
+            task_type = check_run_command_heroku_task_params_task_type(_task_type)
 
         post_to_incident_timeline = d.pop("post_to_incident_timeline", UNSET)
 

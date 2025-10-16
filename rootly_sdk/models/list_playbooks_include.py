@@ -1,14 +1,21 @@
-from enum import Enum
+from typing import Literal, cast
+
+ListPlaybooksInclude = Literal[
+    "causes", "environments", "functionalities", "groups", "incident_types", "services", "severities"
+]
+
+LIST_PLAYBOOKS_INCLUDE_VALUES: set[ListPlaybooksInclude] = {
+    "causes",
+    "environments",
+    "functionalities",
+    "groups",
+    "incident_types",
+    "services",
+    "severities",
+}
 
 
-class ListPlaybooksInclude(str, Enum):
-    CAUSES = "causes"
-    ENVIRONMENTS = "environments"
-    FUNCTIONALITIES = "functionalities"
-    GROUPS = "groups"
-    INCIDENT_TYPES = "incident_types"
-    SERVICES = "services"
-    SEVERITIES = "severities"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_list_playbooks_include(value: str) -> ListPlaybooksInclude:
+    if value in LIST_PLAYBOOKS_INCLUDE_VALUES:
+        return cast(ListPlaybooksInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {LIST_PLAYBOOKS_INCLUDE_VALUES!r}")

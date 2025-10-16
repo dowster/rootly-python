@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
-from ..models.new_incident_feedback_data_attributes_rating import NewIncidentFeedbackDataAttributesRating
+from ..models.new_incident_feedback_data_attributes_rating import (
+    NewIncidentFeedbackDataAttributesRating,
+    check_new_incident_feedback_data_attributes_rating,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewIncidentFeedbackDataAttributes")
@@ -24,11 +28,12 @@ class NewIncidentFeedbackDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         feedback = self.feedback
 
-        rating = self.rating.value
+        rating: int = self.rating
 
         anonymous = self.anonymous
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "feedback": feedback,
@@ -41,11 +46,11 @@ class NewIncidentFeedbackDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         feedback = d.pop("feedback")
 
-        rating = NewIncidentFeedbackDataAttributesRating(d.pop("rating"))
+        rating = check_new_incident_feedback_data_attributes_rating(d.pop("rating"))
 
         anonymous = d.pop("anonymous", UNSET)
 

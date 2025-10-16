@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_alerts_task_params_task_type import GetAlertsTaskParamsTaskType
+from ..models.get_alerts_task_params_task_type import (
+    GetAlertsTaskParamsTaskType,
+    check_get_alerts_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -51,7 +55,7 @@ class GetAlertsTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         service_ids: Union[Unset, list[str]] = UNSET
         if not isinstance(self.service_ids, Unset):
@@ -117,7 +121,7 @@ class GetAlertsTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.get_alerts_task_params_parent_message_thread_task import (
             GetAlertsTaskParamsParentMessageThreadTask,
         )
@@ -125,7 +129,7 @@ class GetAlertsTaskParams:
             GetAlertsTaskParamsPostToSlackChannelsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         past_duration = d.pop("past_duration")
 
         _task_type = d.pop("task_type", UNSET)
@@ -133,7 +137,7 @@ class GetAlertsTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = GetAlertsTaskParamsTaskType(_task_type)
+            task_type = check_get_alerts_task_params_task_type(_task_type)
 
         service_ids = cast(list[str], d.pop("service_ids", UNSET))
 

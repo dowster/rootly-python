@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+ShiftListDataItemType = Literal["shifts"]
+
+SHIFT_LIST_DATA_ITEM_TYPE_VALUES: set[ShiftListDataItemType] = {
+    "shifts",
+}
 
 
-class ShiftListDataItemType(str, Enum):
-    SHIFTS = "shifts"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_shift_list_data_item_type(value: str) -> ShiftListDataItemType:
+    if value in SHIFT_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(ShiftListDataItemType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {SHIFT_LIST_DATA_ITEM_TYPE_VALUES!r}")

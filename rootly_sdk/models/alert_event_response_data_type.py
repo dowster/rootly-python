@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+AlertEventResponseDataType = Literal["alert_events"]
+
+ALERT_EVENT_RESPONSE_DATA_TYPE_VALUES: set[AlertEventResponseDataType] = {
+    "alert_events",
+}
 
 
-class AlertEventResponseDataType(str, Enum):
-    ALERT_EVENTS = "alert_events"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_alert_event_response_data_type(value: str) -> AlertEventResponseDataType:
+    if value in ALERT_EVENT_RESPONSE_DATA_TYPE_VALUES:
+        return cast(AlertEventResponseDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {ALERT_EVENT_RESPONSE_DATA_TYPE_VALUES!r}")

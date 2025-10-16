@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.incident_permission_set_boolean_kind import IncidentPermissionSetBooleanKind
+from ..models.incident_permission_set_boolean_kind import (
+    IncidentPermissionSetBooleanKind,
+    check_incident_permission_set_boolean_kind,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="IncidentPermissionSetBoolean")
@@ -30,7 +34,7 @@ class IncidentPermissionSetBoolean:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        kind = self.kind.value
+        kind: str = self.kind
 
         created_at = self.created_at
 
@@ -61,9 +65,9 @@ class IncidentPermissionSetBoolean:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        kind = IncidentPermissionSetBooleanKind(d.pop("kind"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        kind = check_incident_permission_set_boolean_kind(d.pop("kind"))
 
         created_at = d.pop("created_at")
 

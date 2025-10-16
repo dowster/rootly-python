@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.audit_item_type import AuditItemType
+from ..models.audit_item_type import AuditItemType, check_audit_item_type
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -49,7 +50,7 @@ class Audit:
 
         item_type: Union[Unset, str] = UNSET
         if not isinstance(self.item_type, Unset):
-            item_type = self.item_type.value
+            item_type = self.item_type
 
         object_: Union[None, Unset, dict[str, Any]]
         if isinstance(self.object_, Unset):
@@ -109,11 +110,11 @@ class Audit:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.audit_object_changes_type_0 import AuditObjectChangesType0
         from ..models.audit_object_type_0 import AuditObjectType0
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         event = d.pop("event")
 
         created_at = d.pop("created_at")
@@ -123,7 +124,7 @@ class Audit:
         if isinstance(_item_type, Unset):
             item_type = UNSET
         else:
-            item_type = AuditItemType(_item_type)
+            item_type = check_audit_item_type(_item_type)
 
         def _parse_object_(data: object) -> Union["AuditObjectType0", None, Unset]:
             if data is None:

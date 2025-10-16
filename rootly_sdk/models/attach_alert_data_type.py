@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+AttachAlertDataType = Literal["alerts"]
+
+ATTACH_ALERT_DATA_TYPE_VALUES: set[AttachAlertDataType] = {
+    "alerts",
+}
 
 
-class AttachAlertDataType(str, Enum):
-    ALERTS = "alerts"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_attach_alert_data_type(value: str) -> AttachAlertDataType:
+    if value in ATTACH_ALERT_DATA_TYPE_VALUES:
+        return cast(AttachAlertDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {ATTACH_ALERT_DATA_TYPE_VALUES!r}")

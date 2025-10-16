@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewCustomFormDataType = Literal["custom_forms"]
+
+NEW_CUSTOM_FORM_DATA_TYPE_VALUES: set[NewCustomFormDataType] = {
+    "custom_forms",
+}
 
 
-class NewCustomFormDataType(str, Enum):
-    CUSTOM_FORMS = "custom_forms"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_custom_form_data_type(value: str) -> NewCustomFormDataType:
+    if value in NEW_CUSTOM_FORM_DATA_TYPE_VALUES:
+        return cast(NewCustomFormDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_CUSTOM_FORM_DATA_TYPE_VALUES!r}")

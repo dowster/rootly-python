@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.escalation_policy_path_match_mode import EscalationPolicyPathMatchMode
-from ..models.escalation_policy_path_time_restriction_time_zone import EscalationPolicyPathTimeRestrictionTimeZone
+from ..models.escalation_policy_path_match_mode import (
+    EscalationPolicyPathMatchMode,
+    check_escalation_policy_path_match_mode,
+)
+from ..models.escalation_policy_path_time_restriction_time_zone import (
+    EscalationPolicyPathTimeRestrictionTimeZone,
+    check_escalation_policy_path_time_restriction_time_zone,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -107,7 +114,7 @@ class EscalationPolicyPath:
 
         match_mode: Union[Unset, str] = UNSET
         if not isinstance(self.match_mode, Unset):
-            match_mode = self.match_mode.value
+            match_mode = self.match_mode
 
         position = self.position
 
@@ -145,7 +152,7 @@ class EscalationPolicyPath:
 
         time_restriction_time_zone: Union[Unset, str] = UNSET
         if not isinstance(self.time_restriction_time_zone, Unset):
-            time_restriction_time_zone = self.time_restriction_time_zone.value
+            time_restriction_time_zone = self.time_restriction_time_zone
 
         time_restrictions: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.time_restrictions, Unset):
@@ -186,7 +193,7 @@ class EscalationPolicyPath:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.escalation_policy_path_rules_item_type_0 import EscalationPolicyPathRulesItemType0
         from ..models.escalation_policy_path_rules_item_type_1 import EscalationPolicyPathRulesItemType1
         from ..models.escalation_policy_path_rules_item_type_2 import EscalationPolicyPathRulesItemType2
@@ -198,7 +205,7 @@ class EscalationPolicyPath:
         from ..models.escalation_policy_path_rules_item_type_4_type_2 import EscalationPolicyPathRulesItemType4Type2
         from ..models.escalation_policy_path_time_restrictions_item import EscalationPolicyPathTimeRestrictionsItem
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         default = d.pop("default")
@@ -226,7 +233,7 @@ class EscalationPolicyPath:
         if isinstance(_match_mode, Unset):
             match_mode = UNSET
         else:
-            match_mode = EscalationPolicyPathMatchMode(_match_mode)
+            match_mode = check_escalation_policy_path_match_mode(_match_mode)
 
         position = d.pop("position", UNSET)
 
@@ -332,7 +339,9 @@ class EscalationPolicyPath:
         if isinstance(_time_restriction_time_zone, Unset):
             time_restriction_time_zone = UNSET
         else:
-            time_restriction_time_zone = EscalationPolicyPathTimeRestrictionTimeZone(_time_restriction_time_zone)
+            time_restriction_time_zone = check_escalation_policy_path_time_restriction_time_zone(
+                _time_restriction_time_zone
+            )
 
         time_restrictions = []
         _time_restrictions = d.pop("time_restrictions", UNSET)

@@ -1,11 +1,16 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentRetrospectiveStepStatus = Literal["completed", "in_progress", "skipped", "todo"]
+
+INCIDENT_RETROSPECTIVE_STEP_STATUS_VALUES: set[IncidentRetrospectiveStepStatus] = {
+    "completed",
+    "in_progress",
+    "skipped",
+    "todo",
+}
 
 
-class IncidentRetrospectiveStepStatus(str, Enum):
-    COMPLETED = "completed"
-    IN_PROGRESS = "in_progress"
-    SKIPPED = "skipped"
-    TODO = "todo"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_retrospective_step_status(value: str) -> IncidentRetrospectiveStepStatus:
+    if value in INCIDENT_RETROSPECTIVE_STEP_STATUS_VALUES:
+        return cast(IncidentRetrospectiveStepStatus, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {INCIDENT_RETROSPECTIVE_STEP_STATUS_VALUES!r}")

@@ -1,10 +1,17 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdatePagerdutyIncidentTaskParamsUrgency = Literal["auto", "high", "low"]
+
+UPDATE_PAGERDUTY_INCIDENT_TASK_PARAMS_URGENCY_VALUES: set[UpdatePagerdutyIncidentTaskParamsUrgency] = {
+    "auto",
+    "high",
+    "low",
+}
 
 
-class UpdatePagerdutyIncidentTaskParamsUrgency(str, Enum):
-    AUTO = "auto"
-    HIGH = "high"
-    LOW = "low"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_pagerduty_incident_task_params_urgency(value: str) -> UpdatePagerdutyIncidentTaskParamsUrgency:
+    if value in UPDATE_PAGERDUTY_INCIDENT_TASK_PARAMS_URGENCY_VALUES:
+        return cast(UpdatePagerdutyIncidentTaskParamsUrgency, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_PAGERDUTY_INCIDENT_TASK_PARAMS_URGENCY_VALUES!r}"
+    )

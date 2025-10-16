@@ -1,10 +1,20 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.new_dashboard_data_attributes_color import NewDashboardDataAttributesColor
-from ..models.new_dashboard_data_attributes_owner import NewDashboardDataAttributesOwner
-from ..models.new_dashboard_data_attributes_period import NewDashboardDataAttributesPeriod
+from ..models.new_dashboard_data_attributes_color import (
+    NewDashboardDataAttributesColor,
+    check_new_dashboard_data_attributes_color,
+)
+from ..models.new_dashboard_data_attributes_owner import (
+    NewDashboardDataAttributesOwner,
+    check_new_dashboard_data_attributes_owner,
+)
+from ..models.new_dashboard_data_attributes_period import (
+    NewDashboardDataAttributesPeriod,
+    check_new_dashboard_data_attributes_period,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewDashboardDataAttributes")
@@ -38,7 +48,7 @@ class NewDashboardDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         name = self.name
 
-        owner = self.owner.value
+        owner: str = self.owner
 
         description: Union[None, Unset, str]
         if isinstance(self.description, Unset):
@@ -58,15 +68,16 @@ class NewDashboardDataAttributes:
 
         color: Union[Unset, str] = UNSET
         if not isinstance(self.color, Unset):
-            color = self.color.value
+            color = self.color
 
         icon = self.icon
 
         period: Union[Unset, str] = UNSET
         if not isinstance(self.period, Unset):
-            period = self.period.value
+            period = self.period
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -91,11 +102,11 @@ class NewDashboardDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
-        owner = NewDashboardDataAttributesOwner(d.pop("owner"))
+        owner = check_new_dashboard_data_attributes_owner(d.pop("owner"))
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -124,7 +135,7 @@ class NewDashboardDataAttributes:
         if isinstance(_color, Unset):
             color = UNSET
         else:
-            color = NewDashboardDataAttributesColor(_color)
+            color = check_new_dashboard_data_attributes_color(_color)
 
         icon = d.pop("icon", UNSET)
 
@@ -133,7 +144,7 @@ class NewDashboardDataAttributes:
         if isinstance(_period, Unset):
             period = UNSET
         else:
-            period = NewDashboardDataAttributesPeriod(_period)
+            period = check_new_dashboard_data_attributes_period(_period)
 
         new_dashboard_data_attributes = cls(
             name=name,

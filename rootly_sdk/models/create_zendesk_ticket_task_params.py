@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_zendesk_ticket_task_params_kind import CreateZendeskTicketTaskParamsKind
-from ..models.create_zendesk_ticket_task_params_task_type import CreateZendeskTicketTaskParamsTaskType
+from ..models.create_zendesk_ticket_task_params_kind import (
+    CreateZendeskTicketTaskParamsKind,
+    check_create_zendesk_ticket_task_params_kind,
+)
+from ..models.create_zendesk_ticket_task_params_task_type import (
+    CreateZendeskTicketTaskParamsTaskType,
+    check_create_zendesk_ticket_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -44,13 +51,13 @@ class CreateZendeskTicketTaskParams:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        kind = self.kind.value
+        kind: str = self.kind
 
         subject = self.subject
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         comment = self.comment
 
@@ -102,12 +109,12 @@ class CreateZendeskTicketTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_zendesk_ticket_task_params_completion import CreateZendeskTicketTaskParamsCompletion
         from ..models.create_zendesk_ticket_task_params_priority import CreateZendeskTicketTaskParamsPriority
 
-        d = src_dict.copy()
-        kind = CreateZendeskTicketTaskParamsKind(d.pop("kind"))
+        d = dict(src_dict)
+        kind = check_create_zendesk_ticket_task_params_kind(d.pop("kind"))
 
         subject = d.pop("subject")
 
@@ -116,7 +123,7 @@ class CreateZendeskTicketTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateZendeskTicketTaskParamsTaskType(_task_type)
+            task_type = check_create_zendesk_ticket_task_params_task_type(_task_type)
 
         comment = d.pop("comment", UNSET)
 

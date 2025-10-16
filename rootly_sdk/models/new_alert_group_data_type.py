@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewAlertGroupDataType = Literal["alert_groups"]
+
+NEW_ALERT_GROUP_DATA_TYPE_VALUES: set[NewAlertGroupDataType] = {
+    "alert_groups",
+}
 
 
-class NewAlertGroupDataType(str, Enum):
-    ALERT_GROUPS = "alert_groups"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_alert_group_data_type(value: str) -> NewAlertGroupDataType:
+    if value in NEW_ALERT_GROUP_DATA_TYPE_VALUES:
+        return cast(NewAlertGroupDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_ALERT_GROUP_DATA_TYPE_VALUES!r}")

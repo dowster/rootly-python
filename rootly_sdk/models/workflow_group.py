@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.workflow_group_kind import WorkflowGroupKind
+from ..models.workflow_group_kind import WorkflowGroupKind, check_workflow_group_kind
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="WorkflowGroup")
@@ -38,7 +39,7 @@ class WorkflowGroup:
 
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         slug = self.slug
 
@@ -74,8 +75,8 @@ class WorkflowGroup:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
         position = d.pop("position")
@@ -85,7 +86,7 @@ class WorkflowGroup:
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = WorkflowGroupKind(_kind)
+            kind = check_workflow_group_kind(_kind)
 
         slug = d.pop("slug", UNSET)
 

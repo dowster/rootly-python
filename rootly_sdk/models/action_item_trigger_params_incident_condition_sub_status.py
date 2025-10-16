@@ -1,15 +1,28 @@
-from enum import Enum
+from typing import Literal, cast
+
+ActionItemTriggerParamsIncidentConditionSubStatus = Literal[
+    "ANY", "CONTAINS", "CONTAINS_ALL", "CONTAINS_NONE", "IS", "NONE", "SET", "UNSET"
+]
+
+ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_CONDITION_SUB_STATUS_VALUES: set[
+    ActionItemTriggerParamsIncidentConditionSubStatus
+] = {
+    "ANY",
+    "CONTAINS",
+    "CONTAINS_ALL",
+    "CONTAINS_NONE",
+    "IS",
+    "NONE",
+    "SET",
+    "UNSET",
+}
 
 
-class ActionItemTriggerParamsIncidentConditionSubStatus(str, Enum):
-    ANY = "ANY"
-    CONTAINS = "CONTAINS"
-    CONTAINS_ALL = "CONTAINS_ALL"
-    CONTAINS_NONE = "CONTAINS_NONE"
-    IS = "IS"
-    NONE = "NONE"
-    SET = "SET"
-    UNSET = "UNSET"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_action_item_trigger_params_incident_condition_sub_status(
+    value: str,
+) -> ActionItemTriggerParamsIncidentConditionSubStatus:
+    if value in ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_CONDITION_SUB_STATUS_VALUES:
+        return cast(ActionItemTriggerParamsIncidentConditionSubStatus, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_CONDITION_SUB_STATUS_VALUES!r}"
+    )

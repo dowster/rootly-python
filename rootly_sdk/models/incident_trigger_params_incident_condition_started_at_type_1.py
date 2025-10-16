@@ -1,9 +1,20 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentTriggerParamsIncidentConditionStartedAtType1 = Literal["SET", "UNSET"]
+
+INCIDENT_TRIGGER_PARAMS_INCIDENT_CONDITION_STARTED_AT_TYPE_1_VALUES: set[
+    IncidentTriggerParamsIncidentConditionStartedAtType1
+] = {
+    "SET",
+    "UNSET",
+}
 
 
-class IncidentTriggerParamsIncidentConditionStartedAtType1(str, Enum):
-    SET = "SET"
-    UNSET = "UNSET"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_trigger_params_incident_condition_started_at_type_1(
+    value: str,
+) -> IncidentTriggerParamsIncidentConditionStartedAtType1:
+    if value in INCIDENT_TRIGGER_PARAMS_INCIDENT_CONDITION_STARTED_AT_TYPE_1_VALUES:
+        return cast(IncidentTriggerParamsIncidentConditionStartedAtType1, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {INCIDENT_TRIGGER_PARAMS_INCIDENT_CONDITION_STARTED_AT_TYPE_1_VALUES!r}"
+    )

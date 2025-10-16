@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.auto_assign_role_opsgenie_task_params_task_type import AutoAssignRoleOpsgenieTaskParamsTaskType
+from ..models.auto_assign_role_opsgenie_task_params_task_type import (
+    AutoAssignRoleOpsgenieTaskParamsTaskType,
+    check_auto_assign_role_opsgenie_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -34,7 +38,7 @@ class AutoAssignRoleOpsgenieTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -50,10 +54,10 @@ class AutoAssignRoleOpsgenieTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.auto_assign_role_opsgenie_task_params_schedule import AutoAssignRoleOpsgenieTaskParamsSchedule
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         incident_role_id = d.pop("incident_role_id")
 
         schedule = AutoAssignRoleOpsgenieTaskParamsSchedule.from_dict(d.pop("schedule"))
@@ -63,7 +67,7 @@ class AutoAssignRoleOpsgenieTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = AutoAssignRoleOpsgenieTaskParamsTaskType(_task_type)
+            task_type = check_auto_assign_role_opsgenie_task_params_task_type(_task_type)
 
         auto_assign_role_opsgenie_task_params = cls(
             incident_role_id=incident_role_id,

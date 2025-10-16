@@ -1,11 +1,18 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewIncidentActionItemDataAttributesStatus = Literal["cancelled", "done", "in_progress", "open"]
+
+NEW_INCIDENT_ACTION_ITEM_DATA_ATTRIBUTES_STATUS_VALUES: set[NewIncidentActionItemDataAttributesStatus] = {
+    "cancelled",
+    "done",
+    "in_progress",
+    "open",
+}
 
 
-class NewIncidentActionItemDataAttributesStatus(str, Enum):
-    CANCELLED = "cancelled"
-    DONE = "done"
-    IN_PROGRESS = "in_progress"
-    OPEN = "open"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_incident_action_item_data_attributes_status(value: str) -> NewIncidentActionItemDataAttributesStatus:
+    if value in NEW_INCIDENT_ACTION_ITEM_DATA_ATTRIBUTES_STATUS_VALUES:
+        return cast(NewIncidentActionItemDataAttributesStatus, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_INCIDENT_ACTION_ITEM_DATA_ATTRIBUTES_STATUS_VALUES!r}"
+    )

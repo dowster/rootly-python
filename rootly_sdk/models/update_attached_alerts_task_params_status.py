@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateAttachedAlertsTaskParamsStatus = Literal["acknowledged", "resolved"]
+
+UPDATE_ATTACHED_ALERTS_TASK_PARAMS_STATUS_VALUES: set[UpdateAttachedAlertsTaskParamsStatus] = {
+    "acknowledged",
+    "resolved",
+}
 
 
-class UpdateAttachedAlertsTaskParamsStatus(str, Enum):
-    ACKNOWLEDGED = "acknowledged"
-    RESOLVED = "resolved"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_attached_alerts_task_params_status(value: str) -> UpdateAttachedAlertsTaskParamsStatus:
+    if value in UPDATE_ATTACHED_ALERTS_TASK_PARAMS_STATUS_VALUES:
+        return cast(UpdateAttachedAlertsTaskParamsStatus, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_ATTACHED_ALERTS_TASK_PARAMS_STATUS_VALUES!r}")

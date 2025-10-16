@@ -1,13 +1,23 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateLiveCallRouterDataAttributesCountryCode = Literal["AU", "CA", "DE", "GB", "NL", "NZ", "US"]
+
+UPDATE_LIVE_CALL_ROUTER_DATA_ATTRIBUTES_COUNTRY_CODE_VALUES: set[UpdateLiveCallRouterDataAttributesCountryCode] = {
+    "AU",
+    "CA",
+    "DE",
+    "GB",
+    "NL",
+    "NZ",
+    "US",
+}
 
 
-class UpdateLiveCallRouterDataAttributesCountryCode(str, Enum):
-    AU = "AU"
-    CA = "CA"
-    GB = "GB"
-    NL = "NL"
-    NZ = "NZ"
-    US = "US"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_live_call_router_data_attributes_country_code(
+    value: str,
+) -> UpdateLiveCallRouterDataAttributesCountryCode:
+    if value in UPDATE_LIVE_CALL_ROUTER_DATA_ATTRIBUTES_COUNTRY_CODE_VALUES:
+        return cast(UpdateLiveCallRouterDataAttributesCountryCode, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_LIVE_CALL_ROUTER_DATA_ATTRIBUTES_COUNTRY_CODE_VALUES!r}"
+    )

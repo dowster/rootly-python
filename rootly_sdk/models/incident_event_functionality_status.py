@@ -1,10 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentEventFunctionalityStatus = Literal["major_outage", "operational", "partial_outage"]
+
+INCIDENT_EVENT_FUNCTIONALITY_STATUS_VALUES: set[IncidentEventFunctionalityStatus] = {
+    "major_outage",
+    "operational",
+    "partial_outage",
+}
 
 
-class IncidentEventFunctionalityStatus(str, Enum):
-    MAJOR_OUTAGE = "major_outage"
-    OPERATIONAL = "operational"
-    PARTIAL_OUTAGE = "partial_outage"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_event_functionality_status(value: str) -> IncidentEventFunctionalityStatus:
+    if value in INCIDENT_EVENT_FUNCTIONALITY_STATUS_VALUES:
+        return cast(IncidentEventFunctionalityStatus, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {INCIDENT_EVENT_FUNCTIONALITY_STATUS_VALUES!r}")

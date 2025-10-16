@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
-from ..models.update_incident_event_data_attributes_visibility import UpdateIncidentEventDataAttributesVisibility
+from ..models.update_incident_event_data_attributes_visibility import (
+    UpdateIncidentEventDataAttributesVisibility,
+    check_update_incident_event_data_attributes_visibility,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateIncidentEventDataAttributes")
@@ -25,9 +29,10 @@ class UpdateIncidentEventDataAttributes:
 
         visibility: Union[Unset, str] = UNSET
         if not isinstance(self.visibility, Unset):
-            visibility = self.visibility.value
+            visibility = self.visibility
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if event is not UNSET:
             field_dict["event"] = event
@@ -37,8 +42,8 @@ class UpdateIncidentEventDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         event = d.pop("event", UNSET)
 
         _visibility = d.pop("visibility", UNSET)
@@ -46,7 +51,7 @@ class UpdateIncidentEventDataAttributes:
         if isinstance(_visibility, Unset):
             visibility = UNSET
         else:
-            visibility = UpdateIncidentEventDataAttributesVisibility(_visibility)
+            visibility = check_update_incident_event_data_attributes_visibility(_visibility)
 
         update_incident_event_data_attributes = cls(
             event=event,

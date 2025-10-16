@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_linear_issue_task_params_task_type import CreateLinearIssueTaskParamsTaskType
+from ..models.create_linear_issue_task_params_task_type import (
+    CreateLinearIssueTaskParamsTaskType,
+    check_create_linear_issue_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -52,7 +56,7 @@ class CreateLinearIssueTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         description = self.description
 
@@ -98,14 +102,14 @@ class CreateLinearIssueTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_linear_issue_task_params_labels_item import CreateLinearIssueTaskParamsLabelsItem
         from ..models.create_linear_issue_task_params_priority import CreateLinearIssueTaskParamsPriority
         from ..models.create_linear_issue_task_params_project import CreateLinearIssueTaskParamsProject
         from ..models.create_linear_issue_task_params_state import CreateLinearIssueTaskParamsState
         from ..models.create_linear_issue_task_params_team import CreateLinearIssueTaskParamsTeam
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         title = d.pop("title")
 
         team = CreateLinearIssueTaskParamsTeam.from_dict(d.pop("team"))
@@ -117,7 +121,7 @@ class CreateLinearIssueTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateLinearIssueTaskParamsTaskType(_task_type)
+            task_type = check_create_linear_issue_task_params_task_type(_task_type)
 
         description = d.pop("description", UNSET)
 

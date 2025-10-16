@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.invite_to_slack_channel_rootly_task_params_task_type import InviteToSlackChannelRootlyTaskParamsTaskType
+from ..models.invite_to_slack_channel_rootly_task_params_task_type import (
+    InviteToSlackChannelRootlyTaskParamsTaskType,
+    check_invite_to_slack_channel_rootly_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -60,7 +64,7 @@ class InviteToSlackChannelRootlyTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         escalation_policy_target: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.escalation_policy_target, Unset):
@@ -105,7 +109,7 @@ class InviteToSlackChannelRootlyTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.invite_to_slack_channel_rootly_task_params_channels_item import (
             InviteToSlackChannelRootlyTaskParamsChannelsItem,
         )
@@ -125,7 +129,7 @@ class InviteToSlackChannelRootlyTaskParams:
             InviteToSlackChannelRootlyTaskParamsUserTarget,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         channels = []
         _channels = d.pop("channels")
         for channels_item_data in _channels:
@@ -138,7 +142,7 @@ class InviteToSlackChannelRootlyTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = InviteToSlackChannelRootlyTaskParamsTaskType(_task_type)
+            task_type = check_invite_to_slack_channel_rootly_task_params_task_type(_task_type)
 
         _escalation_policy_target = d.pop("escalation_policy_target", UNSET)
         escalation_policy_target: Union[Unset, InviteToSlackChannelRootlyTaskParamsEscalationPolicyTarget]

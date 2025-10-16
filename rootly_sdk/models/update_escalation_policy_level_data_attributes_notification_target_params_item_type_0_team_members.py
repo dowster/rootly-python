@@ -1,10 +1,26 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers = Literal[
+    "admins", "all", "escalate"
+]
+
+UPDATE_ESCALATION_POLICY_LEVEL_DATA_ATTRIBUTES_NOTIFICATION_TARGET_PARAMS_ITEM_TYPE_0_TEAM_MEMBERS_VALUES: set[
+    UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers
+] = {
+    "admins",
+    "all",
+    "escalate",
+}
 
 
-class UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers(str, Enum):
-    ADMINS = "admins"
-    ALL = "all"
-    ESCALATE = "escalate"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_escalation_policy_level_data_attributes_notification_target_params_item_type_0_team_members(
+    value: str,
+) -> UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers:
+    if (
+        value
+        in UPDATE_ESCALATION_POLICY_LEVEL_DATA_ATTRIBUTES_NOTIFICATION_TARGET_PARAMS_ITEM_TYPE_0_TEAM_MEMBERS_VALUES
+    ):
+        return cast(UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_ESCALATION_POLICY_LEVEL_DATA_ATTRIBUTES_NOTIFICATION_TARGET_PARAMS_ITEM_TYPE_0_TEAM_MEMBERS_VALUES!r}"
+    )

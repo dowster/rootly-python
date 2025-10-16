@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_service_now_incident_task_params_task_type import UpdateServiceNowIncidentTaskParamsTaskType
+from ..models.update_service_now_incident_task_params_task_type import (
+    UpdateServiceNowIncidentTaskParamsTaskType,
+    check_update_service_now_incident_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -42,7 +46,7 @@ class UpdateServiceNowIncidentTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         title = self.title
 
@@ -85,13 +89,13 @@ class UpdateServiceNowIncidentTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_service_now_incident_task_params_completion import (
             UpdateServiceNowIncidentTaskParamsCompletion,
         )
         from ..models.update_service_now_incident_task_params_priority import UpdateServiceNowIncidentTaskParamsPriority
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         incident_id = d.pop("incident_id")
 
         _task_type = d.pop("task_type", UNSET)
@@ -99,7 +103,7 @@ class UpdateServiceNowIncidentTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateServiceNowIncidentTaskParamsTaskType(_task_type)
+            task_type = check_update_service_now_incident_task_params_task_type(_task_type)
 
         title = d.pop("title", UNSET)
 

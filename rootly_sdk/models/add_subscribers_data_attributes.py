@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -36,6 +37,7 @@ class AddSubscribersDataAttributes:
             remove_users_with_no_private_incident_access = self.remove_users_with_no_private_incident_access
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if user_ids is not UNSET:
             field_dict["user_ids"] = user_ids
@@ -45,8 +47,8 @@ class AddSubscribersDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
 
         def _parse_user_ids(data: object) -> Union[None, Unset, list[str]]:
             if data is None:

@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+GetTeamInclude = Literal["users"]
+
+GET_TEAM_INCLUDE_VALUES: set[GetTeamInclude] = {
+    "users",
+}
 
 
-class GetTeamInclude(str, Enum):
-    USERS = "users"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_get_team_include(value: str) -> GetTeamInclude:
+    if value in GET_TEAM_INCLUDE_VALUES:
+        return cast(GetTeamInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {GET_TEAM_INCLUDE_VALUES!r}")

@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewStatusPageDataType = Literal["status_pages"]
+
+NEW_STATUS_PAGE_DATA_TYPE_VALUES: set[NewStatusPageDataType] = {
+    "status_pages",
+}
 
 
-class NewStatusPageDataType(str, Enum):
-    STATUS_PAGES = "status_pages"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_status_page_data_type(value: str) -> NewStatusPageDataType:
+    if value in NEW_STATUS_PAGE_DATA_TYPE_VALUES:
+        return cast(NewStatusPageDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_STATUS_PAGE_DATA_TYPE_VALUES!r}")

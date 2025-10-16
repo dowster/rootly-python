@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+CommunicationsTypeResponseDataType = Literal["communications_types"]
+
+COMMUNICATIONS_TYPE_RESPONSE_DATA_TYPE_VALUES: set[CommunicationsTypeResponseDataType] = {
+    "communications_types",
+}
 
 
-class CommunicationsTypeResponseDataType(str, Enum):
-    COMMUNICATIONS_TYPES = "communications_types"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_communications_type_response_data_type(value: str) -> CommunicationsTypeResponseDataType:
+    if value in COMMUNICATIONS_TYPE_RESPONSE_DATA_TYPE_VALUES:
+        return cast(CommunicationsTypeResponseDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {COMMUNICATIONS_TYPE_RESPONSE_DATA_TYPE_VALUES!r}")

@@ -1,5 +1,6 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
+from uuid import UUID
 
 import httpx
 
@@ -12,7 +13,7 @@ from ...types import Response
 
 
 def _get_kwargs(
-    id: str,
+    id: Union[UUID, str],
     *,
     body: AddSubscribers,
 ) -> dict[str, Any]:
@@ -23,9 +24,8 @@ def _get_kwargs(
         "url": f"/v1/incidents/{id}/add_subscribers",
     }
 
-    _body = body.to_dict()
+    _kwargs["json"] = body.to_dict()
 
-    _kwargs["json"] = _body
     headers["Content-Type"] = "application/vnd.api+json"
 
     _kwargs["headers"] = headers
@@ -39,10 +39,12 @@ def _parse_response(
         response_200 = IncidentResponse.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 404:
         response_404 = ErrorsList.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -61,7 +63,7 @@ def _build_response(
 
 
 def sync_detailed(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
     body: AddSubscribers,
@@ -71,7 +73,7 @@ def sync_detailed(
      Add subscribers to incident
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
         body (AddSubscribers):
 
     Raises:
@@ -95,7 +97,7 @@ def sync_detailed(
 
 
 def sync(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
     body: AddSubscribers,
@@ -105,7 +107,7 @@ def sync(
      Add subscribers to incident
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
         body (AddSubscribers):
 
     Raises:
@@ -124,7 +126,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
     body: AddSubscribers,
@@ -134,7 +136,7 @@ async def asyncio_detailed(
      Add subscribers to incident
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
         body (AddSubscribers):
 
     Raises:
@@ -156,7 +158,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
     body: AddSubscribers,
@@ -166,7 +168,7 @@ async def asyncio(
      Add subscribers to incident
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
         body (AddSubscribers):
 
     Raises:

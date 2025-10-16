@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+EnvironmentResponseDataType = Literal["environments"]
+
+ENVIRONMENT_RESPONSE_DATA_TYPE_VALUES: set[EnvironmentResponseDataType] = {
+    "environments",
+}
 
 
-class EnvironmentResponseDataType(str, Enum):
-    ENVIRONMENTS = "environments"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_environment_response_data_type(value: str) -> EnvironmentResponseDataType:
+    if value in ENVIRONMENT_RESPONSE_DATA_TYPE_VALUES:
+        return cast(EnvironmentResponseDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {ENVIRONMENT_RESPONSE_DATA_TYPE_VALUES!r}")

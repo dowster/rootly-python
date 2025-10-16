@@ -1,9 +1,11 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
 from ..models.update_user_notification_rule_data_attributes_enabled_contact_types_item import (
     UpdateUserNotificationRuleDataAttributesEnabledContactTypesItem,
+    check_update_user_notification_rule_data_attributes_enabled_contact_types_item,
 )
 from ..types import UNSET, Unset
 
@@ -73,10 +75,11 @@ class UpdateUserNotificationRuleDataAttributes:
         if not isinstance(self.enabled_contact_types, Unset):
             enabled_contact_types = []
             for enabled_contact_types_item_data in self.enabled_contact_types:
-                enabled_contact_types_item = enabled_contact_types_item_data.value
+                enabled_contact_types_item: str = enabled_contact_types_item_data
                 enabled_contact_types.append(enabled_contact_types_item)
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if delay is not UNSET:
             field_dict["delay"] = delay
@@ -96,8 +99,8 @@ class UpdateUserNotificationRuleDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
 
         def _parse_delay(data: object) -> Union[None, Unset, int]:
             if data is None:
@@ -156,7 +159,7 @@ class UpdateUserNotificationRuleDataAttributes:
         enabled_contact_types = []
         _enabled_contact_types = d.pop("enabled_contact_types", UNSET)
         for enabled_contact_types_item_data in _enabled_contact_types or []:
-            enabled_contact_types_item = UpdateUserNotificationRuleDataAttributesEnabledContactTypesItem(
+            enabled_contact_types_item = check_update_user_notification_rule_data_attributes_enabled_contact_types_item(
                 enabled_contact_types_item_data
             )
 

@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+CreateZendeskTicketTaskParamsTaskType = Literal["create_zendesk_ticket"]
+
+CREATE_ZENDESK_TICKET_TASK_PARAMS_TASK_TYPE_VALUES: set[CreateZendeskTicketTaskParamsTaskType] = {
+    "create_zendesk_ticket",
+}
 
 
-class CreateZendeskTicketTaskParamsTaskType(str, Enum):
-    CREATE_ZENDESK_TICKET = "create_zendesk_ticket"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_create_zendesk_ticket_task_params_task_type(value: str) -> CreateZendeskTicketTaskParamsTaskType:
+    if value in CREATE_ZENDESK_TICKET_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(CreateZendeskTicketTaskParamsTaskType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {CREATE_ZENDESK_TICKET_TASK_PARAMS_TASK_TYPE_VALUES!r}"
+    )

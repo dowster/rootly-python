@@ -1,12 +1,19 @@
-from enum import IntEnum
+from typing import Literal, cast
+
+NewIncidentFeedbackDataAttributesRating = Literal[0, 1, 2, 3, 4]
+
+NEW_INCIDENT_FEEDBACK_DATA_ATTRIBUTES_RATING_VALUES: set[NewIncidentFeedbackDataAttributesRating] = {
+    0,
+    1,
+    2,
+    3,
+    4,
+}
 
 
-class NewIncidentFeedbackDataAttributesRating(IntEnum):
-    VALUE_4 = 4
-    VALUE_3 = 3
-    VALUE_2 = 2
-    VALUE_1 = 1
-    VALUE_0 = 0
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_incident_feedback_data_attributes_rating(value: int) -> NewIncidentFeedbackDataAttributesRating:
+    if value in NEW_INCIDENT_FEEDBACK_DATA_ATTRIBUTES_RATING_VALUES:
+        return cast(NewIncidentFeedbackDataAttributesRating, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_INCIDENT_FEEDBACK_DATA_ATTRIBUTES_RATING_VALUES!r}"
+    )

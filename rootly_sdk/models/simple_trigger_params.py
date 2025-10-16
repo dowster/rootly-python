@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.simple_trigger_params_trigger_type import SimpleTriggerParamsTriggerType
-from ..models.simple_trigger_params_triggers_item import SimpleTriggerParamsTriggersItem
+from ..models.simple_trigger_params_trigger_type import (
+    SimpleTriggerParamsTriggerType,
+    check_simple_trigger_params_trigger_type,
+)
+from ..models.simple_trigger_params_triggers_item import (
+    SimpleTriggerParamsTriggersItem,
+    check_simple_trigger_params_triggers_item,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SimpleTriggerParams")
@@ -23,13 +30,13 @@ class SimpleTriggerParams:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        trigger_type = self.trigger_type.value
+        trigger_type: str = self.trigger_type
 
         triggers: Union[Unset, list[str]] = UNSET
         if not isinstance(self.triggers, Unset):
             triggers = []
             for triggers_item_data in self.triggers:
-                triggers_item = triggers_item_data.value
+                triggers_item: str = triggers_item_data
                 triggers.append(triggers_item)
 
         field_dict: dict[str, Any] = {}
@@ -45,14 +52,14 @@ class SimpleTriggerParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        trigger_type = SimpleTriggerParamsTriggerType(d.pop("trigger_type"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        trigger_type = check_simple_trigger_params_trigger_type(d.pop("trigger_type"))
 
         triggers = []
         _triggers = d.pop("triggers", UNSET)
         for triggers_item_data in _triggers or []:
-            triggers_item = SimpleTriggerParamsTriggersItem(triggers_item_data)
+            triggers_item = check_simple_trigger_params_triggers_item(triggers_item_data)
 
             triggers.append(triggers_item)
 

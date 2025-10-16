@@ -1,12 +1,23 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
-from ..models.new_live_call_router_data_attributes_country_code import NewLiveCallRouterDataAttributesCountryCode
-from ..models.new_live_call_router_data_attributes_kind import NewLiveCallRouterDataAttributesKind
-from ..models.new_live_call_router_data_attributes_phone_type import NewLiveCallRouterDataAttributesPhoneType
+from ..models.new_live_call_router_data_attributes_country_code import (
+    NewLiveCallRouterDataAttributesCountryCode,
+    check_new_live_call_router_data_attributes_country_code,
+)
+from ..models.new_live_call_router_data_attributes_kind import (
+    NewLiveCallRouterDataAttributesKind,
+    check_new_live_call_router_data_attributes_kind,
+)
+from ..models.new_live_call_router_data_attributes_phone_type import (
+    NewLiveCallRouterDataAttributesPhoneType,
+    check_new_live_call_router_data_attributes_phone_type,
+)
 from ..models.new_live_call_router_data_attributes_waiting_music_url import (
     NewLiveCallRouterDataAttributesWaitingMusicUrl,
+    check_new_live_call_router_data_attributes_waiting_music_url,
 )
 from ..types import UNSET, Unset
 
@@ -74,13 +85,13 @@ class NewLiveCallRouterDataAttributes:
     )
 
     def to_dict(self) -> dict[str, Any]:
-        kind = self.kind.value
+        kind: str = self.kind
 
         name = self.name
 
-        country_code = self.country_code.value
+        country_code: str = self.country_code
 
-        phone_type = self.phone_type.value
+        phone_type: str = self.phone_type
 
         phone_number = self.phone_number
 
@@ -92,7 +103,7 @@ class NewLiveCallRouterDataAttributes:
 
         waiting_music_url: Union[Unset, str] = UNSET
         if not isinstance(self.waiting_music_url, Unset):
-            waiting_music_url = self.waiting_music_url.value
+            waiting_music_url = self.waiting_music_url
 
         sent_to_voicemail_delay = self.sent_to_voicemail_delay
 
@@ -118,6 +129,7 @@ class NewLiveCallRouterDataAttributes:
             escalation_policy_trigger_params = self.escalation_policy_trigger_params.to_dict()
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "kind": kind,
@@ -155,7 +167,7 @@ class NewLiveCallRouterDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_live_call_router_data_attributes_escalation_policy_trigger_params import (
             NewLiveCallRouterDataAttributesEscalationPolicyTriggerParams,
         )
@@ -163,14 +175,14 @@ class NewLiveCallRouterDataAttributes:
             NewLiveCallRouterDataAttributesPagingTargetsItem,
         )
 
-        d = src_dict.copy()
-        kind = NewLiveCallRouterDataAttributesKind(d.pop("kind"))
+        d = dict(src_dict)
+        kind = check_new_live_call_router_data_attributes_kind(d.pop("kind"))
 
         name = d.pop("name")
 
-        country_code = NewLiveCallRouterDataAttributesCountryCode(d.pop("country_code"))
+        country_code = check_new_live_call_router_data_attributes_country_code(d.pop("country_code"))
 
-        phone_type = NewLiveCallRouterDataAttributesPhoneType(d.pop("phone_type"))
+        phone_type = check_new_live_call_router_data_attributes_phone_type(d.pop("phone_type"))
 
         phone_number = d.pop("phone_number")
 
@@ -185,7 +197,7 @@ class NewLiveCallRouterDataAttributes:
         if isinstance(_waiting_music_url, Unset):
             waiting_music_url = UNSET
         else:
-            waiting_music_url = NewLiveCallRouterDataAttributesWaitingMusicUrl(_waiting_music_url)
+            waiting_music_url = check_new_live_call_router_data_attributes_waiting_music_url(_waiting_music_url)
 
         sent_to_voicemail_delay = d.pop("sent_to_voicemail_delay", UNSET)
 

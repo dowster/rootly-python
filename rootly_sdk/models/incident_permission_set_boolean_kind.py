@@ -1,19 +1,37 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentPermissionSetBooleanKind = Literal[
+    "assign_incident_roles",
+    "create_communications",
+    "delete_communications",
+    "invite_subscribers",
+    "modify_custom_fields",
+    "publish_to_status_page",
+    "read_communications",
+    "send_communications",
+    "trigger_workflows",
+    "update_communications",
+    "update_summary",
+    "update_timeline",
+]
+
+INCIDENT_PERMISSION_SET_BOOLEAN_KIND_VALUES: set[IncidentPermissionSetBooleanKind] = {
+    "assign_incident_roles",
+    "create_communications",
+    "delete_communications",
+    "invite_subscribers",
+    "modify_custom_fields",
+    "publish_to_status_page",
+    "read_communications",
+    "send_communications",
+    "trigger_workflows",
+    "update_communications",
+    "update_summary",
+    "update_timeline",
+}
 
 
-class IncidentPermissionSetBooleanKind(str, Enum):
-    ASSIGN_INCIDENT_ROLES = "assign_incident_roles"
-    CREATE_COMMUNICATIONS = "create_communications"
-    DELETE_COMMUNICATIONS = "delete_communications"
-    INVITE_SUBSCRIBERS = "invite_subscribers"
-    MODIFY_CUSTOM_FIELDS = "modify_custom_fields"
-    PUBLISH_TO_STATUS_PAGE = "publish_to_status_page"
-    READ_COMMUNICATIONS = "read_communications"
-    SEND_COMMUNICATIONS = "send_communications"
-    TRIGGER_WORKFLOWS = "trigger_workflows"
-    UPDATE_COMMUNICATIONS = "update_communications"
-    UPDATE_SUMMARY = "update_summary"
-    UPDATE_TIMELINE = "update_timeline"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_permission_set_boolean_kind(value: str) -> IncidentPermissionSetBooleanKind:
+    if value in INCIDENT_PERMISSION_SET_BOOLEAN_KIND_VALUES:
+        return cast(IncidentPermissionSetBooleanKind, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {INCIDENT_PERMISSION_SET_BOOLEAN_KIND_VALUES!r}")

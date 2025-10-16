@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.tweet_twitter_message_task_params_task_type import TweetTwitterMessageTaskParamsTaskType
+from ..models.tweet_twitter_message_task_params_task_type import (
+    TweetTwitterMessageTaskParamsTaskType,
+    check_tweet_twitter_message_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="TweetTwitterMessageTaskParams")
@@ -26,7 +30,7 @@ class TweetTwitterMessageTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -41,8 +45,8 @@ class TweetTwitterMessageTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         message = d.pop("message")
 
         _task_type = d.pop("task_type", UNSET)
@@ -50,7 +54,7 @@ class TweetTwitterMessageTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = TweetTwitterMessageTaskParamsTaskType(_task_type)
+            task_type = check_tweet_twitter_message_task_params_task_type(_task_type)
 
         tweet_twitter_message_task_params = cls(
             message=message,

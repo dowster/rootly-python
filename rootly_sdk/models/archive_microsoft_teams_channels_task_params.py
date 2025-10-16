@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -5,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..models.archive_microsoft_teams_channels_task_params_task_type import (
     ArchiveMicrosoftTeamsChannelsTaskParamsTaskType,
+    check_archive_microsoft_teams_channels_task_params_task_type,
 )
 from ..types import UNSET, Unset
 
@@ -42,7 +44,7 @@ class ArchiveMicrosoftTeamsChannelsTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -58,7 +60,7 @@ class ArchiveMicrosoftTeamsChannelsTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.archive_microsoft_teams_channels_task_params_channels_item import (
             ArchiveMicrosoftTeamsChannelsTaskParamsChannelsItem,
         )
@@ -66,7 +68,7 @@ class ArchiveMicrosoftTeamsChannelsTaskParams:
             ArchiveMicrosoftTeamsChannelsTaskParamsTeam,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         team = ArchiveMicrosoftTeamsChannelsTaskParamsTeam.from_dict(d.pop("team"))
 
         channels = []
@@ -81,7 +83,7 @@ class ArchiveMicrosoftTeamsChannelsTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = ArchiveMicrosoftTeamsChannelsTaskParamsTaskType(_task_type)
+            task_type = check_archive_microsoft_teams_channels_task_params_task_type(_task_type)
 
         archive_microsoft_teams_channels_task_params = cls(
             team=team,

@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateAttachedAlertsTaskParamsTaskType = Literal["update_attached_alerts"]
+
+UPDATE_ATTACHED_ALERTS_TASK_PARAMS_TASK_TYPE_VALUES: set[UpdateAttachedAlertsTaskParamsTaskType] = {
+    "update_attached_alerts",
+}
 
 
-class UpdateAttachedAlertsTaskParamsTaskType(str, Enum):
-    UPDATE_ATTACHED_ALERTS = "update_attached_alerts"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_attached_alerts_task_params_task_type(value: str) -> UpdateAttachedAlertsTaskParamsTaskType:
+    if value in UPDATE_ATTACHED_ALERTS_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(UpdateAttachedAlertsTaskParamsTaskType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_ATTACHED_ALERTS_TASK_PARAMS_TASK_TYPE_VALUES!r}"
+    )

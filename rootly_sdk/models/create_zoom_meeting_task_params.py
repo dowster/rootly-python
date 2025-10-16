@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_zoom_meeting_task_params_auto_recording import CreateZoomMeetingTaskParamsAutoRecording
-from ..models.create_zoom_meeting_task_params_task_type import CreateZoomMeetingTaskParamsTaskType
+from ..models.create_zoom_meeting_task_params_auto_recording import (
+    CreateZoomMeetingTaskParamsAutoRecording,
+    check_create_zoom_meeting_task_params_auto_recording,
+)
+from ..models.create_zoom_meeting_task_params_task_type import (
+    CreateZoomMeetingTaskParamsTaskType,
+    check_create_zoom_meeting_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -25,8 +32,7 @@ class CreateZoomMeetingTaskParams:
         password (Union[Unset, str]): The meeting password
         create_as_email (Union[Unset, str]): The email to use if creating as email
         alternative_hosts (Union[Unset, list[str]]):
-        auto_recording (Union[Unset, CreateZoomMeetingTaskParamsAutoRecording]):  Default:
-            CreateZoomMeetingTaskParamsAutoRecording.NONE.
+        auto_recording (Union[Unset, CreateZoomMeetingTaskParamsAutoRecording]):  Default: 'none'.
         record_meeting (Union[Unset, bool]): Rootly AI will record the meeting and automatically generate a transcript
             and summary from your meeting
         post_to_incident_timeline (Union[Unset, bool]):
@@ -38,9 +44,7 @@ class CreateZoomMeetingTaskParams:
     password: Union[Unset, str] = UNSET
     create_as_email: Union[Unset, str] = UNSET
     alternative_hosts: Union[Unset, list[str]] = UNSET
-    auto_recording: Union[Unset, CreateZoomMeetingTaskParamsAutoRecording] = (
-        CreateZoomMeetingTaskParamsAutoRecording.NONE
-    )
+    auto_recording: Union[Unset, CreateZoomMeetingTaskParamsAutoRecording] = "none"
     record_meeting: Union[Unset, bool] = UNSET
     post_to_incident_timeline: Union[Unset, bool] = UNSET
     post_to_slack_channels: Union[Unset, list["CreateZoomMeetingTaskParamsPostToSlackChannelsItem"]] = UNSET
@@ -51,7 +55,7 @@ class CreateZoomMeetingTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         password = self.password
 
@@ -63,7 +67,7 @@ class CreateZoomMeetingTaskParams:
 
         auto_recording: Union[Unset, str] = UNSET
         if not isinstance(self.auto_recording, Unset):
-            auto_recording = self.auto_recording.value
+            auto_recording = self.auto_recording
 
         record_meeting = self.record_meeting
 
@@ -103,12 +107,12 @@ class CreateZoomMeetingTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_zoom_meeting_task_params_post_to_slack_channels_item import (
             CreateZoomMeetingTaskParamsPostToSlackChannelsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         topic = d.pop("topic")
 
         _task_type = d.pop("task_type", UNSET)
@@ -116,7 +120,7 @@ class CreateZoomMeetingTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateZoomMeetingTaskParamsTaskType(_task_type)
+            task_type = check_create_zoom_meeting_task_params_task_type(_task_type)
 
         password = d.pop("password", UNSET)
 
@@ -129,7 +133,7 @@ class CreateZoomMeetingTaskParams:
         if isinstance(_auto_recording, Unset):
             auto_recording = UNSET
         else:
-            auto_recording = CreateZoomMeetingTaskParamsAutoRecording(_auto_recording)
+            auto_recording = check_create_zoom_meeting_task_params_auto_recording(_auto_recording)
 
         record_meeting = d.pop("record_meeting", UNSET)
 

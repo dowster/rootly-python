@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.form_set_condition_comparison import FormSetConditionComparison
+from ..models.form_set_condition_comparison import FormSetConditionComparison, check_form_set_condition_comparison
 
 T = TypeVar("T", bound="FormSetCondition")
 
@@ -29,7 +30,7 @@ class FormSetCondition:
 
         form_field_id = self.form_field_id
 
-        comparison = self.comparison.value
+        comparison: str = self.comparison
 
         values = self.values
 
@@ -47,13 +48,13 @@ class FormSetCondition:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         form_set_id = d.pop("form_set_id")
 
         form_field_id = d.pop("form_field_id")
 
-        comparison = FormSetConditionComparison(d.pop("comparison"))
+        comparison = check_form_set_condition_comparison(d.pop("comparison"))
 
         values = cast(list[str], d.pop("values"))
 

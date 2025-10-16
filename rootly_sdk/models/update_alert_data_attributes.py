@@ -1,14 +1,24 @@
 import datetime
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from dateutil.parser import isoparse
 
-from ..models.update_alert_data_attributes_noise import UpdateAlertDataAttributesNoise
-from ..models.update_alert_data_attributes_source import UpdateAlertDataAttributesSource
+from ..models.update_alert_data_attributes_noise import (
+    UpdateAlertDataAttributesNoise,
+    check_update_alert_data_attributes_noise,
+)
+from ..models.update_alert_data_attributes_source import (
+    UpdateAlertDataAttributesSource,
+    check_update_alert_data_attributes_source,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.update_alert_data_attributes_alert_field_values_attributes_item_type_0 import (
+        UpdateAlertDataAttributesAlertFieldValuesAttributesItemType0,
+    )
     from ..models.update_alert_data_attributes_data_type_0 import UpdateAlertDataAttributesDataType0
     from ..models.update_alert_data_attributes_labels_item_type_0 import UpdateAlertDataAttributesLabelsItemType0
 
@@ -34,6 +44,11 @@ class UpdateAlertDataAttributes:
         alert_urgency_id (Union[None, Unset, str]): The ID of the alert urgency
         labels (Union[Unset, list[Union['UpdateAlertDataAttributesLabelsItemType0', None]]]):
         data (Union['UpdateAlertDataAttributesDataType0', None, Unset]): Additional data
+        deduplication_key (Union[None, Unset, str]): Alerts sharing the same deduplication key are treated as a single
+            alert.
+        alert_field_values_attributes (Union[Unset,
+            list[Union['UpdateAlertDataAttributesAlertFieldValuesAttributesItemType0', None]]]): Custom alert field values
+            to create with the alert
     """
 
     noise: Union[Unset, UpdateAlertDataAttributesNoise] = UNSET
@@ -50,18 +65,25 @@ class UpdateAlertDataAttributes:
     alert_urgency_id: Union[None, Unset, str] = UNSET
     labels: Union[Unset, list[Union["UpdateAlertDataAttributesLabelsItemType0", None]]] = UNSET
     data: Union["UpdateAlertDataAttributesDataType0", None, Unset] = UNSET
+    deduplication_key: Union[None, Unset, str] = UNSET
+    alert_field_values_attributes: Union[
+        Unset, list[Union["UpdateAlertDataAttributesAlertFieldValuesAttributesItemType0", None]]
+    ] = UNSET
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.update_alert_data_attributes_alert_field_values_attributes_item_type_0 import (
+            UpdateAlertDataAttributesAlertFieldValuesAttributesItemType0,
+        )
         from ..models.update_alert_data_attributes_data_type_0 import UpdateAlertDataAttributesDataType0
         from ..models.update_alert_data_attributes_labels_item_type_0 import UpdateAlertDataAttributesLabelsItemType0
 
         noise: Union[Unset, str] = UNSET
         if not isinstance(self.noise, Unset):
-            noise = self.noise.value
+            noise = self.noise
 
         source: Union[Unset, str] = UNSET
         if not isinstance(self.source, Unset):
-            source = self.source.value
+            source = self.source
 
         summary = self.summary
 
@@ -151,7 +173,28 @@ class UpdateAlertDataAttributes:
         else:
             data = self.data
 
+        deduplication_key: Union[None, Unset, str]
+        if isinstance(self.deduplication_key, Unset):
+            deduplication_key = UNSET
+        else:
+            deduplication_key = self.deduplication_key
+
+        alert_field_values_attributes: Union[Unset, list[Union[None, dict[str, Any]]]] = UNSET
+        if not isinstance(self.alert_field_values_attributes, Unset):
+            alert_field_values_attributes = []
+            for alert_field_values_attributes_item_data in self.alert_field_values_attributes:
+                alert_field_values_attributes_item: Union[None, dict[str, Any]]
+                if isinstance(
+                    alert_field_values_attributes_item_data,
+                    UpdateAlertDataAttributesAlertFieldValuesAttributesItemType0,
+                ):
+                    alert_field_values_attributes_item = alert_field_values_attributes_item_data.to_dict()
+                else:
+                    alert_field_values_attributes_item = alert_field_values_attributes_item_data
+                alert_field_values_attributes.append(alert_field_values_attributes_item)
+
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if noise is not UNSET:
             field_dict["noise"] = noise
@@ -181,28 +224,35 @@ class UpdateAlertDataAttributes:
             field_dict["labels"] = labels
         if data is not UNSET:
             field_dict["data"] = data
+        if deduplication_key is not UNSET:
+            field_dict["deduplication_key"] = deduplication_key
+        if alert_field_values_attributes is not UNSET:
+            field_dict["alert_field_values_attributes"] = alert_field_values_attributes
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.update_alert_data_attributes_alert_field_values_attributes_item_type_0 import (
+            UpdateAlertDataAttributesAlertFieldValuesAttributesItemType0,
+        )
         from ..models.update_alert_data_attributes_data_type_0 import UpdateAlertDataAttributesDataType0
         from ..models.update_alert_data_attributes_labels_item_type_0 import UpdateAlertDataAttributesLabelsItemType0
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _noise = d.pop("noise", UNSET)
         noise: Union[Unset, UpdateAlertDataAttributesNoise]
         if isinstance(_noise, Unset):
             noise = UNSET
         else:
-            noise = UpdateAlertDataAttributesNoise(_noise)
+            noise = check_update_alert_data_attributes_noise(_noise)
 
         _source = d.pop("source", UNSET)
         source: Union[Unset, UpdateAlertDataAttributesSource]
         if isinstance(_source, Unset):
             source = UNSET
         else:
-            source = UpdateAlertDataAttributesSource(_source)
+            source = check_update_alert_data_attributes_source(_source)
 
         summary = d.pop("summary", UNSET)
 
@@ -365,6 +415,42 @@ class UpdateAlertDataAttributes:
 
         data = _parse_data(d.pop("data", UNSET))
 
+        def _parse_deduplication_key(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        deduplication_key = _parse_deduplication_key(d.pop("deduplication_key", UNSET))
+
+        alert_field_values_attributes = []
+        _alert_field_values_attributes = d.pop("alert_field_values_attributes", UNSET)
+        for alert_field_values_attributes_item_data in _alert_field_values_attributes or []:
+
+            def _parse_alert_field_values_attributes_item(
+                data: object,
+            ) -> Union["UpdateAlertDataAttributesAlertFieldValuesAttributesItemType0", None]:
+                if data is None:
+                    return data
+                try:
+                    if not isinstance(data, dict):
+                        raise TypeError()
+                    alert_field_values_attributes_item_type_0 = (
+                        UpdateAlertDataAttributesAlertFieldValuesAttributesItemType0.from_dict(data)
+                    )
+
+                    return alert_field_values_attributes_item_type_0
+                except:  # noqa: E722
+                    pass
+                return cast(Union["UpdateAlertDataAttributesAlertFieldValuesAttributesItemType0", None], data)
+
+            alert_field_values_attributes_item = _parse_alert_field_values_attributes_item(
+                alert_field_values_attributes_item_data
+            )
+
+            alert_field_values_attributes.append(alert_field_values_attributes_item)
+
         update_alert_data_attributes = cls(
             noise=noise,
             source=source,
@@ -380,6 +466,8 @@ class UpdateAlertDataAttributes:
             alert_urgency_id=alert_urgency_id,
             labels=labels,
             data=data,
+            deduplication_key=deduplication_key,
+            alert_field_values_attributes=alert_field_values_attributes,
         )
 
         return update_alert_data_attributes

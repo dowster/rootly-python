@@ -22,9 +22,8 @@ def _get_kwargs(
         "url": "/v1/alert_routing_rules",
     }
 
-    _body = body.to_dict()
+    _kwargs["json"] = body.to_dict()
 
-    _kwargs["json"] = _body
     headers["Content-Type"] = "application/vnd.api+json"
 
     _kwargs["headers"] = headers
@@ -38,14 +37,17 @@ def _parse_response(
         response_201 = AlertRoutingRuleResponse.from_dict(response.json())
 
         return response_201
-    if response.status_code == 422:
-        response_422 = ErrorsList.from_dict(response.json())
 
-        return response_422
     if response.status_code == 401:
         response_401 = ErrorsList.from_dict(response.json())
 
         return response_401
+
+    if response.status_code == 422:
+        response_422 = ErrorsList.from_dict(response.json())
+
+        return response_422
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -70,7 +72,9 @@ def sync_detailed(
 ) -> Response[Union[AlertRoutingRuleResponse, ErrorsList]]:
     """Creates an alert routing rule
 
-     Creates a new alert routing rule from provided data
+     Creates a new alert routing rule from provided data. **Note: If you are an advanced alert routing
+    user, you should use the Alert Routes endpoint instead of this endpoint. If you don't know whether
+    you are an advanced user, please contact Rootly customer support.**
 
     Args:
         body (NewAlertRoutingRule):
@@ -101,7 +105,9 @@ def sync(
 ) -> Optional[Union[AlertRoutingRuleResponse, ErrorsList]]:
     """Creates an alert routing rule
 
-     Creates a new alert routing rule from provided data
+     Creates a new alert routing rule from provided data. **Note: If you are an advanced alert routing
+    user, you should use the Alert Routes endpoint instead of this endpoint. If you don't know whether
+    you are an advanced user, please contact Rootly customer support.**
 
     Args:
         body (NewAlertRoutingRule):
@@ -127,7 +133,9 @@ async def asyncio_detailed(
 ) -> Response[Union[AlertRoutingRuleResponse, ErrorsList]]:
     """Creates an alert routing rule
 
-     Creates a new alert routing rule from provided data
+     Creates a new alert routing rule from provided data. **Note: If you are an advanced alert routing
+    user, you should use the Alert Routes endpoint instead of this endpoint. If you don't know whether
+    you are an advanced user, please contact Rootly customer support.**
 
     Args:
         body (NewAlertRoutingRule):
@@ -156,7 +164,9 @@ async def asyncio(
 ) -> Optional[Union[AlertRoutingRuleResponse, ErrorsList]]:
     """Creates an alert routing rule
 
-     Creates a new alert routing rule from provided data
+     Creates a new alert routing rule from provided data. **Note: If you are an advanced alert routing
+    user, you should use the Alert Routes endpoint instead of this endpoint. If you don't know whether
+    you are an advanced user, please contact Rootly customer support.**
 
     Args:
         body (NewAlertRoutingRule):

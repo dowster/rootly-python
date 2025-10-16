@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.incident_event_visibility import IncidentEventVisibility
+from ..models.incident_event_visibility import IncidentEventVisibility, check_incident_event_visibility
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="IncidentEvent")
@@ -38,7 +39,7 @@ class IncidentEvent:
 
         visibility: Union[Unset, str] = UNSET
         if not isinstance(self.visibility, Unset):
-            visibility = self.visibility.value
+            visibility = self.visibility
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -56,8 +57,8 @@ class IncidentEvent:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         event = d.pop("event")
 
         occurred_at = d.pop("occurred_at")
@@ -71,7 +72,7 @@ class IncidentEvent:
         if isinstance(_visibility, Unset):
             visibility = UNSET
         else:
-            visibility = IncidentEventVisibility(_visibility)
+            visibility = check_incident_event_visibility(_visibility)
 
         incident_event = cls(
             event=event,

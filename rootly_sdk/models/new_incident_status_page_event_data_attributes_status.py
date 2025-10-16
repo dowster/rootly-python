@@ -1,15 +1,25 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewIncidentStatusPageEventDataAttributesStatus = Literal[
+    "completed", "identified", "in_progress", "investigating", "monitoring", "resolved", "scheduled"
+]
+
+NEW_INCIDENT_STATUS_PAGE_EVENT_DATA_ATTRIBUTES_STATUS_VALUES: set[NewIncidentStatusPageEventDataAttributesStatus] = {
+    "completed",
+    "identified",
+    "in_progress",
+    "investigating",
+    "monitoring",
+    "resolved",
+    "scheduled",
+}
 
 
-class NewIncidentStatusPageEventDataAttributesStatus(str, Enum):
-    COMPLETED = "completed"
-    IDENTIFIED = "identified"
-    INVESTIGATING = "investigating"
-    IN_PROGRESS = "in_progress"
-    MONITORING = "monitoring"
-    RESOLVED = "resolved"
-    SCHEDULED = "scheduled"
-    VERIFYING = "verifying"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_incident_status_page_event_data_attributes_status(
+    value: str,
+) -> NewIncidentStatusPageEventDataAttributesStatus:
+    if value in NEW_INCIDENT_STATUS_PAGE_EVENT_DATA_ATTRIBUTES_STATUS_VALUES:
+        return cast(NewIncidentStatusPageEventDataAttributesStatus, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_INCIDENT_STATUS_PAGE_EVENT_DATA_ATTRIBUTES_STATUS_VALUES!r}"
+    )

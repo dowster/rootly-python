@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.sub_status_response_data_type import SubStatusResponseDataType
+from ..models.sub_status_response_data_type import SubStatusResponseDataType, check_sub_status_response_data_type
 
 if TYPE_CHECKING:
     from ..models.sub_status import SubStatus
@@ -29,7 +30,7 @@ class SubStatusResponseData:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
@@ -46,13 +47,13 @@ class SubStatusResponseData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.sub_status import SubStatus
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         id = d.pop("id")
 
-        type_ = SubStatusResponseDataType(d.pop("type"))
+        type_ = check_sub_status_response_data_type(d.pop("type"))
 
         attributes = SubStatus.from_dict(d.pop("attributes"))
 

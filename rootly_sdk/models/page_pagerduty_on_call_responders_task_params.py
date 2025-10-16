@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,9 +6,11 @@ from attrs import field as _attrs_field
 
 from ..models.page_pagerduty_on_call_responders_task_params_task_type import (
     PagePagerdutyOnCallRespondersTaskParamsTaskType,
+    check_page_pagerduty_on_call_responders_task_params_task_type,
 )
 from ..models.page_pagerduty_on_call_responders_task_params_urgency import (
     PagePagerdutyOnCallRespondersTaskParamsUrgency,
+    check_page_pagerduty_on_call_responders_task_params_urgency,
 )
 from ..types import UNSET, Unset
 
@@ -36,8 +39,7 @@ class PagePagerdutyOnCallRespondersTaskParams:
         users (Union[Unset, list['PagePagerdutyOnCallRespondersTaskParamsUsersItem']]):
         title (Union[None, Unset, str]): Incident title.
         message (Union[Unset, str]):
-        urgency (Union[Unset, PagePagerdutyOnCallRespondersTaskParamsUrgency]):  Default:
-            PagePagerdutyOnCallRespondersTaskParamsUrgency.HIGH.
+        urgency (Union[Unset, PagePagerdutyOnCallRespondersTaskParamsUrgency]):  Default: 'high'.
         priority (Union[Unset, str]): PagerDuty incident priority, selecting auto will let Rootly auto map our incident
             severity
         create_new_incident_on_conflict (Union[Unset, bool]): Rootly only supports linking to a single PagerDuty
@@ -52,9 +54,7 @@ class PagePagerdutyOnCallRespondersTaskParams:
     users: Union[Unset, list["PagePagerdutyOnCallRespondersTaskParamsUsersItem"]] = UNSET
     title: Union[None, Unset, str] = UNSET
     message: Union[Unset, str] = UNSET
-    urgency: Union[Unset, PagePagerdutyOnCallRespondersTaskParamsUrgency] = (
-        PagePagerdutyOnCallRespondersTaskParamsUrgency.HIGH
-    )
+    urgency: Union[Unset, PagePagerdutyOnCallRespondersTaskParamsUrgency] = "high"
     priority: Union[Unset, str] = UNSET
     create_new_incident_on_conflict: Union[Unset, bool] = False
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -64,7 +64,7 @@ class PagePagerdutyOnCallRespondersTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         escalation_policies: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.escalation_policies, Unset):
@@ -90,7 +90,7 @@ class PagePagerdutyOnCallRespondersTaskParams:
 
         urgency: Union[Unset, str] = UNSET
         if not isinstance(self.urgency, Unset):
-            urgency = self.urgency.value
+            urgency = self.urgency
 
         priority = self.priority
 
@@ -123,7 +123,7 @@ class PagePagerdutyOnCallRespondersTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.page_pagerduty_on_call_responders_task_params_escalation_policies_item import (
             PagePagerdutyOnCallRespondersTaskParamsEscalationPoliciesItem,
         )
@@ -134,7 +134,7 @@ class PagePagerdutyOnCallRespondersTaskParams:
             PagePagerdutyOnCallRespondersTaskParamsUsersItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         service = PagePagerdutyOnCallRespondersTaskParamsService.from_dict(d.pop("service"))
 
         _task_type = d.pop("task_type", UNSET)
@@ -142,7 +142,7 @@ class PagePagerdutyOnCallRespondersTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = PagePagerdutyOnCallRespondersTaskParamsTaskType(_task_type)
+            task_type = check_page_pagerduty_on_call_responders_task_params_task_type(_task_type)
 
         escalation_policies = []
         _escalation_policies = d.pop("escalation_policies", UNSET)
@@ -176,7 +176,7 @@ class PagePagerdutyOnCallRespondersTaskParams:
         if isinstance(_urgency, Unset):
             urgency = UNSET
         else:
-            urgency = PagePagerdutyOnCallRespondersTaskParamsUrgency(_urgency)
+            urgency = check_page_pagerduty_on_call_responders_task_params_urgency(_urgency)
 
         priority = d.pop("priority", UNSET)
 

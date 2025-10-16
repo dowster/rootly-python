@@ -1,9 +1,18 @@
-from enum import Enum
+from typing import Literal, cast
+
+AlertRoutingRuleConditionsItemPropertyFieldType = Literal["attribute", "payload"]
+
+ALERT_ROUTING_RULE_CONDITIONS_ITEM_PROPERTY_FIELD_TYPE_VALUES: set[AlertRoutingRuleConditionsItemPropertyFieldType] = {
+    "attribute",
+    "payload",
+}
 
 
-class AlertRoutingRuleConditionsItemPropertyFieldType(str, Enum):
-    ATTRIBUTE = "attribute"
-    PAYLOAD = "payload"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_alert_routing_rule_conditions_item_property_field_type(
+    value: str,
+) -> AlertRoutingRuleConditionsItemPropertyFieldType:
+    if value in ALERT_ROUTING_RULE_CONDITIONS_ITEM_PROPERTY_FIELD_TYPE_VALUES:
+        return cast(AlertRoutingRuleConditionsItemPropertyFieldType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {ALERT_ROUTING_RULE_CONDITIONS_ITEM_PROPERTY_FIELD_TYPE_VALUES!r}"
+    )

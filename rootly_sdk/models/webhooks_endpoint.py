@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.webhooks_endpoint_event_types_item import WebhooksEndpointEventTypesItem
+from ..models.webhooks_endpoint_event_types_item import (
+    WebhooksEndpointEventTypesItem,
+    check_webhooks_endpoint_event_types_item,
+)
 
 T = TypeVar("T", bound="WebhooksEndpoint")
 
@@ -41,7 +45,7 @@ class WebhooksEndpoint:
 
         event_types = []
         for event_types_item_data in self.event_types:
-            event_types_item = event_types_item_data.value
+            event_types_item: str = event_types_item_data
             event_types.append(event_types_item)
 
         secret = self.secret
@@ -70,8 +74,8 @@ class WebhooksEndpoint:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
         slug = d.pop("slug")
@@ -81,7 +85,7 @@ class WebhooksEndpoint:
         event_types = []
         _event_types = d.pop("event_types")
         for event_types_item_data in _event_types:
-            event_types_item = WebhooksEndpointEventTypesItem(event_types_item_data)
+            event_types_item = check_webhooks_endpoint_event_types_item(event_types_item_data)
 
             event_types.append(event_types_item)
 

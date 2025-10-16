@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_incident_postmortem_task_params_task_type import UpdateIncidentPostmortemTaskParamsTaskType
+from ..models.update_incident_postmortem_task_params_task_type import (
+    UpdateIncidentPostmortemTaskParamsTaskType,
+    check_update_incident_postmortem_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateIncidentPostmortemTaskParams")
@@ -30,7 +34,7 @@ class UpdateIncidentPostmortemTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         title: Union[None, Unset, str]
         if isinstance(self.title, Unset):
@@ -61,8 +65,8 @@ class UpdateIncidentPostmortemTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         postmortem_id = d.pop("postmortem_id")
 
         _task_type = d.pop("task_type", UNSET)
@@ -70,7 +74,7 @@ class UpdateIncidentPostmortemTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateIncidentPostmortemTaskParamsTaskType(_task_type)
+            task_type = check_update_incident_postmortem_task_params_task_type(_task_type)
 
         def _parse_title(data: object) -> Union[None, Unset, str]:
             if data is None:

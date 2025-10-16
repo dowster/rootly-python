@@ -1,11 +1,16 @@
-from enum import Enum
+from typing import Literal, cast
+
+RoleApiKeysPermissionsItem = Literal["create", "delete", "read", "update"]
+
+ROLE_API_KEYS_PERMISSIONS_ITEM_VALUES: set[RoleApiKeysPermissionsItem] = {
+    "create",
+    "delete",
+    "read",
+    "update",
+}
 
 
-class RoleApiKeysPermissionsItem(str, Enum):
-    CREATE = "create"
-    DELETE = "delete"
-    READ = "read"
-    UPDATE = "update"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_role_api_keys_permissions_item(value: str) -> RoleApiKeysPermissionsItem:
+    if value in ROLE_API_KEYS_PERMISSIONS_ITEM_VALUES:
+        return cast(RoleApiKeysPermissionsItem, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {ROLE_API_KEYS_PERMISSIONS_ITEM_VALUES!r}")

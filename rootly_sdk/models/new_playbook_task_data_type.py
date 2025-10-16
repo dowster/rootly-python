@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewPlaybookTaskDataType = Literal["playbook_tasks"]
+
+NEW_PLAYBOOK_TASK_DATA_TYPE_VALUES: set[NewPlaybookTaskDataType] = {
+    "playbook_tasks",
+}
 
 
-class NewPlaybookTaskDataType(str, Enum):
-    PLAYBOOK_TASKS = "playbook_tasks"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_playbook_task_data_type(value: str) -> NewPlaybookTaskDataType:
+    if value in NEW_PLAYBOOK_TASK_DATA_TYPE_VALUES:
+        return cast(NewPlaybookTaskDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_PLAYBOOK_TASK_DATA_TYPE_VALUES!r}")

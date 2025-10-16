@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_google_docs_permissions_task_params_task_type import CreateGoogleDocsPermissionsTaskParamsTaskType
+from ..models.create_google_docs_permissions_task_params_task_type import (
+    CreateGoogleDocsPermissionsTaskParamsTaskType,
+    check_create_google_docs_permissions_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CreateGoogleDocsPermissionsTaskParams")
@@ -34,7 +38,7 @@ class CreateGoogleDocsPermissionsTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         send_notification_email = self.send_notification_email
 
@@ -62,8 +66,8 @@ class CreateGoogleDocsPermissionsTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         file_id = d.pop("file_id")
 
         permissions = d.pop("permissions")
@@ -73,7 +77,7 @@ class CreateGoogleDocsPermissionsTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateGoogleDocsPermissionsTaskParamsTaskType(_task_type)
+            task_type = check_create_google_docs_permissions_task_params_task_type(_task_type)
 
         send_notification_email = d.pop("send_notification_email", UNSET)
 

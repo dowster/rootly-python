@@ -6,7 +6,9 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.escalation_policy_list import EscalationPolicyList
-from ...models.list_escalation_policies_include import ListEscalationPoliciesInclude
+from ...models.list_escalation_policies_include import (
+    ListEscalationPoliciesInclude,
+)
 from ...types import UNSET, Response, Unset
 
 
@@ -26,7 +28,7 @@ def _get_kwargs(
 
     json_include: Union[Unset, str] = UNSET
     if not isinstance(include, Unset):
-        json_include = include.value
+        json_include = include
 
     params["include"] = json_include
 
@@ -64,6 +66,7 @@ def _parse_response(
         response_200 = EscalationPolicyList.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:

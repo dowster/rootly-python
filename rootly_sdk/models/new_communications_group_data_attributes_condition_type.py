@@ -1,9 +1,20 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewCommunicationsGroupDataAttributesConditionType = Literal["all", "any"]
+
+NEW_COMMUNICATIONS_GROUP_DATA_ATTRIBUTES_CONDITION_TYPE_VALUES: set[
+    NewCommunicationsGroupDataAttributesConditionType
+] = {
+    "all",
+    "any",
+}
 
 
-class NewCommunicationsGroupDataAttributesConditionType(str, Enum):
-    ALL = "all"
-    ANY = "any"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_communications_group_data_attributes_condition_type(
+    value: str,
+) -> NewCommunicationsGroupDataAttributesConditionType:
+    if value in NEW_COMMUNICATIONS_GROUP_DATA_ATTRIBUTES_CONDITION_TYPE_VALUES:
+        return cast(NewCommunicationsGroupDataAttributesConditionType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_COMMUNICATIONS_GROUP_DATA_ATTRIBUTES_CONDITION_TYPE_VALUES!r}"
+    )

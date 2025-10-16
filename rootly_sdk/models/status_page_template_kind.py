@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+StatusPageTemplateKind = Literal["normal", "scheduled"]
+
+STATUS_PAGE_TEMPLATE_KIND_VALUES: set[StatusPageTemplateKind] = {
+    "normal",
+    "scheduled",
+}
 
 
-class StatusPageTemplateKind(str, Enum):
-    NORMAL = "normal"
-    SCHEDULED = "scheduled"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_status_page_template_kind(value: str) -> StatusPageTemplateKind:
+    if value in STATUS_PAGE_TEMPLATE_KIND_VALUES:
+        return cast(StatusPageTemplateKind, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {STATUS_PAGE_TEMPLATE_KIND_VALUES!r}")

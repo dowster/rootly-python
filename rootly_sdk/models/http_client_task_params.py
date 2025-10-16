@@ -1,10 +1,14 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.http_client_task_params_method import HttpClientTaskParamsMethod
-from ..models.http_client_task_params_task_type import HttpClientTaskParamsTaskType
+from ..models.http_client_task_params_method import HttpClientTaskParamsMethod, check_http_client_task_params_method
+from ..models.http_client_task_params_task_type import (
+    HttpClientTaskParamsTaskType,
+    check_http_client_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -27,7 +31,7 @@ class HttpClientTaskParams:
         body (Union[Unset, str]): HTTP body
         event_url (Union[Unset, str]):
         event_message (Union[Unset, str]):
-        method (Union[Unset, HttpClientTaskParamsMethod]): HTTP method Default: HttpClientTaskParamsMethod.GET.
+        method (Union[Unset, HttpClientTaskParamsMethod]): HTTP method Default: 'GET'.
         post_to_incident_timeline (Union[Unset, bool]):
         post_to_slack_channels (Union[Unset, list['HttpClientTaskParamsPostToSlackChannelsItem']]):
     """
@@ -40,7 +44,7 @@ class HttpClientTaskParams:
     body: Union[Unset, str] = UNSET
     event_url: Union[Unset, str] = UNSET
     event_message: Union[Unset, str] = UNSET
-    method: Union[Unset, HttpClientTaskParamsMethod] = HttpClientTaskParamsMethod.GET
+    method: Union[Unset, HttpClientTaskParamsMethod] = "GET"
     post_to_incident_timeline: Union[Unset, bool] = UNSET
     post_to_slack_channels: Union[Unset, list["HttpClientTaskParamsPostToSlackChannelsItem"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -52,7 +56,7 @@ class HttpClientTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         headers = self.headers
 
@@ -66,7 +70,7 @@ class HttpClientTaskParams:
 
         method: Union[Unset, str] = UNSET
         if not isinstance(self.method, Unset):
-            method = self.method.value
+            method = self.method
 
         post_to_incident_timeline = self.post_to_incident_timeline
 
@@ -107,12 +111,12 @@ class HttpClientTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.http_client_task_params_post_to_slack_channels_item import (
             HttpClientTaskParamsPostToSlackChannelsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         url = d.pop("url")
 
         succeed_on_status = d.pop("succeed_on_status")
@@ -122,7 +126,7 @@ class HttpClientTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = HttpClientTaskParamsTaskType(_task_type)
+            task_type = check_http_client_task_params_task_type(_task_type)
 
         headers = d.pop("headers", UNSET)
 
@@ -139,7 +143,7 @@ class HttpClientTaskParams:
         if isinstance(_method, Unset):
             method = UNSET
         else:
-            method = HttpClientTaskParamsMethod(_method)
+            method = check_http_client_task_params_method(_method)
 
         post_to_incident_timeline = d.pop("post_to_incident_timeline", UNSET)
 

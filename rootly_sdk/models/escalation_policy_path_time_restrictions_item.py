@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -5,9 +6,11 @@ from attrs import field as _attrs_field
 
 from ..models.escalation_policy_path_time_restrictions_item_end_day import (
     EscalationPolicyPathTimeRestrictionsItemEndDay,
+    check_escalation_policy_path_time_restrictions_item_end_day,
 )
 from ..models.escalation_policy_path_time_restrictions_item_start_day import (
     EscalationPolicyPathTimeRestrictionsItemStartDay,
+    check_escalation_policy_path_time_restrictions_item_start_day,
 )
 from ..types import UNSET, Unset
 
@@ -33,13 +36,13 @@ class EscalationPolicyPathTimeRestrictionsItem:
     def to_dict(self) -> dict[str, Any]:
         start_day: Union[Unset, str] = UNSET
         if not isinstance(self.start_day, Unset):
-            start_day = self.start_day.value
+            start_day = self.start_day
 
         start_time = self.start_time
 
         end_day: Union[Unset, str] = UNSET
         if not isinstance(self.end_day, Unset):
-            end_day = self.end_day.value
+            end_day = self.end_day
 
         end_time = self.end_time
 
@@ -58,14 +61,14 @@ class EscalationPolicyPathTimeRestrictionsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         _start_day = d.pop("start_day", UNSET)
         start_day: Union[Unset, EscalationPolicyPathTimeRestrictionsItemStartDay]
         if isinstance(_start_day, Unset):
             start_day = UNSET
         else:
-            start_day = EscalationPolicyPathTimeRestrictionsItemStartDay(_start_day)
+            start_day = check_escalation_policy_path_time_restrictions_item_start_day(_start_day)
 
         start_time = d.pop("start_time", UNSET)
 
@@ -74,7 +77,7 @@ class EscalationPolicyPathTimeRestrictionsItem:
         if isinstance(_end_day, Unset):
             end_day = UNSET
         else:
-            end_day = EscalationPolicyPathTimeRestrictionsItemEndDay(_end_day)
+            end_day = check_escalation_policy_path_time_restrictions_item_end_day(_end_day)
 
         end_time = d.pop("end_time", UNSET)
 

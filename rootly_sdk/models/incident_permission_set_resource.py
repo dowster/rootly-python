@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.incident_permission_set_resource_kind import IncidentPermissionSetResourceKind
+from ..models.incident_permission_set_resource_kind import (
+    IncidentPermissionSetResourceKind,
+    check_incident_permission_set_resource_kind,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="IncidentPermissionSetResource")
@@ -34,7 +38,7 @@ class IncidentPermissionSetResource:
     def to_dict(self) -> dict[str, Any]:
         incident_permission_set_id = self.incident_permission_set_id
 
-        kind = self.kind.value
+        kind: str = self.kind
 
         created_at = self.created_at
 
@@ -66,11 +70,11 @@ class IncidentPermissionSetResource:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         incident_permission_set_id = d.pop("incident_permission_set_id")
 
-        kind = IncidentPermissionSetResourceKind(d.pop("kind"))
+        kind = check_incident_permission_set_resource_kind(d.pop("kind"))
 
         created_at = d.pop("created_at")
 

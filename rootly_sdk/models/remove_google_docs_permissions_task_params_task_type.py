@@ -1,8 +1,17 @@
-from enum import Enum
+from typing import Literal, cast
+
+RemoveGoogleDocsPermissionsTaskParamsTaskType = Literal["remove_google_docs_permissions"]
+
+REMOVE_GOOGLE_DOCS_PERMISSIONS_TASK_PARAMS_TASK_TYPE_VALUES: set[RemoveGoogleDocsPermissionsTaskParamsTaskType] = {
+    "remove_google_docs_permissions",
+}
 
 
-class RemoveGoogleDocsPermissionsTaskParamsTaskType(str, Enum):
-    REMOVE_GOOGLE_DOCS_PERMISSIONS = "remove_google_docs_permissions"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_remove_google_docs_permissions_task_params_task_type(
+    value: str,
+) -> RemoveGoogleDocsPermissionsTaskParamsTaskType:
+    if value in REMOVE_GOOGLE_DOCS_PERMISSIONS_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(RemoveGoogleDocsPermissionsTaskParamsTaskType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {REMOVE_GOOGLE_DOCS_PERMISSIONS_TASK_PARAMS_TASK_TYPE_VALUES!r}"
+    )

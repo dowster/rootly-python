@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_jira_issue_task_params_task_type import UpdateJiraIssueTaskParamsTaskType
+from ..models.update_jira_issue_task_params_task_type import (
+    UpdateJiraIssueTaskParamsTaskType,
+    check_update_jira_issue_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -56,7 +60,7 @@ class UpdateJiraIssueTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         title = self.title
 
@@ -124,11 +128,11 @@ class UpdateJiraIssueTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_jira_issue_task_params_priority import UpdateJiraIssueTaskParamsPriority
         from ..models.update_jira_issue_task_params_status import UpdateJiraIssueTaskParamsStatus
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         issue_id = d.pop("issue_id")
 
         project_key = d.pop("project_key")
@@ -138,7 +142,7 @@ class UpdateJiraIssueTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateJiraIssueTaskParamsTaskType(_task_type)
+            task_type = check_update_jira_issue_task_params_task_type(_task_type)
 
         title = d.pop("title", UNSET)
 

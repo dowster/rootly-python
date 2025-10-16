@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -195,6 +196,7 @@ class UpdateWorkflowDataAttributes:
             sub_status_ids = self.sub_status_ids
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if name is not UNSET:
             field_dict["name"] = name
@@ -248,14 +250,14 @@ class UpdateWorkflowDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.action_item_trigger_params import ActionItemTriggerParams
         from ..models.alert_trigger_params import AlertTriggerParams
         from ..models.incident_trigger_params import IncidentTriggerParams
         from ..models.pulse_trigger_params import PulseTriggerParams
         from ..models.simple_trigger_params import SimpleTriggerParams
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name", UNSET)
 
         slug = d.pop("slug", UNSET)

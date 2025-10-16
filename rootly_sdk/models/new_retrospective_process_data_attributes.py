@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -78,6 +79,7 @@ class NewRetrospectiveProcessDataAttributes:
             retrospective_process_matching_criteria = self.retrospective_process_matching_criteria.to_dict()
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -92,7 +94,7 @@ class NewRetrospectiveProcessDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_retrospective_process_data_attributes_retrospective_process_matching_criteria_type_0 import (
             NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteriaType0,
         )
@@ -103,7 +105,7 @@ class NewRetrospectiveProcessDataAttributes:
             NewRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteriaType2,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         copy_from = d.pop("copy_from")

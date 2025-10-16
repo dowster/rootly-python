@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -68,6 +69,7 @@ class UpdateCommunicationsTemplateDataAttributes:
             communication_template_stages_attributes = self.communication_template_stages_attributes
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if name is not UNSET:
             field_dict["name"] = name
@@ -83,12 +85,12 @@ class UpdateCommunicationsTemplateDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_communications_template_data_attributes_communication_template_stages_attributes_type_0_item import (
             UpdateCommunicationsTemplateDataAttributesCommunicationTemplateStagesAttributesType0Item,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name", UNSET)
 
         def _parse_description(data: object) -> Union[None, Unset, str]:

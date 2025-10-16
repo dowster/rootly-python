@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+RetrospectiveConfigurationListDataItemType = Literal["retrospective_configurations"]
+
+RETROSPECTIVE_CONFIGURATION_LIST_DATA_ITEM_TYPE_VALUES: set[RetrospectiveConfigurationListDataItemType] = {
+    "retrospective_configurations",
+}
 
 
-class RetrospectiveConfigurationListDataItemType(str, Enum):
-    RETROSPECTIVE_CONFIGURATIONS = "retrospective_configurations"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_retrospective_configuration_list_data_item_type(value: str) -> RetrospectiveConfigurationListDataItemType:
+    if value in RETROSPECTIVE_CONFIGURATION_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(RetrospectiveConfigurationListDataItemType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {RETROSPECTIVE_CONFIGURATION_LIST_DATA_ITEM_TYPE_VALUES!r}"
+    )

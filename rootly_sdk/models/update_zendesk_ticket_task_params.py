@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_zendesk_ticket_task_params_task_type import UpdateZendeskTicketTaskParamsTaskType
+from ..models.update_zendesk_ticket_task_params_task_type import (
+    UpdateZendeskTicketTaskParamsTaskType,
+    check_update_zendesk_ticket_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -45,7 +49,7 @@ class UpdateZendeskTicketTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         subject = self.subject
 
@@ -96,11 +100,11 @@ class UpdateZendeskTicketTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_zendesk_ticket_task_params_completion import UpdateZendeskTicketTaskParamsCompletion
         from ..models.update_zendesk_ticket_task_params_priority import UpdateZendeskTicketTaskParamsPriority
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         ticket_id = d.pop("ticket_id")
 
         _task_type = d.pop("task_type", UNSET)
@@ -108,7 +112,7 @@ class UpdateZendeskTicketTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateZendeskTicketTaskParamsTaskType(_task_type)
+            task_type = check_update_zendesk_ticket_task_params_task_type(_task_type)
 
         subject = d.pop("subject", UNSET)
 

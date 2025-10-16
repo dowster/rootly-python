@@ -1,11 +1,22 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewIncidentPermissionSetDataAttributesPrivateIncidentPermissionsItem = Literal["create", "delete", "read", "update"]
+
+NEW_INCIDENT_PERMISSION_SET_DATA_ATTRIBUTES_PRIVATE_INCIDENT_PERMISSIONS_ITEM_VALUES: set[
+    NewIncidentPermissionSetDataAttributesPrivateIncidentPermissionsItem
+] = {
+    "create",
+    "delete",
+    "read",
+    "update",
+}
 
 
-class NewIncidentPermissionSetDataAttributesPrivateIncidentPermissionsItem(str, Enum):
-    CREATE = "create"
-    DELETE = "delete"
-    READ = "read"
-    UPDATE = "update"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_incident_permission_set_data_attributes_private_incident_permissions_item(
+    value: str,
+) -> NewIncidentPermissionSetDataAttributesPrivateIncidentPermissionsItem:
+    if value in NEW_INCIDENT_PERMISSION_SET_DATA_ATTRIBUTES_PRIVATE_INCIDENT_PERMISSIONS_ITEM_VALUES:
+        return cast(NewIncidentPermissionSetDataAttributesPrivateIncidentPermissionsItem, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_INCIDENT_PERMISSION_SET_DATA_ATTRIBUTES_PRIVATE_INCIDENT_PERMISSIONS_ITEM_VALUES!r}"
+    )

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -50,6 +51,7 @@ class UpdateRetrospectiveConfigurationDataAttributes:
             incident_type_ids = self.incident_type_ids
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if severity_ids is not UNSET:
             field_dict["severity_ids"] = severity_ids
@@ -61,8 +63,8 @@ class UpdateRetrospectiveConfigurationDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
 
         def _parse_severity_ids(data: object) -> Union[None, Unset, list[str]]:
             if data is None:

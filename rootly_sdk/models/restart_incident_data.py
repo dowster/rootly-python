@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.restart_incident_data_type import RestartIncidentDataType
+from ..models.restart_incident_data_type import RestartIncidentDataType, check_restart_incident_data_type
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -26,7 +27,7 @@ class RestartIncidentData:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
@@ -45,11 +46,11 @@ class RestartIncidentData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.restart_incident_data_attributes import RestartIncidentDataAttributes
 
-        d = src_dict.copy()
-        type_ = RestartIncidentDataType(d.pop("type"))
+        d = dict(src_dict)
+        type_ = check_restart_incident_data_type(d.pop("type"))
 
         _attributes = d.pop("attributes", UNSET)
         attributes: Union[Unset, RestartIncidentDataAttributes]

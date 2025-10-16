@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.incident_retrospective_step_status import IncidentRetrospectiveStepStatus
+from ..models.incident_retrospective_step_status import (
+    IncidentRetrospectiveStepStatus,
+    check_incident_retrospective_step_status,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="IncidentRetrospectiveStep")
@@ -58,7 +62,7 @@ class IncidentRetrospectiveStep:
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
-            status = self.status.value
+            status = self.status
 
         kind: Union[None, Unset, str]
         if isinstance(self.kind, Unset):
@@ -103,8 +107,8 @@ class IncidentRetrospectiveStep:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         retrospective_step_id = d.pop("retrospective_step_id")
 
         incident_id = d.pop("incident_id")
@@ -129,7 +133,7 @@ class IncidentRetrospectiveStep:
         if isinstance(_status, Unset):
             status = UNSET
         else:
-            status = IncidentRetrospectiveStepStatus(_status)
+            status = check_incident_retrospective_step_status(_status)
 
         def _parse_kind(data: object) -> Union[None, Unset, str]:
             if data is None:

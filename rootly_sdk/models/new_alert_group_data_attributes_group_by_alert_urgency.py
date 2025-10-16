@@ -1,9 +1,18 @@
-from enum import IntEnum
+from typing import Literal, cast
+
+NewAlertGroupDataAttributesGroupByAlertUrgency = Literal[0, 1]
+
+NEW_ALERT_GROUP_DATA_ATTRIBUTES_GROUP_BY_ALERT_URGENCY_VALUES: set[NewAlertGroupDataAttributesGroupByAlertUrgency] = {
+    0,
+    1,
+}
 
 
-class NewAlertGroupDataAttributesGroupByAlertUrgency(IntEnum):
-    VALUE_1 = 1
-    VALUE_0 = 0
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_alert_group_data_attributes_group_by_alert_urgency(
+    value: int,
+) -> NewAlertGroupDataAttributesGroupByAlertUrgency:
+    if value in NEW_ALERT_GROUP_DATA_ATTRIBUTES_GROUP_BY_ALERT_URGENCY_VALUES:
+        return cast(NewAlertGroupDataAttributesGroupByAlertUrgency, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_ALERT_GROUP_DATA_ATTRIBUTES_GROUP_BY_ALERT_URGENCY_VALUES!r}"
+    )

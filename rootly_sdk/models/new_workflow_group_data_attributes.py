@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.new_workflow_group_data_attributes_kind import NewWorkflowGroupDataAttributesKind
+from ..models.new_workflow_group_data_attributes_kind import (
+    NewWorkflowGroupDataAttributesKind,
+    check_new_workflow_group_data_attributes_kind,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewWorkflowGroupDataAttributes")
@@ -34,7 +38,7 @@ class NewWorkflowGroupDataAttributes:
 
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         description: Union[None, Unset, str]
         if isinstance(self.description, Unset):
@@ -69,8 +73,8 @@ class NewWorkflowGroupDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
         _kind = d.pop("kind", UNSET)
@@ -78,7 +82,7 @@ class NewWorkflowGroupDataAttributes:
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = NewWorkflowGroupDataAttributesKind(_kind)
+            kind = check_new_workflow_group_data_attributes_kind(_kind)
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
             if data is None:

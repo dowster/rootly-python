@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.form_field_list_data_item_type import FormFieldListDataItemType
+from ..models.form_field_list_data_item_type import FormFieldListDataItemType, check_form_field_list_data_item_type
 
 if TYPE_CHECKING:
     from ..models.form_field import FormField
@@ -29,7 +30,7 @@ class FormFieldListDataItem:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
@@ -46,13 +47,13 @@ class FormFieldListDataItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.form_field import FormField
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         id = d.pop("id")
 
-        type_ = FormFieldListDataItemType(d.pop("type"))
+        type_ = check_form_field_list_data_item_type(d.pop("type"))
 
         attributes = FormField.from_dict(d.pop("attributes"))
 

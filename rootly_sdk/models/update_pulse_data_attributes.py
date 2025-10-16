@@ -1,4 +1,5 @@
 import datetime
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -126,6 +127,7 @@ class UpdatePulseDataAttributes:
             data = self.data
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if source is not UNSET:
             field_dict["source"] = source
@@ -151,12 +153,12 @@ class UpdatePulseDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_pulse_data_attributes_data_type_0 import UpdatePulseDataAttributesDataType0
         from ..models.update_pulse_data_attributes_labels_item_type_0 import UpdatePulseDataAttributesLabelsItemType0
         from ..models.update_pulse_data_attributes_refs_item_type_0 import UpdatePulseDataAttributesRefsItemType0
 
-        d = src_dict.copy()
+        d = dict(src_dict)
 
         def _parse_source(data: object) -> Union[None, Unset, str]:
             if data is None:

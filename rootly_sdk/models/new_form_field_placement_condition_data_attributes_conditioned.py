@@ -1,9 +1,20 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewFormFieldPlacementConditionDataAttributesConditioned = Literal["placement", "required"]
+
+NEW_FORM_FIELD_PLACEMENT_CONDITION_DATA_ATTRIBUTES_CONDITIONED_VALUES: set[
+    NewFormFieldPlacementConditionDataAttributesConditioned
+] = {
+    "placement",
+    "required",
+}
 
 
-class NewFormFieldPlacementConditionDataAttributesConditioned(str, Enum):
-    PLACEMENT = "placement"
-    REQUIRED = "required"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_form_field_placement_condition_data_attributes_conditioned(
+    value: str,
+) -> NewFormFieldPlacementConditionDataAttributesConditioned:
+    if value in NEW_FORM_FIELD_PLACEMENT_CONDITION_DATA_ATTRIBUTES_CONDITIONED_VALUES:
+        return cast(NewFormFieldPlacementConditionDataAttributesConditioned, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_FORM_FIELD_PLACEMENT_CONDITION_DATA_ATTRIBUTES_CONDITIONED_VALUES!r}"
+    )

@@ -1,12 +1,23 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
-from ..models.update_live_call_router_data_attributes_country_code import UpdateLiveCallRouterDataAttributesCountryCode
-from ..models.update_live_call_router_data_attributes_kind import UpdateLiveCallRouterDataAttributesKind
-from ..models.update_live_call_router_data_attributes_phone_type import UpdateLiveCallRouterDataAttributesPhoneType
+from ..models.update_live_call_router_data_attributes_country_code import (
+    UpdateLiveCallRouterDataAttributesCountryCode,
+    check_update_live_call_router_data_attributes_country_code,
+)
+from ..models.update_live_call_router_data_attributes_kind import (
+    UpdateLiveCallRouterDataAttributesKind,
+    check_update_live_call_router_data_attributes_kind,
+)
+from ..models.update_live_call_router_data_attributes_phone_type import (
+    UpdateLiveCallRouterDataAttributesPhoneType,
+    check_update_live_call_router_data_attributes_phone_type,
+)
 from ..models.update_live_call_router_data_attributes_waiting_music_url import (
     UpdateLiveCallRouterDataAttributesWaitingMusicUrl,
+    check_update_live_call_router_data_attributes_waiting_music_url,
 )
 from ..types import UNSET, Unset
 
@@ -74,7 +85,7 @@ class UpdateLiveCallRouterDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         enabled = self.enabled
 
@@ -82,11 +93,11 @@ class UpdateLiveCallRouterDataAttributes:
 
         country_code: Union[Unset, str] = UNSET
         if not isinstance(self.country_code, Unset):
-            country_code = self.country_code.value
+            country_code = self.country_code
 
         phone_type: Union[Unset, str] = UNSET
         if not isinstance(self.phone_type, Unset):
-            phone_type = self.phone_type.value
+            phone_type = self.phone_type
 
         voicemail_greeting = self.voicemail_greeting
 
@@ -94,7 +105,7 @@ class UpdateLiveCallRouterDataAttributes:
 
         waiting_music_url: Union[Unset, str] = UNSET
         if not isinstance(self.waiting_music_url, Unset):
-            waiting_music_url = self.waiting_music_url.value
+            waiting_music_url = self.waiting_music_url
 
         sent_to_voicemail_delay = self.sent_to_voicemail_delay
 
@@ -120,6 +131,7 @@ class UpdateLiveCallRouterDataAttributes:
             escalation_policy_trigger_params = self.escalation_policy_trigger_params.to_dict()
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if kind is not UNSET:
             field_dict["kind"] = kind
@@ -157,7 +169,7 @@ class UpdateLiveCallRouterDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_live_call_router_data_attributes_escalation_policy_trigger_params import (
             UpdateLiveCallRouterDataAttributesEscalationPolicyTriggerParams,
         )
@@ -165,13 +177,13 @@ class UpdateLiveCallRouterDataAttributes:
             UpdateLiveCallRouterDataAttributesPagingTargetsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _kind = d.pop("kind", UNSET)
         kind: Union[Unset, UpdateLiveCallRouterDataAttributesKind]
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = UpdateLiveCallRouterDataAttributesKind(_kind)
+            kind = check_update_live_call_router_data_attributes_kind(_kind)
 
         enabled = d.pop("enabled", UNSET)
 
@@ -182,14 +194,14 @@ class UpdateLiveCallRouterDataAttributes:
         if isinstance(_country_code, Unset):
             country_code = UNSET
         else:
-            country_code = UpdateLiveCallRouterDataAttributesCountryCode(_country_code)
+            country_code = check_update_live_call_router_data_attributes_country_code(_country_code)
 
         _phone_type = d.pop("phone_type", UNSET)
         phone_type: Union[Unset, UpdateLiveCallRouterDataAttributesPhoneType]
         if isinstance(_phone_type, Unset):
             phone_type = UNSET
         else:
-            phone_type = UpdateLiveCallRouterDataAttributesPhoneType(_phone_type)
+            phone_type = check_update_live_call_router_data_attributes_phone_type(_phone_type)
 
         voicemail_greeting = d.pop("voicemail_greeting", UNSET)
 
@@ -200,7 +212,7 @@ class UpdateLiveCallRouterDataAttributes:
         if isinstance(_waiting_music_url, Unset):
             waiting_music_url = UNSET
         else:
-            waiting_music_url = UpdateLiveCallRouterDataAttributesWaitingMusicUrl(_waiting_music_url)
+            waiting_music_url = check_update_live_call_router_data_attributes_waiting_music_url(_waiting_music_url)
 
         sent_to_voicemail_delay = d.pop("sent_to_voicemail_delay", UNSET)
 

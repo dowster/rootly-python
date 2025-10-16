@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewIncidentCustomFieldSelectionDataType = Literal["incident_custom_field_selections"]
+
+NEW_INCIDENT_CUSTOM_FIELD_SELECTION_DATA_TYPE_VALUES: set[NewIncidentCustomFieldSelectionDataType] = {
+    "incident_custom_field_selections",
+}
 
 
-class NewIncidentCustomFieldSelectionDataType(str, Enum):
-    INCIDENT_CUSTOM_FIELD_SELECTIONS = "incident_custom_field_selections"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_incident_custom_field_selection_data_type(value: str) -> NewIncidentCustomFieldSelectionDataType:
+    if value in NEW_INCIDENT_CUSTOM_FIELD_SELECTION_DATA_TYPE_VALUES:
+        return cast(NewIncidentCustomFieldSelectionDataType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_INCIDENT_CUSTOM_FIELD_SELECTION_DATA_TYPE_VALUES!r}"
+    )

@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+GetCatalogEntityInclude = Literal["catalog", "properties"]
+
+GET_CATALOG_ENTITY_INCLUDE_VALUES: set[GetCatalogEntityInclude] = {
+    "catalog",
+    "properties",
+}
 
 
-class GetCatalogEntityInclude(str, Enum):
-    CATALOG = "catalog"
-    PROPERTIES = "properties"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_get_catalog_entity_include(value: str) -> GetCatalogEntityInclude:
+    if value in GET_CATALOG_ENTITY_INCLUDE_VALUES:
+        return cast(GetCatalogEntityInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {GET_CATALOG_ENTITY_INCLUDE_VALUES!r}")

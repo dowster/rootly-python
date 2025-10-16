@@ -1,15 +1,22 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateCatalogDataAttributesIcon = Literal[
+    "chart-bar", "cursor-arrow-ripple", "globe-alt", "light-bulb", "server-stack", "shapes", "user-group", "users"
+]
+
+UPDATE_CATALOG_DATA_ATTRIBUTES_ICON_VALUES: set[UpdateCatalogDataAttributesIcon] = {
+    "chart-bar",
+    "cursor-arrow-ripple",
+    "globe-alt",
+    "light-bulb",
+    "server-stack",
+    "shapes",
+    "user-group",
+    "users",
+}
 
 
-class UpdateCatalogDataAttributesIcon(str, Enum):
-    CHART_BAR = "chart-bar"
-    CURSOR_ARROW_RIPPLE = "cursor-arrow-ripple"
-    GLOBE_ALT = "globe-alt"
-    LIGHT_BULB = "light-bulb"
-    SERVER_STACK = "server-stack"
-    SHAPES = "shapes"
-    USERS = "users"
-    USER_GROUP = "user-group"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_catalog_data_attributes_icon(value: str) -> UpdateCatalogDataAttributesIcon:
+    if value in UPDATE_CATALOG_DATA_ATTRIBUTES_ICON_VALUES:
+        return cast(UpdateCatalogDataAttributesIcon, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_CATALOG_DATA_ATTRIBUTES_ICON_VALUES!r}")

@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+AuthorizationGranteeType = Literal["Team", "User"]
+
+AUTHORIZATION_GRANTEE_TYPE_VALUES: set[AuthorizationGranteeType] = {
+    "Team",
+    "User",
+}
 
 
-class AuthorizationGranteeType(str, Enum):
-    TEAM = "Team"
-    USER = "User"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_authorization_grantee_type(value: str) -> AuthorizationGranteeType:
+    if value in AUTHORIZATION_GRANTEE_TYPE_VALUES:
+        return cast(AuthorizationGranteeType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {AUTHORIZATION_GRANTEE_TYPE_VALUES!r}")

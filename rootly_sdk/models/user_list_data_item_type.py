@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+UserListDataItemType = Literal["users"]
+
+USER_LIST_DATA_ITEM_TYPE_VALUES: set[UserListDataItemType] = {
+    "users",
+}
 
 
-class UserListDataItemType(str, Enum):
-    USERS = "users"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_user_list_data_item_type(value: str) -> UserListDataItemType:
+    if value in USER_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(UserListDataItemType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {USER_LIST_DATA_ITEM_TYPE_VALUES!r}")

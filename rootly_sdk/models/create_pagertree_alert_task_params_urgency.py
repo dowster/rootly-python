@@ -1,12 +1,19 @@
-from enum import Enum
+from typing import Literal, cast
+
+CreatePagertreeAlertTaskParamsUrgency = Literal["auto", "critical", "high", "low", "medium"]
+
+CREATE_PAGERTREE_ALERT_TASK_PARAMS_URGENCY_VALUES: set[CreatePagertreeAlertTaskParamsUrgency] = {
+    "auto",
+    "critical",
+    "high",
+    "low",
+    "medium",
+}
 
 
-class CreatePagertreeAlertTaskParamsUrgency(str, Enum):
-    AUTO = "auto"
-    CRITICAL = "critical"
-    HIGH = "high"
-    LOW = "low"
-    MEDIUM = "medium"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_create_pagertree_alert_task_params_urgency(value: str) -> CreatePagertreeAlertTaskParamsUrgency:
+    if value in CREATE_PAGERTREE_ALERT_TASK_PARAMS_URGENCY_VALUES:
+        return cast(CreatePagertreeAlertTaskParamsUrgency, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {CREATE_PAGERTREE_ALERT_TASK_PARAMS_URGENCY_VALUES!r}"
+    )

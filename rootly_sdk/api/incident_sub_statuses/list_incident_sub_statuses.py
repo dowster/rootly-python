@@ -6,7 +6,9 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.incident_sub_status_list import IncidentSubStatusList
-from ...models.list_incident_sub_statuses_include import ListIncidentSubStatusesInclude
+from ...models.list_incident_sub_statuses_include import (
+    ListIncidentSubStatusesInclude,
+)
 from ...models.list_incident_sub_statuses_sort import ListIncidentSubStatusesSort
 from ...types import UNSET, Response, Unset
 
@@ -28,13 +30,13 @@ def _get_kwargs(
 
     json_include: Union[Unset, str] = UNSET
     if not isinstance(include, Unset):
-        json_include = include.value
+        json_include = include
 
     params["include"] = json_include
 
     json_sort: Union[Unset, str] = UNSET
     if not isinstance(sort, Unset):
-        json_sort = sort.value
+        json_sort = sort
 
     params["sort"] = json_sort
 
@@ -70,6 +72,7 @@ def _parse_response(
         response_200 = IncidentSubStatusList.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:

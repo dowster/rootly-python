@@ -1,12 +1,15 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
 from ..models.update_escalation_policy_level_data_attributes_paging_strategy_configuration_schedule_strategy import (
     UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy,
+    check_update_escalation_policy_level_data_attributes_paging_strategy_configuration_schedule_strategy,
 )
 from ..models.update_escalation_policy_level_data_attributes_paging_strategy_configuration_strategy import (
     UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy,
+    check_update_escalation_policy_level_data_attributes_paging_strategy_configuration_strategy,
 )
 from ..types import UNSET, Unset
 
@@ -66,11 +69,11 @@ class UpdateEscalationPolicyLevelDataAttributes:
 
         paging_strategy_configuration_strategy: Union[Unset, str] = UNSET
         if not isinstance(self.paging_strategy_configuration_strategy, Unset):
-            paging_strategy_configuration_strategy = self.paging_strategy_configuration_strategy.value
+            paging_strategy_configuration_strategy = self.paging_strategy_configuration_strategy
 
         paging_strategy_configuration_schedule_strategy: Union[Unset, str] = UNSET
         if not isinstance(self.paging_strategy_configuration_schedule_strategy, Unset):
-            paging_strategy_configuration_schedule_strategy = self.paging_strategy_configuration_schedule_strategy.value
+            paging_strategy_configuration_schedule_strategy = self.paging_strategy_configuration_schedule_strategy
 
         notification_target_params: Union[Unset, list[Union[None, dict[str, Any]]]] = UNSET
         if not isinstance(self.notification_target_params, Unset):
@@ -87,6 +90,7 @@ class UpdateEscalationPolicyLevelDataAttributes:
                 notification_target_params.append(notification_target_params_item)
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if delay is not UNSET:
             field_dict["delay"] = delay
@@ -106,12 +110,12 @@ class UpdateEscalationPolicyLevelDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_escalation_policy_level_data_attributes_notification_target_params_item_type_0 import (
             UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         delay = d.pop("delay", UNSET)
 
         position = d.pop("position", UNSET)
@@ -133,7 +137,7 @@ class UpdateEscalationPolicyLevelDataAttributes:
             paging_strategy_configuration_strategy = UNSET
         else:
             paging_strategy_configuration_strategy = (
-                UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy(
+                check_update_escalation_policy_level_data_attributes_paging_strategy_configuration_strategy(
                     _paging_strategy_configuration_strategy
                 )
             )
@@ -148,7 +152,7 @@ class UpdateEscalationPolicyLevelDataAttributes:
             paging_strategy_configuration_schedule_strategy = UNSET
         else:
             paging_strategy_configuration_schedule_strategy = (
-                UpdateEscalationPolicyLevelDataAttributesPagingStrategyConfigurationScheduleStrategy(
+                check_update_escalation_policy_level_data_attributes_paging_strategy_configuration_schedule_strategy(
                     _paging_strategy_configuration_schedule_strategy
                 )
             )

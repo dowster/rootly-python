@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -5,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..models.new_dashboard_panel_data_attributes_params_legend_groups import (
     NewDashboardPanelDataAttributesParamsLegendGroups,
+    check_new_dashboard_panel_data_attributes_params_legend_groups,
 )
 from ..types import UNSET, Unset
 
@@ -15,19 +17,16 @@ T = TypeVar("T", bound="NewDashboardPanelDataAttributesParamsLegend")
 class NewDashboardPanelDataAttributesParamsLegend:
     """
     Attributes:
-        groups (Union[Unset, NewDashboardPanelDataAttributesParamsLegendGroups]):  Default:
-            NewDashboardPanelDataAttributesParamsLegendGroups.ALL.
+        groups (Union[Unset, NewDashboardPanelDataAttributesParamsLegendGroups]):  Default: 'all'.
     """
 
-    groups: Union[Unset, NewDashboardPanelDataAttributesParamsLegendGroups] = (
-        NewDashboardPanelDataAttributesParamsLegendGroups.ALL
-    )
+    groups: Union[Unset, NewDashboardPanelDataAttributesParamsLegendGroups] = "all"
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         groups: Union[Unset, str] = UNSET
         if not isinstance(self.groups, Unset):
-            groups = self.groups.value
+            groups = self.groups
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -38,14 +37,14 @@ class NewDashboardPanelDataAttributesParamsLegend:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         _groups = d.pop("groups", UNSET)
         groups: Union[Unset, NewDashboardPanelDataAttributesParamsLegendGroups]
         if isinstance(_groups, Unset):
             groups = UNSET
         else:
-            groups = NewDashboardPanelDataAttributesParamsLegendGroups(_groups)
+            groups = check_new_dashboard_panel_data_attributes_params_legend_groups(_groups)
 
         new_dashboard_panel_data_attributes_params_legend = cls(
             groups=groups,

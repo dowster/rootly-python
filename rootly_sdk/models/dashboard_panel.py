@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -79,12 +80,12 @@ class DashboardPanel:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.dashboard_panel_data_item import DashboardPanelDataItem
         from ..models.dashboard_panel_params import DashboardPanelParams
         from ..models.dashboard_panel_position_type_0 import DashboardPanelPositionType0
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         params = DashboardPanelParams.from_dict(d.pop("params"))
 
         dashboard_id = d.pop("dashboard_id", UNSET)

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,8 +6,12 @@ from attrs import field as _attrs_field
 
 from ..models.create_google_meeting_task_params_conference_solution_key import (
     CreateGoogleMeetingTaskParamsConferenceSolutionKey,
+    check_create_google_meeting_task_params_conference_solution_key,
 )
-from ..models.create_google_meeting_task_params_task_type import CreateGoogleMeetingTaskParamsTaskType
+from ..models.create_google_meeting_task_params_task_type import (
+    CreateGoogleMeetingTaskParamsTaskType,
+    check_create_google_meeting_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -51,11 +56,11 @@ class CreateGoogleMeetingTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         conference_solution_key: Union[Unset, str] = UNSET
         if not isinstance(self.conference_solution_key, Unset):
-            conference_solution_key = self.conference_solution_key.value
+            conference_solution_key = self.conference_solution_key
 
         record_meeting = self.record_meeting
 
@@ -90,12 +95,12 @@ class CreateGoogleMeetingTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_google_meeting_task_params_post_to_slack_channels_item import (
             CreateGoogleMeetingTaskParamsPostToSlackChannelsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
 
         def _parse_summary(data: object) -> Union[None, str]:
             if data is None:
@@ -116,14 +121,16 @@ class CreateGoogleMeetingTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateGoogleMeetingTaskParamsTaskType(_task_type)
+            task_type = check_create_google_meeting_task_params_task_type(_task_type)
 
         _conference_solution_key = d.pop("conference_solution_key", UNSET)
         conference_solution_key: Union[Unset, CreateGoogleMeetingTaskParamsConferenceSolutionKey]
         if isinstance(_conference_solution_key, Unset):
             conference_solution_key = UNSET
         else:
-            conference_solution_key = CreateGoogleMeetingTaskParamsConferenceSolutionKey(_conference_solution_key)
+            conference_solution_key = check_create_google_meeting_task_params_conference_solution_key(
+                _conference_solution_key
+            )
 
         record_meeting = d.pop("record_meeting", UNSET)
 

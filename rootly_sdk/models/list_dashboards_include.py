@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+ListDashboardsInclude = Literal["panels"]
+
+LIST_DASHBOARDS_INCLUDE_VALUES: set[ListDashboardsInclude] = {
+    "panels",
+}
 
 
-class ListDashboardsInclude(str, Enum):
-    PANELS = "panels"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_list_dashboards_include(value: str) -> ListDashboardsInclude:
+    if value in LIST_DASHBOARDS_INCLUDE_VALUES:
+        return cast(ListDashboardsInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {LIST_DASHBOARDS_INCLUDE_VALUES!r}")

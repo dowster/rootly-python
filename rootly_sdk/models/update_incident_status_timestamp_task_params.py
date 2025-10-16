@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -5,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..models.update_incident_status_timestamp_task_params_task_type import (
     UpdateIncidentStatusTimestampTaskParamsTaskType,
+    check_update_incident_status_timestamp_task_params_task_type,
 )
 from ..types import UNSET, Unset
 
@@ -32,7 +34,7 @@ class UpdateIncidentStatusTimestampTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -48,8 +50,8 @@ class UpdateIncidentStatusTimestampTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         sub_status_id = d.pop("sub_status_id")
 
         assigned_at = d.pop("assigned_at")
@@ -59,7 +61,7 @@ class UpdateIncidentStatusTimestampTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateIncidentStatusTimestampTaskParamsTaskType(_task_type)
+            task_type = check_update_incident_status_timestamp_task_params_task_type(_task_type)
 
         update_incident_status_timestamp_task_params = cls(
             sub_status_id=sub_status_id,

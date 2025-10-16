@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.user_notification_rule_enabled_contact_types_item import UserNotificationRuleEnabledContactTypesItem
+from ..models.user_notification_rule_enabled_contact_types_item import (
+    UserNotificationRuleEnabledContactTypesItem,
+    check_user_notification_rule_enabled_contact_types_item,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UserNotificationRule")
@@ -81,7 +85,7 @@ class UserNotificationRule:
         if not isinstance(self.enabled_contact_types, Unset):
             enabled_contact_types = []
             for enabled_contact_types_item_data in self.enabled_contact_types:
-                enabled_contact_types_item = enabled_contact_types_item_data.value
+                enabled_contact_types_item: str = enabled_contact_types_item_data
                 enabled_contact_types.append(enabled_contact_types_item)
 
         created_at = self.created_at
@@ -115,8 +119,8 @@ class UserNotificationRule:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         user_id = d.pop("user_id", UNSET)
 
         def _parse_delay(data: object) -> Union[None, Unset, int]:
@@ -176,7 +180,9 @@ class UserNotificationRule:
         enabled_contact_types = []
         _enabled_contact_types = d.pop("enabled_contact_types", UNSET)
         for enabled_contact_types_item_data in _enabled_contact_types or []:
-            enabled_contact_types_item = UserNotificationRuleEnabledContactTypesItem(enabled_contact_types_item_data)
+            enabled_contact_types_item = check_user_notification_rule_enabled_contact_types_item(
+                enabled_contact_types_item_data
+            )
 
             enabled_contact_types.append(enabled_contact_types_item)
 

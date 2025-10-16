@@ -1,10 +1,20 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.update_dashboard_data_attributes_color import UpdateDashboardDataAttributesColor
-from ..models.update_dashboard_data_attributes_owner import UpdateDashboardDataAttributesOwner
-from ..models.update_dashboard_data_attributes_period import UpdateDashboardDataAttributesPeriod
+from ..models.update_dashboard_data_attributes_color import (
+    UpdateDashboardDataAttributesColor,
+    check_update_dashboard_data_attributes_color,
+)
+from ..models.update_dashboard_data_attributes_owner import (
+    UpdateDashboardDataAttributesOwner,
+    check_update_dashboard_data_attributes_owner,
+)
+from ..models.update_dashboard_data_attributes_period import (
+    UpdateDashboardDataAttributesPeriod,
+    check_update_dashboard_data_attributes_period,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateDashboardDataAttributes")
@@ -46,7 +56,7 @@ class UpdateDashboardDataAttributes:
 
         owner: Union[Unset, str] = UNSET
         if not isinstance(self.owner, Unset):
-            owner = self.owner.value
+            owner = self.owner
 
         public = self.public
 
@@ -60,15 +70,16 @@ class UpdateDashboardDataAttributes:
 
         color: Union[Unset, str] = UNSET
         if not isinstance(self.color, Unset):
-            color = self.color.value
+            color = self.color
 
         icon = self.icon
 
         period: Union[Unset, str] = UNSET
         if not isinstance(self.period, Unset):
-            period = self.period.value
+            period = self.period
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if name is not UNSET:
             field_dict["name"] = name
@@ -92,8 +103,8 @@ class UpdateDashboardDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name", UNSET)
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
@@ -110,7 +121,7 @@ class UpdateDashboardDataAttributes:
         if isinstance(_owner, Unset):
             owner = UNSET
         else:
-            owner = UpdateDashboardDataAttributesOwner(_owner)
+            owner = check_update_dashboard_data_attributes_owner(_owner)
 
         public = d.pop("public", UNSET)
 
@@ -130,7 +141,7 @@ class UpdateDashboardDataAttributes:
         if isinstance(_color, Unset):
             color = UNSET
         else:
-            color = UpdateDashboardDataAttributesColor(_color)
+            color = check_update_dashboard_data_attributes_color(_color)
 
         icon = d.pop("icon", UNSET)
 
@@ -139,7 +150,7 @@ class UpdateDashboardDataAttributes:
         if isinstance(_period, Unset):
             period = UNSET
         else:
-            period = UpdateDashboardDataAttributesPeriod(_period)
+            period = check_update_dashboard_data_attributes_period(_period)
 
         update_dashboard_data_attributes = cls(
             name=name,

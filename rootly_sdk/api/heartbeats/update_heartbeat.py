@@ -1,5 +1,6 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
+from uuid import UUID
 
 import httpx
 
@@ -12,7 +13,7 @@ from ...types import Response
 
 
 def _get_kwargs(
-    id: str,
+    id: Union[UUID, str],
     *,
     body: UpdateHeartbeat,
 ) -> dict[str, Any]:
@@ -23,9 +24,8 @@ def _get_kwargs(
         "url": f"/v1/heartbeats/{id}",
     }
 
-    _body = body.to_dict()
+    _kwargs["json"] = body.to_dict()
 
-    _kwargs["json"] = _body
     headers["Content-Type"] = "application/vnd.api+json"
 
     _kwargs["headers"] = headers
@@ -39,14 +39,17 @@ def _parse_response(
         response_200 = HeartbeatResponse.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 404:
         response_404 = ErrorsList.from_dict(response.json())
 
         return response_404
+
     if response.status_code == 422:
         response_422 = ErrorsList.from_dict(response.json())
 
         return response_422
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -65,7 +68,7 @@ def _build_response(
 
 
 def sync_detailed(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
     body: UpdateHeartbeat,
@@ -75,7 +78,7 @@ def sync_detailed(
      Update a specific heartbeat by id
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
         body (UpdateHeartbeat):
 
     Raises:
@@ -99,7 +102,7 @@ def sync_detailed(
 
 
 def sync(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
     body: UpdateHeartbeat,
@@ -109,7 +112,7 @@ def sync(
      Update a specific heartbeat by id
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
         body (UpdateHeartbeat):
 
     Raises:
@@ -128,7 +131,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
     body: UpdateHeartbeat,
@@ -138,7 +141,7 @@ async def asyncio_detailed(
      Update a specific heartbeat by id
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
         body (UpdateHeartbeat):
 
     Raises:
@@ -160,7 +163,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
     body: UpdateHeartbeat,
@@ -170,7 +173,7 @@ async def asyncio(
      Update a specific heartbeat by id
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
         body (UpdateHeartbeat):
 
     Raises:

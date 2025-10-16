@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewSecretDataAttributesKind = Literal["built_in", "hashicorp_vault"]
+
+NEW_SECRET_DATA_ATTRIBUTES_KIND_VALUES: set[NewSecretDataAttributesKind] = {
+    "built_in",
+    "hashicorp_vault",
+}
 
 
-class NewSecretDataAttributesKind(str, Enum):
-    BUILT_IN = "built_in"
-    HASHICORP_VAULT = "hashicorp_vault"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_secret_data_attributes_kind(value: str) -> NewSecretDataAttributesKind:
+    if value in NEW_SECRET_DATA_ATTRIBUTES_KIND_VALUES:
+        return cast(NewSecretDataAttributesKind, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_SECRET_DATA_ATTRIBUTES_KIND_VALUES!r}")

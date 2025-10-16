@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewRetrospectiveProcessDataType = Literal["retrospective_processes"]
+
+NEW_RETROSPECTIVE_PROCESS_DATA_TYPE_VALUES: set[NewRetrospectiveProcessDataType] = {
+    "retrospective_processes",
+}
 
 
-class NewRetrospectiveProcessDataType(str, Enum):
-    RETROSPECTIVE_PROCESSES = "retrospective_processes"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_retrospective_process_data_type(value: str) -> NewRetrospectiveProcessDataType:
+    if value in NEW_RETROSPECTIVE_PROCESS_DATA_TYPE_VALUES:
+        return cast(NewRetrospectiveProcessDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_RETROSPECTIVE_PROCESS_DATA_TYPE_VALUES!r}")

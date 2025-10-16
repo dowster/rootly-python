@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+RemoveSubscribersDataType = Literal["incidents"]
+
+REMOVE_SUBSCRIBERS_DATA_TYPE_VALUES: set[RemoveSubscribersDataType] = {
+    "incidents",
+}
 
 
-class RemoveSubscribersDataType(str, Enum):
-    INCIDENTS = "incidents"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_remove_subscribers_data_type(value: str) -> RemoveSubscribersDataType:
+    if value in REMOVE_SUBSCRIBERS_DATA_TYPE_VALUES:
+        return cast(RemoveSubscribersDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {REMOVE_SUBSCRIBERS_DATA_TYPE_VALUES!r}")

@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
-from ..models.update_incident_feedback_data_attributes_rating import UpdateIncidentFeedbackDataAttributesRating
+from ..models.update_incident_feedback_data_attributes_rating import (
+    UpdateIncidentFeedbackDataAttributesRating,
+    check_update_incident_feedback_data_attributes_rating,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateIncidentFeedbackDataAttributes")
@@ -26,11 +30,12 @@ class UpdateIncidentFeedbackDataAttributes:
 
         rating: Union[Unset, int] = UNSET
         if not isinstance(self.rating, Unset):
-            rating = self.rating.value
+            rating = self.rating
 
         anonymous = self.anonymous
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if feedback is not UNSET:
             field_dict["feedback"] = feedback
@@ -42,8 +47,8 @@ class UpdateIncidentFeedbackDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         feedback = d.pop("feedback", UNSET)
 
         _rating = d.pop("rating", UNSET)
@@ -51,7 +56,7 @@ class UpdateIncidentFeedbackDataAttributes:
         if isinstance(_rating, Unset):
             rating = UNSET
         else:
-            rating = UpdateIncidentFeedbackDataAttributesRating(_rating)
+            rating = check_update_incident_feedback_data_attributes_rating(_rating)
 
         anonymous = d.pop("anonymous", UNSET)
 

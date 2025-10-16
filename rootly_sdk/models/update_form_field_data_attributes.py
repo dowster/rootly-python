@@ -1,10 +1,20 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.update_form_field_data_attributes_input_kind import UpdateFormFieldDataAttributesInputKind
-from ..models.update_form_field_data_attributes_kind import UpdateFormFieldDataAttributesKind
-from ..models.update_form_field_data_attributes_value_kind import UpdateFormFieldDataAttributesValueKind
+from ..models.update_form_field_data_attributes_input_kind import (
+    UpdateFormFieldDataAttributesInputKind,
+    check_update_form_field_data_attributes_input_kind,
+)
+from ..models.update_form_field_data_attributes_kind import (
+    UpdateFormFieldDataAttributesKind,
+    check_update_form_field_data_attributes_kind,
+)
+from ..models.update_form_field_data_attributes_value_kind import (
+    UpdateFormFieldDataAttributesValueKind,
+    check_update_form_field_data_attributes_value_kind,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateFormFieldDataAttributes")
@@ -42,15 +52,15 @@ class UpdateFormFieldDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         input_kind: Union[Unset, str] = UNSET
         if not isinstance(self.input_kind, Unset):
-            input_kind = self.input_kind.value
+            input_kind = self.input_kind
 
         value_kind: Union[Unset, str] = UNSET
         if not isinstance(self.value_kind, Unset):
-            value_kind = self.value_kind.value
+            value_kind = self.value_kind
 
         value_kind_catalog_id: Union[None, Unset, str]
         if isinstance(self.value_kind_catalog_id, Unset):
@@ -83,6 +93,7 @@ class UpdateFormFieldDataAttributes:
             default_values = self.default_values
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if kind is not UNSET:
             field_dict["kind"] = kind
@@ -110,28 +121,28 @@ class UpdateFormFieldDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         _kind = d.pop("kind", UNSET)
         kind: Union[Unset, UpdateFormFieldDataAttributesKind]
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = UpdateFormFieldDataAttributesKind(_kind)
+            kind = check_update_form_field_data_attributes_kind(_kind)
 
         _input_kind = d.pop("input_kind", UNSET)
         input_kind: Union[Unset, UpdateFormFieldDataAttributesInputKind]
         if isinstance(_input_kind, Unset):
             input_kind = UNSET
         else:
-            input_kind = UpdateFormFieldDataAttributesInputKind(_input_kind)
+            input_kind = check_update_form_field_data_attributes_input_kind(_input_kind)
 
         _value_kind = d.pop("value_kind", UNSET)
         value_kind: Union[Unset, UpdateFormFieldDataAttributesValueKind]
         if isinstance(_value_kind, Unset):
             value_kind = UNSET
         else:
-            value_kind = UpdateFormFieldDataAttributesValueKind(_value_kind)
+            value_kind = check_update_form_field_data_attributes_value_kind(_value_kind)
 
         def _parse_value_kind_catalog_id(data: object) -> Union[None, Unset, str]:
             if data is None:

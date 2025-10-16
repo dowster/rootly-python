@@ -1,9 +1,16 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewSubStatusDataAttributesParentStatus = Literal["retrospective", "started"]
+
+NEW_SUB_STATUS_DATA_ATTRIBUTES_PARENT_STATUS_VALUES: set[NewSubStatusDataAttributesParentStatus] = {
+    "retrospective",
+    "started",
+}
 
 
-class NewSubStatusDataAttributesParentStatus(str, Enum):
-    RETROSPECTIVE = "retrospective"
-    STARTED = "started"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_sub_status_data_attributes_parent_status(value: str) -> NewSubStatusDataAttributesParentStatus:
+    if value in NEW_SUB_STATUS_DATA_ATTRIBUTES_PARENT_STATUS_VALUES:
+        return cast(NewSubStatusDataAttributesParentStatus, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_SUB_STATUS_DATA_ATTRIBUTES_PARENT_STATUS_VALUES!r}"
+    )

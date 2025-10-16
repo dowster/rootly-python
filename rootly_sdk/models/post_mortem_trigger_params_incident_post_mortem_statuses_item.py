@@ -1,9 +1,20 @@
-from enum import Enum
+from typing import Literal, cast
+
+PostMortemTriggerParamsIncidentPostMortemStatusesItem = Literal["draft", "published"]
+
+POST_MORTEM_TRIGGER_PARAMS_INCIDENT_POST_MORTEM_STATUSES_ITEM_VALUES: set[
+    PostMortemTriggerParamsIncidentPostMortemStatusesItem
+] = {
+    "draft",
+    "published",
+}
 
 
-class PostMortemTriggerParamsIncidentPostMortemStatusesItem(str, Enum):
-    DRAFT = "draft"
-    PUBLISHED = "published"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_post_mortem_trigger_params_incident_post_mortem_statuses_item(
+    value: str,
+) -> PostMortemTriggerParamsIncidentPostMortemStatusesItem:
+    if value in POST_MORTEM_TRIGGER_PARAMS_INCIDENT_POST_MORTEM_STATUSES_ITEM_VALUES:
+        return cast(PostMortemTriggerParamsIncidentPostMortemStatusesItem, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {POST_MORTEM_TRIGGER_PARAMS_INCIDENT_POST_MORTEM_STATUSES_ITEM_VALUES!r}"
+    )

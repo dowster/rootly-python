@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
-from ..models.update_form_field_position_data_attributes_form import UpdateFormFieldPositionDataAttributesForm
+from ..models.update_form_field_position_data_attributes_form import (
+    UpdateFormFieldPositionDataAttributesForm,
+    check_update_form_field_position_data_attributes_form,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateFormFieldPositionDataAttributes")
@@ -26,11 +30,12 @@ class UpdateFormFieldPositionDataAttributes:
 
         form: Union[Unset, str] = UNSET
         if not isinstance(self.form, Unset):
-            form = self.form.value
+            form = self.form
 
         position = self.position
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if form_field_id is not UNSET:
             field_dict["form_field_id"] = form_field_id
@@ -42,8 +47,8 @@ class UpdateFormFieldPositionDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         form_field_id = d.pop("form_field_id", UNSET)
 
         _form = d.pop("form", UNSET)
@@ -51,7 +56,7 @@ class UpdateFormFieldPositionDataAttributes:
         if isinstance(_form, Unset):
             form = UNSET
         else:
-            form = UpdateFormFieldPositionDataAttributesForm(_form)
+            form = check_update_form_field_position_data_attributes_form(_form)
 
         position = d.pop("position", UNSET)
 

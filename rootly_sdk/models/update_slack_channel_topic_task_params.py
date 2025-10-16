@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_slack_channel_topic_task_params_task_type import UpdateSlackChannelTopicTaskParamsTaskType
+from ..models.update_slack_channel_topic_task_params_task_type import (
+    UpdateSlackChannelTopicTaskParamsTaskType,
+    check_update_slack_channel_topic_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -34,7 +38,7 @@ class UpdateSlackChannelTopicTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -50,10 +54,10 @@ class UpdateSlackChannelTopicTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_slack_channel_topic_task_params_channel import UpdateSlackChannelTopicTaskParamsChannel
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         channel = UpdateSlackChannelTopicTaskParamsChannel.from_dict(d.pop("channel"))
 
         topic = d.pop("topic")
@@ -63,7 +67,7 @@ class UpdateSlackChannelTopicTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateSlackChannelTopicTaskParamsTaskType(_task_type)
+            task_type = check_update_slack_channel_topic_task_params_task_type(_task_type)
 
         update_slack_channel_topic_task_params = cls(
             channel=channel,

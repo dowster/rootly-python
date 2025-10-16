@@ -1,10 +1,11 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.dashboard_color import DashboardColor
-from ..models.dashboard_owner import DashboardOwner
+from ..models.dashboard_color import DashboardColor, check_dashboard_color
+from ..models.dashboard_owner import DashboardOwner, check_dashboard_owner
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Dashboard")
@@ -47,7 +48,7 @@ class Dashboard:
     def to_dict(self) -> dict[str, Any]:
         name = self.name
 
-        owner = self.owner.value
+        owner: str = self.owner
 
         public = self.public
 
@@ -81,7 +82,7 @@ class Dashboard:
 
         color: Union[Unset, str] = UNSET
         if not isinstance(self.color, Unset):
-            color = self.color.value
+            color = self.color
 
         icon = self.icon
 
@@ -122,11 +123,11 @@ class Dashboard:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
-        owner = DashboardOwner(d.pop("owner"))
+        owner = check_dashboard_owner(d.pop("owner"))
 
         public = d.pop("public")
 
@@ -175,7 +176,7 @@ class Dashboard:
         if isinstance(_color, Unset):
             color = UNSET
         else:
-            color = DashboardColor(_color)
+            color = check_dashboard_color(_color)
 
         icon = d.pop("icon", UNSET)
 

@@ -1,9 +1,20 @@
-from enum import Enum
+from typing import Literal, cast
+
+ScheduleRotationScheduleRotationableAttributesType2HandoffDay = Literal["first_day_of_month", "last_day_of_month"]
+
+SCHEDULE_ROTATION_SCHEDULE_ROTATIONABLE_ATTRIBUTES_TYPE_2_HANDOFF_DAY_VALUES: set[
+    ScheduleRotationScheduleRotationableAttributesType2HandoffDay
+] = {
+    "first_day_of_month",
+    "last_day_of_month",
+}
 
 
-class ScheduleRotationScheduleRotationableAttributesType2HandoffDay(str, Enum):
-    FIRST_DAY_OF_MONTH = "first_day_of_month"
-    LAST_DAY_OF_MONTH = "last_day_of_month"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_schedule_rotation_schedule_rotationable_attributes_type_2_handoff_day(
+    value: str,
+) -> ScheduleRotationScheduleRotationableAttributesType2HandoffDay:
+    if value in SCHEDULE_ROTATION_SCHEDULE_ROTATIONABLE_ATTRIBUTES_TYPE_2_HANDOFF_DAY_VALUES:
+        return cast(ScheduleRotationScheduleRotationableAttributesType2HandoffDay, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {SCHEDULE_ROTATION_SCHEDULE_ROTATIONABLE_ATTRIBUTES_TYPE_2_HANDOFF_DAY_VALUES!r}"
+    )

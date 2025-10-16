@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewIncidentDataType = Literal["incidents"]
+
+NEW_INCIDENT_DATA_TYPE_VALUES: set[NewIncidentDataType] = {
+    "incidents",
+}
 
 
-class NewIncidentDataType(str, Enum):
-    INCIDENTS = "incidents"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_incident_data_type(value: str) -> NewIncidentDataType:
+    if value in NEW_INCIDENT_DATA_TYPE_VALUES:
+        return cast(NewIncidentDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_INCIDENT_DATA_TYPE_VALUES!r}")

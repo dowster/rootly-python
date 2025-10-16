@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateJiraIssueTaskParamsTaskType = Literal["update_jira_issue"]
+
+UPDATE_JIRA_ISSUE_TASK_PARAMS_TASK_TYPE_VALUES: set[UpdateJiraIssueTaskParamsTaskType] = {
+    "update_jira_issue",
+}
 
 
-class UpdateJiraIssueTaskParamsTaskType(str, Enum):
-    UPDATE_JIRA_ISSUE = "update_jira_issue"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_jira_issue_task_params_task_type(value: str) -> UpdateJiraIssueTaskParamsTaskType:
+    if value in UPDATE_JIRA_ISSUE_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(UpdateJiraIssueTaskParamsTaskType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_JIRA_ISSUE_TASK_PARAMS_TASK_TYPE_VALUES!r}")

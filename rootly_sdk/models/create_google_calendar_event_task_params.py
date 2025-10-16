@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,8 +6,12 @@ from attrs import field as _attrs_field
 
 from ..models.create_google_calendar_event_task_params_conference_solution_key import (
     CreateGoogleCalendarEventTaskParamsConferenceSolutionKey,
+    check_create_google_calendar_event_task_params_conference_solution_key,
 )
-from ..models.create_google_calendar_event_task_params_task_type import CreateGoogleCalendarEventTaskParamsTaskType
+from ..models.create_google_calendar_event_task_params_task_type import (
+    CreateGoogleCalendarEventTaskParamsTaskType,
+    check_create_google_calendar_event_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -74,7 +79,7 @@ class CreateGoogleCalendarEventTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         attendees: Union[Unset, list[str]] = UNSET
         if not isinstance(self.attendees, Unset):
@@ -104,7 +109,7 @@ class CreateGoogleCalendarEventTaskParams:
 
         conference_solution_key: Union[Unset, str] = UNSET
         if not isinstance(self.conference_solution_key, Unset):
-            conference_solution_key = self.conference_solution_key.value
+            conference_solution_key = self.conference_solution_key
 
         post_to_incident_timeline = self.post_to_incident_timeline
 
@@ -154,12 +159,12 @@ class CreateGoogleCalendarEventTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_google_calendar_event_task_params_post_to_slack_channels_item import (
             CreateGoogleCalendarEventTaskParamsPostToSlackChannelsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         days_until_meeting = d.pop("days_until_meeting")
 
         time_of_meeting = d.pop("time_of_meeting")
@@ -175,7 +180,7 @@ class CreateGoogleCalendarEventTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateGoogleCalendarEventTaskParamsTaskType(_task_type)
+            task_type = check_create_google_calendar_event_task_params_task_type(_task_type)
 
         attendees = cast(list[str], d.pop("attendees", UNSET))
 
@@ -212,7 +217,9 @@ class CreateGoogleCalendarEventTaskParams:
         if isinstance(_conference_solution_key, Unset):
             conference_solution_key = UNSET
         else:
-            conference_solution_key = CreateGoogleCalendarEventTaskParamsConferenceSolutionKey(_conference_solution_key)
+            conference_solution_key = check_create_google_calendar_event_task_params_conference_solution_key(
+                _conference_solution_key
+            )
 
         post_to_incident_timeline = d.pop("post_to_incident_timeline", UNSET)
 

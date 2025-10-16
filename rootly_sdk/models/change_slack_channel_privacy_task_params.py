@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.change_slack_channel_privacy_task_params_privacy import ChangeSlackChannelPrivacyTaskParamsPrivacy
-from ..models.change_slack_channel_privacy_task_params_task_type import ChangeSlackChannelPrivacyTaskParamsTaskType
+from ..models.change_slack_channel_privacy_task_params_privacy import (
+    ChangeSlackChannelPrivacyTaskParamsPrivacy,
+    check_change_slack_channel_privacy_task_params_privacy,
+)
+from ..models.change_slack_channel_privacy_task_params_task_type import (
+    ChangeSlackChannelPrivacyTaskParamsTaskType,
+    check_change_slack_channel_privacy_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -29,11 +36,11 @@ class ChangeSlackChannelPrivacyTaskParams:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        privacy = self.privacy.value
+        privacy: str = self.privacy
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         channel: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.channel, Unset):
@@ -54,18 +61,18 @@ class ChangeSlackChannelPrivacyTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.change_slack_channel_privacy_task_params_channel import ChangeSlackChannelPrivacyTaskParamsChannel
 
-        d = src_dict.copy()
-        privacy = ChangeSlackChannelPrivacyTaskParamsPrivacy(d.pop("privacy"))
+        d = dict(src_dict)
+        privacy = check_change_slack_channel_privacy_task_params_privacy(d.pop("privacy"))
 
         _task_type = d.pop("task_type", UNSET)
         task_type: Union[Unset, ChangeSlackChannelPrivacyTaskParamsTaskType]
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = ChangeSlackChannelPrivacyTaskParamsTaskType(_task_type)
+            task_type = check_change_slack_channel_privacy_task_params_task_type(_task_type)
 
         _channel = d.pop("channel", UNSET)
         channel: Union[Unset, ChangeSlackChannelPrivacyTaskParamsChannel]

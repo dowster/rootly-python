@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -60,6 +61,7 @@ class NewScheduleDataAttributes:
             owner_user_id = self.owner_user_id
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -79,10 +81,10 @@ class NewScheduleDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_schedule_data_attributes_slack_user_group import NewScheduleDataAttributesSlackUserGroup
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         def _parse_description(data: object) -> Union[None, Unset, str]:

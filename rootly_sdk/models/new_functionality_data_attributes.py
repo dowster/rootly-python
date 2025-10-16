@@ -1,9 +1,11 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
 from ..models.new_functionality_data_attributes_show_uptime_last_days import (
     NewFunctionalityDataAttributesShowUptimeLastDays,
+    check_new_functionality_data_attributes_show_uptime_last_days,
 )
 from ..types import UNSET, Unset
 
@@ -39,7 +41,7 @@ class NewFunctionalityDataAttributes:
         service_now_ci_sys_id (Union[None, Unset, str]): The Service Now CI sys id associated to this functionality
         show_uptime (Union[None, Unset, bool]): Show uptime
         show_uptime_last_days (Union[Unset, NewFunctionalityDataAttributesShowUptimeLastDays]): Show uptime over x days
-            Default: NewFunctionalityDataAttributesShowUptimeLastDays.VALUE_60.
+            Default: 60.
         environment_ids (Union[None, Unset, list[str]]): Environments associated with this functionality
         service_ids (Union[None, Unset, list[str]]): Services associated with this functionality
         owner_group_ids (Union[None, Unset, list[str]]): Owner Teams associated with this functionality
@@ -64,9 +66,7 @@ class NewFunctionalityDataAttributes:
     cortex_id: Union[None, Unset, str] = UNSET
     service_now_ci_sys_id: Union[None, Unset, str] = UNSET
     show_uptime: Union[None, Unset, bool] = UNSET
-    show_uptime_last_days: Union[Unset, NewFunctionalityDataAttributesShowUptimeLastDays] = (
-        NewFunctionalityDataAttributesShowUptimeLastDays.VALUE_60
-    )
+    show_uptime_last_days: Union[Unset, NewFunctionalityDataAttributesShowUptimeLastDays] = 60
     environment_ids: Union[None, Unset, list[str]] = UNSET
     service_ids: Union[None, Unset, list[str]] = UNSET
     owner_group_ids: Union[None, Unset, list[str]] = UNSET
@@ -160,7 +160,7 @@ class NewFunctionalityDataAttributes:
 
         show_uptime_last_days: Union[Unset, int] = UNSET
         if not isinstance(self.show_uptime_last_days, Unset):
-            show_uptime_last_days = self.show_uptime_last_days.value
+            show_uptime_last_days = self.show_uptime_last_days
 
         environment_ids: Union[None, Unset, list[str]]
         if isinstance(self.environment_ids, Unset):
@@ -223,6 +223,7 @@ class NewFunctionalityDataAttributes:
             slack_aliases = self.slack_aliases
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -272,7 +273,7 @@ class NewFunctionalityDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_functionality_data_attributes_slack_aliases_type_0_item import (
             NewFunctionalityDataAttributesSlackAliasesType0Item,
         )
@@ -280,7 +281,7 @@ class NewFunctionalityDataAttributes:
             NewFunctionalityDataAttributesSlackChannelsType0Item,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
@@ -413,7 +414,9 @@ class NewFunctionalityDataAttributes:
         if isinstance(_show_uptime_last_days, Unset):
             show_uptime_last_days = UNSET
         else:
-            show_uptime_last_days = NewFunctionalityDataAttributesShowUptimeLastDays(_show_uptime_last_days)
+            show_uptime_last_days = check_new_functionality_data_attributes_show_uptime_last_days(
+                _show_uptime_last_days
+            )
 
         def _parse_environment_ids(data: object) -> Union[None, Unset, list[str]]:
             if data is None:

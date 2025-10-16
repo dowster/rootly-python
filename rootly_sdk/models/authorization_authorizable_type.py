@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+AuthorizationAuthorizableType = Literal["Dashboard"]
+
+AUTHORIZATION_AUTHORIZABLE_TYPE_VALUES: set[AuthorizationAuthorizableType] = {
+    "Dashboard",
+}
 
 
-class AuthorizationAuthorizableType(str, Enum):
-    DASHBOARD = "Dashboard"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_authorization_authorizable_type(value: str) -> AuthorizationAuthorizableType:
+    if value in AUTHORIZATION_AUTHORIZABLE_TYPE_VALUES:
+        return cast(AuthorizationAuthorizableType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {AUTHORIZATION_AUTHORIZABLE_TYPE_VALUES!r}")

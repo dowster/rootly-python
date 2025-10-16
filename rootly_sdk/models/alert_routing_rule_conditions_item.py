@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,9 +6,11 @@ from attrs import field as _attrs_field
 
 from ..models.alert_routing_rule_conditions_item_property_field_condition_type import (
     AlertRoutingRuleConditionsItemPropertyFieldConditionType,
+    check_alert_routing_rule_conditions_item_property_field_condition_type,
 )
 from ..models.alert_routing_rule_conditions_item_property_field_type import (
     AlertRoutingRuleConditionsItemPropertyFieldType,
+    check_alert_routing_rule_conditions_item_property_field_type,
 )
 from ..types import UNSET, Unset
 
@@ -39,11 +42,11 @@ class AlertRoutingRuleConditionsItem:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        property_field_type = self.property_field_type.value
+        property_field_type: str = self.property_field_type
 
         property_field_name = self.property_field_name
 
-        property_field_condition_type = self.property_field_condition_type.value
+        property_field_condition_type: str = self.property_field_condition_type
 
         property_field_value: Union[None, Unset, str]
         if isinstance(self.property_field_value, Unset):
@@ -72,13 +75,13 @@ class AlertRoutingRuleConditionsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        property_field_type = AlertRoutingRuleConditionsItemPropertyFieldType(d.pop("property_field_type"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        property_field_type = check_alert_routing_rule_conditions_item_property_field_type(d.pop("property_field_type"))
 
         property_field_name = d.pop("property_field_name")
 
-        property_field_condition_type = AlertRoutingRuleConditionsItemPropertyFieldConditionType(
+        property_field_condition_type = check_alert_routing_rule_conditions_item_property_field_condition_type(
             d.pop("property_field_condition_type")
         )
 

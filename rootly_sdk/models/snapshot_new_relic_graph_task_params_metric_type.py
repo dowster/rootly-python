@@ -1,23 +1,47 @@
-from enum import Enum
+from typing import Literal, cast
+
+SnapshotNewRelicGraphTaskParamsMetricType = Literal[
+    "APDEX",
+    "AREA",
+    "BAR",
+    "BASELINE",
+    "BILLBOARD",
+    "BULLET",
+    "EVENT_FEED",
+    "FUNNEL",
+    "HEATMAP",
+    "HISTOGRAM",
+    "LINE",
+    "PIE",
+    "SCATTER",
+    "STACKED_HORIZONTAL_BAR",
+    "TABLE",
+    "VERTICAL_BAR",
+]
+
+SNAPSHOT_NEW_RELIC_GRAPH_TASK_PARAMS_METRIC_TYPE_VALUES: set[SnapshotNewRelicGraphTaskParamsMetricType] = {
+    "APDEX",
+    "AREA",
+    "BAR",
+    "BASELINE",
+    "BILLBOARD",
+    "BULLET",
+    "EVENT_FEED",
+    "FUNNEL",
+    "HEATMAP",
+    "HISTOGRAM",
+    "LINE",
+    "PIE",
+    "SCATTER",
+    "STACKED_HORIZONTAL_BAR",
+    "TABLE",
+    "VERTICAL_BAR",
+}
 
 
-class SnapshotNewRelicGraphTaskParamsMetricType(str, Enum):
-    APDEX = "APDEX"
-    AREA = "AREA"
-    BAR = "BAR"
-    BASELINE = "BASELINE"
-    BILLBOARD = "BILLBOARD"
-    BULLET = "BULLET"
-    EVENT_FEED = "EVENT_FEED"
-    FUNNEL = "FUNNEL"
-    HEATMAP = "HEATMAP"
-    HISTOGRAM = "HISTOGRAM"
-    LINE = "LINE"
-    PIE = "PIE"
-    SCATTER = "SCATTER"
-    STACKED_HORIZONTAL_BAR = "STACKED_HORIZONTAL_BAR"
-    TABLE = "TABLE"
-    VERTICAL_BAR = "VERTICAL_BAR"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_snapshot_new_relic_graph_task_params_metric_type(value: str) -> SnapshotNewRelicGraphTaskParamsMetricType:
+    if value in SNAPSHOT_NEW_RELIC_GRAPH_TASK_PARAMS_METRIC_TYPE_VALUES:
+        return cast(SnapshotNewRelicGraphTaskParamsMetricType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {SNAPSHOT_NEW_RELIC_GRAPH_TASK_PARAMS_METRIC_TYPE_VALUES!r}"
+    )

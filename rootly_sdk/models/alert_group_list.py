@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
@@ -37,10 +38,10 @@ class AlertGroupList:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.alert_group_list_data_item import AlertGroupListDataItem
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         data = []
         _data = d.pop("data")
         for data_item_data in _data:

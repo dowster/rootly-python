@@ -1,9 +1,20 @@
-from enum import Enum
+from typing import Literal, cast
+
+ActionItemTriggerParamsIncidentActionItemKindsItem = Literal["follow_up", "task"]
+
+ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_ACTION_ITEM_KINDS_ITEM_VALUES: set[
+    ActionItemTriggerParamsIncidentActionItemKindsItem
+] = {
+    "follow_up",
+    "task",
+}
 
 
-class ActionItemTriggerParamsIncidentActionItemKindsItem(str, Enum):
-    FOLLOW_UP = "follow_up"
-    TASK = "task"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_action_item_trigger_params_incident_action_item_kinds_item(
+    value: str,
+) -> ActionItemTriggerParamsIncidentActionItemKindsItem:
+    if value in ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_ACTION_ITEM_KINDS_ITEM_VALUES:
+        return cast(ActionItemTriggerParamsIncidentActionItemKindsItem, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {ACTION_ITEM_TRIGGER_PARAMS_INCIDENT_ACTION_ITEM_KINDS_ITEM_VALUES!r}"
+    )

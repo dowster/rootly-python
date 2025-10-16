@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewEscalationPolicyDataType = Literal["escalation_policies"]
+
+NEW_ESCALATION_POLICY_DATA_TYPE_VALUES: set[NewEscalationPolicyDataType] = {
+    "escalation_policies",
+}
 
 
-class NewEscalationPolicyDataType(str, Enum):
-    ESCALATION_POLICIES = "escalation_policies"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_escalation_policy_data_type(value: str) -> NewEscalationPolicyDataType:
+    if value in NEW_ESCALATION_POLICY_DATA_TYPE_VALUES:
+        return cast(NewEscalationPolicyDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_ESCALATION_POLICY_DATA_TYPE_VALUES!r}")

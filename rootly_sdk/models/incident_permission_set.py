@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,9 +6,11 @@ from attrs import field as _attrs_field
 
 from ..models.incident_permission_set_private_incident_permissions_item import (
     IncidentPermissionSetPrivateIncidentPermissionsItem,
+    check_incident_permission_set_private_incident_permissions_item,
 )
 from ..models.incident_permission_set_public_incident_permissions_item import (
     IncidentPermissionSetPublicIncidentPermissionsItem,
+    check_incident_permission_set_public_incident_permissions_item,
 )
 from ..types import UNSET, Unset
 
@@ -55,14 +58,14 @@ class IncidentPermissionSet:
         if not isinstance(self.private_incident_permissions, Unset):
             private_incident_permissions = []
             for private_incident_permissions_item_data in self.private_incident_permissions:
-                private_incident_permissions_item = private_incident_permissions_item_data.value
+                private_incident_permissions_item: str = private_incident_permissions_item_data
                 private_incident_permissions.append(private_incident_permissions_item)
 
         public_incident_permissions: Union[Unset, list[str]] = UNSET
         if not isinstance(self.public_incident_permissions, Unset):
             public_incident_permissions = []
             for public_incident_permissions_item_data in self.public_incident_permissions:
-                public_incident_permissions_item = public_incident_permissions_item_data.value
+                public_incident_permissions_item: str = public_incident_permissions_item_data
                 public_incident_permissions.append(public_incident_permissions_item)
 
         field_dict: dict[str, Any] = {}
@@ -85,8 +88,8 @@ class IncidentPermissionSet:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
         slug = d.pop("slug")
@@ -107,7 +110,7 @@ class IncidentPermissionSet:
         private_incident_permissions = []
         _private_incident_permissions = d.pop("private_incident_permissions", UNSET)
         for private_incident_permissions_item_data in _private_incident_permissions or []:
-            private_incident_permissions_item = IncidentPermissionSetPrivateIncidentPermissionsItem(
+            private_incident_permissions_item = check_incident_permission_set_private_incident_permissions_item(
                 private_incident_permissions_item_data
             )
 
@@ -116,7 +119,7 @@ class IncidentPermissionSet:
         public_incident_permissions = []
         _public_incident_permissions = d.pop("public_incident_permissions", UNSET)
         for public_incident_permissions_item_data in _public_incident_permissions or []:
-            public_incident_permissions_item = IncidentPermissionSetPublicIncidentPermissionsItem(
+            public_incident_permissions_item = check_incident_permission_set_public_incident_permissions_item(
                 public_incident_permissions_item_data
             )
 

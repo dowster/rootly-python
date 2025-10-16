@@ -1,8 +1,9 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 
-from ..models.incident_event_service_status import IncidentEventServiceStatus
+from ..models.incident_event_service_status import IncidentEventServiceStatus, check_incident_event_service_status
 
 T = TypeVar("T", bound="IncidentEventService")
 
@@ -25,9 +26,10 @@ class IncidentEventService:
 
         service_id = self.service_id
 
-        status = self.status.value
+        status: str = self.status
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "incident_event_id": incident_event_id,
@@ -39,13 +41,13 @@ class IncidentEventService:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         incident_event_id = d.pop("incident_event_id")
 
         service_id = d.pop("service_id")
 
-        status = IncidentEventServiceStatus(d.pop("status"))
+        status = check_incident_event_service_status(d.pop("status"))
 
         incident_event_service = cls(
             incident_event_id=incident_event_id,

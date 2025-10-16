@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.form_field_placement_condition_comparison import FormFieldPlacementConditionComparison
-from ..models.form_field_placement_condition_conditioned import FormFieldPlacementConditionConditioned
+from ..models.form_field_placement_condition_comparison import (
+    FormFieldPlacementConditionComparison,
+    check_form_field_placement_condition_comparison,
+)
+from ..models.form_field_placement_condition_conditioned import (
+    FormFieldPlacementConditionConditioned,
+    check_form_field_placement_condition_conditioned,
+)
 
 T = TypeVar("T", bound="FormFieldPlacementCondition")
 
@@ -32,13 +39,13 @@ class FormFieldPlacementCondition:
     def to_dict(self) -> dict[str, Any]:
         form_field_placement_id = self.form_field_placement_id
 
-        conditioned = self.conditioned.value
+        conditioned: str = self.conditioned
 
         position = self.position
 
         form_field_id = self.form_field_id
 
-        comparison = self.comparison.value
+        comparison: str = self.comparison
 
         values = self.values
 
@@ -58,17 +65,17 @@ class FormFieldPlacementCondition:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         form_field_placement_id = d.pop("form_field_placement_id")
 
-        conditioned = FormFieldPlacementConditionConditioned(d.pop("conditioned"))
+        conditioned = check_form_field_placement_condition_conditioned(d.pop("conditioned"))
 
         position = d.pop("position")
 
         form_field_id = d.pop("form_field_id")
 
-        comparison = FormFieldPlacementConditionComparison(d.pop("comparison"))
+        comparison = check_form_field_placement_condition_comparison(d.pop("comparison"))
 
         values = cast(list[str], d.pop("values"))
 

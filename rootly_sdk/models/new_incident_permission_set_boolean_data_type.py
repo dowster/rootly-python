@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewIncidentPermissionSetBooleanDataType = Literal["incident_permission_set_booleans"]
+
+NEW_INCIDENT_PERMISSION_SET_BOOLEAN_DATA_TYPE_VALUES: set[NewIncidentPermissionSetBooleanDataType] = {
+    "incident_permission_set_booleans",
+}
 
 
-class NewIncidentPermissionSetBooleanDataType(str, Enum):
-    INCIDENT_PERMISSION_SET_BOOLEANS = "incident_permission_set_booleans"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_incident_permission_set_boolean_data_type(value: str) -> NewIncidentPermissionSetBooleanDataType:
+    if value in NEW_INCIDENT_PERMISSION_SET_BOOLEAN_DATA_TYPE_VALUES:
+        return cast(NewIncidentPermissionSetBooleanDataType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_INCIDENT_PERMISSION_SET_BOOLEAN_DATA_TYPE_VALUES!r}"
+    )

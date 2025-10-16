@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_slack_channel_task_params_private import CreateSlackChannelTaskParamsPrivate
-from ..models.create_slack_channel_task_params_task_type import CreateSlackChannelTaskParamsTaskType
+from ..models.create_slack_channel_task_params_private import (
+    CreateSlackChannelTaskParamsPrivate,
+    check_create_slack_channel_task_params_private,
+)
+from ..models.create_slack_channel_task_params_task_type import (
+    CreateSlackChannelTaskParamsTaskType,
+    check_create_slack_channel_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -21,13 +28,13 @@ class CreateSlackChannelTaskParams:
         workspace (CreateSlackChannelTaskParamsWorkspace):
         title (str): Slack channel title
         task_type (Union[Unset, CreateSlackChannelTaskParamsTaskType]):
-        private (Union[Unset, CreateSlackChannelTaskParamsPrivate]):  Default: CreateSlackChannelTaskParamsPrivate.AUTO.
+        private (Union[Unset, CreateSlackChannelTaskParamsPrivate]):  Default: 'auto'.
     """
 
     workspace: "CreateSlackChannelTaskParamsWorkspace"
     title: str
     task_type: Union[Unset, CreateSlackChannelTaskParamsTaskType] = UNSET
-    private: Union[Unset, CreateSlackChannelTaskParamsPrivate] = CreateSlackChannelTaskParamsPrivate.AUTO
+    private: Union[Unset, CreateSlackChannelTaskParamsPrivate] = "auto"
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -37,11 +44,11 @@ class CreateSlackChannelTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         private: Union[Unset, str] = UNSET
         if not isinstance(self.private, Unset):
-            private = self.private.value
+            private = self.private
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -59,10 +66,10 @@ class CreateSlackChannelTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_slack_channel_task_params_workspace import CreateSlackChannelTaskParamsWorkspace
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         workspace = CreateSlackChannelTaskParamsWorkspace.from_dict(d.pop("workspace"))
 
         title = d.pop("title")
@@ -72,14 +79,14 @@ class CreateSlackChannelTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateSlackChannelTaskParamsTaskType(_task_type)
+            task_type = check_create_slack_channel_task_params_task_type(_task_type)
 
         _private = d.pop("private", UNSET)
         private: Union[Unset, CreateSlackChannelTaskParamsPrivate]
         if isinstance(_private, Unset):
             private = UNSET
         else:
-            private = CreateSlackChannelTaskParamsPrivate(_private)
+            private = check_create_slack_channel_task_params_private(_private)
 
         create_slack_channel_task_params = cls(
             workspace=workspace,

@@ -1,15 +1,22 @@
-from enum import Enum
+from typing import Literal, cast
+
+CatalogIcon = Literal[
+    "chart-bar", "cursor-arrow-ripple", "globe-alt", "light-bulb", "server-stack", "shapes", "user-group", "users"
+]
+
+CATALOG_ICON_VALUES: set[CatalogIcon] = {
+    "chart-bar",
+    "cursor-arrow-ripple",
+    "globe-alt",
+    "light-bulb",
+    "server-stack",
+    "shapes",
+    "user-group",
+    "users",
+}
 
 
-class CatalogIcon(str, Enum):
-    CHART_BAR = "chart-bar"
-    CURSOR_ARROW_RIPPLE = "cursor-arrow-ripple"
-    GLOBE_ALT = "globe-alt"
-    LIGHT_BULB = "light-bulb"
-    SERVER_STACK = "server-stack"
-    SHAPES = "shapes"
-    USERS = "users"
-    USER_GROUP = "user-group"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_catalog_icon(value: str) -> CatalogIcon:
+    if value in CATALOG_ICON_VALUES:
+        return cast(CatalogIcon, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {CATALOG_ICON_VALUES!r}")

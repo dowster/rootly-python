@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+ListCatalogFieldsInclude = Literal["catalog"]
+
+LIST_CATALOG_FIELDS_INCLUDE_VALUES: set[ListCatalogFieldsInclude] = {
+    "catalog",
+}
 
 
-class ListCatalogFieldsInclude(str, Enum):
-    CATALOG = "catalog"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_list_catalog_fields_include(value: str) -> ListCatalogFieldsInclude:
+    if value in LIST_CATALOG_FIELDS_INCLUDE_VALUES:
+        return cast(ListCatalogFieldsInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {LIST_CATALOG_FIELDS_INCLUDE_VALUES!r}")

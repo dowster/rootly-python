@@ -1,15 +1,28 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentTriggerParamsIncidentConditionIncidentType = Literal[
+    "ANY", "CONTAINS", "CONTAINS_ALL", "CONTAINS_NONE", "IS", "NONE", "SET", "UNSET"
+]
+
+INCIDENT_TRIGGER_PARAMS_INCIDENT_CONDITION_INCIDENT_TYPE_VALUES: set[
+    IncidentTriggerParamsIncidentConditionIncidentType
+] = {
+    "ANY",
+    "CONTAINS",
+    "CONTAINS_ALL",
+    "CONTAINS_NONE",
+    "IS",
+    "NONE",
+    "SET",
+    "UNSET",
+}
 
 
-class IncidentTriggerParamsIncidentConditionIncidentType(str, Enum):
-    ANY = "ANY"
-    CONTAINS = "CONTAINS"
-    CONTAINS_ALL = "CONTAINS_ALL"
-    CONTAINS_NONE = "CONTAINS_NONE"
-    IS = "IS"
-    NONE = "NONE"
-    SET = "SET"
-    UNSET = "UNSET"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_trigger_params_incident_condition_incident_type(
+    value: str,
+) -> IncidentTriggerParamsIncidentConditionIncidentType:
+    if value in INCIDENT_TRIGGER_PARAMS_INCIDENT_CONDITION_INCIDENT_TYPE_VALUES:
+        return cast(IncidentTriggerParamsIncidentConditionIncidentType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {INCIDENT_TRIGGER_PARAMS_INCIDENT_CONDITION_INCIDENT_TYPE_VALUES!r}"
+    )

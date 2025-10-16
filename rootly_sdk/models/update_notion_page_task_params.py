@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_notion_page_task_params_task_type import UpdateNotionPageTaskParamsTaskType
+from ..models.update_notion_page_task_params_task_type import (
+    UpdateNotionPageTaskParamsTaskType,
+    check_update_notion_page_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateNotionPageTaskParams")
@@ -37,7 +41,7 @@ class UpdateNotionPageTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         title = self.title
 
@@ -72,8 +76,8 @@ class UpdateNotionPageTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         file_id = d.pop("file_id")
 
         _task_type = d.pop("task_type", UNSET)
@@ -81,7 +85,7 @@ class UpdateNotionPageTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateNotionPageTaskParamsTaskType(_task_type)
+            task_type = check_update_notion_page_task_params_task_type(_task_type)
 
         title = d.pop("title", UNSET)
 

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -73,6 +74,7 @@ class UpdateRetrospectiveProcessDataAttributes:
             retrospective_process_matching_criteria = self.retrospective_process_matching_criteria.to_dict()
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if name is not UNSET:
             field_dict["name"] = name
@@ -84,7 +86,7 @@ class UpdateRetrospectiveProcessDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_retrospective_process_data_attributes_retrospective_process_matching_criteria_type_0 import (
             UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteriaType0,
         )
@@ -95,7 +97,7 @@ class UpdateRetrospectiveProcessDataAttributes:
             UpdateRetrospectiveProcessDataAttributesRetrospectiveProcessMatchingCriteriaType2,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name", UNSET)
 
         def _parse_description(data: object) -> Union[None, Unset, str]:

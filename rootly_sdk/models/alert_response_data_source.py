@@ -1,48 +1,97 @@
-from enum import Enum
+from typing import Literal, cast
+
+AlertResponseDataSource = Literal[
+    "alertmanager",
+    "api",
+    "app_dynamics",
+    "app_optics",
+    "asana",
+    "azure",
+    "bug_snag",
+    "catchpoint",
+    "checkly",
+    "chronosphere",
+    "clickup",
+    "cloud_watch",
+    "datadog",
+    "email",
+    "generic_webhook",
+    "gitlab",
+    "google_cloud",
+    "grafana",
+    "heartbeat",
+    "honeycomb",
+    "jira",
+    "linear",
+    "live_call_routing",
+    "manual",
+    "monte_carlo",
+    "nagios",
+    "new_relic",
+    "nobl9",
+    "opsgenie",
+    "pagerduty",
+    "pagertree",
+    "prtg",
+    "rollbar",
+    "rootly",
+    "sentry",
+    "service_now",
+    "slack",
+    "splunk",
+    "victorops",
+    "web",
+    "workflow",
+    "zendesk",
+]
+
+ALERT_RESPONSE_DATA_SOURCE_VALUES: set[AlertResponseDataSource] = {
+    "alertmanager",
+    "api",
+    "app_dynamics",
+    "app_optics",
+    "asana",
+    "azure",
+    "bug_snag",
+    "catchpoint",
+    "checkly",
+    "chronosphere",
+    "clickup",
+    "cloud_watch",
+    "datadog",
+    "email",
+    "generic_webhook",
+    "gitlab",
+    "google_cloud",
+    "grafana",
+    "heartbeat",
+    "honeycomb",
+    "jira",
+    "linear",
+    "live_call_routing",
+    "manual",
+    "monte_carlo",
+    "nagios",
+    "new_relic",
+    "nobl9",
+    "opsgenie",
+    "pagerduty",
+    "pagertree",
+    "prtg",
+    "rollbar",
+    "rootly",
+    "sentry",
+    "service_now",
+    "slack",
+    "splunk",
+    "victorops",
+    "web",
+    "workflow",
+    "zendesk",
+}
 
 
-class AlertResponseDataSource(str, Enum):
-    ALERTMANAGER = "alertmanager"
-    API = "api"
-    APP_DYNAMICS = "app_dynamics"
-    APP_OPTICS = "app_optics"
-    ASANA = "asana"
-    AZURE = "azure"
-    BUG_SNAG = "bug_snag"
-    CATCHPOINT = "catchpoint"
-    CHECKLY = "checkly"
-    CHRONOSPHERE = "chronosphere"
-    CLICKUP = "clickup"
-    CLOUD_WATCH = "cloud_watch"
-    DATADOG = "datadog"
-    EMAIL = "email"
-    GENERIC_WEBHOOK = "generic_webhook"
-    GITLAB = "gitlab"
-    GOOGLE_CLOUD = "google_cloud"
-    GRAFANA = "grafana"
-    HONEYCOMB = "honeycomb"
-    JIRA = "jira"
-    LINEAR = "linear"
-    LIVE_CALL_ROUTING = "live_call_routing"
-    MANUAL = "manual"
-    MONTE_CARLO = "monte_carlo"
-    NAGIOS = "nagios"
-    NEW_RELIC = "new_relic"
-    NOBL9 = "nobl9"
-    OPSGENIE = "opsgenie"
-    PAGERDUTY = "pagerduty"
-    PAGERTREE = "pagertree"
-    PRTG = "prtg"
-    ROLLBAR = "rollbar"
-    ROOTLY = "rootly"
-    SENTRY = "sentry"
-    SERVICE_NOW = "service_now"
-    SLACK = "slack"
-    SPLUNK = "splunk"
-    VICTOROPS = "victorops"
-    WEB = "web"
-    WORKFLOW = "workflow"
-    ZENDESK = "zendesk"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_alert_response_data_source(value: str) -> AlertResponseDataSource:
+    if value in ALERT_RESPONSE_DATA_SOURCE_VALUES:
+        return cast(AlertResponseDataSource, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {ALERT_RESPONSE_DATA_SOURCE_VALUES!r}")

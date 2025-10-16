@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.form_field_position_form import FormFieldPositionForm
+from ..models.form_field_position_form import FormFieldPositionForm, check_form_field_position_form
 
 T = TypeVar("T", bound="FormFieldPosition")
 
@@ -25,7 +26,7 @@ class FormFieldPosition:
     def to_dict(self) -> dict[str, Any]:
         form_field_id = self.form_field_id
 
-        form = self.form.value
+        form: str = self.form
 
         position = self.position
 
@@ -42,11 +43,11 @@ class FormFieldPosition:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         form_field_id = d.pop("form_field_id")
 
-        form = FormFieldPositionForm(d.pop("form"))
+        form = check_form_field_position_form(d.pop("form"))
 
         position = d.pop("position")
 

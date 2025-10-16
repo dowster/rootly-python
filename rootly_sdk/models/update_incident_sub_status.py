@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
@@ -34,10 +35,10 @@ class UpdateIncidentSubStatus:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_incident_sub_status_data import UpdateIncidentSubStatusData
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         data = UpdateIncidentSubStatusData.from_dict(d.pop("data"))
 
         update_incident_sub_status = cls(

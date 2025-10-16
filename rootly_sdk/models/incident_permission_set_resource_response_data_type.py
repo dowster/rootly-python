@@ -1,8 +1,17 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentPermissionSetResourceResponseDataType = Literal["incident_permission_set_resources"]
+
+INCIDENT_PERMISSION_SET_RESOURCE_RESPONSE_DATA_TYPE_VALUES: set[IncidentPermissionSetResourceResponseDataType] = {
+    "incident_permission_set_resources",
+}
 
 
-class IncidentPermissionSetResourceResponseDataType(str, Enum):
-    INCIDENT_PERMISSION_SET_RESOURCES = "incident_permission_set_resources"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_permission_set_resource_response_data_type(
+    value: str,
+) -> IncidentPermissionSetResourceResponseDataType:
+    if value in INCIDENT_PERMISSION_SET_RESOURCE_RESPONSE_DATA_TYPE_VALUES:
+        return cast(IncidentPermissionSetResourceResponseDataType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {INCIDENT_PERMISSION_SET_RESOURCE_RESPONSE_DATA_TYPE_VALUES!r}"
+    )

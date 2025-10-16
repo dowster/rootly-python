@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.send_email_task_params_task_type import SendEmailTaskParamsTaskType
+from ..models.send_email_task_params_task_type import (
+    SendEmailTaskParamsTaskType,
+    check_send_email_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SendEmailTaskParams")
@@ -50,7 +54,7 @@ class SendEmailTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         from_ = self.from_
 
@@ -107,8 +111,8 @@ class SendEmailTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         to = cast(list[str], d.pop("to"))
 
         subject = d.pop("subject")
@@ -125,7 +129,7 @@ class SendEmailTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = SendEmailTaskParamsTaskType(_task_type)
+            task_type = check_send_email_task_params_task_type(_task_type)
 
         from_ = d.pop("from", UNSET)
 

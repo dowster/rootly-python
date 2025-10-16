@@ -1,44 +1,87 @@
-from enum import Enum
+from typing import Literal, cast
+
+AuditItemType = Literal[
+    "ApiKey",
+    "Cause",
+    "CustomField",
+    "CustomFieldOption",
+    "CustomForm",
+    "Dashboard",
+    "Environment",
+    "EscalationPolicy",
+    "EscalationPolicyPath",
+    "ExportJob",
+    "FormField",
+    "Functionality",
+    "GeniusWorkflow",
+    "GeniusWorkflowGroup",
+    "GeniusWorkflowRun",
+    "Group",
+    "Heartbeat",
+    "Incident",
+    "IncidentActionItem",
+    "IncidentEvent",
+    "IncidentFormFieldSelection",
+    "IncidentFormFieldSelectionUser",
+    "IncidentPostMortem",
+    "IncidentRoleAssignment",
+    "IncidentRoleTask",
+    "IncidentStatusPageEvent",
+    "IncidentTask",
+    "IncidentType",
+    "LiveCallRouter",
+    "OnCallRole",
+    "Playbook",
+    "PlaybookTask",
+    "Role",
+    "Schedule",
+    "Service",
+    "Severity",
+    "StatusPage",
+]
+
+AUDIT_ITEM_TYPE_VALUES: set[AuditItemType] = {
+    "ApiKey",
+    "Cause",
+    "CustomField",
+    "CustomFieldOption",
+    "CustomForm",
+    "Dashboard",
+    "Environment",
+    "EscalationPolicy",
+    "EscalationPolicyPath",
+    "ExportJob",
+    "FormField",
+    "Functionality",
+    "GeniusWorkflow",
+    "GeniusWorkflowGroup",
+    "GeniusWorkflowRun",
+    "Group",
+    "Heartbeat",
+    "Incident",
+    "IncidentActionItem",
+    "IncidentEvent",
+    "IncidentFormFieldSelection",
+    "IncidentFormFieldSelectionUser",
+    "IncidentPostMortem",
+    "IncidentRoleAssignment",
+    "IncidentRoleTask",
+    "IncidentStatusPageEvent",
+    "IncidentTask",
+    "IncidentType",
+    "LiveCallRouter",
+    "OnCallRole",
+    "Playbook",
+    "PlaybookTask",
+    "Role",
+    "Schedule",
+    "Service",
+    "Severity",
+    "StatusPage",
+}
 
 
-class AuditItemType(str, Enum):
-    APIKEY = "ApiKey"
-    CAUSE = "Cause"
-    CUSTOMFIELD = "CustomField"
-    CUSTOMFIELDOPTION = "CustomFieldOption"
-    CUSTOMFORM = "CustomForm"
-    DASHBOARD = "Dashboard"
-    ENVIRONMENT = "Environment"
-    ESCALATIONPOLICY = "EscalationPolicy"
-    ESCALATIONPOLICYPATH = "EscalationPolicyPath"
-    EXPORTJOB = "ExportJob"
-    FORMFIELD = "FormField"
-    FUNCTIONALITY = "Functionality"
-    GENIUSWORKFLOW = "GeniusWorkflow"
-    GENIUSWORKFLOWGROUP = "GeniusWorkflowGroup"
-    GENIUSWORKFLOWRUN = "GeniusWorkflowRun"
-    GROUP = "Group"
-    HEARTBEAT = "Heartbeat"
-    INCIDENT = "Incident"
-    INCIDENTACTIONITEM = "IncidentActionItem"
-    INCIDENTEVENT = "IncidentEvent"
-    INCIDENTFORMFIELDSELECTION = "IncidentFormFieldSelection"
-    INCIDENTFORMFIELDSELECTIONUSER = "IncidentFormFieldSelectionUser"
-    INCIDENTPOSTMORTEM = "IncidentPostMortem"
-    INCIDENTROLEASSIGNMENT = "IncidentRoleAssignment"
-    INCIDENTROLETASK = "IncidentRoleTask"
-    INCIDENTSTATUSPAGEEVENT = "IncidentStatusPageEvent"
-    INCIDENTTASK = "IncidentTask"
-    INCIDENTTYPE = "IncidentType"
-    LIVECALLROUTER = "LiveCallRouter"
-    ONCALLROLE = "OnCallRole"
-    PLAYBOOK = "Playbook"
-    PLAYBOOKTASK = "PlaybookTask"
-    ROLE = "Role"
-    SCHEDULE = "Schedule"
-    SERVICE = "Service"
-    SEVERITY = "Severity"
-    STATUSPAGE = "StatusPage"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_audit_item_type(value: str) -> AuditItemType:
+    if value in AUDIT_ITEM_TYPE_VALUES:
+        return cast(AuditItemType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {AUDIT_ITEM_TYPE_VALUES!r}")

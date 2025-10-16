@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,9 +6,11 @@ from attrs import field as _attrs_field
 
 from ..models.page_opsgenie_on_call_responders_task_params_priority import (
     PageOpsgenieOnCallRespondersTaskParamsPriority,
+    check_page_opsgenie_on_call_responders_task_params_priority,
 )
 from ..models.page_opsgenie_on_call_responders_task_params_task_type import (
     PageOpsgenieOnCallRespondersTaskParamsTaskType,
+    check_page_opsgenie_on_call_responders_task_params_task_type,
 )
 from ..types import UNSET, Unset
 
@@ -34,8 +37,7 @@ class PageOpsgenieOnCallRespondersTaskParams:
             information about the incident
         teams (Union[Unset, list['PageOpsgenieOnCallRespondersTaskParamsTeamsItem']]):
         users (Union[Unset, list['PageOpsgenieOnCallRespondersTaskParamsUsersItem']]):
-        priority (Union[Unset, PageOpsgenieOnCallRespondersTaskParamsPriority]):  Default:
-            PageOpsgenieOnCallRespondersTaskParamsPriority.P1.
+        priority (Union[Unset, PageOpsgenieOnCallRespondersTaskParamsPriority]):  Default: 'P1'.
     """
 
     task_type: Union[Unset, PageOpsgenieOnCallRespondersTaskParamsTaskType] = UNSET
@@ -44,15 +46,13 @@ class PageOpsgenieOnCallRespondersTaskParams:
     description: Union[Unset, str] = UNSET
     teams: Union[Unset, list["PageOpsgenieOnCallRespondersTaskParamsTeamsItem"]] = UNSET
     users: Union[Unset, list["PageOpsgenieOnCallRespondersTaskParamsUsersItem"]] = UNSET
-    priority: Union[Unset, PageOpsgenieOnCallRespondersTaskParamsPriority] = (
-        PageOpsgenieOnCallRespondersTaskParamsPriority.P1
-    )
+    priority: Union[Unset, PageOpsgenieOnCallRespondersTaskParamsPriority] = "P1"
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         title: Union[None, Unset, str]
         if isinstance(self.title, Unset):
@@ -80,7 +80,7 @@ class PageOpsgenieOnCallRespondersTaskParams:
 
         priority: Union[Unset, str] = UNSET
         if not isinstance(self.priority, Unset):
-            priority = self.priority.value
+            priority = self.priority
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -103,7 +103,7 @@ class PageOpsgenieOnCallRespondersTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.page_opsgenie_on_call_responders_task_params_teams_item import (
             PageOpsgenieOnCallRespondersTaskParamsTeamsItem,
         )
@@ -111,13 +111,13 @@ class PageOpsgenieOnCallRespondersTaskParams:
             PageOpsgenieOnCallRespondersTaskParamsUsersItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _task_type = d.pop("task_type", UNSET)
         task_type: Union[Unset, PageOpsgenieOnCallRespondersTaskParamsTaskType]
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = PageOpsgenieOnCallRespondersTaskParamsTaskType(_task_type)
+            task_type = check_page_opsgenie_on_call_responders_task_params_task_type(_task_type)
 
         def _parse_title(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -151,7 +151,7 @@ class PageOpsgenieOnCallRespondersTaskParams:
         if isinstance(_priority, Unset):
             priority = UNSET
         else:
-            priority = PageOpsgenieOnCallRespondersTaskParamsPriority(_priority)
+            priority = check_page_opsgenie_on_call_responders_task_params_priority(_priority)
 
         page_opsgenie_on_call_responders_task_params = cls(
             task_type=task_type,

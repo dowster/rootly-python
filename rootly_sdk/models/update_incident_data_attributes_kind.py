@@ -1,15 +1,22 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateIncidentDataAttributesKind = Literal[
+    "backfilled", "example", "example_sub", "normal", "normal_sub", "scheduled", "test", "test_sub"
+]
+
+UPDATE_INCIDENT_DATA_ATTRIBUTES_KIND_VALUES: set[UpdateIncidentDataAttributesKind] = {
+    "backfilled",
+    "example",
+    "example_sub",
+    "normal",
+    "normal_sub",
+    "scheduled",
+    "test",
+    "test_sub",
+}
 
 
-class UpdateIncidentDataAttributesKind(str, Enum):
-    BACKFILLED = "backfilled"
-    EXAMPLE = "example"
-    EXAMPLE_SUB = "example_sub"
-    NORMAL = "normal"
-    NORMAL_SUB = "normal_sub"
-    SCHEDULED = "scheduled"
-    TEST = "test"
-    TEST_SUB = "test_sub"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_incident_data_attributes_kind(value: str) -> UpdateIncidentDataAttributesKind:
+    if value in UPDATE_INCIDENT_DATA_ATTRIBUTES_KIND_VALUES:
+        return cast(UpdateIncidentDataAttributesKind, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_INCIDENT_DATA_ATTRIBUTES_KIND_VALUES!r}")

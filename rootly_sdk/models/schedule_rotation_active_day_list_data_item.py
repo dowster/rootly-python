@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.schedule_rotation_active_day_list_data_item_type import ScheduleRotationActiveDayListDataItemType
+from ..models.schedule_rotation_active_day_list_data_item_type import (
+    ScheduleRotationActiveDayListDataItemType,
+    check_schedule_rotation_active_day_list_data_item_type,
+)
 
 if TYPE_CHECKING:
     from ..models.schedule_rotation_active_day import ScheduleRotationActiveDay
@@ -29,7 +33,7 @@ class ScheduleRotationActiveDayListDataItem:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
@@ -46,13 +50,13 @@ class ScheduleRotationActiveDayListDataItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.schedule_rotation_active_day import ScheduleRotationActiveDay
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         id = d.pop("id")
 
-        type_ = ScheduleRotationActiveDayListDataItemType(d.pop("type"))
+        type_ = check_schedule_rotation_active_day_list_data_item_type(d.pop("type"))
 
         attributes = ScheduleRotationActiveDay.from_dict(d.pop("attributes"))
 

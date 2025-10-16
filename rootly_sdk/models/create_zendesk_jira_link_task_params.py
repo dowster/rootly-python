@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_zendesk_jira_link_task_params_task_type import CreateZendeskJiraLinkTaskParamsTaskType
+from ..models.create_zendesk_jira_link_task_params_task_type import (
+    CreateZendeskJiraLinkTaskParamsTaskType,
+    check_create_zendesk_jira_link_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CreateZendeskJiraLinkTaskParams")
@@ -34,7 +38,7 @@ class CreateZendeskJiraLinkTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,8 +55,8 @@ class CreateZendeskJiraLinkTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         jira_issue_id = d.pop("jira_issue_id")
 
         jira_issue_key = d.pop("jira_issue_key")
@@ -64,7 +68,7 @@ class CreateZendeskJiraLinkTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateZendeskJiraLinkTaskParamsTaskType(_task_type)
+            task_type = check_create_zendesk_jira_link_task_params_task_type(_task_type)
 
         create_zendesk_jira_link_task_params = cls(
             jira_issue_id=jira_issue_id,

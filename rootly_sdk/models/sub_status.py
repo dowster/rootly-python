@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.sub_status_parent_status import SubStatusParentStatus
+from ..models.sub_status_parent_status import SubStatusParentStatus, check_sub_status_parent_status
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SubStatus")
@@ -34,7 +35,7 @@ class SubStatus:
     def to_dict(self) -> dict[str, Any]:
         name = self.name
 
-        parent_status = self.parent_status.value
+        parent_status: str = self.parent_status
 
         created_at = self.created_at
 
@@ -74,11 +75,11 @@ class SubStatus:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
-        parent_status = SubStatusParentStatus(d.pop("parent_status"))
+        parent_status = check_sub_status_parent_status(d.pop("parent_status"))
 
         created_at = d.pop("created_at")
 

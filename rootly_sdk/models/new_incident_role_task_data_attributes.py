@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.new_incident_role_task_data_attributes_priority import NewIncidentRoleTaskDataAttributesPriority
+from ..models.new_incident_role_task_data_attributes_priority import (
+    NewIncidentRoleTaskDataAttributesPriority,
+    check_new_incident_role_task_data_attributes_priority,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewIncidentRoleTaskDataAttributes")
@@ -36,9 +40,10 @@ class NewIncidentRoleTaskDataAttributes:
 
         priority: Union[Unset, str] = UNSET
         if not isinstance(self.priority, Unset):
-            priority = self.priority.value
+            priority = self.priority
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "task": task,
@@ -54,8 +59,8 @@ class NewIncidentRoleTaskDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         task = d.pop("task")
 
         incident_role_id = d.pop("incident_role_id", UNSET)
@@ -74,7 +79,7 @@ class NewIncidentRoleTaskDataAttributes:
         if isinstance(_priority, Unset):
             priority = UNSET
         else:
-            priority = NewIncidentRoleTaskDataAttributesPriority(_priority)
+            priority = check_new_incident_role_task_data_attributes_priority(_priority)
 
         new_incident_role_task_data_attributes = cls(
             task=task,

@@ -1,13 +1,18 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.alert_routing_rule_condition_type import AlertRoutingRuleConditionType
+from ..models.alert_routing_rule_condition_type import (
+    AlertRoutingRuleConditionType,
+    check_alert_routing_rule_condition_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.alert_routing_rule_condition_groups_item import AlertRoutingRuleConditionGroupsItem
     from ..models.alert_routing_rule_conditions_item import AlertRoutingRuleConditionsItem
     from ..models.alert_routing_rule_destination_type_0 import AlertRoutingRuleDestinationType0
 
@@ -29,6 +34,8 @@ class AlertRoutingRule:
         conditions (Union[Unset, list['AlertRoutingRuleConditionsItem']]): The conditions for the alert routing rule
         destination (Union['AlertRoutingRuleDestinationType0', None, Unset]): The destinations for the alert routing
             rule
+        condition_groups (Union[Unset, list['AlertRoutingRuleConditionGroupsItem']]): The condition groups for the alert
+            routing rule
     """
 
     name: str
@@ -40,6 +47,7 @@ class AlertRoutingRule:
     updated_at: str
     conditions: Union[Unset, list["AlertRoutingRuleConditionsItem"]] = UNSET
     destination: Union["AlertRoutingRuleDestinationType0", None, Unset] = UNSET
+    condition_groups: Union[Unset, list["AlertRoutingRuleConditionGroupsItem"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -53,7 +61,7 @@ class AlertRoutingRule:
 
         position = self.position
 
-        condition_type = self.condition_type.value
+        condition_type: str = self.condition_type
 
         created_at = self.created_at
 
@@ -74,6 +82,13 @@ class AlertRoutingRule:
         else:
             destination = self.destination
 
+        condition_groups: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.condition_groups, Unset):
+            condition_groups = []
+            for condition_groups_item_data in self.condition_groups:
+                condition_groups_item = condition_groups_item_data.to_dict()
+                condition_groups.append(condition_groups_item)
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -91,15 +106,18 @@ class AlertRoutingRule:
             field_dict["conditions"] = conditions
         if destination is not UNSET:
             field_dict["destination"] = destination
+        if condition_groups is not UNSET:
+            field_dict["condition_groups"] = condition_groups
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.alert_routing_rule_condition_groups_item import AlertRoutingRuleConditionGroupsItem
         from ..models.alert_routing_rule_conditions_item import AlertRoutingRuleConditionsItem
         from ..models.alert_routing_rule_destination_type_0 import AlertRoutingRuleDestinationType0
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         enabled = d.pop("enabled")
@@ -108,7 +126,7 @@ class AlertRoutingRule:
 
         position = d.pop("position")
 
-        condition_type = AlertRoutingRuleConditionType(d.pop("condition_type"))
+        condition_type = check_alert_routing_rule_condition_type(d.pop("condition_type"))
 
         created_at = d.pop("created_at")
 
@@ -138,6 +156,13 @@ class AlertRoutingRule:
 
         destination = _parse_destination(d.pop("destination", UNSET))
 
+        condition_groups = []
+        _condition_groups = d.pop("condition_groups", UNSET)
+        for condition_groups_item_data in _condition_groups or []:
+            condition_groups_item = AlertRoutingRuleConditionGroupsItem.from_dict(condition_groups_item_data)
+
+            condition_groups.append(condition_groups_item)
+
         alert_routing_rule = cls(
             name=name,
             enabled=enabled,
@@ -148,6 +173,7 @@ class AlertRoutingRule:
             updated_at=updated_at,
             conditions=conditions,
             destination=destination,
+            condition_groups=condition_groups,
         )
 
         alert_routing_rule.additional_properties = d

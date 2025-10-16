@@ -1,4 +1,5 @@
-from typing import Any, TypeVar, Union
+from collections.abc import Mapping
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,18 +14,22 @@ class NewAlertsSourceDataAttributesAlertSourceFieldsAttributesItem:
     """
     Attributes:
         alert_field_id (Union[Unset, str]): The ID of the alert field
-        template_body (Union[Unset, str]): Liquid expression to extract a specific value from the alert's payload for
-            evaluation
+        template_body (Union[None, Unset, str]): Liquid expression to extract a specific value from the alert's payload
+            for evaluation
     """
 
     alert_field_id: Union[Unset, str] = UNSET
-    template_body: Union[Unset, str] = UNSET
+    template_body: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         alert_field_id = self.alert_field_id
 
-        template_body = self.template_body
+        template_body: Union[None, Unset, str]
+        if isinstance(self.template_body, Unset):
+            template_body = UNSET
+        else:
+            template_body = self.template_body
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -37,11 +42,18 @@ class NewAlertsSourceDataAttributesAlertSourceFieldsAttributesItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         alert_field_id = d.pop("alert_field_id", UNSET)
 
-        template_body = d.pop("template_body", UNSET)
+        def _parse_template_body(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        template_body = _parse_template_body(d.pop("template_body", UNSET))
 
         new_alerts_source_data_attributes_alert_source_fields_attributes_item = cls(
             alert_field_id=alert_field_id,

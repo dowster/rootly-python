@@ -1,11 +1,22 @@
-from enum import Enum
+from typing import Literal, cast
+
+EscalationPolicyPathRulesItemType4Type2Operator = Literal["contains", "does_not_contain", "is", "is_not"]
+
+ESCALATION_POLICY_PATH_RULES_ITEM_TYPE_4_TYPE_2_OPERATOR_VALUES: set[
+    EscalationPolicyPathRulesItemType4Type2Operator
+] = {
+    "contains",
+    "does_not_contain",
+    "is",
+    "is_not",
+}
 
 
-class EscalationPolicyPathRulesItemType4Type2Operator(str, Enum):
-    CONTAINS = "contains"
-    DOES_NOT_CONTAIN = "does_not_contain"
-    IS = "is"
-    IS_NOT = "is_not"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_escalation_policy_path_rules_item_type_4_type_2_operator(
+    value: str,
+) -> EscalationPolicyPathRulesItemType4Type2Operator:
+    if value in ESCALATION_POLICY_PATH_RULES_ITEM_TYPE_4_TYPE_2_OPERATOR_VALUES:
+        return cast(EscalationPolicyPathRulesItemType4Type2Operator, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {ESCALATION_POLICY_PATH_RULES_ITEM_TYPE_4_TYPE_2_OPERATOR_VALUES!r}"
+    )

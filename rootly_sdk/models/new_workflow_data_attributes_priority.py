@@ -1,10 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewWorkflowDataAttributesPriority = Literal["high", "low", "normal"]
+
+NEW_WORKFLOW_DATA_ATTRIBUTES_PRIORITY_VALUES: set[NewWorkflowDataAttributesPriority] = {
+    "high",
+    "low",
+    "normal",
+}
 
 
-class NewWorkflowDataAttributesPriority(str, Enum):
-    HIGH = "high"
-    LOW = "low"
-    NORMAL = "normal"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_workflow_data_attributes_priority(value: str) -> NewWorkflowDataAttributesPriority:
+    if value in NEW_WORKFLOW_DATA_ATTRIBUTES_PRIORITY_VALUES:
+        return cast(NewWorkflowDataAttributesPriority, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_WORKFLOW_DATA_ATTRIBUTES_PRIORITY_VALUES!r}")

@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateWorkflowTaskDataType = Literal["workflow_tasks"]
+
+UPDATE_WORKFLOW_TASK_DATA_TYPE_VALUES: set[UpdateWorkflowTaskDataType] = {
+    "workflow_tasks",
+}
 
 
-class UpdateWorkflowTaskDataType(str, Enum):
-    WORKFLOW_TASKS = "workflow_tasks"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_workflow_task_data_type(value: str) -> UpdateWorkflowTaskDataType:
+    if value in UPDATE_WORKFLOW_TASK_DATA_TYPE_VALUES:
+        return cast(UpdateWorkflowTaskDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_WORKFLOW_TASK_DATA_TYPE_VALUES!r}")

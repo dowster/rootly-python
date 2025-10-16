@@ -28,10 +28,17 @@ def _parse_response(
         response_200 = AlertResponse.from_dict(response.json())
 
         return response_200
+
+    if response.status_code == 400:
+        response_400 = ErrorsList.from_dict(response.json())
+
+        return response_400
+
     if response.status_code == 404:
         response_404 = ErrorsList.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:

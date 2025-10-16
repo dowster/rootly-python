@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
@@ -34,10 +35,10 @@ class NewIncidentPermissionSetResource:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_incident_permission_set_resource_data import NewIncidentPermissionSetResourceData
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         data = NewIncidentPermissionSetResourceData.from_dict(d.pop("data"))
 
         new_incident_permission_set_resource = cls(

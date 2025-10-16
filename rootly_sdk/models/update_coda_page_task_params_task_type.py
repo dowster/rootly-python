@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateCodaPageTaskParamsTaskType = Literal["update_coda_page"]
+
+UPDATE_CODA_PAGE_TASK_PARAMS_TASK_TYPE_VALUES: set[UpdateCodaPageTaskParamsTaskType] = {
+    "update_coda_page",
+}
 
 
-class UpdateCodaPageTaskParamsTaskType(str, Enum):
-    UPDATE_CODA_PAGE = "update_coda_page"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_coda_page_task_params_task_type(value: str) -> UpdateCodaPageTaskParamsTaskType:
+    if value in UPDATE_CODA_PAGE_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(UpdateCodaPageTaskParamsTaskType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_CODA_PAGE_TASK_PARAMS_TASK_TYPE_VALUES!r}")

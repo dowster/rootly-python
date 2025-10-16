@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.snapshot_looker_look_task_params_task_type import SnapshotLookerLookTaskParamsTaskType
+from ..models.snapshot_looker_look_task_params_task_type import (
+    SnapshotLookerLookTaskParamsTaskType,
+    check_snapshot_looker_look_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -40,7 +44,7 @@ class SnapshotLookerLookTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         post_to_incident_timeline = self.post_to_incident_timeline
 
@@ -68,13 +72,13 @@ class SnapshotLookerLookTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.snapshot_looker_look_task_params_dashboards_item import SnapshotLookerLookTaskParamsDashboardsItem
         from ..models.snapshot_looker_look_task_params_post_to_slack_channels_item import (
             SnapshotLookerLookTaskParamsPostToSlackChannelsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         dashboards = []
         _dashboards = d.pop("dashboards")
         for dashboards_item_data in _dashboards:
@@ -87,7 +91,7 @@ class SnapshotLookerLookTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = SnapshotLookerLookTaskParamsTaskType(_task_type)
+            task_type = check_snapshot_looker_look_task_params_task_type(_task_type)
 
         post_to_incident_timeline = d.pop("post_to_incident_timeline", UNSET)
 

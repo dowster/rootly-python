@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateOpsgenieIncidentTaskParamsTaskType = Literal["update_opsgenie_incident"]
+
+UPDATE_OPSGENIE_INCIDENT_TASK_PARAMS_TASK_TYPE_VALUES: set[UpdateOpsgenieIncidentTaskParamsTaskType] = {
+    "update_opsgenie_incident",
+}
 
 
-class UpdateOpsgenieIncidentTaskParamsTaskType(str, Enum):
-    UPDATE_OPSGENIE_INCIDENT = "update_opsgenie_incident"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_opsgenie_incident_task_params_task_type(value: str) -> UpdateOpsgenieIncidentTaskParamsTaskType:
+    if value in UPDATE_OPSGENIE_INCIDENT_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(UpdateOpsgenieIncidentTaskParamsTaskType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_OPSGENIE_INCIDENT_TASK_PARAMS_TASK_TYPE_VALUES!r}"
+    )

@@ -1,8 +1,9 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.new_secret_data_attributes_kind import NewSecretDataAttributesKind
+from ..models.new_secret_data_attributes_kind import NewSecretDataAttributesKind, check_new_secret_data_attributes_kind
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewSecretDataAttributes")
@@ -34,7 +35,7 @@ class NewSecretDataAttributes:
 
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         hashicorp_vault_mount: Union[None, Unset, str]
         if isinstance(self.hashicorp_vault_mount, Unset):
@@ -55,6 +56,7 @@ class NewSecretDataAttributes:
             hashicorp_vault_version = self.hashicorp_vault_version
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -73,8 +75,8 @@ class NewSecretDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
         secret = d.pop("secret")
@@ -84,7 +86,7 @@ class NewSecretDataAttributes:
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = NewSecretDataAttributesKind(_kind)
+            kind = check_new_secret_data_attributes_kind(_kind)
 
         def _parse_hashicorp_vault_mount(data: object) -> Union[None, Unset, str]:
             if data is None:

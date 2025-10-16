@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateAirtableTableRecordTaskParamsTaskType = Literal["update_airtable_table_record"]
+
+UPDATE_AIRTABLE_TABLE_RECORD_TASK_PARAMS_TASK_TYPE_VALUES: set[UpdateAirtableTableRecordTaskParamsTaskType] = {
+    "update_airtable_table_record",
+}
 
 
-class UpdateAirtableTableRecordTaskParamsTaskType(str, Enum):
-    UPDATE_AIRTABLE_TABLE_RECORD = "update_airtable_table_record"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_airtable_table_record_task_params_task_type(value: str) -> UpdateAirtableTableRecordTaskParamsTaskType:
+    if value in UPDATE_AIRTABLE_TABLE_RECORD_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(UpdateAirtableTableRecordTaskParamsTaskType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_AIRTABLE_TABLE_RECORD_TASK_PARAMS_TASK_TYPE_VALUES!r}"
+    )

@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.incident_event_functionality_response_data_type import IncidentEventFunctionalityResponseDataType
+from ..models.incident_event_functionality_response_data_type import (
+    IncidentEventFunctionalityResponseDataType,
+    check_incident_event_functionality_response_data_type,
+)
 
 if TYPE_CHECKING:
     from ..models.incident_event_functionality import IncidentEventFunctionality
@@ -29,7 +33,7 @@ class IncidentEventFunctionalityResponseData:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
@@ -46,13 +50,13 @@ class IncidentEventFunctionalityResponseData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.incident_event_functionality import IncidentEventFunctionality
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         id = d.pop("id")
 
-        type_ = IncidentEventFunctionalityResponseDataType(d.pop("type"))
+        type_ = check_incident_event_functionality_response_data_type(d.pop("type"))
 
         attributes = IncidentEventFunctionality.from_dict(d.pop("attributes"))
 

@@ -1,9 +1,18 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewAlertRoutingRuleDataAttributesConditionType = Literal["all", "any"]
+
+NEW_ALERT_ROUTING_RULE_DATA_ATTRIBUTES_CONDITION_TYPE_VALUES: set[NewAlertRoutingRuleDataAttributesConditionType] = {
+    "all",
+    "any",
+}
 
 
-class NewAlertRoutingRuleDataAttributesConditionType(str, Enum):
-    ALL = "all"
-    ANY = "any"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_alert_routing_rule_data_attributes_condition_type(
+    value: str,
+) -> NewAlertRoutingRuleDataAttributesConditionType:
+    if value in NEW_ALERT_ROUTING_RULE_DATA_ATTRIBUTES_CONDITION_TYPE_VALUES:
+        return cast(NewAlertRoutingRuleDataAttributesConditionType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_ALERT_ROUTING_RULE_DATA_ATTRIBUTES_CONDITION_TYPE_VALUES!r}"
+    )

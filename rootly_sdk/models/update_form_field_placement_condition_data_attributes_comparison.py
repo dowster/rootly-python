@@ -1,10 +1,22 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateFormFieldPlacementConditionDataAttributesComparison = Literal["equal", "is_not_set", "is_set", "not_equal"]
+
+UPDATE_FORM_FIELD_PLACEMENT_CONDITION_DATA_ATTRIBUTES_COMPARISON_VALUES: set[
+    UpdateFormFieldPlacementConditionDataAttributesComparison
+] = {
+    "equal",
+    "is_not_set",
+    "is_set",
+    "not_equal",
+}
 
 
-class UpdateFormFieldPlacementConditionDataAttributesComparison(str, Enum):
-    EQUAL = "equal"
-    IS_NOT_SET = "is_not_set"
-    IS_SET = "is_set"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_form_field_placement_condition_data_attributes_comparison(
+    value: str,
+) -> UpdateFormFieldPlacementConditionDataAttributesComparison:
+    if value in UPDATE_FORM_FIELD_PLACEMENT_CONDITION_DATA_ATTRIBUTES_COMPARISON_VALUES:
+        return cast(UpdateFormFieldPlacementConditionDataAttributesComparison, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_FORM_FIELD_PLACEMENT_CONDITION_DATA_ATTRIBUTES_COMPARISON_VALUES!r}"
+    )

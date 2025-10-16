@@ -1,15 +1,33 @@
-from enum import Enum
+from typing import Literal, cast
+
+SubStatusParentStatus = Literal[
+    "cancelled",
+    "closed",
+    "completed",
+    "in_progress",
+    "in_triage",
+    "planning",
+    "resolved",
+    "scheduled",
+    "started",
+    "verifying",
+]
+
+SUB_STATUS_PARENT_STATUS_VALUES: set[SubStatusParentStatus] = {
+    "cancelled",
+    "closed",
+    "completed",
+    "in_progress",
+    "in_triage",
+    "planning",
+    "resolved",
+    "scheduled",
+    "started",
+    "verifying",
+}
 
 
-class SubStatusParentStatus(str, Enum):
-    CANCELLED = "cancelled"
-    CLOSED = "closed"
-    COMPLETED = "completed"
-    IN_PROGRESS = "in_progress"
-    IN_TRIAGE = "in_triage"
-    RESOLVED = "resolved"
-    SCHEDULED = "scheduled"
-    STARTED = "started"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_sub_status_parent_status(value: str) -> SubStatusParentStatus:
+    if value in SUB_STATUS_PARENT_STATUS_VALUES:
+        return cast(SubStatusParentStatus, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {SUB_STATUS_PARENT_STATUS_VALUES!r}")

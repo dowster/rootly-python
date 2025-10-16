@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -12,11 +13,12 @@ T = TypeVar("T", bound="FormFieldOption")
 class FormFieldOption:
     """
     Attributes:
-        value (str): The value of the form_field_option
-        color (str): The hex color of the form_field_option
-        position (int): The position of the form_field_option
+        value (str): The value of the form field option
+        color (str): The hex color of the form field option
+        position (int): The position of the form field option
         created_at (str): Date of creation
         updated_at (str): Date of last update
+        id (Union[Unset, str]): Unique ID of the form field option
         form_field_id (Union[Unset, str]): The ID of the parent custom field
         default (Union[Unset, bool]):
     """
@@ -26,6 +28,7 @@ class FormFieldOption:
     position: int
     created_at: str
     updated_at: str
+    id: Union[Unset, str] = UNSET
     form_field_id: Union[Unset, str] = UNSET
     default: Union[Unset, bool] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -40,6 +43,8 @@ class FormFieldOption:
         created_at = self.created_at
 
         updated_at = self.updated_at
+
+        id = self.id
 
         form_field_id = self.form_field_id
 
@@ -56,6 +61,8 @@ class FormFieldOption:
                 "updated_at": updated_at,
             }
         )
+        if id is not UNSET:
+            field_dict["id"] = id
         if form_field_id is not UNSET:
             field_dict["form_field_id"] = form_field_id
         if default is not UNSET:
@@ -64,8 +71,8 @@ class FormFieldOption:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         value = d.pop("value")
 
         color = d.pop("color")
@@ -75,6 +82,8 @@ class FormFieldOption:
         created_at = d.pop("created_at")
 
         updated_at = d.pop("updated_at")
+
+        id = d.pop("id", UNSET)
 
         form_field_id = d.pop("form_field_id", UNSET)
 
@@ -86,6 +95,7 @@ class FormFieldOption:
             position=position,
             created_at=created_at,
             updated_at=updated_at,
+            id=id,
             form_field_id=form_field_id,
             default=default,
         )

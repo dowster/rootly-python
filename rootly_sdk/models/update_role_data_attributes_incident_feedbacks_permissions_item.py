@@ -1,11 +1,22 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateRoleDataAttributesIncidentFeedbacksPermissionsItem = Literal["create", "delete", "read", "update"]
+
+UPDATE_ROLE_DATA_ATTRIBUTES_INCIDENT_FEEDBACKS_PERMISSIONS_ITEM_VALUES: set[
+    UpdateRoleDataAttributesIncidentFeedbacksPermissionsItem
+] = {
+    "create",
+    "delete",
+    "read",
+    "update",
+}
 
 
-class UpdateRoleDataAttributesIncidentFeedbacksPermissionsItem(str, Enum):
-    CREATE = "create"
-    DELETE = "delete"
-    READ = "read"
-    UPDATE = "update"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_role_data_attributes_incident_feedbacks_permissions_item(
+    value: str,
+) -> UpdateRoleDataAttributesIncidentFeedbacksPermissionsItem:
+    if value in UPDATE_ROLE_DATA_ATTRIBUTES_INCIDENT_FEEDBACKS_PERMISSIONS_ITEM_VALUES:
+        return cast(UpdateRoleDataAttributesIncidentFeedbacksPermissionsItem, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_ROLE_DATA_ATTRIBUTES_INCIDENT_FEEDBACKS_PERMISSIONS_ITEM_VALUES!r}"
+    )

@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.catalog_field_kind import CatalogFieldKind
+from ..models.catalog_field_kind import CatalogFieldKind, check_catalog_field_kind
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CatalogField")
@@ -42,7 +43,7 @@ class CatalogField:
 
         slug = self.slug
 
-        kind = self.kind.value
+        kind: str = self.kind
 
         multiple = self.multiple
 
@@ -79,15 +80,15 @@ class CatalogField:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         catalog_id = d.pop("catalog_id")
 
         name = d.pop("name")
 
         slug = d.pop("slug")
 
-        kind = CatalogFieldKind(d.pop("kind"))
+        kind = check_catalog_field_kind(d.pop("kind"))
 
         multiple = d.pop("multiple")
 

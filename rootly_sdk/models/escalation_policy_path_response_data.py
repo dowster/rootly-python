@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.escalation_policy_path_response_data_type import EscalationPolicyPathResponseDataType
+from ..models.escalation_policy_path_response_data_type import (
+    EscalationPolicyPathResponseDataType,
+    check_escalation_policy_path_response_data_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -34,7 +38,7 @@ class EscalationPolicyPathResponseData:
 
         type_: Union[Unset, str] = UNSET
         if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+            type_ = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -50,10 +54,10 @@ class EscalationPolicyPathResponseData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.escalation_policy_path import EscalationPolicyPath
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         id = d.pop("id")
 
         attributes = EscalationPolicyPath.from_dict(d.pop("attributes"))
@@ -63,7 +67,7 @@ class EscalationPolicyPathResponseData:
         if isinstance(_type_, Unset):
             type_ = UNSET
         else:
-            type_ = EscalationPolicyPathResponseDataType(_type_)
+            type_ = check_escalation_policy_path_response_data_type(_type_)
 
         escalation_policy_path_response_data = cls(
             id=id,

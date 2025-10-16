@@ -1,10 +1,17 @@
-from enum import IntEnum
+from typing import Literal, cast
+
+NewServiceDataAttributesShowUptimeLastDays = Literal[30, 60, 90]
+
+NEW_SERVICE_DATA_ATTRIBUTES_SHOW_UPTIME_LAST_DAYS_VALUES: set[NewServiceDataAttributesShowUptimeLastDays] = {
+    30,
+    60,
+    90,
+}
 
 
-class NewServiceDataAttributesShowUptimeLastDays(IntEnum):
-    VALUE_30 = 30
-    VALUE_60 = 60
-    VALUE_90 = 90
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_service_data_attributes_show_uptime_last_days(value: int) -> NewServiceDataAttributesShowUptimeLastDays:
+    if value in NEW_SERVICE_DATA_ATTRIBUTES_SHOW_UPTIME_LAST_DAYS_VALUES:
+        return cast(NewServiceDataAttributesShowUptimeLastDays, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_SERVICE_DATA_ATTRIBUTES_SHOW_UPTIME_LAST_DAYS_VALUES!r}"
+    )

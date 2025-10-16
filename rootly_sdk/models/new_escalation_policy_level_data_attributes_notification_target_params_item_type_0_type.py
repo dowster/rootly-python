@@ -1,12 +1,25 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type = Literal[
+    "schedule", "service", "slack_channel", "team", "user"
+]
+
+NEW_ESCALATION_POLICY_LEVEL_DATA_ATTRIBUTES_NOTIFICATION_TARGET_PARAMS_ITEM_TYPE_0_TYPE_VALUES: set[
+    NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type
+] = {
+    "schedule",
+    "service",
+    "slack_channel",
+    "team",
+    "user",
+}
 
 
-class NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type(str, Enum):
-    SCHEDULE = "schedule"
-    SERVICE = "service"
-    SLACK_CHANNEL = "slack_channel"
-    TEAM = "team"
-    USER = "user"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_escalation_policy_level_data_attributes_notification_target_params_item_type_0_type(
+    value: str,
+) -> NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type:
+    if value in NEW_ESCALATION_POLICY_LEVEL_DATA_ATTRIBUTES_NOTIFICATION_TARGET_PARAMS_ITEM_TYPE_0_TYPE_VALUES:
+        return cast(NewEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_ESCALATION_POLICY_LEVEL_DATA_ATTRIBUTES_NOTIFICATION_TARGET_PARAMS_ITEM_TYPE_0_TYPE_VALUES!r}"
+    )

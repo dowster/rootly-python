@@ -62,6 +62,7 @@ def _parse_response(
         response_200 = AlertRoutingRuleList.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -95,7 +96,9 @@ def sync_detailed(
 ) -> Response[AlertRoutingRuleList]:
     """List alert routing rules
 
-     List alert routing rules
+     List alert routing rules. **Note: If you are an advanced alert routing user, you should use the
+    Alert Routes endpoint instead of this endpoint. If you don't know whether you are an advanced user,
+    please contact Rootly customer support.**
 
     Args:
         include (Union[Unset, str]):
@@ -153,7 +156,9 @@ def sync(
 ) -> Optional[AlertRoutingRuleList]:
     """List alert routing rules
 
-     List alert routing rules
+     List alert routing rules. **Note: If you are an advanced alert routing user, you should use the
+    Alert Routes endpoint instead of this endpoint. If you don't know whether you are an advanced user,
+    please contact Rootly customer support.**
 
     Args:
         include (Union[Unset, str]):
@@ -206,7 +211,9 @@ async def asyncio_detailed(
 ) -> Response[AlertRoutingRuleList]:
     """List alert routing rules
 
-     List alert routing rules
+     List alert routing rules. **Note: If you are an advanced alert routing user, you should use the
+    Alert Routes endpoint instead of this endpoint. If you don't know whether you are an advanced user,
+    please contact Rootly customer support.**
 
     Args:
         include (Union[Unset, str]):
@@ -262,7 +269,9 @@ async def asyncio(
 ) -> Optional[AlertRoutingRuleList]:
     """List alert routing rules
 
-     List alert routing rules
+     List alert routing rules. **Note: If you are an advanced alert routing user, you should use the
+    Alert Routes endpoint instead of this endpoint. If you don't know whether you are an advanced user,
+    please contact Rootly customer support.**
 
     Args:
         include (Union[Unset, str]):

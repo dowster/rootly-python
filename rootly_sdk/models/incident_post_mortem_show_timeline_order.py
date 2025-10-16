@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentPostMortemShowTimelineOrder = Literal["asc", "desc"]
+
+INCIDENT_POST_MORTEM_SHOW_TIMELINE_ORDER_VALUES: set[IncidentPostMortemShowTimelineOrder] = {
+    "asc",
+    "desc",
+}
 
 
-class IncidentPostMortemShowTimelineOrder(str, Enum):
-    ASC = "asc"
-    DESC = "desc"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_post_mortem_show_timeline_order(value: str) -> IncidentPostMortemShowTimelineOrder:
+    if value in INCIDENT_POST_MORTEM_SHOW_TIMELINE_ORDER_VALUES:
+        return cast(IncidentPostMortemShowTimelineOrder, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {INCIDENT_POST_MORTEM_SHOW_TIMELINE_ORDER_VALUES!r}")

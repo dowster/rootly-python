@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_alert_data_type import UpdateAlertDataType
+from ..models.update_alert_data_type import UpdateAlertDataType, check_update_alert_data_type
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -30,7 +31,7 @@ class UpdateAlertData:
 
         type_: Union[Unset, str] = UNSET
         if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+            type_ = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -45,10 +46,10 @@ class UpdateAlertData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_alert_data_attributes import UpdateAlertDataAttributes
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         attributes = UpdateAlertDataAttributes.from_dict(d.pop("attributes"))
 
         _type_ = d.pop("type", UNSET)
@@ -56,7 +57,7 @@ class UpdateAlertData:
         if isinstance(_type_, Unset):
             type_ = UNSET
         else:
-            type_ = UpdateAlertDataType(_type_)
+            type_ = check_update_alert_data_type(_type_)
 
         update_alert_data = cls(
             attributes=attributes,

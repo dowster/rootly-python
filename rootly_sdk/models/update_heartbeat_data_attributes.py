@@ -1,10 +1,15 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.update_heartbeat_data_attributes_interval_unit import UpdateHeartbeatDataAttributesIntervalUnit
+from ..models.update_heartbeat_data_attributes_interval_unit import (
+    UpdateHeartbeatDataAttributesIntervalUnit,
+    check_update_heartbeat_data_attributes_interval_unit,
+)
 from ..models.update_heartbeat_data_attributes_notification_target_type import (
     UpdateHeartbeatDataAttributesNotificationTargetType,
+    check_update_heartbeat_data_attributes_notification_target_type,
 )
 from ..types import UNSET, Unset
 
@@ -18,6 +23,7 @@ class UpdateHeartbeatDataAttributes:
         name (Union[Unset, str]): The name of the heartbeat
         description (Union[None, Unset, str]): The description of the heartbeat
         alert_summary (Union[Unset, str]): Summary of alerts triggered when heartbeat expires.
+        alert_description (Union[None, Unset, str]): Description of alerts triggered when heartbeat expires.
         alert_urgency_id (Union[None, Unset, str]): Urgency of alerts triggered when heartbeat expires.
         interval (Union[Unset, int]):
         interval_unit (Union[Unset, UpdateHeartbeatDataAttributesIntervalUnit]):
@@ -29,6 +35,7 @@ class UpdateHeartbeatDataAttributes:
     name: Union[Unset, str] = UNSET
     description: Union[None, Unset, str] = UNSET
     alert_summary: Union[Unset, str] = UNSET
+    alert_description: Union[None, Unset, str] = UNSET
     alert_urgency_id: Union[None, Unset, str] = UNSET
     interval: Union[Unset, int] = UNSET
     interval_unit: Union[Unset, UpdateHeartbeatDataAttributesIntervalUnit] = UNSET
@@ -47,6 +54,12 @@ class UpdateHeartbeatDataAttributes:
 
         alert_summary = self.alert_summary
 
+        alert_description: Union[None, Unset, str]
+        if isinstance(self.alert_description, Unset):
+            alert_description = UNSET
+        else:
+            alert_description = self.alert_description
+
         alert_urgency_id: Union[None, Unset, str]
         if isinstance(self.alert_urgency_id, Unset):
             alert_urgency_id = UNSET
@@ -57,17 +70,18 @@ class UpdateHeartbeatDataAttributes:
 
         interval_unit: Union[Unset, str] = UNSET
         if not isinstance(self.interval_unit, Unset):
-            interval_unit = self.interval_unit.value
+            interval_unit = self.interval_unit
 
         notification_target_id = self.notification_target_id
 
         notification_target_type: Union[Unset, str] = UNSET
         if not isinstance(self.notification_target_type, Unset):
-            notification_target_type = self.notification_target_type.value
+            notification_target_type = self.notification_target_type
 
         enabled = self.enabled
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if name is not UNSET:
             field_dict["name"] = name
@@ -75,6 +89,8 @@ class UpdateHeartbeatDataAttributes:
             field_dict["description"] = description
         if alert_summary is not UNSET:
             field_dict["alert_summary"] = alert_summary
+        if alert_description is not UNSET:
+            field_dict["alert_description"] = alert_description
         if alert_urgency_id is not UNSET:
             field_dict["alert_urgency_id"] = alert_urgency_id
         if interval is not UNSET:
@@ -91,8 +107,8 @@ class UpdateHeartbeatDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name", UNSET)
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
@@ -105,6 +121,15 @@ class UpdateHeartbeatDataAttributes:
         description = _parse_description(d.pop("description", UNSET))
 
         alert_summary = d.pop("alert_summary", UNSET)
+
+        def _parse_alert_description(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        alert_description = _parse_alert_description(d.pop("alert_description", UNSET))
 
         def _parse_alert_urgency_id(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -122,7 +147,7 @@ class UpdateHeartbeatDataAttributes:
         if isinstance(_interval_unit, Unset):
             interval_unit = UNSET
         else:
-            interval_unit = UpdateHeartbeatDataAttributesIntervalUnit(_interval_unit)
+            interval_unit = check_update_heartbeat_data_attributes_interval_unit(_interval_unit)
 
         notification_target_id = d.pop("notification_target_id", UNSET)
 
@@ -131,7 +156,9 @@ class UpdateHeartbeatDataAttributes:
         if isinstance(_notification_target_type, Unset):
             notification_target_type = UNSET
         else:
-            notification_target_type = UpdateHeartbeatDataAttributesNotificationTargetType(_notification_target_type)
+            notification_target_type = check_update_heartbeat_data_attributes_notification_target_type(
+                _notification_target_type
+            )
 
         enabled = d.pop("enabled", UNSET)
 
@@ -139,6 +166,7 @@ class UpdateHeartbeatDataAttributes:
             name=name,
             description=description,
             alert_summary=alert_summary,
+            alert_description=alert_description,
             alert_urgency_id=alert_urgency_id,
             interval=interval,
             interval_unit=interval_unit,

@@ -1,9 +1,21 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.status_page_show_uptime_last_days import StatusPageShowUptimeLastDays
+from ..models.status_page_authentication_method import (
+    StatusPageAuthenticationMethod,
+    check_status_page_authentication_method,
+)
+from ..models.status_page_saml_name_identifier_format import (
+    StatusPageSamlNameIdentifierFormat,
+    check_status_page_saml_name_identifier_format,
+)
+from ..models.status_page_show_uptime_last_days import (
+    StatusPageShowUptimeLastDays,
+    check_status_page_show_uptime_last_days,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="StatusPage")
@@ -28,8 +40,15 @@ class StatusPage:
         show_uptime_last_days (Union[Unset, StatusPageShowUptimeLastDays]): Show uptime over x days
         success_message (Union[None, Unset, str]): Message showing when all components are operational
         failure_message (Union[None, Unset, str]): Message showing when at least one component is not operational
-        authentication_enabled (Union[None, Unset, bool]): Enable authentication Default: False.
+        authentication_method (Union[Unset, StatusPageAuthenticationMethod]): Authentication method Default: 'none'.
+        authentication_enabled (Union[None, Unset, bool]): Enable authentication (deprecated - use authentication_method
+            instead) Default: False.
         authentication_password (Union[None, Unset, str]): Authentication password
+        saml_idp_sso_service_url (Union[None, Unset, str]): SAML IdP SSO service URL
+        saml_idp_slo_service_url (Union[None, Unset, str]): SAML IdP SLO service URL
+        saml_idp_cert (Union[None, Unset, str]): SAML IdP certificate
+        saml_idp_cert_fingerprint (Union[None, Unset, str]): SAML IdP certificate fingerprint
+        saml_name_identifier_format (Union[Unset, StatusPageSamlNameIdentifierFormat]): SAML name identifier format
         website_url (Union[None, Unset, str]): Website URL
         website_privacy_url (Union[None, Unset, str]): Website Privacy URL
         website_support_url (Union[None, Unset, str]): Website Support URL
@@ -56,8 +75,14 @@ class StatusPage:
     show_uptime_last_days: Union[Unset, StatusPageShowUptimeLastDays] = UNSET
     success_message: Union[None, Unset, str] = UNSET
     failure_message: Union[None, Unset, str] = UNSET
+    authentication_method: Union[Unset, StatusPageAuthenticationMethod] = "none"
     authentication_enabled: Union[None, Unset, bool] = False
     authentication_password: Union[None, Unset, str] = UNSET
+    saml_idp_sso_service_url: Union[None, Unset, str] = UNSET
+    saml_idp_slo_service_url: Union[None, Unset, str] = UNSET
+    saml_idp_cert: Union[None, Unset, str] = UNSET
+    saml_idp_cert_fingerprint: Union[None, Unset, str] = UNSET
+    saml_name_identifier_format: Union[Unset, StatusPageSamlNameIdentifierFormat] = UNSET
     website_url: Union[None, Unset, str] = UNSET
     website_privacy_url: Union[None, Unset, str] = UNSET
     website_support_url: Union[None, Unset, str] = UNSET
@@ -123,7 +148,7 @@ class StatusPage:
 
         show_uptime_last_days: Union[Unset, int] = UNSET
         if not isinstance(self.show_uptime_last_days, Unset):
-            show_uptime_last_days = self.show_uptime_last_days.value
+            show_uptime_last_days = self.show_uptime_last_days
 
         success_message: Union[None, Unset, str]
         if isinstance(self.success_message, Unset):
@@ -137,6 +162,10 @@ class StatusPage:
         else:
             failure_message = self.failure_message
 
+        authentication_method: Union[Unset, str] = UNSET
+        if not isinstance(self.authentication_method, Unset):
+            authentication_method = self.authentication_method
+
         authentication_enabled: Union[None, Unset, bool]
         if isinstance(self.authentication_enabled, Unset):
             authentication_enabled = UNSET
@@ -148,6 +177,34 @@ class StatusPage:
             authentication_password = UNSET
         else:
             authentication_password = self.authentication_password
+
+        saml_idp_sso_service_url: Union[None, Unset, str]
+        if isinstance(self.saml_idp_sso_service_url, Unset):
+            saml_idp_sso_service_url = UNSET
+        else:
+            saml_idp_sso_service_url = self.saml_idp_sso_service_url
+
+        saml_idp_slo_service_url: Union[None, Unset, str]
+        if isinstance(self.saml_idp_slo_service_url, Unset):
+            saml_idp_slo_service_url = UNSET
+        else:
+            saml_idp_slo_service_url = self.saml_idp_slo_service_url
+
+        saml_idp_cert: Union[None, Unset, str]
+        if isinstance(self.saml_idp_cert, Unset):
+            saml_idp_cert = UNSET
+        else:
+            saml_idp_cert = self.saml_idp_cert
+
+        saml_idp_cert_fingerprint: Union[None, Unset, str]
+        if isinstance(self.saml_idp_cert_fingerprint, Unset):
+            saml_idp_cert_fingerprint = UNSET
+        else:
+            saml_idp_cert_fingerprint = self.saml_idp_cert_fingerprint
+
+        saml_name_identifier_format: Union[Unset, str] = UNSET
+        if not isinstance(self.saml_name_identifier_format, Unset):
+            saml_name_identifier_format = self.saml_name_identifier_format
 
         website_url: Union[None, Unset, str]
         if isinstance(self.website_url, Unset):
@@ -234,10 +291,22 @@ class StatusPage:
             field_dict["success_message"] = success_message
         if failure_message is not UNSET:
             field_dict["failure_message"] = failure_message
+        if authentication_method is not UNSET:
+            field_dict["authentication_method"] = authentication_method
         if authentication_enabled is not UNSET:
             field_dict["authentication_enabled"] = authentication_enabled
         if authentication_password is not UNSET:
             field_dict["authentication_password"] = authentication_password
+        if saml_idp_sso_service_url is not UNSET:
+            field_dict["saml_idp_sso_service_url"] = saml_idp_sso_service_url
+        if saml_idp_slo_service_url is not UNSET:
+            field_dict["saml_idp_slo_service_url"] = saml_idp_slo_service_url
+        if saml_idp_cert is not UNSET:
+            field_dict["saml_idp_cert"] = saml_idp_cert
+        if saml_idp_cert_fingerprint is not UNSET:
+            field_dict["saml_idp_cert_fingerprint"] = saml_idp_cert_fingerprint
+        if saml_name_identifier_format is not UNSET:
+            field_dict["saml_name_identifier_format"] = saml_name_identifier_format
         if website_url is not UNSET:
             field_dict["website_url"] = website_url
         if website_privacy_url is not UNSET:
@@ -262,8 +331,8 @@ class StatusPage:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         title = d.pop("title")
 
         created_at = d.pop("created_at")
@@ -340,7 +409,7 @@ class StatusPage:
         if isinstance(_show_uptime_last_days, Unset):
             show_uptime_last_days = UNSET
         else:
-            show_uptime_last_days = StatusPageShowUptimeLastDays(_show_uptime_last_days)
+            show_uptime_last_days = check_status_page_show_uptime_last_days(_show_uptime_last_days)
 
         def _parse_success_message(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -360,6 +429,13 @@ class StatusPage:
 
         failure_message = _parse_failure_message(d.pop("failure_message", UNSET))
 
+        _authentication_method = d.pop("authentication_method", UNSET)
+        authentication_method: Union[Unset, StatusPageAuthenticationMethod]
+        if isinstance(_authentication_method, Unset):
+            authentication_method = UNSET
+        else:
+            authentication_method = check_status_page_authentication_method(_authentication_method)
+
         def _parse_authentication_enabled(data: object) -> Union[None, Unset, bool]:
             if data is None:
                 return data
@@ -377,6 +453,49 @@ class StatusPage:
             return cast(Union[None, Unset, str], data)
 
         authentication_password = _parse_authentication_password(d.pop("authentication_password", UNSET))
+
+        def _parse_saml_idp_sso_service_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        saml_idp_sso_service_url = _parse_saml_idp_sso_service_url(d.pop("saml_idp_sso_service_url", UNSET))
+
+        def _parse_saml_idp_slo_service_url(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        saml_idp_slo_service_url = _parse_saml_idp_slo_service_url(d.pop("saml_idp_slo_service_url", UNSET))
+
+        def _parse_saml_idp_cert(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        saml_idp_cert = _parse_saml_idp_cert(d.pop("saml_idp_cert", UNSET))
+
+        def _parse_saml_idp_cert_fingerprint(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        saml_idp_cert_fingerprint = _parse_saml_idp_cert_fingerprint(d.pop("saml_idp_cert_fingerprint", UNSET))
+
+        _saml_name_identifier_format = d.pop("saml_name_identifier_format", UNSET)
+        saml_name_identifier_format: Union[Unset, StatusPageSamlNameIdentifierFormat]
+        if isinstance(_saml_name_identifier_format, Unset):
+            saml_name_identifier_format = UNSET
+        else:
+            saml_name_identifier_format = check_status_page_saml_name_identifier_format(_saml_name_identifier_format)
 
         def _parse_website_url(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -462,8 +581,14 @@ class StatusPage:
             show_uptime_last_days=show_uptime_last_days,
             success_message=success_message,
             failure_message=failure_message,
+            authentication_method=authentication_method,
             authentication_enabled=authentication_enabled,
             authentication_password=authentication_password,
+            saml_idp_sso_service_url=saml_idp_sso_service_url,
+            saml_idp_slo_service_url=saml_idp_slo_service_url,
+            saml_idp_cert=saml_idp_cert,
+            saml_idp_cert_fingerprint=saml_idp_cert_fingerprint,
+            saml_name_identifier_format=saml_name_identifier_format,
             website_url=website_url,
             website_privacy_url=website_privacy_url,
             website_support_url=website_support_url,

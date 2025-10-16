@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_google_docs_page_task_params_task_type import CreateGoogleDocsPageTaskParamsTaskType
+from ..models.create_google_docs_page_task_params_task_type import (
+    CreateGoogleDocsPageTaskParamsTaskType,
+    check_create_google_docs_page_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -45,7 +49,7 @@ class CreateGoogleDocsPageTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         post_mortem_template_id = self.post_mortem_template_id
 
@@ -92,13 +96,13 @@ class CreateGoogleDocsPageTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_google_docs_page_task_params_drive import CreateGoogleDocsPageTaskParamsDrive
         from ..models.create_google_docs_page_task_params_parent_folder import (
             CreateGoogleDocsPageTaskParamsParentFolder,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         title = d.pop("title")
 
         _task_type = d.pop("task_type", UNSET)
@@ -106,7 +110,7 @@ class CreateGoogleDocsPageTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateGoogleDocsPageTaskParamsTaskType(_task_type)
+            task_type = check_create_google_docs_page_task_params_task_type(_task_type)
 
         post_mortem_template_id = d.pop("post_mortem_template_id", UNSET)
 

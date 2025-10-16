@@ -1,4 +1,5 @@
 import datetime
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -6,9 +7,11 @@ from dateutil.parser import isoparse
 
 from ..models.new_schedule_rotation_data_attributes_active_days_item import (
     NewScheduleRotationDataAttributesActiveDaysItem,
+    check_new_schedule_rotation_data_attributes_active_days_item,
 )
 from ..models.new_schedule_rotation_data_attributes_schedule_rotationable_type import (
     NewScheduleRotationDataAttributesScheduleRotationableType,
+    check_new_schedule_rotation_data_attributes_schedule_rotationable_type,
 )
 from ..types import UNSET, Unset
 
@@ -86,7 +89,7 @@ class NewScheduleRotationDataAttributes:
 
         name = self.name
 
-        schedule_rotationable_type = self.schedule_rotationable_type.value
+        schedule_rotationable_type: str = self.schedule_rotationable_type
 
         schedule_rotationable_attributes: dict[str, Any]
         if isinstance(
@@ -112,7 +115,7 @@ class NewScheduleRotationDataAttributes:
         if not isinstance(self.active_days, Unset):
             active_days = []
             for active_days_item_data in self.active_days:
-                active_days_item = active_days_item_data.value
+                active_days_item: str = active_days_item_data
                 active_days.append(active_days_item)
 
         active_time_type = self.active_time_type
@@ -143,6 +146,7 @@ class NewScheduleRotationDataAttributes:
             end_time = self.end_time
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -170,7 +174,7 @@ class NewScheduleRotationDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_schedule_rotation_data_attributes_active_time_attributes_item import (
             NewScheduleRotationDataAttributesActiveTimeAttributesItem,
         )
@@ -187,10 +191,10 @@ class NewScheduleRotationDataAttributes:
             NewScheduleRotationDataAttributesScheduleRotationableAttributesType3,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
-        schedule_rotationable_type = NewScheduleRotationDataAttributesScheduleRotationableType(
+        schedule_rotationable_type = check_new_schedule_rotation_data_attributes_schedule_rotationable_type(
             d.pop("schedule_rotationable_type")
         )
 
@@ -251,7 +255,7 @@ class NewScheduleRotationDataAttributes:
         active_days = []
         _active_days = d.pop("active_days", UNSET)
         for active_days_item_data in _active_days or []:
-            active_days_item = NewScheduleRotationDataAttributesActiveDaysItem(active_days_item_data)
+            active_days_item = check_new_schedule_rotation_data_attributes_active_days_item(active_days_item_data)
 
             active_days.append(active_days_item)
 

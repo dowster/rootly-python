@@ -1,14 +1,27 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewScheduleRotationDataAttributesScheduleRotationableAttributesType1HandoffDay = Literal[
+    "F", "M", "R", "S", "T", "U", "W"
+]
+
+NEW_SCHEDULE_ROTATION_DATA_ATTRIBUTES_SCHEDULE_ROTATIONABLE_ATTRIBUTES_TYPE_1_HANDOFF_DAY_VALUES: set[
+    NewScheduleRotationDataAttributesScheduleRotationableAttributesType1HandoffDay
+] = {
+    "F",
+    "M",
+    "R",
+    "S",
+    "T",
+    "U",
+    "W",
+}
 
 
-class NewScheduleRotationDataAttributesScheduleRotationableAttributesType1HandoffDay(str, Enum):
-    F = "F"
-    M = "M"
-    R = "R"
-    S = "S"
-    T = "T"
-    U = "U"
-    W = "W"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_schedule_rotation_data_attributes_schedule_rotationable_attributes_type_1_handoff_day(
+    value: str,
+) -> NewScheduleRotationDataAttributesScheduleRotationableAttributesType1HandoffDay:
+    if value in NEW_SCHEDULE_ROTATION_DATA_ATTRIBUTES_SCHEDULE_ROTATIONABLE_ATTRIBUTES_TYPE_1_HANDOFF_DAY_VALUES:
+        return cast(NewScheduleRotationDataAttributesScheduleRotationableAttributesType1HandoffDay, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_SCHEDULE_ROTATION_DATA_ATTRIBUTES_SCHEDULE_ROTATIONABLE_ATTRIBUTES_TYPE_1_HANDOFF_DAY_VALUES!r}"
+    )

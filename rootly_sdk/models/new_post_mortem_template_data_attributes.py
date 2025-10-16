@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.new_post_mortem_template_data_attributes_format import NewPostMortemTemplateDataAttributesFormat
+from ..models.new_post_mortem_template_data_attributes_format import (
+    NewPostMortemTemplateDataAttributesFormat,
+    check_new_post_mortem_template_data_attributes_format,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewPostMortemTemplateDataAttributes")
@@ -15,14 +19,13 @@ class NewPostMortemTemplateDataAttributes:
         name (str): The name of the postmortem template
         content (str): The postmortem template. Liquid syntax is supported
         default (Union[None, Unset, bool]): Default selected template when editing a postmortem
-        format_ (Union[Unset, NewPostMortemTemplateDataAttributesFormat]): The format of the input Default:
-            NewPostMortemTemplateDataAttributesFormat.HTML.
+        format_ (Union[Unset, NewPostMortemTemplateDataAttributesFormat]): The format of the input Default: 'html'.
     """
 
     name: str
     content: str
     default: Union[None, Unset, bool] = UNSET
-    format_: Union[Unset, NewPostMortemTemplateDataAttributesFormat] = NewPostMortemTemplateDataAttributesFormat.HTML
+    format_: Union[Unset, NewPostMortemTemplateDataAttributesFormat] = "html"
 
     def to_dict(self) -> dict[str, Any]:
         name = self.name
@@ -37,9 +40,10 @@ class NewPostMortemTemplateDataAttributes:
 
         format_: Union[Unset, str] = UNSET
         if not isinstance(self.format_, Unset):
-            format_ = self.format_.value
+            format_ = self.format_
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -54,8 +58,8 @@ class NewPostMortemTemplateDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
         content = d.pop("content")
@@ -74,7 +78,7 @@ class NewPostMortemTemplateDataAttributes:
         if isinstance(_format_, Unset):
             format_ = UNSET
         else:
-            format_ = NewPostMortemTemplateDataAttributesFormat(_format_)
+            format_ = check_new_post_mortem_template_data_attributes_format(_format_)
 
         new_post_mortem_template_data_attributes = cls(
             name=name,

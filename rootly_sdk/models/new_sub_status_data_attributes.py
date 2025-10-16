@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.new_sub_status_data_attributes_parent_status import NewSubStatusDataAttributesParentStatus
+from ..models.new_sub_status_data_attributes_parent_status import (
+    NewSubStatusDataAttributesParentStatus,
+    check_new_sub_status_data_attributes_parent_status,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewSubStatusDataAttributes")
@@ -28,7 +32,7 @@ class NewSubStatusDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         name = self.name
 
-        parent_status = self.parent_status.value
+        parent_status: str = self.parent_status
 
         slug = self.slug
 
@@ -45,6 +49,7 @@ class NewSubStatusDataAttributes:
             position = self.position
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -61,11 +66,11 @@ class NewSubStatusDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
-        parent_status = NewSubStatusDataAttributesParentStatus(d.pop("parent_status"))
+        parent_status = check_new_sub_status_data_attributes_parent_status(d.pop("parent_status"))
 
         slug = d.pop("slug", UNSET)
 

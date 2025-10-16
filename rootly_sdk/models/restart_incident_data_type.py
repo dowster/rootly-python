@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+RestartIncidentDataType = Literal["incidents"]
+
+RESTART_INCIDENT_DATA_TYPE_VALUES: set[RestartIncidentDataType] = {
+    "incidents",
+}
 
 
-class RestartIncidentDataType(str, Enum):
-    INCIDENTS = "incidents"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_restart_incident_data_type(value: str) -> RestartIncidentDataType:
+    if value in RESTART_INCIDENT_DATA_TYPE_VALUES:
+        return cast(RestartIncidentDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {RESTART_INCIDENT_DATA_TYPE_VALUES!r}")

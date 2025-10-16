@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 from uuid import UUID
 
@@ -5,6 +6,7 @@ from attrs import define as _attrs_define
 
 from ..models.update_alert_routing_rule_data_attributes_condition_type import (
     UpdateAlertRoutingRuleDataAttributesConditionType,
+    check_update_alert_routing_rule_data_attributes_condition_type,
 )
 from ..types import UNSET, Unset
 
@@ -64,7 +66,7 @@ class UpdateAlertRoutingRuleDataAttributes:
 
         condition_type: Union[Unset, str] = UNSET
         if not isinstance(self.condition_type, Unset):
-            condition_type = self.condition_type.value
+            condition_type = self.condition_type
 
         conditions: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.conditions, Unset):
@@ -78,6 +80,7 @@ class UpdateAlertRoutingRuleDataAttributes:
             destination = self.destination.to_dict()
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if name is not UNSET:
             field_dict["name"] = name
@@ -99,7 +102,7 @@ class UpdateAlertRoutingRuleDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_alert_routing_rule_data_attributes_conditions_item import (
             UpdateAlertRoutingRuleDataAttributesConditionsItem,
         )
@@ -107,7 +110,7 @@ class UpdateAlertRoutingRuleDataAttributes:
             UpdateAlertRoutingRuleDataAttributesDestination,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name", UNSET)
 
         enabled = d.pop("enabled", UNSET)
@@ -133,7 +136,7 @@ class UpdateAlertRoutingRuleDataAttributes:
         if isinstance(_condition_type, Unset):
             condition_type = UNSET
         else:
-            condition_type = UpdateAlertRoutingRuleDataAttributesConditionType(_condition_type)
+            condition_type = check_update_alert_routing_rule_data_attributes_condition_type(_condition_type)
 
         conditions = []
         _conditions = d.pop("conditions", UNSET)

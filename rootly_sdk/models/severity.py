@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.severity_severity import SeveritySeverity
+from ..models.severity_severity import SeveritySeverity, check_severity_severity
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -63,7 +64,7 @@ class Severity:
 
         severity: Union[Unset, str] = UNSET
         if not isinstance(self.severity, Unset):
-            severity = self.severity.value
+            severity = self.severity
 
         color: Union[None, Unset, str]
         if isinstance(self.color, Unset):
@@ -139,11 +140,11 @@ class Severity:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.severity_slack_aliases_type_0_item import SeveritySlackAliasesType0Item
         from ..models.severity_slack_channels_type_0_item import SeveritySlackChannelsType0Item
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         created_at = d.pop("created_at")
@@ -166,7 +167,7 @@ class Severity:
         if isinstance(_severity, Unset):
             severity = UNSET
         else:
-            severity = SeveritySeverity(_severity)
+            severity = check_severity_severity(_severity)
 
         def _parse_color(data: object) -> Union[None, Unset, str]:
             if data is None:

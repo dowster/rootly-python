@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
@@ -5,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..models.escalation_policy_path_rules_item_type_4_type_0_rule_type import (
     EscalationPolicyPathRulesItemType4Type0RuleType,
+    check_escalation_policy_path_rules_item_type_4_type_0_rule_type,
 )
 
 T = TypeVar("T", bound="EscalationPolicyPathRulesItemType4Type0")
@@ -23,7 +25,7 @@ class EscalationPolicyPathRulesItemType4Type0:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        rule_type = self.rule_type.value
+        rule_type: str = self.rule_type
 
         urgency_ids = self.urgency_ids
 
@@ -39,9 +41,9 @@ class EscalationPolicyPathRulesItemType4Type0:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        rule_type = EscalationPolicyPathRulesItemType4Type0RuleType(d.pop("rule_type"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        rule_type = check_escalation_policy_path_rules_item_type_4_type_0_rule_type(d.pop("rule_type"))
 
         urgency_ids = cast(list[str], d.pop("urgency_ids"))
 

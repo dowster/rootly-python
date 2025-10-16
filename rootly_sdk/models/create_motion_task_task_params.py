@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_motion_task_task_params_task_type import CreateMotionTaskTaskParamsTaskType
+from ..models.create_motion_task_task_params_task_type import (
+    CreateMotionTaskTaskParamsTaskType,
+    check_create_motion_task_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -51,7 +55,7 @@ class CreateMotionTaskTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         project: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.project, Unset):
@@ -103,13 +107,13 @@ class CreateMotionTaskTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_motion_task_task_params_priority import CreateMotionTaskTaskParamsPriority
         from ..models.create_motion_task_task_params_project import CreateMotionTaskTaskParamsProject
         from ..models.create_motion_task_task_params_status import CreateMotionTaskTaskParamsStatus
         from ..models.create_motion_task_task_params_workspace import CreateMotionTaskTaskParamsWorkspace
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         workspace = CreateMotionTaskTaskParamsWorkspace.from_dict(d.pop("workspace"))
 
         title = d.pop("title")
@@ -119,7 +123,7 @@ class CreateMotionTaskTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateMotionTaskTaskParamsTaskType(_task_type)
+            task_type = check_create_motion_task_task_params_task_type(_task_type)
 
         _project = d.pop("project", UNSET)
         project: Union[Unset, CreateMotionTaskTaskParamsProject]

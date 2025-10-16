@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
-from ..models.new_catalog_entity_property_data_attributes_key import NewCatalogEntityPropertyDataAttributesKey
+from ..models.new_catalog_entity_property_data_attributes_key import (
+    NewCatalogEntityPropertyDataAttributesKey,
+    check_new_catalog_entity_property_data_attributes_key,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewCatalogEntityPropertyDataAttributes")
@@ -26,13 +30,14 @@ class NewCatalogEntityPropertyDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         catalog_field_id = self.catalog_field_id
 
-        key = self.key.value
+        key: str = self.key
 
         value = self.value
 
         catalog_entity_id = self.catalog_entity_id
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "catalog_field_id": catalog_field_id,
@@ -46,11 +51,11 @@ class NewCatalogEntityPropertyDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         catalog_field_id = d.pop("catalog_field_id")
 
-        key = NewCatalogEntityPropertyDataAttributesKey(d.pop("key"))
+        key = check_new_catalog_entity_property_data_attributes_key(d.pop("key"))
 
         value = d.pop("value")
 

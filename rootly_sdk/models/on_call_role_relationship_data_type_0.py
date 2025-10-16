@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.on_call_role_relationship_data_type_0_type import OnCallRoleRelationshipDataType0Type
+from ..models.on_call_role_relationship_data_type_0_type import (
+    OnCallRoleRelationshipDataType0Type,
+    check_on_call_role_relationship_data_type_0_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="OnCallRoleRelationshipDataType0")
@@ -26,7 +30,7 @@ class OnCallRoleRelationshipDataType0:
 
         type_: Union[Unset, str] = UNSET
         if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+            type_ = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -39,8 +43,8 @@ class OnCallRoleRelationshipDataType0:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         id = d.pop("id", UNSET)
 
         _type_ = d.pop("type", UNSET)
@@ -48,7 +52,7 @@ class OnCallRoleRelationshipDataType0:
         if isinstance(_type_, Unset):
             type_ = UNSET
         else:
-            type_ = OnCallRoleRelationshipDataType0Type(_type_)
+            type_ = check_on_call_role_relationship_data_type_0_type(_type_)
 
         on_call_role_relationship_data_type_0 = cls(
             id=id,

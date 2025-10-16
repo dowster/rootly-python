@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.rename_microsoft_teams_channel_task_params_task_type import RenameMicrosoftTeamsChannelTaskParamsTaskType
+from ..models.rename_microsoft_teams_channel_task_params_task_type import (
+    RenameMicrosoftTeamsChannelTaskParamsTaskType,
+    check_rename_microsoft_teams_channel_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -39,7 +43,7 @@ class RenameMicrosoftTeamsChannelTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -56,13 +60,13 @@ class RenameMicrosoftTeamsChannelTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.rename_microsoft_teams_channel_task_params_channel import (
             RenameMicrosoftTeamsChannelTaskParamsChannel,
         )
         from ..models.rename_microsoft_teams_channel_task_params_team import RenameMicrosoftTeamsChannelTaskParamsTeam
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         team = RenameMicrosoftTeamsChannelTaskParamsTeam.from_dict(d.pop("team"))
 
         channel = RenameMicrosoftTeamsChannelTaskParamsChannel.from_dict(d.pop("channel"))
@@ -74,7 +78,7 @@ class RenameMicrosoftTeamsChannelTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = RenameMicrosoftTeamsChannelTaskParamsTaskType(_task_type)
+            task_type = check_rename_microsoft_teams_channel_task_params_task_type(_task_type)
 
         rename_microsoft_teams_channel_task_params = cls(
             team=team,

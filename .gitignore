@@ -19,8 +19,5 @@ dmypy.json
 # JetBrains
 .idea/
 
-# Claude Code
-.claude/
-
 /coverage.xml
 /.coverage

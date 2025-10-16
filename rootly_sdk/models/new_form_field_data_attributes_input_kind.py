@@ -1,17 +1,24 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewFormFieldDataAttributesInputKind = Literal[
+    "checkbox", "date", "datetime", "multi_select", "number", "rich_text", "select", "tags", "text", "textarea"
+]
+
+NEW_FORM_FIELD_DATA_ATTRIBUTES_INPUT_KIND_VALUES: set[NewFormFieldDataAttributesInputKind] = {
+    "checkbox",
+    "date",
+    "datetime",
+    "multi_select",
+    "number",
+    "rich_text",
+    "select",
+    "tags",
+    "text",
+    "textarea",
+}
 
 
-class NewFormFieldDataAttributesInputKind(str, Enum):
-    CHECKBOX = "checkbox"
-    DATE = "date"
-    DATETIME = "datetime"
-    MULTI_SELECT = "multi_select"
-    NUMBER = "number"
-    RICH_TEXT = "rich_text"
-    SELECT = "select"
-    TAGS = "tags"
-    TEXT = "text"
-    TEXTAREA = "textarea"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_form_field_data_attributes_input_kind(value: str) -> NewFormFieldDataAttributesInputKind:
+    if value in NEW_FORM_FIELD_DATA_ATTRIBUTES_INPUT_KIND_VALUES:
+        return cast(NewFormFieldDataAttributesInputKind, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_FORM_FIELD_DATA_ATTRIBUTES_INPUT_KIND_VALUES!r}")

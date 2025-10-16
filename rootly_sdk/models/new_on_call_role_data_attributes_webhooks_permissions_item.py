@@ -1,11 +1,22 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewOnCallRoleDataAttributesWebhooksPermissionsItem = Literal["create", "delete", "read", "update"]
+
+NEW_ON_CALL_ROLE_DATA_ATTRIBUTES_WEBHOOKS_PERMISSIONS_ITEM_VALUES: set[
+    NewOnCallRoleDataAttributesWebhooksPermissionsItem
+] = {
+    "create",
+    "delete",
+    "read",
+    "update",
+}
 
 
-class NewOnCallRoleDataAttributesWebhooksPermissionsItem(str, Enum):
-    CREATE = "create"
-    DELETE = "delete"
-    READ = "read"
-    UPDATE = "update"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_on_call_role_data_attributes_webhooks_permissions_item(
+    value: str,
+) -> NewOnCallRoleDataAttributesWebhooksPermissionsItem:
+    if value in NEW_ON_CALL_ROLE_DATA_ATTRIBUTES_WEBHOOKS_PERMISSIONS_ITEM_VALUES:
+        return cast(NewOnCallRoleDataAttributesWebhooksPermissionsItem, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_ON_CALL_ROLE_DATA_ATTRIBUTES_WEBHOOKS_PERMISSIONS_ITEM_VALUES!r}"
+    )

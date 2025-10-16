@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+FormSetListDataItemType = Literal["form_sets"]
+
+FORM_SET_LIST_DATA_ITEM_TYPE_VALUES: set[FormSetListDataItemType] = {
+    "form_sets",
+}
 
 
-class FormSetListDataItemType(str, Enum):
-    FORM_SETS = "form_sets"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_form_set_list_data_item_type(value: str) -> FormSetListDataItemType:
+    if value in FORM_SET_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(FormSetListDataItemType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {FORM_SET_LIST_DATA_ITEM_TYPE_VALUES!r}")

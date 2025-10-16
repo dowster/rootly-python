@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+SendDashboardReportTaskParamsTaskType = Literal["send_dashboard_report"]
+
+SEND_DASHBOARD_REPORT_TASK_PARAMS_TASK_TYPE_VALUES: set[SendDashboardReportTaskParamsTaskType] = {
+    "send_dashboard_report",
+}
 
 
-class SendDashboardReportTaskParamsTaskType(str, Enum):
-    SEND_DASHBOARD_REPORT = "send_dashboard_report"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_send_dashboard_report_task_params_task_type(value: str) -> SendDashboardReportTaskParamsTaskType:
+    if value in SEND_DASHBOARD_REPORT_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(SendDashboardReportTaskParamsTaskType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {SEND_DASHBOARD_REPORT_TASK_PARAMS_TASK_TYPE_VALUES!r}"
+    )

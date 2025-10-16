@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+ListWorkflowRunsInclude = Literal["genius_task_runs"]
+
+LIST_WORKFLOW_RUNS_INCLUDE_VALUES: set[ListWorkflowRunsInclude] = {
+    "genius_task_runs",
+}
 
 
-class ListWorkflowRunsInclude(str, Enum):
-    GENIUS_TASK_RUNS = "genius_task_runs"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_list_workflow_runs_include(value: str) -> ListWorkflowRunsInclude:
+    if value in LIST_WORKFLOW_RUNS_INCLUDE_VALUES:
+        return cast(ListWorkflowRunsInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {LIST_WORKFLOW_RUNS_INCLUDE_VALUES!r}")

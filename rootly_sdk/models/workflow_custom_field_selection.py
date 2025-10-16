@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.workflow_custom_field_selection_incident_condition import WorkflowCustomFieldSelectionIncidentCondition
+from ..models.workflow_custom_field_selection_incident_condition import (
+    WorkflowCustomFieldSelectionIncidentCondition,
+    check_workflow_custom_field_selection_incident_condition,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="WorkflowCustomFieldSelection")
@@ -15,8 +19,7 @@ class WorkflowCustomFieldSelection:
     Attributes:
         workflow_id (str): The workflow for this selection
         custom_field_id (int): The custom field for this selection
-        incident_condition (WorkflowCustomFieldSelectionIncidentCondition): The trigger condition Default:
-            WorkflowCustomFieldSelectionIncidentCondition.ANY.
+        incident_condition (WorkflowCustomFieldSelectionIncidentCondition): The trigger condition Default: 'ANY'.
         selected_option_ids (list[int]):
         values (Union[Unset, list[str]]):
     """
@@ -24,9 +27,7 @@ class WorkflowCustomFieldSelection:
     workflow_id: str
     custom_field_id: int
     selected_option_ids: list[int]
-    incident_condition: WorkflowCustomFieldSelectionIncidentCondition = (
-        WorkflowCustomFieldSelectionIncidentCondition.ANY
-    )
+    incident_condition: WorkflowCustomFieldSelectionIncidentCondition = "ANY"
     values: Union[Unset, list[str]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -35,7 +36,7 @@ class WorkflowCustomFieldSelection:
 
         custom_field_id = self.custom_field_id
 
-        incident_condition = self.incident_condition.value
+        incident_condition: str = self.incident_condition
 
         selected_option_ids = self.selected_option_ids
 
@@ -59,13 +60,13 @@ class WorkflowCustomFieldSelection:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         workflow_id = d.pop("workflow_id")
 
         custom_field_id = d.pop("custom_field_id")
 
-        incident_condition = WorkflowCustomFieldSelectionIncidentCondition(d.pop("incident_condition"))
+        incident_condition = check_workflow_custom_field_selection_incident_condition(d.pop("incident_condition"))
 
         selected_option_ids = cast(list[int], d.pop("selected_option_ids"))
 

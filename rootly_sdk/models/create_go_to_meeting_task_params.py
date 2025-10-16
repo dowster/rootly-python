@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_go_to_meeting_task_params_conference_call_info import CreateGoToMeetingTaskParamsConferenceCallInfo
-from ..models.create_go_to_meeting_task_params_task_type import CreateGoToMeetingTaskParamsTaskType
+from ..models.create_go_to_meeting_task_params_conference_call_info import (
+    CreateGoToMeetingTaskParamsConferenceCallInfo,
+    check_create_go_to_meeting_task_params_conference_call_info,
+)
+from ..models.create_go_to_meeting_task_params_task_type import (
+    CreateGoToMeetingTaskParamsTaskType,
+    check_create_go_to_meeting_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -22,8 +29,8 @@ class CreateGoToMeetingTaskParams:
     Attributes:
         subject (str): The meeting subject
         task_type (Union[Unset, CreateGoToMeetingTaskParamsTaskType]):
-        conference_call_info (Union[Unset, CreateGoToMeetingTaskParamsConferenceCallInfo]):  Default:
-            CreateGoToMeetingTaskParamsConferenceCallInfo.VOIP. Example: voip.
+        conference_call_info (Union[Unset, CreateGoToMeetingTaskParamsConferenceCallInfo]):  Default: 'voip'. Example:
+            voip.
         password_required (Union[None, Unset, bool]):
         post_to_incident_timeline (Union[Unset, bool]):
         post_to_slack_channels (Union[Unset, list['CreateGoToMeetingTaskParamsPostToSlackChannelsItem']]):
@@ -31,9 +38,7 @@ class CreateGoToMeetingTaskParams:
 
     subject: str
     task_type: Union[Unset, CreateGoToMeetingTaskParamsTaskType] = UNSET
-    conference_call_info: Union[Unset, CreateGoToMeetingTaskParamsConferenceCallInfo] = (
-        CreateGoToMeetingTaskParamsConferenceCallInfo.VOIP
-    )
+    conference_call_info: Union[Unset, CreateGoToMeetingTaskParamsConferenceCallInfo] = "voip"
     password_required: Union[None, Unset, bool] = UNSET
     post_to_incident_timeline: Union[Unset, bool] = UNSET
     post_to_slack_channels: Union[Unset, list["CreateGoToMeetingTaskParamsPostToSlackChannelsItem"]] = UNSET
@@ -44,11 +49,11 @@ class CreateGoToMeetingTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         conference_call_info: Union[Unset, str] = UNSET
         if not isinstance(self.conference_call_info, Unset):
-            conference_call_info = self.conference_call_info.value
+            conference_call_info = self.conference_call_info
 
         password_required: Union[None, Unset, bool]
         if isinstance(self.password_required, Unset):
@@ -86,12 +91,12 @@ class CreateGoToMeetingTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_go_to_meeting_task_params_post_to_slack_channels_item import (
             CreateGoToMeetingTaskParamsPostToSlackChannelsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         subject = d.pop("subject")
 
         _task_type = d.pop("task_type", UNSET)
@@ -99,14 +104,14 @@ class CreateGoToMeetingTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateGoToMeetingTaskParamsTaskType(_task_type)
+            task_type = check_create_go_to_meeting_task_params_task_type(_task_type)
 
         _conference_call_info = d.pop("conference_call_info", UNSET)
         conference_call_info: Union[Unset, CreateGoToMeetingTaskParamsConferenceCallInfo]
         if isinstance(_conference_call_info, Unset):
             conference_call_info = UNSET
         else:
-            conference_call_info = CreateGoToMeetingTaskParamsConferenceCallInfo(_conference_call_info)
+            conference_call_info = check_create_go_to_meeting_task_params_conference_call_info(_conference_call_info)
 
         def _parse_password_required(data: object) -> Union[None, Unset, bool]:
             if data is None:

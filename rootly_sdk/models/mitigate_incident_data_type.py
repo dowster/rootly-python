@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+MitigateIncidentDataType = Literal["incidents"]
+
+MITIGATE_INCIDENT_DATA_TYPE_VALUES: set[MitigateIncidentDataType] = {
+    "incidents",
+}
 
 
-class MitigateIncidentDataType(str, Enum):
-    INCIDENTS = "incidents"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_mitigate_incident_data_type(value: str) -> MitigateIncidentDataType:
+    if value in MITIGATE_INCIDENT_DATA_TYPE_VALUES:
+        return cast(MitigateIncidentDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {MITIGATE_INCIDENT_DATA_TYPE_VALUES!r}")

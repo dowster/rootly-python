@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.page_rootly_on_call_responders_task_params_task_type import PageRootlyOnCallRespondersTaskParamsTaskType
+from ..models.page_rootly_on_call_responders_task_params_task_type import (
+    PageRootlyOnCallRespondersTaskParamsTaskType,
+    check_page_rootly_on_call_responders_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -55,7 +59,7 @@ class PageRootlyOnCallRespondersTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         escalation_policy_target: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.escalation_policy_target, Unset):
@@ -106,7 +110,7 @@ class PageRootlyOnCallRespondersTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.page_rootly_on_call_responders_task_params_escalation_policy_target import (
             PageRootlyOnCallRespondersTaskParamsEscalationPolicyTarget,
         )
@@ -120,7 +124,7 @@ class PageRootlyOnCallRespondersTaskParams:
             PageRootlyOnCallRespondersTaskParamsUserTarget,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         summary = d.pop("summary")
 
         _task_type = d.pop("task_type", UNSET)
@@ -128,7 +132,7 @@ class PageRootlyOnCallRespondersTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = PageRootlyOnCallRespondersTaskParamsTaskType(_task_type)
+            task_type = check_page_rootly_on_call_responders_task_params_task_type(_task_type)
 
         _escalation_policy_target = d.pop("escalation_policy_target", UNSET)
         escalation_policy_target: Union[Unset, PageRootlyOnCallRespondersTaskParamsEscalationPolicyTarget]

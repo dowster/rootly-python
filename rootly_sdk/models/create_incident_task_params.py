@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_incident_task_params_task_type import CreateIncidentTaskParamsTaskType
+from ..models.create_incident_task_params_task_type import (
+    CreateIncidentTaskParamsTaskType,
+    check_create_incident_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CreateIncidentTaskParams")
@@ -45,7 +49,7 @@ class CreateIncidentTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         summary = self.summary
 
@@ -110,8 +114,8 @@ class CreateIncidentTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         title = d.pop("title")
 
         _task_type = d.pop("task_type", UNSET)
@@ -119,7 +123,7 @@ class CreateIncidentTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateIncidentTaskParamsTaskType(_task_type)
+            task_type = check_create_incident_task_params_task_type(_task_type)
 
         summary = d.pop("summary", UNSET)
 

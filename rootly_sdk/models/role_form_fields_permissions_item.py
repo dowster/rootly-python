@@ -1,11 +1,16 @@
-from enum import Enum
+from typing import Literal, cast
+
+RoleFormFieldsPermissionsItem = Literal["create", "delete", "read", "update"]
+
+ROLE_FORM_FIELDS_PERMISSIONS_ITEM_VALUES: set[RoleFormFieldsPermissionsItem] = {
+    "create",
+    "delete",
+    "read",
+    "update",
+}
 
 
-class RoleFormFieldsPermissionsItem(str, Enum):
-    CREATE = "create"
-    DELETE = "delete"
-    READ = "read"
-    UPDATE = "update"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_role_form_fields_permissions_item(value: str) -> RoleFormFieldsPermissionsItem:
+    if value in ROLE_FORM_FIELDS_PERMISSIONS_ITEM_VALUES:
+        return cast(RoleFormFieldsPermissionsItem, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {ROLE_FORM_FIELDS_PERMISSIONS_ITEM_VALUES!r}")

@@ -1,12 +1,22 @@
-from enum import Enum
+from typing import Literal, cast
+
+ListUsersInclude = Literal[
+    "devices", "email_addresses", "notification_rules", "on_call_role", "phone_numbers", "role", "schedules", "teams"
+]
+
+LIST_USERS_INCLUDE_VALUES: set[ListUsersInclude] = {
+    "devices",
+    "email_addresses",
+    "notification_rules",
+    "on_call_role",
+    "phone_numbers",
+    "role",
+    "schedules",
+    "teams",
+}
 
 
-class ListUsersInclude(str, Enum):
-    DEVICES = "devices"
-    EMAIL_ADDRESSES = "email_addresses"
-    ON_CALL_ROLE = "on_call_role"
-    PHONE_NUMBERS = "phone_numbers"
-    ROLE = "role"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_list_users_include(value: str) -> ListUsersInclude:
+    if value in LIST_USERS_INCLUDE_VALUES:
+        return cast(ListUsersInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {LIST_USERS_INCLUDE_VALUES!r}")

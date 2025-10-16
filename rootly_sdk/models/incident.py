@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.incident_retrospective_progress_status import IncidentRetrospectiveProgressStatus
+from ..models.incident_retrospective_progress_status import (
+    IncidentRetrospectiveProgressStatus,
+    check_incident_retrospective_progress_status,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -40,7 +44,7 @@ class Incident:
         parent_incident_id (Union[None, Unset, str]): ID of parent incident
         duplicate_incident_id (Union[None, Unset, str]): ID of duplicated incident
         summary (Union[None, Unset, str]): The summary of the incident
-        private (Union[None, Unset, bool]): Create an incident as private Default: False.
+        private (Union[Unset, bool]): The visibility of the incident Default: False.
         source (Union[None, Unset, str]): The source of the incident
         status (Union[None, Unset, str]): The status of the incident
         url (Union[None, Unset, str]): The url to the incident
@@ -161,7 +165,7 @@ class Incident:
     parent_incident_id: Union[None, Unset, str] = UNSET
     duplicate_incident_id: Union[None, Unset, str] = UNSET
     summary: Union[None, Unset, str] = UNSET
-    private: Union[None, Unset, bool] = False
+    private: Union[Unset, bool] = False
     source: Union[None, Unset, str] = UNSET
     status: Union[None, Unset, str] = UNSET
     url: Union[None, Unset, str] = UNSET
@@ -312,11 +316,7 @@ class Incident:
         else:
             summary = self.summary
 
-        private: Union[None, Unset, bool]
-        if isinstance(self.private, Unset):
-            private = UNSET
-        else:
-            private = self.private
+        private = self.private
 
         source: Union[None, Unset, str]
         if isinstance(self.source, Unset):
@@ -901,7 +901,7 @@ class Incident:
 
         retrospective_progress_status: Union[Unset, str] = UNSET
         if not isinstance(self.retrospective_progress_status, Unset):
-            retrospective_progress_status = self.retrospective_progress_status.value
+            retrospective_progress_status = self.retrospective_progress_status
 
         in_triage_by: Union[None, Unset, dict[str, Any]]
         if isinstance(self.in_triage_by, Unset):
@@ -1239,7 +1239,7 @@ class Incident:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.environment_response import EnvironmentResponse
         from ..models.functionality_response import FunctionalityResponse
         from ..models.incident_cancelled_by_type_0 import IncidentCancelledByType0
@@ -1255,7 +1255,7 @@ class Incident:
         from ..models.severity_response import SeverityResponse
         from ..models.team_response import TeamResponse
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         title = d.pop("title")
 
         slug = d.pop("slug")
@@ -1297,14 +1297,7 @@ class Incident:
 
         summary = _parse_summary(d.pop("summary", UNSET))
 
-        def _parse_private(data: object) -> Union[None, Unset, bool]:
-            if data is None:
-                return data
-            if isinstance(data, Unset):
-                return data
-            return cast(Union[None, Unset, bool], data)
-
-        private = _parse_private(d.pop("private", UNSET))
+        private = d.pop("private", UNSET)
 
         def _parse_source(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -2219,7 +2212,7 @@ class Incident:
         if isinstance(_retrospective_progress_status, Unset):
             retrospective_progress_status = UNSET
         else:
-            retrospective_progress_status = IncidentRetrospectiveProgressStatus(_retrospective_progress_status)
+            retrospective_progress_status = check_incident_retrospective_progress_status(_retrospective_progress_status)
 
         def _parse_in_triage_by(data: object) -> Union["IncidentInTriageByType0", None, Unset]:
             if data is None:

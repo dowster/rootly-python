@@ -1,13 +1,18 @@
-from enum import Enum
+from typing import Literal, cast
+
+WorkflowRunStatus = Literal["canceled", "completed", "completed_with_errors", "failed", "queued", "started"]
+
+WORKFLOW_RUN_STATUS_VALUES: set[WorkflowRunStatus] = {
+    "canceled",
+    "completed",
+    "completed_with_errors",
+    "failed",
+    "queued",
+    "started",
+}
 
 
-class WorkflowRunStatus(str, Enum):
-    CANCELED = "canceled"
-    COMPLETED = "completed"
-    COMPLETED_WITH_ERRORS = "completed_with_errors"
-    FAILED = "failed"
-    QUEUED = "queued"
-    STARTED = "started"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_workflow_run_status(value: str) -> WorkflowRunStatus:
+    if value in WORKFLOW_RUN_STATUS_VALUES:
+        return cast(WorkflowRunStatus, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {WORKFLOW_RUN_STATUS_VALUES!r}")

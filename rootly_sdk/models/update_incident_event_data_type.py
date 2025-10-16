@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateIncidentEventDataType = Literal["incident_events"]
+
+UPDATE_INCIDENT_EVENT_DATA_TYPE_VALUES: set[UpdateIncidentEventDataType] = {
+    "incident_events",
+}
 
 
-class UpdateIncidentEventDataType(str, Enum):
-    INCIDENT_EVENTS = "incident_events"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_incident_event_data_type(value: str) -> UpdateIncidentEventDataType:
+    if value in UPDATE_INCIDENT_EVENT_DATA_TYPE_VALUES:
+        return cast(UpdateIncidentEventDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_INCIDENT_EVENT_DATA_TYPE_VALUES!r}")

@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.new_workflow_run_data_type import NewWorkflowRunDataType
+from ..models.new_workflow_run_data_type import NewWorkflowRunDataType, check_new_workflow_run_data_type
 
 if TYPE_CHECKING:
     from ..models.new_workflow_run_data_attributes_type_0 import NewWorkflowRunDataAttributesType0
@@ -45,7 +46,7 @@ class NewWorkflowRunData:
         from ..models.new_workflow_run_data_attributes_type_3 import NewWorkflowRunDataAttributesType3
         from ..models.new_workflow_run_data_attributes_type_4 import NewWorkflowRunDataAttributesType4
 
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes: dict[str, Any]
         if isinstance(self.attributes, NewWorkflowRunDataAttributesType0):
@@ -73,7 +74,7 @@ class NewWorkflowRunData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_workflow_run_data_attributes_type_0 import NewWorkflowRunDataAttributesType0
         from ..models.new_workflow_run_data_attributes_type_1 import NewWorkflowRunDataAttributesType1
         from ..models.new_workflow_run_data_attributes_type_2 import NewWorkflowRunDataAttributesType2
@@ -81,8 +82,8 @@ class NewWorkflowRunData:
         from ..models.new_workflow_run_data_attributes_type_4 import NewWorkflowRunDataAttributesType4
         from ..models.new_workflow_run_data_attributes_type_5 import NewWorkflowRunDataAttributesType5
 
-        d = src_dict.copy()
-        type_ = NewWorkflowRunDataType(d.pop("type"))
+        d = dict(src_dict)
+        type_ = check_new_workflow_run_data_type(d.pop("type"))
 
         def _parse_attributes(
             data: object,

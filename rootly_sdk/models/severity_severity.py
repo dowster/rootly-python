@@ -1,11 +1,16 @@
-from enum import Enum
+from typing import Literal, cast
+
+SeveritySeverity = Literal["critical", "high", "low", "medium"]
+
+SEVERITY_SEVERITY_VALUES: set[SeveritySeverity] = {
+    "critical",
+    "high",
+    "low",
+    "medium",
+}
 
 
-class SeveritySeverity(str, Enum):
-    CRITICAL = "critical"
-    HIGH = "high"
-    LOW = "low"
-    MEDIUM = "medium"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_severity_severity(value: str) -> SeveritySeverity:
+    if value in SEVERITY_SEVERITY_VALUES:
+        return cast(SeveritySeverity, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {SEVERITY_SEVERITY_VALUES!r}")

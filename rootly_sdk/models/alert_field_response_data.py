@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.alert_field_response_data_type import AlertFieldResponseDataType
+from ..models.alert_field_response_data_type import AlertFieldResponseDataType, check_alert_field_response_data_type
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -28,7 +29,7 @@ class AlertFieldResponseData:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
@@ -48,11 +49,11 @@ class AlertFieldResponseData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.alert_field import AlertField
 
-        d = src_dict.copy()
-        type_ = AlertFieldResponseDataType(d.pop("type"))
+        d = dict(src_dict)
+        type_ = check_alert_field_response_data_type(d.pop("type"))
 
         attributes = AlertField.from_dict(d.pop("attributes"))
 

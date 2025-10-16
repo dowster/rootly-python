@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -39,10 +40,10 @@ class ErrorsList:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.errors_list_errors_item import ErrorsListErrorsItem
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         errors = []
         _errors = d.pop("errors", UNSET)
         for errors_item_data in _errors or []:

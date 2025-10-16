@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.communications_group_condition_type import CommunicationsGroupConditionType
+from ..models.communications_group_condition_type import (
+    CommunicationsGroupConditionType,
+    check_communications_group_condition_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -73,7 +77,7 @@ class CommunicationsGroup:
 
         is_private = self.is_private
 
-        condition_type = self.condition_type.value
+        condition_type: str = self.condition_type
 
         sms_channel = self.sms_channel
 
@@ -154,7 +158,7 @@ class CommunicationsGroup:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.communications_group_communication_external_group_members_type_0_item import (
             CommunicationsGroupCommunicationExternalGroupMembersType0Item,
         )
@@ -165,7 +169,7 @@ class CommunicationsGroup:
             CommunicationsGroupCommunicationGroupMembersType0Item,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         slug = d.pop("slug")
@@ -174,7 +178,7 @@ class CommunicationsGroup:
 
         is_private = d.pop("is_private")
 
-        condition_type = CommunicationsGroupConditionType(d.pop("condition_type"))
+        condition_type = check_communications_group_condition_type(d.pop("condition_type"))
 
         sms_channel = d.pop("sms_channel")
 

@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateUserDataType = Literal["users"]
+
+UPDATE_USER_DATA_TYPE_VALUES: set[UpdateUserDataType] = {
+    "users",
+}
 
 
-class UpdateUserDataType(str, Enum):
-    USERS = "users"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_user_data_type(value: str) -> UpdateUserDataType:
+    if value in UPDATE_USER_DATA_TYPE_VALUES:
+        return cast(UpdateUserDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_USER_DATA_TYPE_VALUES!r}")

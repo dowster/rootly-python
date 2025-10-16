@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_dashboard_panel_data_type import UpdateDashboardPanelDataType
+from ..models.update_dashboard_panel_data_type import (
+    UpdateDashboardPanelDataType,
+    check_update_dashboard_panel_data_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -28,7 +32,7 @@ class UpdateDashboardPanelData:
     def to_dict(self) -> dict[str, Any]:
         type_: Union[Unset, str] = UNSET
         if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+            type_ = self.type_
 
         attributes: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.attributes, Unset):
@@ -45,16 +49,16 @@ class UpdateDashboardPanelData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_dashboard_panel_data_attributes import UpdateDashboardPanelDataAttributes
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _type_ = d.pop("type", UNSET)
         type_: Union[Unset, UpdateDashboardPanelDataType]
         if isinstance(_type_, Unset):
             type_ = UNSET
         else:
-            type_ = UpdateDashboardPanelDataType(_type_)
+            type_ = check_update_dashboard_panel_data_type(_type_)
 
         _attributes = d.pop("attributes", UNSET)
         attributes: Union[Unset, UpdateDashboardPanelDataAttributes]

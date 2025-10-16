@@ -22,9 +22,8 @@ def _get_kwargs(
         "url": f"/v1/retrospective_process_group_steps/{id}",
     }
 
-    _body = body.to_dict()
+    _kwargs["json"] = body.to_dict()
 
-    _kwargs["json"] = _body
     headers["Content-Type"] = "application/vnd.api+json"
 
     _kwargs["headers"] = headers
@@ -38,6 +37,7 @@ def _parse_response(
         response_200 = RetrospectiveProcessGroupStepResponse.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:

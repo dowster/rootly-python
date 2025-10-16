@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
@@ -34,10 +35,10 @@ class IpRangesResponse:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.ip_ranges_response_data import IpRangesResponseData
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         data = IpRangesResponseData.from_dict(d.pop("data"))
 
         ip_ranges_response = cls(

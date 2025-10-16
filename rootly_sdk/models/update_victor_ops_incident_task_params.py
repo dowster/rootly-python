@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_victor_ops_incident_task_params_status import UpdateVictorOpsIncidentTaskParamsStatus
-from ..models.update_victor_ops_incident_task_params_task_type import UpdateVictorOpsIncidentTaskParamsTaskType
+from ..models.update_victor_ops_incident_task_params_status import (
+    UpdateVictorOpsIncidentTaskParamsStatus,
+    check_update_victor_ops_incident_task_params_status,
+)
+from ..models.update_victor_ops_incident_task_params_task_type import (
+    UpdateVictorOpsIncidentTaskParamsTaskType,
+    check_update_victor_ops_incident_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateVictorOpsIncidentTaskParams")
@@ -30,11 +37,11 @@ class UpdateVictorOpsIncidentTaskParams:
     def to_dict(self) -> dict[str, Any]:
         victor_ops_incident_id = self.victor_ops_incident_id
 
-        status = self.status.value
+        status: str = self.status
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         resolution_message = self.resolution_message
 
@@ -54,18 +61,18 @@ class UpdateVictorOpsIncidentTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         victor_ops_incident_id = d.pop("victor_ops_incident_id")
 
-        status = UpdateVictorOpsIncidentTaskParamsStatus(d.pop("status"))
+        status = check_update_victor_ops_incident_task_params_status(d.pop("status"))
 
         _task_type = d.pop("task_type", UNSET)
         task_type: Union[Unset, UpdateVictorOpsIncidentTaskParamsTaskType]
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateVictorOpsIncidentTaskParamsTaskType(_task_type)
+            task_type = check_update_victor_ops_incident_task_params_task_type(_task_type)
 
         resolution_message = d.pop("resolution_message", UNSET)
 

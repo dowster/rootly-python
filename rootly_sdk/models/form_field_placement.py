@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.form_field_placement_placement_operator import FormFieldPlacementPlacementOperator
-from ..models.form_field_placement_required_operator import FormFieldPlacementRequiredOperator
+from ..models.form_field_placement_placement_operator import (
+    FormFieldPlacementPlacementOperator,
+    check_form_field_placement_placement_operator,
+)
+from ..models.form_field_placement_required_operator import (
+    FormFieldPlacementRequiredOperator,
+    check_form_field_placement_required_operator,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FormFieldPlacement")
@@ -23,6 +30,7 @@ class FormFieldPlacement:
             form_field_placement_conditions with conditioned=required
         placement_operator (Union[Unset, FormFieldPlacementPlacementOperator]): Logical operator when evaluating
             multiple form_field_placement_conditions with conditioned=placement
+        non_editable (Union[Unset, bool]): Whether the field is read-only and cannot be edited by users.
     """
 
     form_field_id: str
@@ -32,6 +40,7 @@ class FormFieldPlacement:
     required: bool
     required_operator: Union[Unset, FormFieldPlacementRequiredOperator] = UNSET
     placement_operator: Union[Unset, FormFieldPlacementPlacementOperator] = UNSET
+    non_editable: Union[Unset, bool] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -47,11 +56,13 @@ class FormFieldPlacement:
 
         required_operator: Union[Unset, str] = UNSET
         if not isinstance(self.required_operator, Unset):
-            required_operator = self.required_operator.value
+            required_operator = self.required_operator
 
         placement_operator: Union[Unset, str] = UNSET
         if not isinstance(self.placement_operator, Unset):
-            placement_operator = self.placement_operator.value
+            placement_operator = self.placement_operator
+
+        non_editable = self.non_editable
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -68,12 +79,14 @@ class FormFieldPlacement:
             field_dict["required_operator"] = required_operator
         if placement_operator is not UNSET:
             field_dict["placement_operator"] = placement_operator
+        if non_editable is not UNSET:
+            field_dict["non_editable"] = non_editable
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         form_field_id = d.pop("form_field_id")
 
         form_set_id = d.pop("form_set_id")
@@ -89,14 +102,16 @@ class FormFieldPlacement:
         if isinstance(_required_operator, Unset):
             required_operator = UNSET
         else:
-            required_operator = FormFieldPlacementRequiredOperator(_required_operator)
+            required_operator = check_form_field_placement_required_operator(_required_operator)
 
         _placement_operator = d.pop("placement_operator", UNSET)
         placement_operator: Union[Unset, FormFieldPlacementPlacementOperator]
         if isinstance(_placement_operator, Unset):
             placement_operator = UNSET
         else:
-            placement_operator = FormFieldPlacementPlacementOperator(_placement_operator)
+            placement_operator = check_form_field_placement_placement_operator(_placement_operator)
+
+        non_editable = d.pop("non_editable", UNSET)
 
         form_field_placement = cls(
             form_field_id=form_field_id,
@@ -106,6 +121,7 @@ class FormFieldPlacement:
             required=required,
             required_operator=required_operator,
             placement_operator=placement_operator,
+            non_editable=non_editable,
         )
 
         form_field_placement.additional_properties = d

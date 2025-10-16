@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+AlertNoise = Literal["noise", "not_noise"]
+
+ALERT_NOISE_VALUES: set[AlertNoise] = {
+    "noise",
+    "not_noise",
+}
 
 
-class AlertNoise(str, Enum):
-    NOISE = "noise"
-    NOT_NOISE = "not_noise"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_alert_noise(value: str) -> AlertNoise:
+    if value in ALERT_NOISE_VALUES:
+        return cast(AlertNoise, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {ALERT_NOISE_VALUES!r}")

@@ -1,12 +1,17 @@
-from enum import Enum
+from typing import Literal, cast
+
+TriggerWorkflowTaskParamsKind = Literal["action_item", "alert", "incident", "post_mortem", "pulse"]
+
+TRIGGER_WORKFLOW_TASK_PARAMS_KIND_VALUES: set[TriggerWorkflowTaskParamsKind] = {
+    "action_item",
+    "alert",
+    "incident",
+    "post_mortem",
+    "pulse",
+}
 
 
-class TriggerWorkflowTaskParamsKind(str, Enum):
-    ACTION_ITEM = "action_item"
-    ALERT = "alert"
-    INCIDENT = "incident"
-    POST_MORTEM = "post_mortem"
-    PULSE = "pulse"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_trigger_workflow_task_params_kind(value: str) -> TriggerWorkflowTaskParamsKind:
+    if value in TRIGGER_WORKFLOW_TASK_PARAMS_KIND_VALUES:
+        return cast(TriggerWorkflowTaskParamsKind, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {TRIGGER_WORKFLOW_TASK_PARAMS_KIND_VALUES!r}")

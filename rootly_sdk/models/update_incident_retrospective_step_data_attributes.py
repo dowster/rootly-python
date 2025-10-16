@@ -1,9 +1,11 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
 from ..models.update_incident_retrospective_step_data_attributes_status import (
     UpdateIncidentRetrospectiveStepDataAttributesStatus,
+    check_update_incident_retrospective_step_data_attributes_status,
 )
 from ..types import UNSET, Unset
 
@@ -55,9 +57,10 @@ class UpdateIncidentRetrospectiveStepDataAttributes:
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
-            status = self.status.value
+            status = self.status
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if title is not UNSET:
             field_dict["title"] = title
@@ -75,8 +78,8 @@ class UpdateIncidentRetrospectiveStepDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         title = d.pop("title", UNSET)
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
@@ -113,7 +116,7 @@ class UpdateIncidentRetrospectiveStepDataAttributes:
         if isinstance(_status, Unset):
             status = UNSET
         else:
-            status = UpdateIncidentRetrospectiveStepDataAttributesStatus(_status)
+            status = check_update_incident_retrospective_step_data_attributes_status(_status)
 
         update_incident_retrospective_step_data_attributes = cls(
             title=title,

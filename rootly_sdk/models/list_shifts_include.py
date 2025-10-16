@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+ListShiftsInclude = Literal["shift_override", "user"]
+
+LIST_SHIFTS_INCLUDE_VALUES: set[ListShiftsInclude] = {
+    "shift_override",
+    "user",
+}
 
 
-class ListShiftsInclude(str, Enum):
-    SHIFT_OVERRIDE = "shift_override"
-    USER = "user"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_list_shifts_include(value: str) -> ListShiftsInclude:
+    if value in LIST_SHIFTS_INCLUDE_VALUES:
+        return cast(ListShiftsInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {LIST_SHIFTS_INCLUDE_VALUES!r}")

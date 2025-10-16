@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_incident_task_params_attribute_to_query_by import UpdateIncidentTaskParamsAttributeToQueryBy
-from ..models.update_incident_task_params_task_type import UpdateIncidentTaskParamsTaskType
+from ..models.update_incident_task_params_attribute_to_query_by import (
+    UpdateIncidentTaskParamsAttributeToQueryBy,
+    check_update_incident_task_params_attribute_to_query_by,
+)
+from ..models.update_incident_task_params_task_type import (
+    UpdateIncidentTaskParamsTaskType,
+    check_update_incident_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateIncidentTaskParams")
@@ -16,8 +23,7 @@ class UpdateIncidentTaskParams:
     Attributes:
         incident_id (str): The incident id to update or id of any attribute on the incident
         task_type (Union[Unset, UpdateIncidentTaskParamsTaskType]):
-        attribute_to_query_by (Union[Unset, UpdateIncidentTaskParamsAttributeToQueryBy]):  Default:
-            UpdateIncidentTaskParamsAttributeToQueryBy.ID.
+        attribute_to_query_by (Union[Unset, UpdateIncidentTaskParamsAttributeToQueryBy]):  Default: 'id'.
         title (Union[None, Unset, str]): The incident title
         summary (Union[None, Unset, str]): The incident summary
         status (Union[None, Unset, str]):
@@ -39,9 +45,7 @@ class UpdateIncidentTaskParams:
 
     incident_id: str
     task_type: Union[Unset, UpdateIncidentTaskParamsTaskType] = UNSET
-    attribute_to_query_by: Union[Unset, UpdateIncidentTaskParamsAttributeToQueryBy] = (
-        UpdateIncidentTaskParamsAttributeToQueryBy.ID
-    )
+    attribute_to_query_by: Union[Unset, UpdateIncidentTaskParamsAttributeToQueryBy] = "id"
     title: Union[None, Unset, str] = UNSET
     summary: Union[None, Unset, str] = UNSET
     status: Union[None, Unset, str] = UNSET
@@ -65,11 +69,11 @@ class UpdateIncidentTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         attribute_to_query_by: Union[Unset, str] = UNSET
         if not isinstance(self.attribute_to_query_by, Unset):
-            attribute_to_query_by = self.attribute_to_query_by.value
+            attribute_to_query_by = self.attribute_to_query_by
 
         title: Union[None, Unset, str]
         if isinstance(self.title, Unset):
@@ -225,8 +229,8 @@ class UpdateIncidentTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         incident_id = d.pop("incident_id")
 
         _task_type = d.pop("task_type", UNSET)
@@ -234,14 +238,14 @@ class UpdateIncidentTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateIncidentTaskParamsTaskType(_task_type)
+            task_type = check_update_incident_task_params_task_type(_task_type)
 
         _attribute_to_query_by = d.pop("attribute_to_query_by", UNSET)
         attribute_to_query_by: Union[Unset, UpdateIncidentTaskParamsAttributeToQueryBy]
         if isinstance(_attribute_to_query_by, Unset):
             attribute_to_query_by = UNSET
         else:
-            attribute_to_query_by = UpdateIncidentTaskParamsAttributeToQueryBy(_attribute_to_query_by)
+            attribute_to_query_by = check_update_incident_task_params_attribute_to_query_by(_attribute_to_query_by)
 
         def _parse_title(data: object) -> Union[None, Unset, str]:
             if data is None:

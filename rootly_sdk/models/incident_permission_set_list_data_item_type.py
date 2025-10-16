@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentPermissionSetListDataItemType = Literal["incident_permission_sets"]
+
+INCIDENT_PERMISSION_SET_LIST_DATA_ITEM_TYPE_VALUES: set[IncidentPermissionSetListDataItemType] = {
+    "incident_permission_sets",
+}
 
 
-class IncidentPermissionSetListDataItemType(str, Enum):
-    INCIDENT_PERMISSION_SETS = "incident_permission_sets"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_permission_set_list_data_item_type(value: str) -> IncidentPermissionSetListDataItemType:
+    if value in INCIDENT_PERMISSION_SET_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(IncidentPermissionSetListDataItemType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {INCIDENT_PERMISSION_SET_LIST_DATA_ITEM_TYPE_VALUES!r}"
+    )

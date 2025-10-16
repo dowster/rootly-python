@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..models.new_communications_group_data_attributes_communication_group_conditions_attributes_type_0_item_property_type import (
     NewCommunicationsGroupDataAttributesCommunicationGroupConditionsAttributesType0ItemPropertyType,
+    check_new_communications_group_data_attributes_communication_group_conditions_attributes_type_0_item_property_type,
 )
 from ..types import UNSET, Unset
 
@@ -37,7 +39,7 @@ class NewCommunicationsGroupDataAttributesCommunicationGroupConditionsAttributes
     def to_dict(self) -> dict[str, Any]:
         property_type: Union[Unset, str] = UNSET
         if not isinstance(self.property_type, Unset):
-            property_type = self.property_type.value
+            property_type = self.property_type
 
         service_ids: Union[None, Unset, list[str]]
         if isinstance(self.service_ids, Unset):
@@ -103,8 +105,8 @@ class NewCommunicationsGroupDataAttributesCommunicationGroupConditionsAttributes
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         _property_type = d.pop("property_type", UNSET)
         property_type: Union[
             Unset, NewCommunicationsGroupDataAttributesCommunicationGroupConditionsAttributesType0ItemPropertyType
@@ -112,10 +114,8 @@ class NewCommunicationsGroupDataAttributesCommunicationGroupConditionsAttributes
         if isinstance(_property_type, Unset):
             property_type = UNSET
         else:
-            property_type = (
-                NewCommunicationsGroupDataAttributesCommunicationGroupConditionsAttributesType0ItemPropertyType(
-                    _property_type
-                )
+            property_type = check_new_communications_group_data_attributes_communication_group_conditions_attributes_type_0_item_property_type(
+                _property_type
             )
 
         def _parse_service_ids(data: object) -> Union[None, Unset, list[str]]:

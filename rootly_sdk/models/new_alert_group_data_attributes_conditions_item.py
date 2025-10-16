@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,12 +6,15 @@ from attrs import field as _attrs_field
 
 from ..models.new_alert_group_data_attributes_conditions_item_conditionable_type import (
     NewAlertGroupDataAttributesConditionsItemConditionableType,
+    check_new_alert_group_data_attributes_conditions_item_conditionable_type,
 )
 from ..models.new_alert_group_data_attributes_conditions_item_property_field_condition_type import (
     NewAlertGroupDataAttributesConditionsItemPropertyFieldConditionType,
+    check_new_alert_group_data_attributes_conditions_item_property_field_condition_type,
 )
 from ..models.new_alert_group_data_attributes_conditions_item_property_field_type import (
     NewAlertGroupDataAttributesConditionsItemPropertyFieldType,
+    check_new_alert_group_data_attributes_conditions_item_property_field_type,
 )
 from ..types import UNSET, Unset
 
@@ -53,9 +57,9 @@ class NewAlertGroupDataAttributesConditionsItem:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        property_field_type = self.property_field_type.value
+        property_field_type: str = self.property_field_type
 
-        property_field_condition_type = self.property_field_condition_type.value
+        property_field_condition_type: str = self.property_field_condition_type
 
         property_field_name = self.property_field_name
 
@@ -76,7 +80,7 @@ class NewAlertGroupDataAttributesConditionsItem:
 
         conditionable_type: Union[Unset, str] = UNSET
         if not isinstance(self.conditionable_type, Unset):
-            conditionable_type = self.conditionable_type.value
+            conditionable_type = self.conditionable_type
 
         conditionable_id = self.conditionable_id
 
@@ -104,12 +108,16 @@ class NewAlertGroupDataAttributesConditionsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        property_field_type = NewAlertGroupDataAttributesConditionsItemPropertyFieldType(d.pop("property_field_type"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        property_field_type = check_new_alert_group_data_attributes_conditions_item_property_field_type(
+            d.pop("property_field_type")
+        )
 
-        property_field_condition_type = NewAlertGroupDataAttributesConditionsItemPropertyFieldConditionType(
-            d.pop("property_field_condition_type")
+        property_field_condition_type = (
+            check_new_alert_group_data_attributes_conditions_item_property_field_condition_type(
+                d.pop("property_field_condition_type")
+            )
         )
 
         property_field_name = d.pop("property_field_name", UNSET)
@@ -140,7 +148,9 @@ class NewAlertGroupDataAttributesConditionsItem:
         if isinstance(_conditionable_type, Unset):
             conditionable_type = UNSET
         else:
-            conditionable_type = NewAlertGroupDataAttributesConditionsItemConditionableType(_conditionable_type)
+            conditionable_type = check_new_alert_group_data_attributes_conditions_item_conditionable_type(
+                _conditionable_type
+            )
 
         conditionable_id = d.pop("conditionable_id", UNSET)
 

@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+PulseTriggerParamsTriggersItem = Literal["pulse_created"]
+
+PULSE_TRIGGER_PARAMS_TRIGGERS_ITEM_VALUES: set[PulseTriggerParamsTriggersItem] = {
+    "pulse_created",
+}
 
 
-class PulseTriggerParamsTriggersItem(str, Enum):
-    PULSE_CREATED = "pulse_created"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_pulse_trigger_params_triggers_item(value: str) -> PulseTriggerParamsTriggersItem:
+    if value in PULSE_TRIGGER_PARAMS_TRIGGERS_ITEM_VALUES:
+        return cast(PulseTriggerParamsTriggersItem, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {PULSE_TRIGGER_PARAMS_TRIGGERS_ITEM_VALUES!r}")

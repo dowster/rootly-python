@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..models.dashboard_panel_params_datasets_item_aggregate_type_0_operation import (
     DashboardPanelParamsDatasetsItemAggregateType0Operation,
+    check_dashboard_panel_params_datasets_item_aggregate_type_0_operation,
 )
 from ..types import UNSET, Unset
 
@@ -28,7 +30,7 @@ class DashboardPanelParamsDatasetsItemAggregateType0:
     def to_dict(self) -> dict[str, Any]:
         operation: Union[Unset, str] = UNSET
         if not isinstance(self.operation, Unset):
-            operation = self.operation.value
+            operation = self.operation
 
         key: Union[None, Unset, str]
         if isinstance(self.key, Unset):
@@ -55,14 +57,14 @@ class DashboardPanelParamsDatasetsItemAggregateType0:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         _operation = d.pop("operation", UNSET)
         operation: Union[Unset, DashboardPanelParamsDatasetsItemAggregateType0Operation]
         if isinstance(_operation, Unset):
             operation = UNSET
         else:
-            operation = DashboardPanelParamsDatasetsItemAggregateType0Operation(_operation)
+            operation = check_dashboard_panel_params_datasets_item_aggregate_type_0_operation(_operation)
 
         def _parse_key(data: object) -> Union[None, Unset, str]:
             if data is None:

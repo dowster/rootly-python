@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+OverrideShiftListDataItemType = Literal["shifts"]
+
+OVERRIDE_SHIFT_LIST_DATA_ITEM_TYPE_VALUES: set[OverrideShiftListDataItemType] = {
+    "shifts",
+}
 
 
-class OverrideShiftListDataItemType(str, Enum):
-    SHIFTS = "shifts"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_override_shift_list_data_item_type(value: str) -> OverrideShiftListDataItemType:
+    if value in OVERRIDE_SHIFT_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(OverrideShiftListDataItemType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {OVERRIDE_SHIFT_LIST_DATA_ITEM_TYPE_VALUES!r}")

@@ -1,10 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+HeartbeatStatus = Literal["active", "expired", "waiting"]
+
+HEARTBEAT_STATUS_VALUES: set[HeartbeatStatus] = {
+    "active",
+    "expired",
+    "waiting",
+}
 
 
-class HeartbeatStatus(str, Enum):
-    ACTIVE = "active"
-    EXPIRED = "expired"
-    WAITING = "waiting"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_heartbeat_status(value: str) -> HeartbeatStatus:
+    if value in HEARTBEAT_STATUS_VALUES:
+        return cast(HeartbeatStatus, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {HEARTBEAT_STATUS_VALUES!r}")

@@ -21,6 +21,8 @@ def _get_kwargs(
     filtercortex_id: Union[Unset, str] = UNSET,
     filteropslevel_id: Union[Unset, str] = UNSET,
     filterexternal_id: Union[Unset, str] = UNSET,
+    filteralert_broadcast_enabled: Union[Unset, bool] = UNSET,
+    filterincident_broadcast_enabled: Union[Unset, bool] = UNSET,
     filtercreated_atgt: Union[Unset, str] = UNSET,
     filtercreated_atgte: Union[Unset, str] = UNSET,
     filtercreated_atlt: Union[Unset, str] = UNSET,
@@ -49,6 +51,10 @@ def _get_kwargs(
 
     params["filter[external_id]"] = filterexternal_id
 
+    params["filter[alert_broadcast_enabled]"] = filteralert_broadcast_enabled
+
+    params["filter[incident_broadcast_enabled]"] = filterincident_broadcast_enabled
+
     params["filter[created_at][gt]"] = filtercreated_atgt
 
     params["filter[created_at][gte]"] = filtercreated_atgte
@@ -75,6 +81,7 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         response_200 = ServiceList.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -103,6 +110,8 @@ def sync_detailed(
     filtercortex_id: Union[Unset, str] = UNSET,
     filteropslevel_id: Union[Unset, str] = UNSET,
     filterexternal_id: Union[Unset, str] = UNSET,
+    filteralert_broadcast_enabled: Union[Unset, bool] = UNSET,
+    filterincident_broadcast_enabled: Union[Unset, bool] = UNSET,
     filtercreated_atgt: Union[Unset, str] = UNSET,
     filtercreated_atgte: Union[Unset, str] = UNSET,
     filtercreated_atlt: Union[Unset, str] = UNSET,
@@ -124,6 +133,8 @@ def sync_detailed(
         filtercortex_id (Union[Unset, str]):
         filteropslevel_id (Union[Unset, str]):
         filterexternal_id (Union[Unset, str]):
+        filteralert_broadcast_enabled (Union[Unset, bool]):
+        filterincident_broadcast_enabled (Union[Unset, bool]):
         filtercreated_atgt (Union[Unset, str]):
         filtercreated_atgte (Union[Unset, str]):
         filtercreated_atlt (Union[Unset, str]):
@@ -149,6 +160,8 @@ def sync_detailed(
         filtercortex_id=filtercortex_id,
         filteropslevel_id=filteropslevel_id,
         filterexternal_id=filterexternal_id,
+        filteralert_broadcast_enabled=filteralert_broadcast_enabled,
+        filterincident_broadcast_enabled=filterincident_broadcast_enabled,
         filtercreated_atgt=filtercreated_atgt,
         filtercreated_atgte=filtercreated_atgte,
         filtercreated_atlt=filtercreated_atlt,
@@ -176,6 +189,8 @@ def sync(
     filtercortex_id: Union[Unset, str] = UNSET,
     filteropslevel_id: Union[Unset, str] = UNSET,
     filterexternal_id: Union[Unset, str] = UNSET,
+    filteralert_broadcast_enabled: Union[Unset, bool] = UNSET,
+    filterincident_broadcast_enabled: Union[Unset, bool] = UNSET,
     filtercreated_atgt: Union[Unset, str] = UNSET,
     filtercreated_atgte: Union[Unset, str] = UNSET,
     filtercreated_atlt: Union[Unset, str] = UNSET,
@@ -197,6 +212,8 @@ def sync(
         filtercortex_id (Union[Unset, str]):
         filteropslevel_id (Union[Unset, str]):
         filterexternal_id (Union[Unset, str]):
+        filteralert_broadcast_enabled (Union[Unset, bool]):
+        filterincident_broadcast_enabled (Union[Unset, bool]):
         filtercreated_atgt (Union[Unset, str]):
         filtercreated_atgte (Union[Unset, str]):
         filtercreated_atlt (Union[Unset, str]):
@@ -223,6 +240,8 @@ def sync(
         filtercortex_id=filtercortex_id,
         filteropslevel_id=filteropslevel_id,
         filterexternal_id=filterexternal_id,
+        filteralert_broadcast_enabled=filteralert_broadcast_enabled,
+        filterincident_broadcast_enabled=filterincident_broadcast_enabled,
         filtercreated_atgt=filtercreated_atgt,
         filtercreated_atgte=filtercreated_atgte,
         filtercreated_atlt=filtercreated_atlt,
@@ -244,6 +263,8 @@ async def asyncio_detailed(
     filtercortex_id: Union[Unset, str] = UNSET,
     filteropslevel_id: Union[Unset, str] = UNSET,
     filterexternal_id: Union[Unset, str] = UNSET,
+    filteralert_broadcast_enabled: Union[Unset, bool] = UNSET,
+    filterincident_broadcast_enabled: Union[Unset, bool] = UNSET,
     filtercreated_atgt: Union[Unset, str] = UNSET,
     filtercreated_atgte: Union[Unset, str] = UNSET,
     filtercreated_atlt: Union[Unset, str] = UNSET,
@@ -265,6 +286,8 @@ async def asyncio_detailed(
         filtercortex_id (Union[Unset, str]):
         filteropslevel_id (Union[Unset, str]):
         filterexternal_id (Union[Unset, str]):
+        filteralert_broadcast_enabled (Union[Unset, bool]):
+        filterincident_broadcast_enabled (Union[Unset, bool]):
         filtercreated_atgt (Union[Unset, str]):
         filtercreated_atgte (Union[Unset, str]):
         filtercreated_atlt (Union[Unset, str]):
@@ -290,6 +313,8 @@ async def asyncio_detailed(
         filtercortex_id=filtercortex_id,
         filteropslevel_id=filteropslevel_id,
         filterexternal_id=filterexternal_id,
+        filteralert_broadcast_enabled=filteralert_broadcast_enabled,
+        filterincident_broadcast_enabled=filterincident_broadcast_enabled,
         filtercreated_atgt=filtercreated_atgt,
         filtercreated_atgte=filtercreated_atgte,
         filtercreated_atlt=filtercreated_atlt,
@@ -315,6 +340,8 @@ async def asyncio(
     filtercortex_id: Union[Unset, str] = UNSET,
     filteropslevel_id: Union[Unset, str] = UNSET,
     filterexternal_id: Union[Unset, str] = UNSET,
+    filteralert_broadcast_enabled: Union[Unset, bool] = UNSET,
+    filterincident_broadcast_enabled: Union[Unset, bool] = UNSET,
     filtercreated_atgt: Union[Unset, str] = UNSET,
     filtercreated_atgte: Union[Unset, str] = UNSET,
     filtercreated_atlt: Union[Unset, str] = UNSET,
@@ -336,6 +363,8 @@ async def asyncio(
         filtercortex_id (Union[Unset, str]):
         filteropslevel_id (Union[Unset, str]):
         filterexternal_id (Union[Unset, str]):
+        filteralert_broadcast_enabled (Union[Unset, bool]):
+        filterincident_broadcast_enabled (Union[Unset, bool]):
         filtercreated_atgt (Union[Unset, str]):
         filtercreated_atgte (Union[Unset, str]):
         filtercreated_atlt (Union[Unset, str]):
@@ -363,6 +392,8 @@ async def asyncio(
             filtercortex_id=filtercortex_id,
             filteropslevel_id=filteropslevel_id,
             filterexternal_id=filterexternal_id,
+            filteralert_broadcast_enabled=filteralert_broadcast_enabled,
+            filterincident_broadcast_enabled=filterincident_broadcast_enabled,
             filtercreated_atgt=filtercreated_atgt,
             filtercreated_atgte=filtercreated_atgte,
             filtercreated_atlt=filtercreated_atlt,

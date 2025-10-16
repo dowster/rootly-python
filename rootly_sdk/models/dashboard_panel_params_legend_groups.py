@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+DashboardPanelParamsLegendGroups = Literal["all", "charted"]
+
+DASHBOARD_PANEL_PARAMS_LEGEND_GROUPS_VALUES: set[DashboardPanelParamsLegendGroups] = {
+    "all",
+    "charted",
+}
 
 
-class DashboardPanelParamsLegendGroups(str, Enum):
-    ALL = "all"
-    CHARTED = "charted"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_dashboard_panel_params_legend_groups(value: str) -> DashboardPanelParamsLegendGroups:
+    if value in DASHBOARD_PANEL_PARAMS_LEGEND_GROUPS_VALUES:
+        return cast(DashboardPanelParamsLegendGroups, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {DASHBOARD_PANEL_PARAMS_LEGEND_GROUPS_VALUES!r}")

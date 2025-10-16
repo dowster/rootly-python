@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+FormSetConditionResponseDataType = Literal["form_set_conditions"]
+
+FORM_SET_CONDITION_RESPONSE_DATA_TYPE_VALUES: set[FormSetConditionResponseDataType] = {
+    "form_set_conditions",
+}
 
 
-class FormSetConditionResponseDataType(str, Enum):
-    FORM_SET_CONDITIONS = "form_set_conditions"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_form_set_condition_response_data_type(value: str) -> FormSetConditionResponseDataType:
+    if value in FORM_SET_CONDITION_RESPONSE_DATA_TYPE_VALUES:
+        return cast(FormSetConditionResponseDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {FORM_SET_CONDITION_RESPONSE_DATA_TYPE_VALUES!r}")

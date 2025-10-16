@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+FormFieldPlacementPlacementOperator = Literal["and", "or"]
+
+FORM_FIELD_PLACEMENT_PLACEMENT_OPERATOR_VALUES: set[FormFieldPlacementPlacementOperator] = {
+    "and",
+    "or",
+}
 
 
-class FormFieldPlacementPlacementOperator(str, Enum):
-    AND = "and"
-    OR = "or"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_form_field_placement_placement_operator(value: str) -> FormFieldPlacementPlacementOperator:
+    if value in FORM_FIELD_PLACEMENT_PLACEMENT_OPERATOR_VALUES:
+        return cast(FormFieldPlacementPlacementOperator, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {FORM_FIELD_PLACEMENT_PLACEMENT_OPERATOR_VALUES!r}")

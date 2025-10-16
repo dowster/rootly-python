@@ -5,7 +5,9 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.list_retrospective_processes_include import ListRetrospectiveProcessesInclude
+from ...models.list_retrospective_processes_include import (
+    ListRetrospectiveProcessesInclude,
+)
 from ...models.retrospective_process_list import RetrospectiveProcessList
 from ...types import UNSET, Response, Unset
 
@@ -20,7 +22,7 @@ def _get_kwargs(
 
     json_include: Union[Unset, str] = UNSET
     if not isinstance(include, Unset):
-        json_include = include.value
+        json_include = include
 
     params["include"] = json_include
 
@@ -46,6 +48,7 @@ def _parse_response(
         response_200 = RetrospectiveProcessList.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:

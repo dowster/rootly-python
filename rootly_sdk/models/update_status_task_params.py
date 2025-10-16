@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_status_task_params_status import UpdateStatusTaskParamsStatus
-from ..models.update_status_task_params_task_type import UpdateStatusTaskParamsTaskType
+from ..models.update_status_task_params_status import (
+    UpdateStatusTaskParamsStatus,
+    check_update_status_task_params_status,
+)
+from ..models.update_status_task_params_task_type import (
+    UpdateStatusTaskParamsTaskType,
+    check_update_status_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateStatusTaskParams")
@@ -25,11 +32,11 @@ class UpdateStatusTaskParams:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        status = self.status.value
+        status: str = self.status
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         inactivity_timeout = self.inactivity_timeout
 
@@ -48,16 +55,16 @@ class UpdateStatusTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        status = UpdateStatusTaskParamsStatus(d.pop("status"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        status = check_update_status_task_params_status(d.pop("status"))
 
         _task_type = d.pop("task_type", UNSET)
         task_type: Union[Unset, UpdateStatusTaskParamsTaskType]
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = UpdateStatusTaskParamsTaskType(_task_type)
+            task_type = check_update_status_task_params_task_type(_task_type)
 
         inactivity_timeout = d.pop("inactivity_timeout", UNSET)
 

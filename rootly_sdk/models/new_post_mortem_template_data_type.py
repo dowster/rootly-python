@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewPostMortemTemplateDataType = Literal["post_mortem_templates"]
+
+NEW_POST_MORTEM_TEMPLATE_DATA_TYPE_VALUES: set[NewPostMortemTemplateDataType] = {
+    "post_mortem_templates",
+}
 
 
-class NewPostMortemTemplateDataType(str, Enum):
-    POST_MORTEM_TEMPLATES = "post_mortem_templates"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_post_mortem_template_data_type(value: str) -> NewPostMortemTemplateDataType:
+    if value in NEW_POST_MORTEM_TEMPLATE_DATA_TYPE_VALUES:
+        return cast(NewPostMortemTemplateDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_POST_MORTEM_TEMPLATE_DATA_TYPE_VALUES!r}")

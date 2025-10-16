@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+FormFieldResponseDataType = Literal["form_fields"]
+
+FORM_FIELD_RESPONSE_DATA_TYPE_VALUES: set[FormFieldResponseDataType] = {
+    "form_fields",
+}
 
 
-class FormFieldResponseDataType(str, Enum):
-    FORM_FIELDS = "form_fields"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_form_field_response_data_type(value: str) -> FormFieldResponseDataType:
+    if value in FORM_FIELD_RESPONSE_DATA_TYPE_VALUES:
+        return cast(FormFieldResponseDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {FORM_FIELD_RESPONSE_DATA_TYPE_VALUES!r}")

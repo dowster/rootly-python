@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+ServiceListDataItemType = Literal["services"]
+
+SERVICE_LIST_DATA_ITEM_TYPE_VALUES: set[ServiceListDataItemType] = {
+    "services",
+}
 
 
-class ServiceListDataItemType(str, Enum):
-    SERVICES = "services"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_service_list_data_item_type(value: str) -> ServiceListDataItemType:
+    if value in SERVICE_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(ServiceListDataItemType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {SERVICE_LIST_DATA_ITEM_TYPE_VALUES!r}")

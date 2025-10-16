@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+AuthorizationListDataItemType = Literal["authorizations"]
+
+AUTHORIZATION_LIST_DATA_ITEM_TYPE_VALUES: set[AuthorizationListDataItemType] = {
+    "authorizations",
+}
 
 
-class AuthorizationListDataItemType(str, Enum):
-    AUTHORIZATIONS = "authorizations"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_authorization_list_data_item_type(value: str) -> AuthorizationListDataItemType:
+    if value in AUTHORIZATION_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(AuthorizationListDataItemType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {AUTHORIZATION_LIST_DATA_ITEM_TYPE_VALUES!r}")

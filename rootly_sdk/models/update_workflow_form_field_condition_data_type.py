@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateWorkflowFormFieldConditionDataType = Literal["workflow_form_field_conditions"]
+
+UPDATE_WORKFLOW_FORM_FIELD_CONDITION_DATA_TYPE_VALUES: set[UpdateWorkflowFormFieldConditionDataType] = {
+    "workflow_form_field_conditions",
+}
 
 
-class UpdateWorkflowFormFieldConditionDataType(str, Enum):
-    WORKFLOW_FORM_FIELD_CONDITIONS = "workflow_form_field_conditions"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_workflow_form_field_condition_data_type(value: str) -> UpdateWorkflowFormFieldConditionDataType:
+    if value in UPDATE_WORKFLOW_FORM_FIELD_CONDITION_DATA_TYPE_VALUES:
+        return cast(UpdateWorkflowFormFieldConditionDataType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_WORKFLOW_FORM_FIELD_CONDITION_DATA_TYPE_VALUES!r}"
+    )

@@ -1,5 +1,6 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
+from uuid import UUID
 
 import httpx
 
@@ -12,7 +13,7 @@ from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
-    id: str,
+    id: Union[UUID, str],
     *,
     include: Union[Unset, GetCatalogFieldInclude] = UNSET,
 ) -> dict[str, Any]:
@@ -20,7 +21,7 @@ def _get_kwargs(
 
     json_include: Union[Unset, str] = UNSET
     if not isinstance(include, Unset):
-        json_include = include.value
+        json_include = include
 
     params["include"] = json_include
 
@@ -42,10 +43,12 @@ def _parse_response(
         response_200 = CatalogFieldResponse.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 404:
         response_404 = ErrorsList.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -64,7 +67,7 @@ def _build_response(
 
 
 def sync_detailed(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogFieldInclude] = UNSET,
@@ -74,7 +77,7 @@ def sync_detailed(
      Retrieves a specific Catalog Field by id
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
         include (Union[Unset, GetCatalogFieldInclude]):
 
     Raises:
@@ -98,7 +101,7 @@ def sync_detailed(
 
 
 def sync(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogFieldInclude] = UNSET,
@@ -108,7 +111,7 @@ def sync(
      Retrieves a specific Catalog Field by id
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
         include (Union[Unset, GetCatalogFieldInclude]):
 
     Raises:
@@ -127,7 +130,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogFieldInclude] = UNSET,
@@ -137,7 +140,7 @@ async def asyncio_detailed(
      Retrieves a specific Catalog Field by id
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
         include (Union[Unset, GetCatalogFieldInclude]):
 
     Raises:
@@ -159,7 +162,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
     include: Union[Unset, GetCatalogFieldInclude] = UNSET,
@@ -169,7 +172,7 @@ async def asyncio(
      Retrieves a specific Catalog Field by id
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
         include (Union[Unset, GetCatalogFieldInclude]):
 
     Raises:

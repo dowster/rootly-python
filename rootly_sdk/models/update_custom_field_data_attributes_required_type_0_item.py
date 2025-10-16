@@ -1,14 +1,33 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateCustomFieldDataAttributesRequiredType0Item = Literal[
+    "incident_form",
+    "incident_mitigation_form",
+    "incident_mitigation_slack_form",
+    "incident_post_mortem_form",
+    "incident_resolution_form",
+    "incident_resolution_slack_form",
+    "incident_slack_form",
+]
+
+UPDATE_CUSTOM_FIELD_DATA_ATTRIBUTES_REQUIRED_TYPE_0_ITEM_VALUES: set[
+    UpdateCustomFieldDataAttributesRequiredType0Item
+] = {
+    "incident_form",
+    "incident_mitigation_form",
+    "incident_mitigation_slack_form",
+    "incident_post_mortem_form",
+    "incident_resolution_form",
+    "incident_resolution_slack_form",
+    "incident_slack_form",
+}
 
 
-class UpdateCustomFieldDataAttributesRequiredType0Item(str, Enum):
-    INCIDENT_FORM = "incident_form"
-    INCIDENT_MITIGATION_FORM = "incident_mitigation_form"
-    INCIDENT_MITIGATION_SLACK_FORM = "incident_mitigation_slack_form"
-    INCIDENT_POST_MORTEM_FORM = "incident_post_mortem_form"
-    INCIDENT_RESOLUTION_FORM = "incident_resolution_form"
-    INCIDENT_RESOLUTION_SLACK_FORM = "incident_resolution_slack_form"
-    INCIDENT_SLACK_FORM = "incident_slack_form"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_custom_field_data_attributes_required_type_0_item(
+    value: str,
+) -> UpdateCustomFieldDataAttributesRequiredType0Item:
+    if value in UPDATE_CUSTOM_FIELD_DATA_ATTRIBUTES_REQUIRED_TYPE_0_ITEM_VALUES:
+        return cast(UpdateCustomFieldDataAttributesRequiredType0Item, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_CUSTOM_FIELD_DATA_ATTRIBUTES_REQUIRED_TYPE_0_ITEM_VALUES!r}"
+    )

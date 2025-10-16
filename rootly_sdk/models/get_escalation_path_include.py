@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+GetEscalationPathInclude = Literal["escalation_policy_levels"]
+
+GET_ESCALATION_PATH_INCLUDE_VALUES: set[GetEscalationPathInclude] = {
+    "escalation_policy_levels",
+}
 
 
-class GetEscalationPathInclude(str, Enum):
-    ESCALATION_POLICY_LEVELS = "escalation_policy_levels"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_get_escalation_path_include(value: str) -> GetEscalationPathInclude:
+    if value in GET_ESCALATION_PATH_INCLUDE_VALUES:
+        return cast(GetEscalationPathInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {GET_ESCALATION_PATH_INCLUDE_VALUES!r}")

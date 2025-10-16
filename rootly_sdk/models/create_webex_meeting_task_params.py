@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_webex_meeting_task_params_task_type import CreateWebexMeetingTaskParamsTaskType
+from ..models.create_webex_meeting_task_params_task_type import (
+    CreateWebexMeetingTaskParamsTaskType,
+    check_create_webex_meeting_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -41,7 +45,7 @@ class CreateWebexMeetingTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         password = self.password
 
@@ -77,12 +81,12 @@ class CreateWebexMeetingTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_webex_meeting_task_params_post_to_slack_channels_item import (
             CreateWebexMeetingTaskParamsPostToSlackChannelsItem,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         topic = d.pop("topic")
 
         _task_type = d.pop("task_type", UNSET)
@@ -90,7 +94,7 @@ class CreateWebexMeetingTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateWebexMeetingTaskParamsTaskType(_task_type)
+            task_type = check_create_webex_meeting_task_params_task_type(_task_type)
 
         password = d.pop("password", UNSET)
 

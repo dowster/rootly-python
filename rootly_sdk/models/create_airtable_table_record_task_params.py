@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_airtable_table_record_task_params_task_type import CreateAirtableTableRecordTaskParamsTaskType
+from ..models.create_airtable_table_record_task_params_task_type import (
+    CreateAirtableTableRecordTaskParamsTaskType,
+    check_create_airtable_table_record_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -38,7 +42,7 @@ class CreateAirtableTableRecordTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         custom_fields_mapping: Union[None, Unset, str]
         if isinstance(self.custom_fields_mapping, Unset):
@@ -62,11 +66,11 @@ class CreateAirtableTableRecordTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_airtable_table_record_task_params_base import CreateAirtableTableRecordTaskParamsBase
         from ..models.create_airtable_table_record_task_params_table import CreateAirtableTableRecordTaskParamsTable
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         base = CreateAirtableTableRecordTaskParamsBase.from_dict(d.pop("base"))
 
         table = CreateAirtableTableRecordTaskParamsTable.from_dict(d.pop("table"))
@@ -76,7 +80,7 @@ class CreateAirtableTableRecordTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateAirtableTableRecordTaskParamsTaskType(_task_type)
+            task_type = check_create_airtable_table_record_task_params_task_type(_task_type)
 
         def _parse_custom_fields_mapping(data: object) -> Union[None, Unset, str]:
             if data is None:

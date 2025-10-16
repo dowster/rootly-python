@@ -1,9 +1,16 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.new_workflow_data_attributes_priority import NewWorkflowDataAttributesPriority
-from ..models.new_workflow_data_attributes_repeat_on_item import NewWorkflowDataAttributesRepeatOnItem
+from ..models.new_workflow_data_attributes_priority import (
+    NewWorkflowDataAttributesPriority,
+    check_new_workflow_data_attributes_priority,
+)
+from ..models.new_workflow_data_attributes_repeat_on_item import (
+    NewWorkflowDataAttributesRepeatOnItem,
+    check_new_workflow_data_attributes_repeat_on_item,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -124,7 +131,7 @@ class NewWorkflowDataAttributes:
 
         priority: Union[Unset, str] = UNSET
         if not isinstance(self.priority, Unset):
-            priority = self.priority.value
+            priority = self.priority
 
         repeat_every_duration: Union[None, Unset, str]
         if isinstance(self.repeat_every_duration, Unset):
@@ -146,7 +153,7 @@ class NewWorkflowDataAttributes:
         if not isinstance(self.repeat_on, Unset):
             repeat_on = []
             for repeat_on_item_data in self.repeat_on:
-                repeat_on_item = repeat_on_item_data.value
+                repeat_on_item: str = repeat_on_item_data
                 repeat_on.append(repeat_on_item)
 
         enabled = self.enabled
@@ -212,6 +219,7 @@ class NewWorkflowDataAttributes:
             sub_status_ids = self.sub_status_ids
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -271,14 +279,14 @@ class NewWorkflowDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.action_item_trigger_params import ActionItemTriggerParams
         from ..models.alert_trigger_params import AlertTriggerParams
         from ..models.incident_trigger_params import IncidentTriggerParams
         from ..models.pulse_trigger_params import PulseTriggerParams
         from ..models.simple_trigger_params import SimpleTriggerParams
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         slug = d.pop("slug", UNSET)
@@ -324,7 +332,7 @@ class NewWorkflowDataAttributes:
         if isinstance(_priority, Unset):
             priority = UNSET
         else:
-            priority = NewWorkflowDataAttributesPriority(_priority)
+            priority = check_new_workflow_data_attributes_priority(_priority)
 
         def _parse_repeat_every_duration(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -353,7 +361,7 @@ class NewWorkflowDataAttributes:
         repeat_on = []
         _repeat_on = d.pop("repeat_on", UNSET)
         for repeat_on_item_data in _repeat_on or []:
-            repeat_on_item = NewWorkflowDataAttributesRepeatOnItem(repeat_on_item_data)
+            repeat_on_item = check_new_workflow_data_attributes_repeat_on_item(repeat_on_item_data)
 
             repeat_on.append(repeat_on_item)
 

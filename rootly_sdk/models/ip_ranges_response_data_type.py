@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+IpRangesResponseDataType = Literal["ip_ranges"]
+
+IP_RANGES_RESPONSE_DATA_TYPE_VALUES: set[IpRangesResponseDataType] = {
+    "ip_ranges",
+}
 
 
-class IpRangesResponseDataType(str, Enum):
-    IP_RANGES = "ip_ranges"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_ip_ranges_response_data_type(value: str) -> IpRangesResponseDataType:
+    if value in IP_RANGES_RESPONSE_DATA_TYPE_VALUES:
+        return cast(IpRangesResponseDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {IP_RANGES_RESPONSE_DATA_TYPE_VALUES!r}")

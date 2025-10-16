@@ -1,15 +1,23 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.alerts_source_source_type import AlertsSourceSourceType
+from ..models.alerts_source_deduplication_key_kind import (
+    AlertsSourceDeduplicationKeyKind,
+    check_alerts_source_deduplication_key_kind,
+)
+from ..models.alerts_source_source_type import AlertsSourceSourceType, check_alerts_source_source_type
+from ..models.alerts_source_status import AlertsSourceStatus, check_alerts_source_status
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.alerts_source_alert_source_fields_attributes_type_0_item import (
-        AlertsSourceAlertSourceFieldsAttributesType0Item,
+    from ..models.alerts_source_alert_source_fields_attributes_item import AlertsSourceAlertSourceFieldsAttributesItem
+    from ..models.alerts_source_alert_source_urgency_rules_attributes_item import (
+        AlertsSourceAlertSourceUrgencyRulesAttributesItem,
     )
+    from ..models.alerts_source_alert_template_attributes_type_0 import AlertsSourceAlertTemplateAttributesType0
     from ..models.alerts_source_resolution_rule_attributes_type_0 import AlertsSourceResolutionRuleAttributesType0
     from ..models.alerts_source_sourceable_attributes_type_0 import AlertsSourceSourceableAttributesType0
 
@@ -22,46 +30,65 @@ class AlertsSource:
     """
     Attributes:
         name (str): The name of the alert source
-        status (str): The current status of the alert source
-        secret (str): A secret key used to authenticate incoming requests to this alerts source
+        status (AlertsSourceStatus): The status of the alert source
+        secret (str): The secret used to authenticate non-email alert sources
         created_at (str): Date of creation
         updated_at (str): Date of last update
-        alert_urgency_id (Union[Unset, str]): ID for the default alert urgency assigned to this alert source
         source_type (Union[Unset, AlertsSourceSourceType]): The alert source type
-        webhook_endpoint (Union[None, Unset, str]): The URL endpoint of the alert source
-        email (Union[None, Unset, str]): The email address of the alert source
+        alert_urgency_id (Union[Unset, str]): ID for the default alert urgency assigned to this alert source
+        deduplicate_alerts_by_key (Union[Unset, bool]): Toggle alert deduplication using deduplication key. If enabled,
+            deduplication_key_kind and deduplication_key_path are required.
+        deduplication_key_kind (Union[Unset, AlertsSourceDeduplicationKeyKind]): Kind of deduplication key.
+        deduplication_key_path (Union[None, Unset, str]): Path to deduplication key. This is a JSON Path to extract the
+            deduplication key from the request body.
+        deduplication_key_regexp (Union[None, Unset, str]): Regular expression to extract key from value found at key
+            path.
         owner_group_ids (Union[Unset, list[str]]): List of team IDs that will own the alert source
-        sourceable_attributes (Union['AlertsSourceSourceableAttributesType0', None, Unset]): Additional attributes
-            specific to certain alert sources (e.g., generic_webhook), encapsulating source-specific configurations or
-            details
-        resolution_rule_attributes (Union['AlertsSourceResolutionRuleAttributesType0', None, Unset]): Additional
-            attributes for email or generic webhook alerts source
-        alert_source_fields_attributes (Union[None, Unset, list['AlertsSourceAlertSourceFieldsAttributesType0Item']]):
-            List of alert fields to be added to alert source
+        alert_template_attributes (Union['AlertsSourceAlertTemplateAttributesType0', None, Unset]):
+        alert_source_urgency_rules_attributes (Union[Unset, list['AlertsSourceAlertSourceUrgencyRulesAttributesItem']]):
+            List of rules that define the conditions under which the alert urgency will be set automatically based on the
+            alert payload
+        sourceable_attributes (Union['AlertsSourceSourceableAttributesType0', None, Unset]): Provide additional
+            attributes for generic_webhook alerts source
+        resolution_rule_attributes (Union['AlertsSourceResolutionRuleAttributesType0', None, Unset]): Provide additional
+            attributes for email alerts source
+        alert_source_fields_attributes (Union[Unset, list['AlertsSourceAlertSourceFieldsAttributesItem']]): List of
+            alert fields to be added to the alert source
+        email (Union[None, Unset, str]): The email generated for email alert sources
+        webhook_endpoint (Union[None, Unset, str]): The webhook URL generated for non-email alert sources
     """
 
     name: str
-    status: str
+    status: AlertsSourceStatus
     secret: str
     created_at: str
     updated_at: str
-    alert_urgency_id: Union[Unset, str] = UNSET
     source_type: Union[Unset, AlertsSourceSourceType] = UNSET
-    webhook_endpoint: Union[None, Unset, str] = UNSET
-    email: Union[None, Unset, str] = UNSET
+    alert_urgency_id: Union[Unset, str] = UNSET
+    deduplicate_alerts_by_key: Union[Unset, bool] = UNSET
+    deduplication_key_kind: Union[Unset, AlertsSourceDeduplicationKeyKind] = UNSET
+    deduplication_key_path: Union[None, Unset, str] = UNSET
+    deduplication_key_regexp: Union[None, Unset, str] = UNSET
     owner_group_ids: Union[Unset, list[str]] = UNSET
+    alert_template_attributes: Union["AlertsSourceAlertTemplateAttributesType0", None, Unset] = UNSET
+    alert_source_urgency_rules_attributes: Union[Unset, list["AlertsSourceAlertSourceUrgencyRulesAttributesItem"]] = (
+        UNSET
+    )
     sourceable_attributes: Union["AlertsSourceSourceableAttributesType0", None, Unset] = UNSET
     resolution_rule_attributes: Union["AlertsSourceResolutionRuleAttributesType0", None, Unset] = UNSET
-    alert_source_fields_attributes: Union[None, Unset, list["AlertsSourceAlertSourceFieldsAttributesType0Item"]] = UNSET
+    alert_source_fields_attributes: Union[Unset, list["AlertsSourceAlertSourceFieldsAttributesItem"]] = UNSET
+    email: Union[None, Unset, str] = UNSET
+    webhook_endpoint: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.alerts_source_alert_template_attributes_type_0 import AlertsSourceAlertTemplateAttributesType0
         from ..models.alerts_source_resolution_rule_attributes_type_0 import AlertsSourceResolutionRuleAttributesType0
         from ..models.alerts_source_sourceable_attributes_type_0 import AlertsSourceSourceableAttributesType0
 
         name = self.name
 
-        status = self.status
+        status: str = self.status
 
         secret = self.secret
 
@@ -69,27 +96,48 @@ class AlertsSource:
 
         updated_at = self.updated_at
 
-        alert_urgency_id = self.alert_urgency_id
-
         source_type: Union[Unset, str] = UNSET
         if not isinstance(self.source_type, Unset):
-            source_type = self.source_type.value
+            source_type = self.source_type
 
-        webhook_endpoint: Union[None, Unset, str]
-        if isinstance(self.webhook_endpoint, Unset):
-            webhook_endpoint = UNSET
-        else:
-            webhook_endpoint = self.webhook_endpoint
+        alert_urgency_id = self.alert_urgency_id
 
-        email: Union[None, Unset, str]
-        if isinstance(self.email, Unset):
-            email = UNSET
+        deduplicate_alerts_by_key = self.deduplicate_alerts_by_key
+
+        deduplication_key_kind: Union[Unset, str] = UNSET
+        if not isinstance(self.deduplication_key_kind, Unset):
+            deduplication_key_kind = self.deduplication_key_kind
+
+        deduplication_key_path: Union[None, Unset, str]
+        if isinstance(self.deduplication_key_path, Unset):
+            deduplication_key_path = UNSET
         else:
-            email = self.email
+            deduplication_key_path = self.deduplication_key_path
+
+        deduplication_key_regexp: Union[None, Unset, str]
+        if isinstance(self.deduplication_key_regexp, Unset):
+            deduplication_key_regexp = UNSET
+        else:
+            deduplication_key_regexp = self.deduplication_key_regexp
 
         owner_group_ids: Union[Unset, list[str]] = UNSET
         if not isinstance(self.owner_group_ids, Unset):
             owner_group_ids = self.owner_group_ids
+
+        alert_template_attributes: Union[None, Unset, dict[str, Any]]
+        if isinstance(self.alert_template_attributes, Unset):
+            alert_template_attributes = UNSET
+        elif isinstance(self.alert_template_attributes, AlertsSourceAlertTemplateAttributesType0):
+            alert_template_attributes = self.alert_template_attributes.to_dict()
+        else:
+            alert_template_attributes = self.alert_template_attributes
+
+        alert_source_urgency_rules_attributes: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.alert_source_urgency_rules_attributes, Unset):
+            alert_source_urgency_rules_attributes = []
+            for alert_source_urgency_rules_attributes_item_data in self.alert_source_urgency_rules_attributes:
+                alert_source_urgency_rules_attributes_item = alert_source_urgency_rules_attributes_item_data.to_dict()
+                alert_source_urgency_rules_attributes.append(alert_source_urgency_rules_attributes_item)
 
         sourceable_attributes: Union[None, Unset, dict[str, Any]]
         if isinstance(self.sourceable_attributes, Unset):
@@ -107,17 +155,24 @@ class AlertsSource:
         else:
             resolution_rule_attributes = self.resolution_rule_attributes
 
-        alert_source_fields_attributes: Union[None, Unset, list[dict[str, Any]]]
-        if isinstance(self.alert_source_fields_attributes, Unset):
-            alert_source_fields_attributes = UNSET
-        elif isinstance(self.alert_source_fields_attributes, list):
+        alert_source_fields_attributes: Union[Unset, list[dict[str, Any]]] = UNSET
+        if not isinstance(self.alert_source_fields_attributes, Unset):
             alert_source_fields_attributes = []
-            for alert_source_fields_attributes_type_0_item_data in self.alert_source_fields_attributes:
-                alert_source_fields_attributes_type_0_item = alert_source_fields_attributes_type_0_item_data.to_dict()
-                alert_source_fields_attributes.append(alert_source_fields_attributes_type_0_item)
+            for alert_source_fields_attributes_item_data in self.alert_source_fields_attributes:
+                alert_source_fields_attributes_item = alert_source_fields_attributes_item_data.to_dict()
+                alert_source_fields_attributes.append(alert_source_fields_attributes_item)
 
+        email: Union[None, Unset, str]
+        if isinstance(self.email, Unset):
+            email = UNSET
         else:
-            alert_source_fields_attributes = self.alert_source_fields_attributes
+            email = self.email
+
+        webhook_endpoint: Union[None, Unset, str]
+        if isinstance(self.webhook_endpoint, Unset):
+            webhook_endpoint = UNSET
+        else:
+            webhook_endpoint = self.webhook_endpoint
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -130,37 +185,53 @@ class AlertsSource:
                 "updated_at": updated_at,
             }
         )
-        if alert_urgency_id is not UNSET:
-            field_dict["alert_urgency_id"] = alert_urgency_id
         if source_type is not UNSET:
             field_dict["source_type"] = source_type
-        if webhook_endpoint is not UNSET:
-            field_dict["webhook_endpoint"] = webhook_endpoint
-        if email is not UNSET:
-            field_dict["email"] = email
+        if alert_urgency_id is not UNSET:
+            field_dict["alert_urgency_id"] = alert_urgency_id
+        if deduplicate_alerts_by_key is not UNSET:
+            field_dict["deduplicate_alerts_by_key"] = deduplicate_alerts_by_key
+        if deduplication_key_kind is not UNSET:
+            field_dict["deduplication_key_kind"] = deduplication_key_kind
+        if deduplication_key_path is not UNSET:
+            field_dict["deduplication_key_path"] = deduplication_key_path
+        if deduplication_key_regexp is not UNSET:
+            field_dict["deduplication_key_regexp"] = deduplication_key_regexp
         if owner_group_ids is not UNSET:
             field_dict["owner_group_ids"] = owner_group_ids
+        if alert_template_attributes is not UNSET:
+            field_dict["alert_template_attributes"] = alert_template_attributes
+        if alert_source_urgency_rules_attributes is not UNSET:
+            field_dict["alert_source_urgency_rules_attributes"] = alert_source_urgency_rules_attributes
         if sourceable_attributes is not UNSET:
             field_dict["sourceable_attributes"] = sourceable_attributes
         if resolution_rule_attributes is not UNSET:
             field_dict["resolution_rule_attributes"] = resolution_rule_attributes
         if alert_source_fields_attributes is not UNSET:
             field_dict["alert_source_fields_attributes"] = alert_source_fields_attributes
+        if email is not UNSET:
+            field_dict["email"] = email
+        if webhook_endpoint is not UNSET:
+            field_dict["webhook_endpoint"] = webhook_endpoint
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        from ..models.alerts_source_alert_source_fields_attributes_type_0_item import (
-            AlertsSourceAlertSourceFieldsAttributesType0Item,
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.alerts_source_alert_source_fields_attributes_item import (
+            AlertsSourceAlertSourceFieldsAttributesItem,
         )
+        from ..models.alerts_source_alert_source_urgency_rules_attributes_item import (
+            AlertsSourceAlertSourceUrgencyRulesAttributesItem,
+        )
+        from ..models.alerts_source_alert_template_attributes_type_0 import AlertsSourceAlertTemplateAttributesType0
         from ..models.alerts_source_resolution_rule_attributes_type_0 import AlertsSourceResolutionRuleAttributesType0
         from ..models.alerts_source_sourceable_attributes_type_0 import AlertsSourceSourceableAttributesType0
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
-        status = d.pop("status")
+        status = check_alerts_source_status(d.pop("status"))
 
         secret = d.pop("secret")
 
@@ -168,34 +239,71 @@ class AlertsSource:
 
         updated_at = d.pop("updated_at")
 
-        alert_urgency_id = d.pop("alert_urgency_id", UNSET)
-
         _source_type = d.pop("source_type", UNSET)
         source_type: Union[Unset, AlertsSourceSourceType]
         if isinstance(_source_type, Unset):
             source_type = UNSET
         else:
-            source_type = AlertsSourceSourceType(_source_type)
+            source_type = check_alerts_source_source_type(_source_type)
 
-        def _parse_webhook_endpoint(data: object) -> Union[None, Unset, str]:
+        alert_urgency_id = d.pop("alert_urgency_id", UNSET)
+
+        deduplicate_alerts_by_key = d.pop("deduplicate_alerts_by_key", UNSET)
+
+        _deduplication_key_kind = d.pop("deduplication_key_kind", UNSET)
+        deduplication_key_kind: Union[Unset, AlertsSourceDeduplicationKeyKind]
+        if isinstance(_deduplication_key_kind, Unset):
+            deduplication_key_kind = UNSET
+        else:
+            deduplication_key_kind = check_alerts_source_deduplication_key_kind(_deduplication_key_kind)
+
+        def _parse_deduplication_key_path(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
             return cast(Union[None, Unset, str], data)
 
-        webhook_endpoint = _parse_webhook_endpoint(d.pop("webhook_endpoint", UNSET))
+        deduplication_key_path = _parse_deduplication_key_path(d.pop("deduplication_key_path", UNSET))
 
-        def _parse_email(data: object) -> Union[None, Unset, str]:
+        def _parse_deduplication_key_regexp(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
             return cast(Union[None, Unset, str], data)
 
-        email = _parse_email(d.pop("email", UNSET))
+        deduplication_key_regexp = _parse_deduplication_key_regexp(d.pop("deduplication_key_regexp", UNSET))
 
         owner_group_ids = cast(list[str], d.pop("owner_group_ids", UNSET))
+
+        def _parse_alert_template_attributes(
+            data: object,
+        ) -> Union["AlertsSourceAlertTemplateAttributesType0", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                alert_template_attributes_type_0 = AlertsSourceAlertTemplateAttributesType0.from_dict(data)
+
+                return alert_template_attributes_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union["AlertsSourceAlertTemplateAttributesType0", None, Unset], data)
+
+        alert_template_attributes = _parse_alert_template_attributes(d.pop("alert_template_attributes", UNSET))
+
+        alert_source_urgency_rules_attributes = []
+        _alert_source_urgency_rules_attributes = d.pop("alert_source_urgency_rules_attributes", UNSET)
+        for alert_source_urgency_rules_attributes_item_data in _alert_source_urgency_rules_attributes or []:
+            alert_source_urgency_rules_attributes_item = AlertsSourceAlertSourceUrgencyRulesAttributesItem.from_dict(
+                alert_source_urgency_rules_attributes_item_data
+            )
+
+            alert_source_urgency_rules_attributes.append(alert_source_urgency_rules_attributes_item)
 
         def _parse_sourceable_attributes(data: object) -> Union["AlertsSourceSourceableAttributesType0", None, Unset]:
             if data is None:
@@ -233,35 +341,32 @@ class AlertsSource:
 
         resolution_rule_attributes = _parse_resolution_rule_attributes(d.pop("resolution_rule_attributes", UNSET))
 
-        def _parse_alert_source_fields_attributes(
-            data: object,
-        ) -> Union[None, Unset, list["AlertsSourceAlertSourceFieldsAttributesType0Item"]]:
+        alert_source_fields_attributes = []
+        _alert_source_fields_attributes = d.pop("alert_source_fields_attributes", UNSET)
+        for alert_source_fields_attributes_item_data in _alert_source_fields_attributes or []:
+            alert_source_fields_attributes_item = AlertsSourceAlertSourceFieldsAttributesItem.from_dict(
+                alert_source_fields_attributes_item_data
+            )
+
+            alert_source_fields_attributes.append(alert_source_fields_attributes_item)
+
+        def _parse_email(data: object) -> Union[None, Unset, str]:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            try:
-                if not isinstance(data, list):
-                    raise TypeError()
-                alert_source_fields_attributes_type_0 = []
-                _alert_source_fields_attributes_type_0 = data
-                for alert_source_fields_attributes_type_0_item_data in _alert_source_fields_attributes_type_0:
-                    alert_source_fields_attributes_type_0_item = (
-                        AlertsSourceAlertSourceFieldsAttributesType0Item.from_dict(
-                            alert_source_fields_attributes_type_0_item_data
-                        )
-                    )
+            return cast(Union[None, Unset, str], data)
 
-                    alert_source_fields_attributes_type_0.append(alert_source_fields_attributes_type_0_item)
+        email = _parse_email(d.pop("email", UNSET))
 
-                return alert_source_fields_attributes_type_0
-            except:  # noqa: E722
-                pass
-            return cast(Union[None, Unset, list["AlertsSourceAlertSourceFieldsAttributesType0Item"]], data)
+        def _parse_webhook_endpoint(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        alert_source_fields_attributes = _parse_alert_source_fields_attributes(
-            d.pop("alert_source_fields_attributes", UNSET)
-        )
+        webhook_endpoint = _parse_webhook_endpoint(d.pop("webhook_endpoint", UNSET))
 
         alerts_source = cls(
             name=name,
@@ -269,14 +374,20 @@ class AlertsSource:
             secret=secret,
             created_at=created_at,
             updated_at=updated_at,
-            alert_urgency_id=alert_urgency_id,
             source_type=source_type,
-            webhook_endpoint=webhook_endpoint,
-            email=email,
+            alert_urgency_id=alert_urgency_id,
+            deduplicate_alerts_by_key=deduplicate_alerts_by_key,
+            deduplication_key_kind=deduplication_key_kind,
+            deduplication_key_path=deduplication_key_path,
+            deduplication_key_regexp=deduplication_key_regexp,
             owner_group_ids=owner_group_ids,
+            alert_template_attributes=alert_template_attributes,
+            alert_source_urgency_rules_attributes=alert_source_urgency_rules_attributes,
             sourceable_attributes=sourceable_attributes,
             resolution_rule_attributes=resolution_rule_attributes,
             alert_source_fields_attributes=alert_source_fields_attributes,
+            email=email,
+            webhook_endpoint=webhook_endpoint,
         )
 
         alerts_source.additional_properties = d

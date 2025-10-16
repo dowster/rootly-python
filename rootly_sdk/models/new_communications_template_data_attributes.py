@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -68,6 +69,7 @@ class NewCommunicationsTemplateDataAttributes:
             communication_template_stages_attributes = self.communication_template_stages_attributes
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -84,12 +86,12 @@ class NewCommunicationsTemplateDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_communications_template_data_attributes_communication_template_stages_attributes_type_0_item import (
             NewCommunicationsTemplateDataAttributesCommunicationTemplateStagesAttributesType0Item,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         communication_type_id = d.pop("communication_type_id")

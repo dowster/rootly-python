@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+WebhooksEndpointListDataItemType = Literal["webhooks_endpoints"]
+
+WEBHOOKS_ENDPOINT_LIST_DATA_ITEM_TYPE_VALUES: set[WebhooksEndpointListDataItemType] = {
+    "webhooks_endpoints",
+}
 
 
-class WebhooksEndpointListDataItemType(str, Enum):
-    WEBHOOKS_ENDPOINTS = "webhooks_endpoints"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_webhooks_endpoint_list_data_item_type(value: str) -> WebhooksEndpointListDataItemType:
+    if value in WEBHOOKS_ENDPOINT_LIST_DATA_ITEM_TYPE_VALUES:
+        return cast(WebhooksEndpointListDataItemType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {WEBHOOKS_ENDPOINT_LIST_DATA_ITEM_TYPE_VALUES!r}")

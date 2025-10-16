@@ -1,14 +1,27 @@
-from enum import Enum
+from typing import Literal, cast
+
+EscalationPolicyPathTimeRestrictionsItemStartDay = Literal[
+    "friday", "monday", "saturday", "sunday", "thursday", "tuesday", "wednesday"
+]
+
+ESCALATION_POLICY_PATH_TIME_RESTRICTIONS_ITEM_START_DAY_VALUES: set[
+    EscalationPolicyPathTimeRestrictionsItemStartDay
+] = {
+    "friday",
+    "monday",
+    "saturday",
+    "sunday",
+    "thursday",
+    "tuesday",
+    "wednesday",
+}
 
 
-class EscalationPolicyPathTimeRestrictionsItemStartDay(str, Enum):
-    FRIDAY = "friday"
-    MONDAY = "monday"
-    SATURDAY = "saturday"
-    SUNDAY = "sunday"
-    THURSDAY = "thursday"
-    TUESDAY = "tuesday"
-    WEDNESDAY = "wednesday"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_escalation_policy_path_time_restrictions_item_start_day(
+    value: str,
+) -> EscalationPolicyPathTimeRestrictionsItemStartDay:
+    if value in ESCALATION_POLICY_PATH_TIME_RESTRICTIONS_ITEM_START_DAY_VALUES:
+        return cast(EscalationPolicyPathTimeRestrictionsItemStartDay, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {ESCALATION_POLICY_PATH_TIME_RESTRICTIONS_ITEM_START_DAY_VALUES!r}"
+    )

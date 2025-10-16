@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.workflow_form_field_condition_incident_condition import WorkflowFormFieldConditionIncidentCondition
+from ..models.workflow_form_field_condition_incident_condition import (
+    WorkflowFormFieldConditionIncidentCondition,
+    check_workflow_form_field_condition_incident_condition,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="WorkflowFormFieldCondition")
@@ -15,8 +19,7 @@ class WorkflowFormFieldCondition:
     Attributes:
         workflow_id (str): The workflow for this condition
         form_field_id (str): The custom field for this condition
-        incident_condition (WorkflowFormFieldConditionIncidentCondition): The trigger condition Default:
-            WorkflowFormFieldConditionIncidentCondition.ANY.
+        incident_condition (WorkflowFormFieldConditionIncidentCondition): The trigger condition Default: 'ANY'.
         selected_catalog_entity_ids (list[str]):
         selected_option_ids (list[str]):
         selected_user_ids (list[int]):
@@ -31,7 +34,7 @@ class WorkflowFormFieldCondition:
     selected_catalog_entity_ids: list[str]
     selected_option_ids: list[str]
     selected_user_ids: list[int]
-    incident_condition: WorkflowFormFieldConditionIncidentCondition = WorkflowFormFieldConditionIncidentCondition.ANY
+    incident_condition: WorkflowFormFieldConditionIncidentCondition = "ANY"
     values: Union[Unset, list[str]] = UNSET
     selected_functionality_ids: Union[Unset, list[str]] = UNSET
     selected_group_ids: Union[Unset, list[str]] = UNSET
@@ -43,7 +46,7 @@ class WorkflowFormFieldCondition:
 
         form_field_id = self.form_field_id
 
-        incident_condition = self.incident_condition.value
+        incident_condition: str = self.incident_condition
 
         selected_catalog_entity_ids = self.selected_catalog_entity_ids
 
@@ -91,13 +94,13 @@ class WorkflowFormFieldCondition:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         workflow_id = d.pop("workflow_id")
 
         form_field_id = d.pop("form_field_id")
 
-        incident_condition = WorkflowFormFieldConditionIncidentCondition(d.pop("incident_condition"))
+        incident_condition = check_workflow_form_field_condition_incident_condition(d.pop("incident_condition"))
 
         selected_catalog_entity_ids = cast(list[str], d.pop("selected_catalog_entity_ids"))
 

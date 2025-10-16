@@ -1,9 +1,11 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
 from ..models.update_incident_permission_set_boolean_data_attributes_kind import (
     UpdateIncidentPermissionSetBooleanDataAttributesKind,
+    check_update_incident_permission_set_boolean_data_attributes_kind,
 )
 from ..types import UNSET, Unset
 
@@ -34,7 +36,7 @@ class UpdateIncidentPermissionSetBooleanDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         private = self.private
 
@@ -45,6 +47,7 @@ class UpdateIncidentPermissionSetBooleanDataAttributes:
             severity_params = self.severity_params.to_dict()
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if kind is not UNSET:
             field_dict["kind"] = kind
@@ -58,18 +61,18 @@ class UpdateIncidentPermissionSetBooleanDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_incident_permission_set_boolean_data_attributes_severity_params import (
             UpdateIncidentPermissionSetBooleanDataAttributesSeverityParams,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _kind = d.pop("kind", UNSET)
         kind: Union[Unset, UpdateIncidentPermissionSetBooleanDataAttributesKind]
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = UpdateIncidentPermissionSetBooleanDataAttributesKind(_kind)
+            kind = check_update_incident_permission_set_boolean_data_attributes_kind(_kind)
 
         private = d.pop("private", UNSET)
 

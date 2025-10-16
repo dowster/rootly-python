@@ -1,12 +1,25 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.add_action_item_task_params_attribute_to_query_by import AddActionItemTaskParamsAttributeToQueryBy
-from ..models.add_action_item_task_params_priority import AddActionItemTaskParamsPriority
-from ..models.add_action_item_task_params_status import AddActionItemTaskParamsStatus
-from ..models.add_action_item_task_params_task_type import AddActionItemTaskParamsTaskType
+from ..models.add_action_item_task_params_attribute_to_query_by import (
+    AddActionItemTaskParamsAttributeToQueryBy,
+    check_add_action_item_task_params_attribute_to_query_by,
+)
+from ..models.add_action_item_task_params_priority import (
+    AddActionItemTaskParamsPriority,
+    check_add_action_item_task_params_priority,
+)
+from ..models.add_action_item_task_params_status import (
+    AddActionItemTaskParamsStatus,
+    check_add_action_item_task_params_status,
+)
+from ..models.add_action_item_task_params_task_type import (
+    AddActionItemTaskParamsTaskType,
+    check_add_action_item_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -60,19 +73,19 @@ class AddActionItemTaskParams:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        priority = self.priority.value
+        priority: str = self.priority
 
         summary = self.summary
 
-        status = self.status.value
+        status: str = self.status
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         attribute_to_query_by: Union[Unset, str] = UNSET
         if not isinstance(self.attribute_to_query_by, Unset):
-            attribute_to_query_by = self.attribute_to_query_by.value
+            attribute_to_query_by = self.attribute_to_query_by
 
         query_value: Union[None, Unset, str]
         if isinstance(self.query_value, Unset):
@@ -142,32 +155,32 @@ class AddActionItemTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.add_action_item_task_params_assigned_to_user import AddActionItemTaskParamsAssignedToUser
         from ..models.add_action_item_task_params_post_to_slack_channels_item import (
             AddActionItemTaskParamsPostToSlackChannelsItem,
         )
 
-        d = src_dict.copy()
-        priority = AddActionItemTaskParamsPriority(d.pop("priority"))
+        d = dict(src_dict)
+        priority = check_add_action_item_task_params_priority(d.pop("priority"))
 
         summary = d.pop("summary")
 
-        status = AddActionItemTaskParamsStatus(d.pop("status"))
+        status = check_add_action_item_task_params_status(d.pop("status"))
 
         _task_type = d.pop("task_type", UNSET)
         task_type: Union[Unset, AddActionItemTaskParamsTaskType]
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = AddActionItemTaskParamsTaskType(_task_type)
+            task_type = check_add_action_item_task_params_task_type(_task_type)
 
         _attribute_to_query_by = d.pop("attribute_to_query_by", UNSET)
         attribute_to_query_by: Union[Unset, AddActionItemTaskParamsAttributeToQueryBy]
         if isinstance(_attribute_to_query_by, Unset):
             attribute_to_query_by = UNSET
         else:
-            attribute_to_query_by = AddActionItemTaskParamsAttributeToQueryBy(_attribute_to_query_by)
+            attribute_to_query_by = check_add_action_item_task_params_attribute_to_query_by(_attribute_to_query_by)
 
         def _parse_query_value(data: object) -> Union[None, Unset, str]:
             if data is None:

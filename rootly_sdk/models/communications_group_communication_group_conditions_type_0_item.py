@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,6 +6,7 @@ from attrs import field as _attrs_field
 
 from ..models.communications_group_communication_group_conditions_type_0_item_property_type import (
     CommunicationsGroupCommunicationGroupConditionsType0ItemPropertyType,
+    check_communications_group_communication_group_conditions_type_0_item_property_type,
 )
 from ..types import UNSET, Unset
 
@@ -44,7 +46,7 @@ class CommunicationsGroupCommunicationGroupConditionsType0Item:
 
         property_type: Union[Unset, str] = UNSET
         if not isinstance(self.property_type, Unset):
-            property_type = self.property_type.value
+            property_type = self.property_type
 
         properties: Union[None, Unset, list[dict[str, Any]]]
         if isinstance(self.properties, Unset):
@@ -73,12 +75,12 @@ class CommunicationsGroupCommunicationGroupConditionsType0Item:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.communications_group_communication_group_conditions_type_0_item_properties_type_0_item import (
             CommunicationsGroupCommunicationGroupConditionsType0ItemPropertiesType0Item,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         id = d.pop("id", UNSET)
 
         condition = d.pop("condition", UNSET)
@@ -88,7 +90,9 @@ class CommunicationsGroupCommunicationGroupConditionsType0Item:
         if isinstance(_property_type, Unset):
             property_type = UNSET
         else:
-            property_type = CommunicationsGroupCommunicationGroupConditionsType0ItemPropertyType(_property_type)
+            property_type = check_communications_group_communication_group_conditions_type_0_item_property_type(
+                _property_type
+            )
 
         def _parse_properties(
             data: object,

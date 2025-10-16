@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2025-10-16
+
+### Changed
+- Regenerated client from latest OpenAPI specification with literal enums support
+- Enabled `literal_enums: true` in OpenAPI generator config to handle duplicate enum keys
+
+### Fixed
+- OpenAPI generator duplicate enum key errors by enabling literal enums
+
 ## [1.0.0] - 2025-10-16
 
 ### Added

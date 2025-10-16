@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewDashboardDataType = Literal["dashboards"]
+
+NEW_DASHBOARD_DATA_TYPE_VALUES: set[NewDashboardDataType] = {
+    "dashboards",
+}
 
 
-class NewDashboardDataType(str, Enum):
-    DASHBOARDS = "dashboards"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_dashboard_data_type(value: str) -> NewDashboardDataType:
+    if value in NEW_DASHBOARD_DATA_TYPE_VALUES:
+        return cast(NewDashboardDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_DASHBOARD_DATA_TYPE_VALUES!r}")

@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewDashboardDataAttributesOwner = Literal["team", "user"]
+
+NEW_DASHBOARD_DATA_ATTRIBUTES_OWNER_VALUES: set[NewDashboardDataAttributesOwner] = {
+    "team",
+    "user",
+}
 
 
-class NewDashboardDataAttributesOwner(str, Enum):
-    TEAM = "team"
-    USER = "user"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_dashboard_data_attributes_owner(value: str) -> NewDashboardDataAttributesOwner:
+    if value in NEW_DASHBOARD_DATA_ATTRIBUTES_OWNER_VALUES:
+        return cast(NewDashboardDataAttributesOwner, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_DASHBOARD_DATA_ATTRIBUTES_OWNER_VALUES!r}")

@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.new_catalog_field_data_attributes_kind import NewCatalogFieldDataAttributesKind
+from ..models.new_catalog_field_data_attributes_kind import (
+    NewCatalogFieldDataAttributesKind,
+    check_new_catalog_field_data_attributes_kind,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewCatalogFieldDataAttributes")
@@ -28,7 +32,7 @@ class NewCatalogFieldDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         name = self.name
 
-        kind = self.kind.value
+        kind: str = self.kind
 
         kind_catalog_id: Union[None, Unset, str]
         if isinstance(self.kind_catalog_id, Unset):
@@ -45,6 +49,7 @@ class NewCatalogFieldDataAttributes:
             position = self.position
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -61,11 +66,11 @@ class NewCatalogFieldDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
-        kind = NewCatalogFieldDataAttributesKind(d.pop("kind"))
+        kind = check_new_catalog_field_data_attributes_kind(d.pop("kind"))
 
         def _parse_kind_catalog_id(data: object) -> Union[None, Unset, str]:
             if data is None:

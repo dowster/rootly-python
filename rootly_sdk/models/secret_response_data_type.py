@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+SecretResponseDataType = Literal["secrets"]
+
+SECRET_RESPONSE_DATA_TYPE_VALUES: set[SecretResponseDataType] = {
+    "secrets",
+}
 
 
-class SecretResponseDataType(str, Enum):
-    SECRETS = "secrets"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_secret_response_data_type(value: str) -> SecretResponseDataType:
+    if value in SECRET_RESPONSE_DATA_TYPE_VALUES:
+        return cast(SecretResponseDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {SECRET_RESPONSE_DATA_TYPE_VALUES!r}")

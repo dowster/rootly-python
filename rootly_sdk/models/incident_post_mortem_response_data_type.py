@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentPostMortemResponseDataType = Literal["incident_post_mortems"]
+
+INCIDENT_POST_MORTEM_RESPONSE_DATA_TYPE_VALUES: set[IncidentPostMortemResponseDataType] = {
+    "incident_post_mortems",
+}
 
 
-class IncidentPostMortemResponseDataType(str, Enum):
-    INCIDENT_POST_MORTEMS = "incident_post_mortems"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_post_mortem_response_data_type(value: str) -> IncidentPostMortemResponseDataType:
+    if value in INCIDENT_POST_MORTEM_RESPONSE_DATA_TYPE_VALUES:
+        return cast(IncidentPostMortemResponseDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {INCIDENT_POST_MORTEM_RESPONSE_DATA_TYPE_VALUES!r}")

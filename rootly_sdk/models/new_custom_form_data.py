@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.new_custom_form_data_type import NewCustomFormDataType
+from ..models.new_custom_form_data_type import NewCustomFormDataType, check_new_custom_form_data_type
 
 if TYPE_CHECKING:
     from ..models.new_custom_form_data_attributes import NewCustomFormDataAttributes
@@ -25,7 +26,7 @@ class NewCustomFormData:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
@@ -41,11 +42,11 @@ class NewCustomFormData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_custom_form_data_attributes import NewCustomFormDataAttributes
 
-        d = src_dict.copy()
-        type_ = NewCustomFormDataType(d.pop("type"))
+        d = dict(src_dict)
+        type_ = check_new_custom_form_data_type(d.pop("type"))
 
         attributes = NewCustomFormDataAttributes.from_dict(d.pop("attributes"))
 

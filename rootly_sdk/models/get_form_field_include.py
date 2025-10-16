@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+GetFormFieldInclude = Literal["options", "positions"]
+
+GET_FORM_FIELD_INCLUDE_VALUES: set[GetFormFieldInclude] = {
+    "options",
+    "positions",
+}
 
 
-class GetFormFieldInclude(str, Enum):
-    OPTIONS = "options"
-    POSITIONS = "positions"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_get_form_field_include(value: str) -> GetFormFieldInclude:
+    if value in GET_FORM_FIELD_INCLUDE_VALUES:
+        return cast(GetFormFieldInclude, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {GET_FORM_FIELD_INCLUDE_VALUES!r}")

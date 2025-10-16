@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_trello_card_task_params_task_type import CreateTrelloCardTaskParamsTaskType
+from ..models.create_trello_card_task_params_task_type import (
+    CreateTrelloCardTaskParamsTaskType,
+    check_create_trello_card_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -49,7 +53,7 @@ class CreateTrelloCardTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         description = self.description
 
@@ -89,13 +93,13 @@ class CreateTrelloCardTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_trello_card_task_params_archivation import CreateTrelloCardTaskParamsArchivation
         from ..models.create_trello_card_task_params_board import CreateTrelloCardTaskParamsBoard
         from ..models.create_trello_card_task_params_labels_item import CreateTrelloCardTaskParamsLabelsItem
         from ..models.create_trello_card_task_params_list import CreateTrelloCardTaskParamsList
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         title = d.pop("title")
 
         board = CreateTrelloCardTaskParamsBoard.from_dict(d.pop("board"))
@@ -107,7 +111,7 @@ class CreateTrelloCardTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateTrelloCardTaskParamsTaskType(_task_type)
+            task_type = check_create_trello_card_task_params_task_type(_task_type)
 
         description = d.pop("description", UNSET)
 

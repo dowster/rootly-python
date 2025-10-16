@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_secret_data_type import UpdateSecretDataType
+from ..models.update_secret_data_type import UpdateSecretDataType, check_update_secret_data_type
 
 if TYPE_CHECKING:
     from ..models.update_secret_data_attributes import UpdateSecretDataAttributes
@@ -25,7 +26,7 @@ class UpdateSecretData:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
@@ -41,11 +42,11 @@ class UpdateSecretData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_secret_data_attributes import UpdateSecretDataAttributes
 
-        d = src_dict.copy()
-        type_ = UpdateSecretDataType(d.pop("type"))
+        d = dict(src_dict)
+        type_ = check_update_secret_data_type(d.pop("type"))
 
         attributes = UpdateSecretDataAttributes.from_dict(d.pop("attributes"))
 

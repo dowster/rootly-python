@@ -1,15 +1,24 @@
-from enum import Enum
+from typing import Literal, cast
+
+PostMortemTriggerParamsIncidentKindsItem = Literal[
+    "backfilled", "example", "example_sub", "normal", "normal_sub", "scheduled", "test", "test_sub"
+]
+
+POST_MORTEM_TRIGGER_PARAMS_INCIDENT_KINDS_ITEM_VALUES: set[PostMortemTriggerParamsIncidentKindsItem] = {
+    "backfilled",
+    "example",
+    "example_sub",
+    "normal",
+    "normal_sub",
+    "scheduled",
+    "test",
+    "test_sub",
+}
 
 
-class PostMortemTriggerParamsIncidentKindsItem(str, Enum):
-    BACKFILLED = "backfilled"
-    EXAMPLE = "example"
-    EXAMPLE_SUB = "example_sub"
-    NORMAL = "normal"
-    NORMAL_SUB = "normal_sub"
-    SCHEDULED = "scheduled"
-    TEST = "test"
-    TEST_SUB = "test_sub"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_post_mortem_trigger_params_incident_kinds_item(value: str) -> PostMortemTriggerParamsIncidentKindsItem:
+    if value in POST_MORTEM_TRIGGER_PARAMS_INCIDENT_KINDS_ITEM_VALUES:
+        return cast(PostMortemTriggerParamsIncidentKindsItem, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {POST_MORTEM_TRIGGER_PARAMS_INCIDENT_KINDS_ITEM_VALUES!r}"
+    )

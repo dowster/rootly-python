@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentEventVisibility = Literal["external", "internal"]
+
+INCIDENT_EVENT_VISIBILITY_VALUES: set[IncidentEventVisibility] = {
+    "external",
+    "internal",
+}
 
 
-class IncidentEventVisibility(str, Enum):
-    EXTERNAL = "external"
-    INTERNAL = "internal"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_event_visibility(value: str) -> IncidentEventVisibility:
+    if value in INCIDENT_EVENT_VISIBILITY_VALUES:
+        return cast(IncidentEventVisibility, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {INCIDENT_EVENT_VISIBILITY_VALUES!r}")

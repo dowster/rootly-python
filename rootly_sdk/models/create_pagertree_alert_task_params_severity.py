@@ -1,12 +1,19 @@
-from enum import Enum
+from typing import Literal, cast
+
+CreatePagertreeAlertTaskParamsSeverity = Literal["auto", "SEV-1", "SEV-2", "SEV-3", "SEV-4"]
+
+CREATE_PAGERTREE_ALERT_TASK_PARAMS_SEVERITY_VALUES: set[CreatePagertreeAlertTaskParamsSeverity] = {
+    "auto",
+    "SEV-1",
+    "SEV-2",
+    "SEV-3",
+    "SEV-4",
+}
 
 
-class CreatePagertreeAlertTaskParamsSeverity(str, Enum):
-    AUTO = "auto"
-    SEV_1 = "SEV-1"
-    SEV_2 = "SEV-2"
-    SEV_3 = "SEV-3"
-    SEV_4 = "SEV-4"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_create_pagertree_alert_task_params_severity(value: str) -> CreatePagertreeAlertTaskParamsSeverity:
+    if value in CREATE_PAGERTREE_ALERT_TASK_PARAMS_SEVERITY_VALUES:
+        return cast(CreatePagertreeAlertTaskParamsSeverity, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {CREATE_PAGERTREE_ALERT_TASK_PARAMS_SEVERITY_VALUES!r}"
+    )

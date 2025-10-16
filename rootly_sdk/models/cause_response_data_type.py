@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+CauseResponseDataType = Literal["causes"]
+
+CAUSE_RESPONSE_DATA_TYPE_VALUES: set[CauseResponseDataType] = {
+    "causes",
+}
 
 
-class CauseResponseDataType(str, Enum):
-    CAUSES = "causes"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_cause_response_data_type(value: str) -> CauseResponseDataType:
+    if value in CAUSE_RESPONSE_DATA_TYPE_VALUES:
+        return cast(CauseResponseDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {CAUSE_RESPONSE_DATA_TYPE_VALUES!r}")

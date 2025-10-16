@@ -1,9 +1,16 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.new_incident_data_attributes_kind import NewIncidentDataAttributesKind
-from ..models.new_incident_data_attributes_status import NewIncidentDataAttributesStatus
+from ..models.new_incident_data_attributes_kind import (
+    NewIncidentDataAttributesKind,
+    check_new_incident_data_attributes_kind,
+)
+from ..models.new_incident_data_attributes_status import (
+    NewIncidentDataAttributesStatus,
+    check_new_incident_data_attributes_status,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -18,8 +25,7 @@ class NewIncidentDataAttributes:
     """
     Attributes:
         title (Union[None, Unset, str]): The title of the incident. We will autogenerate one if null
-        kind (Union[Unset, NewIncidentDataAttributesKind]): The kind of the incident Default:
-            NewIncidentDataAttributesKind.NORMAL.
+        kind (Union[Unset, NewIncidentDataAttributesKind]): The kind of the incident Default: 'normal'.
         parent_incident_id (Union[None, Unset, str]): ID of parent incident
         duplicate_incident_id (Union[None, Unset, str]): ID of duplicated incident
         private (Union[None, Unset, bool]): Create an incident as private. Once an incident is made as private it cannot
@@ -60,7 +66,7 @@ class NewIncidentDataAttributes:
     """
 
     title: Union[None, Unset, str] = UNSET
-    kind: Union[Unset, NewIncidentDataAttributesKind] = NewIncidentDataAttributesKind.NORMAL
+    kind: Union[Unset, NewIncidentDataAttributesKind] = "normal"
     parent_incident_id: Union[None, Unset, str] = UNSET
     duplicate_incident_id: Union[None, Unset, str] = UNSET
     private: Union[None, Unset, bool] = False
@@ -107,7 +113,7 @@ class NewIncidentDataAttributes:
 
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         parent_incident_id: Union[None, Unset, str]
         if isinstance(self.parent_incident_id, Unset):
@@ -269,7 +275,7 @@ class NewIncidentDataAttributes:
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
-            status = self.status.value
+            status = self.status
 
         url = self.url
 
@@ -334,6 +340,7 @@ class NewIncidentDataAttributes:
             cancelled_at = self.cancelled_at
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if title is not UNSET:
             field_dict["title"] = title
@@ -411,10 +418,10 @@ class NewIncidentDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_incident_data_attributes_labels_type_0 import NewIncidentDataAttributesLabelsType0
 
-        d = src_dict.copy()
+        d = dict(src_dict)
 
         def _parse_title(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -430,7 +437,7 @@ class NewIncidentDataAttributes:
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = NewIncidentDataAttributesKind(_kind)
+            kind = check_new_incident_data_attributes_kind(_kind)
 
         def _parse_parent_incident_id(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -707,7 +714,7 @@ class NewIncidentDataAttributes:
         if isinstance(_status, Unset):
             status = UNSET
         else:
-            status = NewIncidentDataAttributesStatus(_status)
+            status = check_new_incident_data_attributes_status(_status)
 
         url = d.pop("url", UNSET)
 

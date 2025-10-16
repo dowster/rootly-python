@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.new_severity_data_attributes_severity import NewSeverityDataAttributesSeverity
+from ..models.new_severity_data_attributes_severity import (
+    NewSeverityDataAttributesSeverity,
+    check_new_severity_data_attributes_severity,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -53,7 +57,7 @@ class NewSeverityDataAttributes:
 
         severity: Union[Unset, str] = UNSET
         if not isinstance(self.severity, Unset):
-            severity = self.severity.value
+            severity = self.severity
 
         color: Union[None, Unset, str]
         if isinstance(self.color, Unset):
@@ -101,6 +105,7 @@ class NewSeverityDataAttributes:
             slack_aliases = self.slack_aliases
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -124,7 +129,7 @@ class NewSeverityDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_severity_data_attributes_slack_aliases_type_0_item import (
             NewSeverityDataAttributesSlackAliasesType0Item,
         )
@@ -132,7 +137,7 @@ class NewSeverityDataAttributes:
             NewSeverityDataAttributesSlackChannelsType0Item,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         name = d.pop("name")
 
         def _parse_description(data: object) -> Union[None, Unset, str]:
@@ -149,7 +154,7 @@ class NewSeverityDataAttributes:
         if isinstance(_severity, Unset):
             severity = UNSET
         else:
-            severity = NewSeverityDataAttributesSeverity(_severity)
+            severity = check_new_severity_data_attributes_severity(_severity)
 
         def _parse_color(data: object) -> Union[None, Unset, str]:
             if data is None:

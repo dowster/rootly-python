@@ -1,15 +1,26 @@
-from enum import Enum
+from typing import Literal, cast
+
+PostMortemTriggerParamsIncidentConditionSeverity = Literal[
+    "ANY", "CONTAINS", "CONTAINS_ALL", "CONTAINS_NONE", "IS", "NONE", "SET", "UNSET"
+]
+
+POST_MORTEM_TRIGGER_PARAMS_INCIDENT_CONDITION_SEVERITY_VALUES: set[PostMortemTriggerParamsIncidentConditionSeverity] = {
+    "ANY",
+    "CONTAINS",
+    "CONTAINS_ALL",
+    "CONTAINS_NONE",
+    "IS",
+    "NONE",
+    "SET",
+    "UNSET",
+}
 
 
-class PostMortemTriggerParamsIncidentConditionSeverity(str, Enum):
-    ANY = "ANY"
-    CONTAINS = "CONTAINS"
-    CONTAINS_ALL = "CONTAINS_ALL"
-    CONTAINS_NONE = "CONTAINS_NONE"
-    IS = "IS"
-    NONE = "NONE"
-    SET = "SET"
-    UNSET = "UNSET"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_post_mortem_trigger_params_incident_condition_severity(
+    value: str,
+) -> PostMortemTriggerParamsIncidentConditionSeverity:
+    if value in POST_MORTEM_TRIGGER_PARAMS_INCIDENT_CONDITION_SEVERITY_VALUES:
+        return cast(PostMortemTriggerParamsIncidentConditionSeverity, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {POST_MORTEM_TRIGGER_PARAMS_INCIDENT_CONDITION_SEVERITY_VALUES!r}"
+    )

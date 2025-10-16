@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+PostMortemTemplateFormat = Literal["html", "markdown"]
+
+POST_MORTEM_TEMPLATE_FORMAT_VALUES: set[PostMortemTemplateFormat] = {
+    "html",
+    "markdown",
+}
 
 
-class PostMortemTemplateFormat(str, Enum):
-    HTML = "html"
-    MARKDOWN = "markdown"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_post_mortem_template_format(value: str) -> PostMortemTemplateFormat:
+    if value in POST_MORTEM_TEMPLATE_FORMAT_VALUES:
+        return cast(PostMortemTemplateFormat, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {POST_MORTEM_TEMPLATE_FORMAT_VALUES!r}")

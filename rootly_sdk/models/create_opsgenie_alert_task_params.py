@@ -1,10 +1,17 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_opsgenie_alert_task_params_priority import CreateOpsgenieAlertTaskParamsPriority
-from ..models.create_opsgenie_alert_task_params_task_type import CreateOpsgenieAlertTaskParamsTaskType
+from ..models.create_opsgenie_alert_task_params_priority import (
+    CreateOpsgenieAlertTaskParamsPriority,
+    check_create_opsgenie_alert_task_params_priority,
+)
+from ..models.create_opsgenie_alert_task_params_task_type import (
+    CreateOpsgenieAlertTaskParamsTaskType,
+    check_create_opsgenie_alert_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -29,8 +36,7 @@ class CreateOpsgenieAlertTaskParams:
         users (Union[Unset, list['CreateOpsgenieAlertTaskParamsUsersItem']]):
         schedules (Union[Unset, list['CreateOpsgenieAlertTaskParamsSchedulesItem']]):
         escalations (Union[Unset, list['CreateOpsgenieAlertTaskParamsEscalationsItem']]):
-        priority (Union[Unset, CreateOpsgenieAlertTaskParamsPriority]):  Default:
-            CreateOpsgenieAlertTaskParamsPriority.P1.
+        priority (Union[Unset, CreateOpsgenieAlertTaskParamsPriority]):  Default: 'P1'.
         details (Union[None, Unset, str]): Details payload. Can contain liquid markup and need to be valid JSON
     """
 
@@ -41,7 +47,7 @@ class CreateOpsgenieAlertTaskParams:
     users: Union[Unset, list["CreateOpsgenieAlertTaskParamsUsersItem"]] = UNSET
     schedules: Union[Unset, list["CreateOpsgenieAlertTaskParamsSchedulesItem"]] = UNSET
     escalations: Union[Unset, list["CreateOpsgenieAlertTaskParamsEscalationsItem"]] = UNSET
-    priority: Union[Unset, CreateOpsgenieAlertTaskParamsPriority] = CreateOpsgenieAlertTaskParamsPriority.P1
+    priority: Union[Unset, CreateOpsgenieAlertTaskParamsPriority] = "P1"
     details: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -50,7 +56,7 @@ class CreateOpsgenieAlertTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         description = self.description
 
@@ -84,7 +90,7 @@ class CreateOpsgenieAlertTaskParams:
 
         priority: Union[Unset, str] = UNSET
         if not isinstance(self.priority, Unset):
-            priority = self.priority.value
+            priority = self.priority
 
         details: Union[None, Unset, str]
         if isinstance(self.details, Unset):
@@ -119,7 +125,7 @@ class CreateOpsgenieAlertTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_opsgenie_alert_task_params_escalations_item import (
             CreateOpsgenieAlertTaskParamsEscalationsItem,
         )
@@ -127,7 +133,7 @@ class CreateOpsgenieAlertTaskParams:
         from ..models.create_opsgenie_alert_task_params_teams_item import CreateOpsgenieAlertTaskParamsTeamsItem
         from ..models.create_opsgenie_alert_task_params_users_item import CreateOpsgenieAlertTaskParamsUsersItem
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         message = d.pop("message")
 
         _task_type = d.pop("task_type", UNSET)
@@ -135,7 +141,7 @@ class CreateOpsgenieAlertTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateOpsgenieAlertTaskParamsTaskType(_task_type)
+            task_type = check_create_opsgenie_alert_task_params_task_type(_task_type)
 
         description = d.pop("description", UNSET)
 
@@ -172,7 +178,7 @@ class CreateOpsgenieAlertTaskParams:
         if isinstance(_priority, Unset):
             priority = UNSET
         else:
-            priority = CreateOpsgenieAlertTaskParamsPriority(_priority)
+            priority = check_create_opsgenie_alert_task_params_priority(_priority)
 
         def _parse_details(data: object) -> Union[None, Unset, str]:
             if data is None:

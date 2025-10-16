@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -30,8 +31,8 @@ class NewDashboardPanelDataAttributesParamsDatalabels:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         enabled = d.pop("enabled", UNSET)
 
         new_dashboard_panel_data_attributes_params_datalabels = cls(

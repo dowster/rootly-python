@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -5,9 +6,11 @@ from attrs import field as _attrs_field
 
 from ..models.update_escalation_policy_level_data_attributes_notification_target_params_item_type_0_team_members import (
     UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers,
+    check_update_escalation_policy_level_data_attributes_notification_target_params_item_type_0_team_members,
 )
 from ..models.update_escalation_policy_level_data_attributes_notification_target_params_item_type_0_type import (
     UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type,
+    check_update_escalation_policy_level_data_attributes_notification_target_params_item_type_0_type,
 )
 from ..types import UNSET, Unset
 
@@ -36,11 +39,11 @@ class UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_ = self.type_.value
+        type_: str = self.type_
 
         team_members: Union[Unset, str] = UNSET
         if not isinstance(self.team_members, Unset):
-            team_members = self.team_members.value
+            team_members = self.team_members
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -56,11 +59,13 @@ class UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         id = d.pop("id")
 
-        type_ = UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0Type(d.pop("type"))
+        type_ = check_update_escalation_policy_level_data_attributes_notification_target_params_item_type_0_type(
+            d.pop("type")
+        )
 
         _team_members = d.pop("team_members", UNSET)
         team_members: Union[
@@ -69,7 +74,7 @@ class UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0
         if isinstance(_team_members, Unset):
             team_members = UNSET
         else:
-            team_members = UpdateEscalationPolicyLevelDataAttributesNotificationTargetParamsItemType0TeamMembers(
+            team_members = check_update_escalation_policy_level_data_attributes_notification_target_params_item_type_0_team_members(
                 _team_members
             )
 

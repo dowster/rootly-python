@@ -1,9 +1,11 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
 from ..models.new_user_notification_rule_data_attributes_enabled_contact_types_item import (
     NewUserNotificationRuleDataAttributesEnabledContactTypesItem,
+    check_new_user_notification_rule_data_attributes_enabled_contact_types_item,
 )
 from ..types import UNSET, Unset
 
@@ -35,7 +37,7 @@ class NewUserNotificationRuleDataAttributes:
     def to_dict(self) -> dict[str, Any]:
         enabled_contact_types = []
         for enabled_contact_types_item_data in self.enabled_contact_types:
-            enabled_contact_types_item = enabled_contact_types_item_data.value
+            enabled_contact_types_item: str = enabled_contact_types_item_data
             enabled_contact_types.append(enabled_contact_types_item)
 
         delay: Union[None, Unset, int]
@@ -75,6 +77,7 @@ class NewUserNotificationRuleDataAttributes:
             user_device_id = self.user_device_id
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "enabled_contact_types": enabled_contact_types,
@@ -96,12 +99,12 @@ class NewUserNotificationRuleDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         enabled_contact_types = []
         _enabled_contact_types = d.pop("enabled_contact_types")
         for enabled_contact_types_item_data in _enabled_contact_types:
-            enabled_contact_types_item = NewUserNotificationRuleDataAttributesEnabledContactTypesItem(
+            enabled_contact_types_item = check_new_user_notification_rule_data_attributes_enabled_contact_types_item(
                 enabled_contact_types_item_data
             )
 

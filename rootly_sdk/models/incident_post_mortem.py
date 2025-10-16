@@ -1,10 +1,14 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.incident_post_mortem_show_timeline_order import IncidentPostMortemShowTimelineOrder
-from ..models.incident_post_mortem_status import IncidentPostMortemStatus
+from ..models.incident_post_mortem_show_timeline_order import (
+    IncidentPostMortemShowTimelineOrder,
+    check_incident_post_mortem_show_timeline_order,
+)
+from ..models.incident_post_mortem_status import IncidentPostMortemStatus, check_incident_post_mortem_status
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="IncidentPostMortem")
@@ -28,7 +32,7 @@ class IncidentPostMortem:
         show_timeline_tasks (Union[Unset, bool]): Show tasks in the timeline of the incident retrospective
         show_timeline_action_items (Union[Unset, bool]): Show action items in the timeline of the incident retrospective
         show_timeline_order (Union[Unset, IncidentPostMortemShowTimelineOrder]): The order of the incident retrospective
-            timeline Default: IncidentPostMortemShowTimelineOrder.DESC.
+            timeline Default: 'desc'.
         show_services_impacted (Union[Unset, bool]): Show functionalities impacted of the incident retrospective
         show_functionalities_impacted (Union[Unset, bool]): Show services impacted of the incident retrospective
         show_groups_impacted (Union[Unset, bool]): Show groups impacted of the incident retrospective
@@ -49,7 +53,7 @@ class IncidentPostMortem:
     show_timeline_genius: Union[Unset, bool] = UNSET
     show_timeline_tasks: Union[Unset, bool] = UNSET
     show_timeline_action_items: Union[Unset, bool] = UNSET
-    show_timeline_order: Union[Unset, IncidentPostMortemShowTimelineOrder] = IncidentPostMortemShowTimelineOrder.DESC
+    show_timeline_order: Union[Unset, IncidentPostMortemShowTimelineOrder] = "desc"
     show_services_impacted: Union[Unset, bool] = UNSET
     show_functionalities_impacted: Union[Unset, bool] = UNSET
     show_groups_impacted: Union[Unset, bool] = UNSET
@@ -72,7 +76,7 @@ class IncidentPostMortem:
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
-            status = self.status.value
+            status = self.status
 
         started_at: Union[None, Unset, str]
         if isinstance(self.started_at, Unset):
@@ -104,7 +108,7 @@ class IncidentPostMortem:
 
         show_timeline_order: Union[Unset, str] = UNSET
         if not isinstance(self.show_timeline_order, Unset):
-            show_timeline_order = self.show_timeline_order.value
+            show_timeline_order = self.show_timeline_order
 
         show_services_impacted = self.show_services_impacted
 
@@ -161,8 +165,8 @@ class IncidentPostMortem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         title = d.pop("title")
 
         created_at = d.pop("created_at")
@@ -183,7 +187,7 @@ class IncidentPostMortem:
         if isinstance(_status, Unset):
             status = UNSET
         else:
-            status = IncidentPostMortemStatus(_status)
+            status = check_incident_post_mortem_status(_status)
 
         def _parse_started_at(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -227,7 +231,7 @@ class IncidentPostMortem:
         if isinstance(_show_timeline_order, Unset):
             show_timeline_order = UNSET
         else:
-            show_timeline_order = IncidentPostMortemShowTimelineOrder(_show_timeline_order)
+            show_timeline_order = check_incident_post_mortem_show_timeline_order(_show_timeline_order)
 
         show_services_impacted = d.pop("show_services_impacted", UNSET)
 

@@ -1,8 +1,13 @@
-from enum import Enum
+from typing import Literal, cast
+
+UserResponseDataType = Literal["users"]
+
+USER_RESPONSE_DATA_TYPE_VALUES: set[UserResponseDataType] = {
+    "users",
+}
 
 
-class UserResponseDataType(str, Enum):
-    USERS = "users"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_user_response_data_type(value: str) -> UserResponseDataType:
+    if value in USER_RESPONSE_DATA_TYPE_VALUES:
+        return cast(UserResponseDataType, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {USER_RESPONSE_DATA_TYPE_VALUES!r}")

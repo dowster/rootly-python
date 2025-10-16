@@ -1,9 +1,14 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewAlertDataAttributesNoise = Literal["noise", "not_noise"]
+
+NEW_ALERT_DATA_ATTRIBUTES_NOISE_VALUES: set[NewAlertDataAttributesNoise] = {
+    "noise",
+    "not_noise",
+}
 
 
-class NewAlertDataAttributesNoise(str, Enum):
-    NOISE = "noise"
-    NOT_NOISE = "not_noise"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_alert_data_attributes_noise(value: str) -> NewAlertDataAttributesNoise:
+    if value in NEW_ALERT_DATA_ATTRIBUTES_NOISE_VALUES:
+        return cast(NewAlertDataAttributesNoise, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {NEW_ALERT_DATA_ATTRIBUTES_NOISE_VALUES!r}")

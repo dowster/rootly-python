@@ -1,11 +1,24 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy = Literal[
+    "alert", "cycle", "default", "random"
+]
+
+NEW_ESCALATION_POLICY_LEVEL_DATA_ATTRIBUTES_PAGING_STRATEGY_CONFIGURATION_STRATEGY_VALUES: set[
+    NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy
+] = {
+    "alert",
+    "cycle",
+    "default",
+    "random",
+}
 
 
-class NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy(str, Enum):
-    ALERT = "alert"
-    CYCLE = "cycle"
-    DEFAULT = "default"
-    RANDOM = "random"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_escalation_policy_level_data_attributes_paging_strategy_configuration_strategy(
+    value: str,
+) -> NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy:
+    if value in NEW_ESCALATION_POLICY_LEVEL_DATA_ATTRIBUTES_PAGING_STRATEGY_CONFIGURATION_STRATEGY_VALUES:
+        return cast(NewEscalationPolicyLevelDataAttributesPagingStrategyConfigurationStrategy, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_ESCALATION_POLICY_LEVEL_DATA_ATTRIBUTES_PAGING_STRATEGY_CONFIGURATION_STRATEGY_VALUES!r}"
+    )

@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.new_incident_event_service_data_type import NewIncidentEventServiceDataType
+from ..models.new_incident_event_service_data_type import (
+    NewIncidentEventServiceDataType,
+    check_new_incident_event_service_data_type,
+)
 
 if TYPE_CHECKING:
     from ..models.new_incident_event_service_data_attributes import NewIncidentEventServiceDataAttributes
@@ -25,7 +29,7 @@ class NewIncidentEventServiceData:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_ = self.type_.value
+        type_: str = self.type_
 
         attributes = self.attributes.to_dict()
 
@@ -41,11 +45,11 @@ class NewIncidentEventServiceData:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.new_incident_event_service_data_attributes import NewIncidentEventServiceDataAttributes
 
-        d = src_dict.copy()
-        type_ = NewIncidentEventServiceDataType(d.pop("type"))
+        d = dict(src_dict)
+        type_ = check_new_incident_event_service_data_type(d.pop("type"))
 
         attributes = NewIncidentEventServiceDataAttributes.from_dict(d.pop("attributes"))
 

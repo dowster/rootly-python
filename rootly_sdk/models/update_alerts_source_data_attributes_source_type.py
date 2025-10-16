@@ -1,28 +1,57 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateAlertsSourceDataAttributesSourceType = Literal[
+    "alertmanager",
+    "app_dynamics",
+    "app_optics",
+    "azure",
+    "bug_snag",
+    "catchpoint",
+    "checkly",
+    "chronosphere",
+    "cloud_watch",
+    "datadog",
+    "email",
+    "generic_webhook",
+    "google_cloud",
+    "grafana",
+    "honeycomb",
+    "monte_carlo",
+    "nagios",
+    "new_relic",
+    "prtg",
+    "sentry",
+    "splunk",
+]
+
+UPDATE_ALERTS_SOURCE_DATA_ATTRIBUTES_SOURCE_TYPE_VALUES: set[UpdateAlertsSourceDataAttributesSourceType] = {
+    "alertmanager",
+    "app_dynamics",
+    "app_optics",
+    "azure",
+    "bug_snag",
+    "catchpoint",
+    "checkly",
+    "chronosphere",
+    "cloud_watch",
+    "datadog",
+    "email",
+    "generic_webhook",
+    "google_cloud",
+    "grafana",
+    "honeycomb",
+    "monte_carlo",
+    "nagios",
+    "new_relic",
+    "prtg",
+    "sentry",
+    "splunk",
+}
 
 
-class UpdateAlertsSourceDataAttributesSourceType(str, Enum):
-    ALERTMANAGER = "alertmanager"
-    APP_DYNAMICS = "app_dynamics"
-    APP_OPTICS = "app_optics"
-    AZURE = "azure"
-    BUG_SNAG = "bug_snag"
-    CATCHPOINT = "catchpoint"
-    CHECKLY = "checkly"
-    CHRONOSPHERE = "chronosphere"
-    CLOUD_WATCH = "cloud_watch"
-    DATADOG = "datadog"
-    EMAIL = "email"
-    GENERIC_WEBHOOK = "generic_webhook"
-    GOOGLE_CLOUD = "google_cloud"
-    GRAFANA = "grafana"
-    HONEYCOMB = "honeycomb"
-    MONTE_CARLO = "monte_carlo"
-    NAGIOS = "nagios"
-    NEW_RELIC = "new_relic"
-    PRTG = "prtg"
-    SENTRY = "sentry"
-    SPLUNK = "splunk"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_alerts_source_data_attributes_source_type(value: str) -> UpdateAlertsSourceDataAttributesSourceType:
+    if value in UPDATE_ALERTS_SOURCE_DATA_ATTRIBUTES_SOURCE_TYPE_VALUES:
+        return cast(UpdateAlertsSourceDataAttributesSourceType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {UPDATE_ALERTS_SOURCE_DATA_ATTRIBUTES_SOURCE_TYPE_VALUES!r}"
+    )

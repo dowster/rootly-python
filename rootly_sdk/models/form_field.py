@@ -1,11 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.form_field_input_kind import FormFieldInputKind
-from ..models.form_field_kind import FormFieldKind
-from ..models.form_field_value_kind import FormFieldValueKind
+from ..models.form_field_input_kind import FormFieldInputKind, check_form_field_input_kind
+from ..models.form_field_kind import FormFieldKind, check_form_field_kind
+from ..models.form_field_value_kind import FormFieldValueKind, check_form_field_value_kind
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FormField")
@@ -48,11 +49,11 @@ class FormField:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        kind = self.kind.value
+        kind: str = self.kind
 
-        input_kind = self.input_kind.value
+        input_kind: str = self.input_kind
 
-        value_kind = self.value_kind.value
+        value_kind: str = self.value_kind
 
         name = self.name
 
@@ -112,13 +113,13 @@ class FormField:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-        kind = FormFieldKind(d.pop("kind"))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        kind = check_form_field_kind(d.pop("kind"))
 
-        input_kind = FormFieldInputKind(d.pop("input_kind"))
+        input_kind = check_form_field_input_kind(d.pop("input_kind"))
 
-        value_kind = FormFieldValueKind(d.pop("value_kind"))
+        value_kind = check_form_field_value_kind(d.pop("value_kind"))
 
         name = d.pop("name")
 

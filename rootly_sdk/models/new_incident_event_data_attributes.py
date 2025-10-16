@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 
-from ..models.new_incident_event_data_attributes_visibility import NewIncidentEventDataAttributesVisibility
+from ..models.new_incident_event_data_attributes_visibility import (
+    NewIncidentEventDataAttributesVisibility,
+    check_new_incident_event_data_attributes_visibility,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewIncidentEventDataAttributes")
@@ -24,9 +28,10 @@ class NewIncidentEventDataAttributes:
 
         visibility: Union[Unset, str] = UNSET
         if not isinstance(self.visibility, Unset):
-            visibility = self.visibility.value
+            visibility = self.visibility
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "event": event,
@@ -38,8 +43,8 @@ class NewIncidentEventDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         event = d.pop("event")
 
         _visibility = d.pop("visibility", UNSET)
@@ -47,7 +52,7 @@ class NewIncidentEventDataAttributes:
         if isinstance(_visibility, Unset):
             visibility = UNSET
         else:
-            visibility = NewIncidentEventDataAttributesVisibility(_visibility)
+            visibility = check_new_incident_event_data_attributes_visibility(_visibility)
 
         new_incident_event_data_attributes = cls(
             event=event,

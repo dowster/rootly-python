@@ -1,10 +1,14 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.custom_field_required_type_0_item import CustomFieldRequiredType0Item
-from ..models.custom_field_shown_item import CustomFieldShownItem
+from ..models.custom_field_required_type_0_item import (
+    CustomFieldRequiredType0Item,
+    check_custom_field_required_type_0_item,
+)
+from ..models.custom_field_shown_item import CustomFieldShownItem, check_custom_field_shown_item
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CustomField")
@@ -47,14 +51,14 @@ class CustomField:
 
         shown = []
         for shown_item_data in self.shown:
-            shown_item = shown_item_data.value
+            shown_item: str = shown_item_data
             shown.append(shown_item)
 
         required: Union[None, list[str]]
         if isinstance(self.required, list):
             required = []
             for required_type_0_item_data in self.required:
-                required_type_0_item = required_type_0_item_data.value
+                required_type_0_item: str = required_type_0_item_data
                 required.append(required_type_0_item)
 
         else:
@@ -107,8 +111,8 @@ class CustomField:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         label = d.pop("label")
 
         slug = d.pop("slug")
@@ -116,7 +120,7 @@ class CustomField:
         shown = []
         _shown = d.pop("shown")
         for shown_item_data in _shown:
-            shown_item = CustomFieldShownItem(shown_item_data)
+            shown_item = check_custom_field_shown_item(shown_item_data)
 
             shown.append(shown_item)
 
@@ -129,7 +133,7 @@ class CustomField:
                 required_type_0 = []
                 _required_type_0 = data
                 for required_type_0_item_data in _required_type_0:
-                    required_type_0_item = CustomFieldRequiredType0Item(required_type_0_item_data)
+                    required_type_0_item = check_custom_field_required_type_0_item(required_type_0_item_data)
 
                     required_type_0.append(required_type_0_item)
 

@@ -1,5 +1,6 @@
 from http import HTTPStatus
 from typing import Any, Optional, Union
+from uuid import UUID
 
 import httpx
 
@@ -11,7 +12,7 @@ from ...types import Response
 
 
 def _get_kwargs(
-    id: str,
+    id: Union[UUID, str],
 ) -> dict[str, Any]:
     _kwargs: dict[str, Any] = {
         "method": "delete",
@@ -28,10 +29,12 @@ def _parse_response(
         response_200 = ServiceResponse.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 404:
         response_404 = ErrorsList.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -50,7 +53,7 @@ def _build_response(
 
 
 def sync_detailed(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, ServiceResponse]]:
@@ -59,7 +62,7 @@ def sync_detailed(
      Delete a specific service by id
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -81,7 +84,7 @@ def sync_detailed(
 
 
 def sync(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, ServiceResponse]]:
@@ -90,7 +93,7 @@ def sync(
      Delete a specific service by id
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -107,7 +110,7 @@ def sync(
 
 
 async def asyncio_detailed(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[ErrorsList, ServiceResponse]]:
@@ -116,7 +119,7 @@ async def asyncio_detailed(
      Delete a specific service by id
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -136,7 +139,7 @@ async def asyncio_detailed(
 
 
 async def asyncio(
-    id: str,
+    id: Union[UUID, str],
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[ErrorsList, ServiceResponse]]:
@@ -145,7 +148,7 @@ async def asyncio(
      Delete a specific service by id
 
     Args:
-        id (str):
+        id (Union[UUID, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

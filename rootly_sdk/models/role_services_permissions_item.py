@@ -1,11 +1,16 @@
-from enum import Enum
+from typing import Literal, cast
+
+RoleServicesPermissionsItem = Literal["create", "delete", "read", "update"]
+
+ROLE_SERVICES_PERMISSIONS_ITEM_VALUES: set[RoleServicesPermissionsItem] = {
+    "create",
+    "delete",
+    "read",
+    "update",
+}
 
 
-class RoleServicesPermissionsItem(str, Enum):
-    CREATE = "create"
-    DELETE = "delete"
-    READ = "read"
-    UPDATE = "update"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_role_services_permissions_item(value: str) -> RoleServicesPermissionsItem:
+    if value in ROLE_SERVICES_PERMISSIONS_ITEM_VALUES:
+        return cast(RoleServicesPermissionsItem, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {ROLE_SERVICES_PERMISSIONS_ITEM_VALUES!r}")

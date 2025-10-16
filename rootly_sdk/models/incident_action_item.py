@@ -1,11 +1,12 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.incident_action_item_kind import IncidentActionItemKind
-from ..models.incident_action_item_priority import IncidentActionItemPriority
-from ..models.incident_action_item_status import IncidentActionItemStatus
+from ..models.incident_action_item_kind import IncidentActionItemKind, check_incident_action_item_kind
+from ..models.incident_action_item_priority import IncidentActionItemPriority, check_incident_action_item_priority
+from ..models.incident_action_item_status import IncidentActionItemStatus, check_incident_action_item_status
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -64,7 +65,7 @@ class IncidentActionItem:
 
         kind: Union[Unset, str] = UNSET
         if not isinstance(self.kind, Unset):
-            kind = self.kind.value
+            kind = self.kind
 
         assigned_to: Union[Unset, dict[str, Any]] = UNSET
         if not isinstance(self.assigned_to, Unset):
@@ -81,11 +82,11 @@ class IncidentActionItem:
 
         priority: Union[Unset, str] = UNSET
         if not isinstance(self.priority, Unset):
-            priority = self.priority.value
+            priority = self.priority
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
-            status = self.status.value
+            status = self.status
 
         due_date: Union[None, Unset, str]
         if isinstance(self.due_date, Unset):
@@ -144,10 +145,10 @@ class IncidentActionItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.user_flat_response import UserFlatResponse
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         summary = d.pop("summary")
 
         created_at = d.pop("created_at")
@@ -168,7 +169,7 @@ class IncidentActionItem:
         if isinstance(_kind, Unset):
             kind = UNSET
         else:
-            kind = IncidentActionItemKind(_kind)
+            kind = check_incident_action_item_kind(_kind)
 
         _assigned_to = d.pop("assigned_to", UNSET)
         assigned_to: Union[Unset, UserFlatResponse]
@@ -199,14 +200,14 @@ class IncidentActionItem:
         if isinstance(_priority, Unset):
             priority = UNSET
         else:
-            priority = IncidentActionItemPriority(_priority)
+            priority = check_incident_action_item_priority(_priority)
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, IncidentActionItemStatus]
         if isinstance(_status, Unset):
             status = UNSET
         else:
-            status = IncidentActionItemStatus(_status)
+            status = check_incident_action_item_status(_status)
 
         def _parse_due_date(data: object) -> Union[None, Unset, str]:
             if data is None:

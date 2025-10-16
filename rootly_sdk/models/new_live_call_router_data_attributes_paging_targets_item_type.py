@@ -1,10 +1,21 @@
-from enum import Enum
+from typing import Literal, cast
+
+NewLiveCallRouterDataAttributesPagingTargetsItemType = Literal["escalation_policy", "service", "team"]
+
+NEW_LIVE_CALL_ROUTER_DATA_ATTRIBUTES_PAGING_TARGETS_ITEM_TYPE_VALUES: set[
+    NewLiveCallRouterDataAttributesPagingTargetsItemType
+] = {
+    "escalation_policy",
+    "service",
+    "team",
+}
 
 
-class NewLiveCallRouterDataAttributesPagingTargetsItemType(str, Enum):
-    ESCALATION_POLICY = "escalation_policy"
-    SERVICE = "service"
-    TEAM = "team"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_new_live_call_router_data_attributes_paging_targets_item_type(
+    value: str,
+) -> NewLiveCallRouterDataAttributesPagingTargetsItemType:
+    if value in NEW_LIVE_CALL_ROUTER_DATA_ATTRIBUTES_PAGING_TARGETS_ITEM_TYPE_VALUES:
+        return cast(NewLiveCallRouterDataAttributesPagingTargetsItemType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {NEW_LIVE_CALL_ROUTER_DATA_ATTRIBUTES_PAGING_TARGETS_ITEM_TYPE_VALUES!r}"
+    )

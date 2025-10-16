@@ -1,12 +1,17 @@
-from enum import Enum
+from typing import Literal, cast
+
+DashboardColor = Literal["#D7F5E1", "#E9E2FF", "#FAE6E8", "#FAEEE6", "#FCF2CF"]
+
+DASHBOARD_COLOR_VALUES: set[DashboardColor] = {
+    "#D7F5E1",
+    "#E9E2FF",
+    "#FAE6E8",
+    "#FAEEE6",
+    "#FCF2CF",
+}
 
 
-class DashboardColor(str, Enum):
-    VALUE_0 = "#FCF2CF"
-    VALUE_1 = "#D7F5E1"
-    VALUE_2 = "#E9E2FF"
-    VALUE_3 = "#FAE6E8"
-    VALUE_4 = "#FAEEE6"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_dashboard_color(value: str) -> DashboardColor:
+    if value in DASHBOARD_COLOR_VALUES:
+        return cast(DashboardColor, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {DASHBOARD_COLOR_VALUES!r}")

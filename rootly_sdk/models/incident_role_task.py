@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.incident_role_task_priority import IncidentRoleTaskPriority
+from ..models.incident_role_task_priority import IncidentRoleTaskPriority, check_incident_role_task_priority
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="IncidentRoleTask")
@@ -46,7 +47,7 @@ class IncidentRoleTask:
 
         priority: Union[Unset, str] = UNSET
         if not isinstance(self.priority, Unset):
-            priority = self.priority.value
+            priority = self.priority
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -67,8 +68,8 @@ class IncidentRoleTask:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         task = d.pop("task")
 
         created_at = d.pop("created_at")
@@ -91,7 +92,7 @@ class IncidentRoleTask:
         if isinstance(_priority, Unset):
             priority = UNSET
         else:
-            priority = IncidentRoleTaskPriority(_priority)
+            priority = check_incident_role_task_priority(_priority)
 
         incident_role_task = cls(
             task=task,

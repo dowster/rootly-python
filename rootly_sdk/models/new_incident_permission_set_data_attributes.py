@@ -1,12 +1,15 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
 from ..models.new_incident_permission_set_data_attributes_private_incident_permissions_item import (
     NewIncidentPermissionSetDataAttributesPrivateIncidentPermissionsItem,
+    check_new_incident_permission_set_data_attributes_private_incident_permissions_item,
 )
 from ..models.new_incident_permission_set_data_attributes_public_incident_permissions_item import (
     NewIncidentPermissionSetDataAttributesPublicIncidentPermissionsItem,
+    check_new_incident_permission_set_data_attributes_public_incident_permissions_item,
 )
 from ..types import UNSET, Unset
 
@@ -51,17 +54,18 @@ class NewIncidentPermissionSetDataAttributes:
         if not isinstance(self.private_incident_permissions, Unset):
             private_incident_permissions = []
             for private_incident_permissions_item_data in self.private_incident_permissions:
-                private_incident_permissions_item = private_incident_permissions_item_data.value
+                private_incident_permissions_item: str = private_incident_permissions_item_data
                 private_incident_permissions.append(private_incident_permissions_item)
 
         public_incident_permissions: Union[Unset, list[str]] = UNSET
         if not isinstance(self.public_incident_permissions, Unset):
             public_incident_permissions = []
             for public_incident_permissions_item_data in self.public_incident_permissions:
-                public_incident_permissions_item = public_incident_permissions_item_data.value
+                public_incident_permissions_item: str = public_incident_permissions_item_data
                 public_incident_permissions.append(public_incident_permissions_item)
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update(
             {
                 "name": name,
@@ -79,8 +83,8 @@ class NewIncidentPermissionSetDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
         slug = d.pop("slug", UNSET)
@@ -97,8 +101,10 @@ class NewIncidentPermissionSetDataAttributes:
         private_incident_permissions = []
         _private_incident_permissions = d.pop("private_incident_permissions", UNSET)
         for private_incident_permissions_item_data in _private_incident_permissions or []:
-            private_incident_permissions_item = NewIncidentPermissionSetDataAttributesPrivateIncidentPermissionsItem(
-                private_incident_permissions_item_data
+            private_incident_permissions_item = (
+                check_new_incident_permission_set_data_attributes_private_incident_permissions_item(
+                    private_incident_permissions_item_data
+                )
             )
 
             private_incident_permissions.append(private_incident_permissions_item)
@@ -106,8 +112,10 @@ class NewIncidentPermissionSetDataAttributes:
         public_incident_permissions = []
         _public_incident_permissions = d.pop("public_incident_permissions", UNSET)
         for public_incident_permissions_item_data in _public_incident_permissions or []:
-            public_incident_permissions_item = NewIncidentPermissionSetDataAttributesPublicIncidentPermissionsItem(
-                public_incident_permissions_item_data
+            public_incident_permissions_item = (
+                check_new_incident_permission_set_data_attributes_public_incident_permissions_item(
+                    public_incident_permissions_item_data
+                )
             )
 
             public_incident_permissions.append(public_incident_permissions_item)

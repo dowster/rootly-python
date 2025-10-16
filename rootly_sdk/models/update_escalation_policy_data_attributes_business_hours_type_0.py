@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -5,6 +6,11 @@ from attrs import field as _attrs_field
 
 from ..models.update_escalation_policy_data_attributes_business_hours_type_0_days_type_0_item import (
     UpdateEscalationPolicyDataAttributesBusinessHoursType0DaysType0Item,
+    check_update_escalation_policy_data_attributes_business_hours_type_0_days_type_0_item,
+)
+from ..models.update_escalation_policy_data_attributes_business_hours_type_0_time_zone import (
+    UpdateEscalationPolicyDataAttributesBusinessHoursType0TimeZone,
+    check_update_escalation_policy_data_attributes_business_hours_type_0_time_zone,
 )
 from ..types import UNSET, Unset
 
@@ -15,24 +21,23 @@ T = TypeVar("T", bound="UpdateEscalationPolicyDataAttributesBusinessHoursType0")
 class UpdateEscalationPolicyDataAttributesBusinessHoursType0:
     """
     Attributes:
-        time_zone (Union[None, Unset, str]): Time zone for business hours
+        time_zone (Union[Unset, UpdateEscalationPolicyDataAttributesBusinessHoursType0TimeZone]): Time zone for business
+            hours
         days (Union[None, Unset, list[UpdateEscalationPolicyDataAttributesBusinessHoursType0DaysType0Item]]): Business
             days
         start_time (Union[None, Unset, str]): Start time for business hours (HH:MM)
         end_time (Union[None, Unset, str]): End time for business hours (HH:MM)
     """
 
-    time_zone: Union[None, Unset, str] = UNSET
+    time_zone: Union[Unset, UpdateEscalationPolicyDataAttributesBusinessHoursType0TimeZone] = UNSET
     days: Union[None, Unset, list[UpdateEscalationPolicyDataAttributesBusinessHoursType0DaysType0Item]] = UNSET
     start_time: Union[None, Unset, str] = UNSET
     end_time: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        time_zone: Union[None, Unset, str]
-        if isinstance(self.time_zone, Unset):
-            time_zone = UNSET
-        else:
+        time_zone: Union[Unset, str] = UNSET
+        if not isinstance(self.time_zone, Unset):
             time_zone = self.time_zone
 
         days: Union[None, Unset, list[str]]
@@ -41,7 +46,7 @@ class UpdateEscalationPolicyDataAttributesBusinessHoursType0:
         elif isinstance(self.days, list):
             days = []
             for days_type_0_item_data in self.days:
-                days_type_0_item = days_type_0_item_data.value
+                days_type_0_item: str = days_type_0_item_data
                 days.append(days_type_0_item)
 
         else:
@@ -74,17 +79,14 @@ class UpdateEscalationPolicyDataAttributesBusinessHoursType0:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
-
-        def _parse_time_zone(data: object) -> Union[None, Unset, str]:
-            if data is None:
-                return data
-            if isinstance(data, Unset):
-                return data
-            return cast(Union[None, Unset, str], data)
-
-        time_zone = _parse_time_zone(d.pop("time_zone", UNSET))
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        _time_zone = d.pop("time_zone", UNSET)
+        time_zone: Union[Unset, UpdateEscalationPolicyDataAttributesBusinessHoursType0TimeZone]
+        if isinstance(_time_zone, Unset):
+            time_zone = UNSET
+        else:
+            time_zone = check_update_escalation_policy_data_attributes_business_hours_type_0_time_zone(_time_zone)
 
         def _parse_days(
             data: object,
@@ -99,8 +101,10 @@ class UpdateEscalationPolicyDataAttributesBusinessHoursType0:
                 days_type_0 = []
                 _days_type_0 = data
                 for days_type_0_item_data in _days_type_0:
-                    days_type_0_item = UpdateEscalationPolicyDataAttributesBusinessHoursType0DaysType0Item(
-                        days_type_0_item_data
+                    days_type_0_item = (
+                        check_update_escalation_policy_data_attributes_business_hours_type_0_days_type_0_item(
+                            days_type_0_item_data
+                        )
                     )
 
                     days_type_0.append(days_type_0_item)

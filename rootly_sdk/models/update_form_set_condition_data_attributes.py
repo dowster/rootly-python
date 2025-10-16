@@ -1,8 +1,12 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 
-from ..models.update_form_set_condition_data_attributes_comparison import UpdateFormSetConditionDataAttributesComparison
+from ..models.update_form_set_condition_data_attributes_comparison import (
+    UpdateFormSetConditionDataAttributesComparison,
+    check_update_form_set_condition_data_attributes_comparison,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdateFormSetConditionDataAttributes")
@@ -26,13 +30,14 @@ class UpdateFormSetConditionDataAttributes:
 
         comparison: Union[Unset, str] = UNSET
         if not isinstance(self.comparison, Unset):
-            comparison = self.comparison.value
+            comparison = self.comparison
 
         values: Union[Unset, list[str]] = UNSET
         if not isinstance(self.values, Unset):
             values = self.values
 
         field_dict: dict[str, Any] = {}
+
         field_dict.update({})
         if form_field_id is not UNSET:
             field_dict["form_field_id"] = form_field_id
@@ -44,8 +49,8 @@ class UpdateFormSetConditionDataAttributes:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         form_field_id = d.pop("form_field_id", UNSET)
 
         _comparison = d.pop("comparison", UNSET)
@@ -53,7 +58,7 @@ class UpdateFormSetConditionDataAttributes:
         if isinstance(_comparison, Unset):
             comparison = UNSET
         else:
-            comparison = UpdateFormSetConditionDataAttributesComparison(_comparison)
+            comparison = check_update_form_set_condition_data_attributes_comparison(_comparison)
 
         values = cast(list[str], d.pop("values", UNSET))
 

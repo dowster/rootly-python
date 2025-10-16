@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_shortcut_task_task_params_task_type import CreateShortcutTaskTaskParamsTaskType
+from ..models.create_shortcut_task_task_params_task_type import (
+    CreateShortcutTaskTaskParamsTaskType,
+    check_create_shortcut_task_task_params_task_type,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -38,7 +42,7 @@ class CreateShortcutTaskTaskParams:
 
         task_type: Union[Unset, str] = UNSET
         if not isinstance(self.task_type, Unset):
-            task_type = self.task_type.value
+            task_type = self.task_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -55,10 +59,10 @@ class CreateShortcutTaskTaskParams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_shortcut_task_task_params_completion import CreateShortcutTaskTaskParamsCompletion
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         parent_story_id = d.pop("parent_story_id")
 
         description = d.pop("description")
@@ -70,7 +74,7 @@ class CreateShortcutTaskTaskParams:
         if isinstance(_task_type, Unset):
             task_type = UNSET
         else:
-            task_type = CreateShortcutTaskTaskParamsTaskType(_task_type)
+            task_type = check_create_shortcut_task_task_params_task_type(_task_type)
 
         create_shortcut_task_task_params = cls(
             parent_story_id=parent_story_id,

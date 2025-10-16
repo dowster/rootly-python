@@ -1,9 +1,13 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.incident_status_page_event_status import IncidentStatusPageEventStatus
+from ..models.incident_status_page_event_status import (
+    IncidentStatusPageEventStatus,
+    check_incident_status_page_event_status,
+)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="IncidentStatusPageEvent")
@@ -46,7 +50,7 @@ class IncidentStatusPageEvent:
 
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
-            status = self.status.value
+            status = self.status
 
         notify_subscribers = self.notify_subscribers
 
@@ -74,8 +78,8 @@ class IncidentStatusPageEvent:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         event = d.pop("event")
 
         started_at = d.pop("started_at")
@@ -91,7 +95,7 @@ class IncidentStatusPageEvent:
         if isinstance(_status, Unset):
             status = UNSET
         else:
-            status = IncidentStatusPageEventStatus(_status)
+            status = check_incident_status_page_event_status(_status)
 
         notify_subscribers = d.pop("notify_subscribers", UNSET)
 

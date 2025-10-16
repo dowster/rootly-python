@@ -1,18 +1,37 @@
-from enum import Enum
+from typing import Literal, cast
+
+IncidentTriggerParamsIncidentStatusesItem = Literal[
+    "acknowledged",
+    "cancelled",
+    "closed",
+    "completed",
+    "detected",
+    "in_progress",
+    "in_triage",
+    "mitigated",
+    "resolved",
+    "scheduled",
+    "started",
+]
+
+INCIDENT_TRIGGER_PARAMS_INCIDENT_STATUSES_ITEM_VALUES: set[IncidentTriggerParamsIncidentStatusesItem] = {
+    "acknowledged",
+    "cancelled",
+    "closed",
+    "completed",
+    "detected",
+    "in_progress",
+    "in_triage",
+    "mitigated",
+    "resolved",
+    "scheduled",
+    "started",
+}
 
 
-class IncidentTriggerParamsIncidentStatusesItem(str, Enum):
-    ACKNOWLEDGED = "acknowledged"
-    CANCELLED = "cancelled"
-    CLOSED = "closed"
-    COMPLETED = "completed"
-    DETECTED = "detected"
-    IN_PROGRESS = "in_progress"
-    IN_TRIAGE = "in_triage"
-    MITIGATED = "mitigated"
-    RESOLVED = "resolved"
-    SCHEDULED = "scheduled"
-    STARTED = "started"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_incident_trigger_params_incident_statuses_item(value: str) -> IncidentTriggerParamsIncidentStatusesItem:
+    if value in INCIDENT_TRIGGER_PARAMS_INCIDENT_STATUSES_ITEM_VALUES:
+        return cast(IncidentTriggerParamsIncidentStatusesItem, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {INCIDENT_TRIGGER_PARAMS_INCIDENT_STATUSES_ITEM_VALUES!r}"
+    )

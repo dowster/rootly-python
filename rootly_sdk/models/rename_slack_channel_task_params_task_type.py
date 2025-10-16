@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+RenameSlackChannelTaskParamsTaskType = Literal["rename_slack_channel"]
+
+RENAME_SLACK_CHANNEL_TASK_PARAMS_TASK_TYPE_VALUES: set[RenameSlackChannelTaskParamsTaskType] = {
+    "rename_slack_channel",
+}
 
 
-class RenameSlackChannelTaskParamsTaskType(str, Enum):
-    RENAME_SLACK_CHANNEL = "rename_slack_channel"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_rename_slack_channel_task_params_task_type(value: str) -> RenameSlackChannelTaskParamsTaskType:
+    if value in RENAME_SLACK_CHANNEL_TASK_PARAMS_TASK_TYPE_VALUES:
+        return cast(RenameSlackChannelTaskParamsTaskType, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {RENAME_SLACK_CHANNEL_TASK_PARAMS_TASK_TYPE_VALUES!r}"
+    )

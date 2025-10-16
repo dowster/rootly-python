@@ -1,8 +1,15 @@
-from enum import Enum
+from typing import Literal, cast
+
+OnCallRoleRelationshipDataType0Type = Literal["on_call_roles"]
+
+ON_CALL_ROLE_RELATIONSHIP_DATA_TYPE_0_TYPE_VALUES: set[OnCallRoleRelationshipDataType0Type] = {
+    "on_call_roles",
+}
 
 
-class OnCallRoleRelationshipDataType0Type(str, Enum):
-    ON_CALL_ROLES = "on_call_roles"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_on_call_role_relationship_data_type_0_type(value: str) -> OnCallRoleRelationshipDataType0Type:
+    if value in ON_CALL_ROLE_RELATIONSHIP_DATA_TYPE_0_TYPE_VALUES:
+        return cast(OnCallRoleRelationshipDataType0Type, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {ON_CALL_ROLE_RELATIONSHIP_DATA_TYPE_0_TYPE_VALUES!r}"
+    )

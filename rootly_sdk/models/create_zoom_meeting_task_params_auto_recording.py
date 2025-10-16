@@ -1,10 +1,17 @@
-from enum import Enum
+from typing import Literal, cast
+
+CreateZoomMeetingTaskParamsAutoRecording = Literal["cloud", "local", "none"]
+
+CREATE_ZOOM_MEETING_TASK_PARAMS_AUTO_RECORDING_VALUES: set[CreateZoomMeetingTaskParamsAutoRecording] = {
+    "cloud",
+    "local",
+    "none",
+}
 
 
-class CreateZoomMeetingTaskParamsAutoRecording(str, Enum):
-    CLOUD = "cloud"
-    LOCAL = "local"
-    NONE = "none"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_create_zoom_meeting_task_params_auto_recording(value: str) -> CreateZoomMeetingTaskParamsAutoRecording:
+    if value in CREATE_ZOOM_MEETING_TASK_PARAMS_AUTO_RECORDING_VALUES:
+        return cast(CreateZoomMeetingTaskParamsAutoRecording, value)
+    raise TypeError(
+        f"Unexpected value {value!r}. Expected one of {CREATE_ZOOM_MEETING_TASK_PARAMS_AUTO_RECORDING_VALUES!r}"
+    )

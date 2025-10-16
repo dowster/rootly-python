@@ -1,9 +1,10 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.post_mortem_template_format import PostMortemTemplateFormat
+from ..models.post_mortem_template_format import PostMortemTemplateFormat, check_post_mortem_template_format
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PostMortemTemplate")
@@ -50,7 +51,7 @@ class PostMortemTemplate:
 
         format_: Union[Unset, str] = UNSET
         if not isinstance(self.format_, Unset):
-            format_ = self.format_.value
+            format_ = self.format_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -73,8 +74,8 @@ class PostMortemTemplate:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         name = d.pop("name")
 
         created_at = d.pop("created_at")
@@ -99,7 +100,7 @@ class PostMortemTemplate:
         if isinstance(_format_, Unset):
             format_ = UNSET
         else:
-            format_ = PostMortemTemplateFormat(_format_)
+            format_ = check_post_mortem_template_format(_format_)
 
         post_mortem_template = cls(
             name=name,

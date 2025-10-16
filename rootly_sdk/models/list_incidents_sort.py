@@ -1,11 +1,16 @@
-from enum import Enum
+from typing import Literal, cast
+
+ListIncidentsSort = Literal["-created_at", "-updated_at", "created_at", "updated_at"]
+
+LIST_INCIDENTS_SORT_VALUES: set[ListIncidentsSort] = {
+    "-created_at",
+    "-updated_at",
+    "created_at",
+    "updated_at",
+}
 
 
-class ListIncidentsSort(str, Enum):
-    CREATED_AT = "created_at"
-    UPDATED_AT = "updated_at"
-    VALUE_1 = "-created_at"
-    VALUE_3 = "-updated_at"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_list_incidents_sort(value: str) -> ListIncidentsSort:
+    if value in LIST_INCIDENTS_SORT_VALUES:
+        return cast(ListIncidentsSort, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {LIST_INCIDENTS_SORT_VALUES!r}")

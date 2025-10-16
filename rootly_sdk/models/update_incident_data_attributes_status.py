@@ -1,18 +1,35 @@
-from enum import Enum
+from typing import Literal, cast
+
+UpdateIncidentDataAttributesStatus = Literal[
+    "acknowledged",
+    "cancelled",
+    "closed",
+    "completed",
+    "detected",
+    "in_progress",
+    "in_triage",
+    "mitigated",
+    "resolved",
+    "scheduled",
+    "started",
+]
+
+UPDATE_INCIDENT_DATA_ATTRIBUTES_STATUS_VALUES: set[UpdateIncidentDataAttributesStatus] = {
+    "acknowledged",
+    "cancelled",
+    "closed",
+    "completed",
+    "detected",
+    "in_progress",
+    "in_triage",
+    "mitigated",
+    "resolved",
+    "scheduled",
+    "started",
+}
 
 
-class UpdateIncidentDataAttributesStatus(str, Enum):
-    ACKNOWLEDGED = "acknowledged"
-    CANCELLED = "cancelled"
-    CLOSED = "closed"
-    COMPLETED = "completed"
-    DETECTED = "detected"
-    IN_PROGRESS = "in_progress"
-    IN_TRIAGE = "in_triage"
-    MITIGATED = "mitigated"
-    RESOLVED = "resolved"
-    SCHEDULED = "scheduled"
-    STARTED = "started"
-
-    def __str__(self) -> str:
-        return str(self.value)
+def check_update_incident_data_attributes_status(value: str) -> UpdateIncidentDataAttributesStatus:
+    if value in UPDATE_INCIDENT_DATA_ATTRIBUTES_STATUS_VALUES:
+        return cast(UpdateIncidentDataAttributesStatus, value)
+    raise TypeError(f"Unexpected value {value!r}. Expected one of {UPDATE_INCIDENT_DATA_ATTRIBUTES_STATUS_VALUES!r}")
